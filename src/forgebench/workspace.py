@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import shutil
+import subprocess
 from pathlib import Path
 
 
@@ -22,6 +23,39 @@ def create_isolated_workspace(seed: Path, runs_root: Path, run_id: str) -> Path:
     target.parent.mkdir(parents=True, exist_ok=False)
     shutil.copytree(seed, target)
     return target
+
+
+def initialize_git_workspace(workspace: Path) -> None:
+    """Create a local Git baseline so agent inspection cannot escape to a parent repo."""
+
+    commands = (
+        ["git", "init", "--quiet"],
+        ["git", "add", "--all"],
+        [
+            "git",
+            "-c",
+            "user.name=ForgeBench",
+            "-c",
+            "user.email=forgebench@localhost",
+            "-c",
+            "commit.gpgsign=false",
+            "commit",
+            "--quiet",
+            "-m",
+            "ForgeBench seed",
+        ],
+    )
+    for command in commands:
+        try:
+            subprocess.run(
+                command,
+                cwd=workspace,
+                capture_output=True,
+                text=True,
+                check=True,
+            )
+        except (OSError, subprocess.CalledProcessError) as exc:
+            raise WorkspaceError("failed to initialize isolated Git workspace") from exc
 
 
 def resolve_workspace_path(root: Path, relative_path: str, *, must_exist: bool) -> Path:

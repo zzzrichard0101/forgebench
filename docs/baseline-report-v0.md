@@ -1,68 +1,85 @@
-# Baseline Report v0 — Infrastructure Readiness
+# Baseline Report v0 — Codex CLI
 
-Date: 2026-08-16  
-Status: **first invocation excluded; authentication refresh required**
+Date: 2026-08-16
 
-## What is validated
+Status: **First valid Codex baseline complete**
 
-- copy-isolated workspaces preserve the seed repository;
-- typed read/write/list/search tools emit append-only events;
-- path escape attempts are rejected and recorded;
-- step-budget exhaustion has an explicit termination reason;
-- the intentionally defective cart fixture fails its hidden invariant;
-- the known-good fix passes public, hidden, and workspace-policy checks;
-- mutating the protected dependency file fails independently of code correctness;
-- external agent stdout/stderr, command manifest, workspace, and grade are retained.
+Sample size: **n = 1**
 
-The current local suite contains 16 dependency-free tests. This report does not
-claim agent performance because the scripted adapter and known-good fixture are
-infrastructure controls, not evaluated models.
+## Result
 
-## Reference baseline protocol
-
-The first real run will use the installed Claude Code CLI against the public
-`python-cart-rounding` task. The invocation is non-interactive, disables session
-persistence and customizations, constrains tools, copies the seed into a unique
-workspace, and runs hidden graders only after the CLI exits.
-
-The project also reserves a Codex reference path. Official OpenAI documentation
-defines `codex exec` as the stable non-interactive command, supports JSONL events,
-an ephemeral session, an explicit workspace root, and the `workspace-write`
-sandbox. It also warns against bypassing approvals and sandboxing except inside
-an externally hardened environment:
-
-https://learn.chatgpt.com/docs/developer-commands?surface=cli
-
-The installed Windows-app Codex executable is currently visible but cannot be
-started from this managed shell (`Access denied`). This is recorded as an
-environment constraint, not a model failure.
-
-## Next measurement
-
-### Attempt 0 — infrastructure failure
+Codex fixed the `python-cart-rounding` task and passed every deterministic
+grader check. The run is a valid harness sample, but it is **not budget
+compliant** because reported input tokens exceeded the task budget.
 
 | Field | Value |
-|---|---|
-| Run ID | `cedd8696e4004e3585c963a30d60e5e7` |
-| Requested alias | `sonnet` |
-| Resolved model reported at init | `claude-sonnet-5` |
-| Claude Code version | `2.1.206` |
-| Outcome | OAuth session expired; refresh failed before inference |
-| API/model turns | 0 |
-| Reported cost | USD 0 |
-| Metric eligibility | excluded — authentication infrastructure failure |
-| Grader outcome | expected seed failure; workspace was unchanged |
+|---|---:|
+| Run ID | `0c487e4b25b7447a87bc10d457f2c15c` |
+| Codex CLI | `0.147.0` |
+| Model | `gpt-5.6-sol` |
+| Reasoning effort | `medium` |
+| Host / sandbox | WSL2 Ubuntu / `workspace-write` |
+| Approximate wall time | 111 seconds |
+| Agent exit | 0, no timeout |
+| Public tests | 3 / 3 passed |
+| Hidden tests | 3 / 3 passed |
+| Policy checks | 1 / 1 passed |
+| Commands | 8 total: 7 completed, 1 failed then recovered |
+| Input tokens | 268,222 (233,216 cached) |
+| Output tokens | 3,732 (955 reasoning) |
 
-This attempt proves that `auth status: loggedIn` is not sufficient readiness
-evidence: a stale OAuth session may still fail on the first request. Future run
-preflight must perform an authenticated no-op or classify this terminal reason
-before adding the run to an agent-performance denominator.
+The failed command exposed Python 3.8 incompatibility with built-in generic
+annotations. Codex diagnosed it, added `from __future__ import annotations`,
+reran the checks, and completed successfully. The actual defect was fixed by
+summing the already rounded line totals, with a regression test covering the
+one-cent discrepancy. No third-party dependency was added.
 
-After the user refreshes Claude authentication:
+## Budget interpretation
 
-1. run one `sonnet` smoke baseline;
-2. retain the exact model identifier reported in stream JSON;
-3. grade without revealing hidden checks;
-4. inspect trace completeness and permissions;
-5. decide whether the CLI path is suitable for the 30-task baseline or whether
-   an API adapter is required for tighter harness ablations.
+The task budget allows 60,000 input tokens. The CLI reported 268,222 input
+tokens, or about 4.47 times the limit. A passing grade therefore means
+**functionally correct**, not **efficiently solved**. Future aggregate reports
+must publish both raw task success and budget-qualified success.
+
+The unusually high context volume for a tiny repository is now a primary
+optimization target. Repeated shell inspection and large cached context suggest
+that prompt/context minimization and tighter loop termination should be tested
+before scaling the benchmark.
+
+## Harness findings
+
+1. The native Windows Codex sandbox behaved effectively read-only in child
+   execution. WSL2 provided a working `workspace-write` boundary without
+   disabling the sandbox.
+2. The run workspace inherited the enclosing portfolio repository as its Git
+   root. The runner now initializes an independent Git baseline inside every
+   external-agent workspace to prevent future parent-repository visibility.
+3. The agent ran with Python 3.8 in WSL while the deterministic grader used
+   Python 3.12 on Windows. The mismatch usefully exposed compatibility handling,
+   but runtime versions must be captured explicitly in later reports.
+4. The original manifest lacked end-state timing. The runner now records UTC
+   start/end times, duration, exit status, timeout status, metric eligibility,
+   and grader outcome.
+
+## Reproduction protocol
+
+The runner uses the official non-interactive `codex exec` interface with JSONL
+events, an ephemeral session, fixed model and reasoning effort, approval policy
+`never`, and the `workspace-write` sandbox. Network search is not enabled and
+the sandbox is not bypassed. The ignored `.tools` directory pins the CLI binary;
+credentials and raw run artifacts are not committed.
+
+```powershell
+$env:PYTHONPATH = "src"
+python scripts/run_codex_baseline.py --execution-host wsl
+```
+
+See the [official Codex CLI command documentation](https://learn.chatgpt.com/docs/developer-commands?surface=cli)
+for the command semantics used by this runner.
+
+## Limits and next experiment
+
+One easy task cannot support a claim about general agent capability. Week 4
+should add multiple task families, enforce token budgets in metric eligibility,
+capture runtime metadata, and compare at least two harness configurations with
+repeated trials.

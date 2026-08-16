@@ -8,7 +8,7 @@ The project asks one practical question:
 
 ## Current status
 
-**Phase 3/10 — deterministic grading and baseline preparation**
+**Phase 3/10 complete — first Codex baseline measured**
 
 - [Design brief](docs/design-brief.md)
 - [Metrics and evaluation contract](docs/metrics.md)
@@ -21,11 +21,24 @@ Phase 2 infrastructure is now present in `src/forgebench`: copy-isolated run
 workspaces, a typed tool gateway, a provider-neutral model adapter, and
 append-only JSONL traces. It is validated with five end-to-end smoke scenarios.
 
-The first executable benchmark fixture and hidden deterministic grader are also
-present. See [Baseline Report v0](docs/baseline-report-v0.md) for what is and is
-not yet measured.
+The first executable benchmark fixture, hidden deterministic grader, and Codex
+CLI reference runner are present. The first valid run passed all 7 checks, but
+exceeded its input-token budget; both facts are reported instead of collapsing
+them into one success number. See [Baseline Report v0](docs/baseline-report-v0.md)
+for the result, limitations, and next experiment.
 
-No agent result is claimed yet. Baselines and ablations will be added only after the runner and graders are reproducible.
+## Local verification
+
+```powershell
+$env:PYTHONPATH = "src"
+python -m unittest discover -s tests -v
+python scripts/validate_task.py benchmark/examples/python-bugfix/task.json
+python scripts/run_codex_baseline.py --execution-host wsl
+```
+
+The baseline runner uses Codex, not Claude. Raw run artifacts and pinned local
+tool binaries stay untracked; the public report contains only sanitized,
+reproducible summary data.
 
 ## Planned evaluation sequence
 

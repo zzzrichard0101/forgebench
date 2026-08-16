@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "report_id": "baseline-v0",
+  "date": "2026-08-16",
+  "sample_size": 1,
+  "run": {
+    "run_id": "0c487e4b25b7447a87bc10d457f2c15c",
+    "task_id": "python-cart-rounding",
+    "task_version": 1,
+    "provider": "codex-cli",
+    "cli_version": "0.147.0",
+    "model": "gpt-5.6-sol",
+    "reasoning_effort": "medium",
+    "execution_host": "wsl2-ubuntu",
+    "sandbox": "workspace-write",
+    "approximate_duration_seconds": 111,
+    "exit_code": 0,
+    "timed_out": false,
+    "eligible_for_agent_metrics": true,
+    "task_passed": true,
+    "budget_compliant": false,
+    "checks": {
+      "public": { "passed": 3, "total": 3 },
+      "hidden": { "passed": 3, "total": 3 },
+      "workspace_policy": { "passed": 1, "total": 1 }
+    },
+    "commands": {
+      "total": 8,
+      "completed": 7,
+      "failed": 1,
+      "recovered": true
+    },
+    "usage": {
+      "input_tokens": 268222,
+      "cached_input_tokens": 233216,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 3732,
+      "reasoning_output_tokens": 955,
+      "input_token_budget": 60000
+    }
+  },
+  "limitations": [
+    "Single easy task; no general capability claim.",
+    "Duration is reconstructed from artifact timestamps because the original manifest did not record timing.",
+    "Agent and grader used different Python runtime versions.",
+    "This run predates independent nested Git initialization for the task workspace."
+  ]
+}
