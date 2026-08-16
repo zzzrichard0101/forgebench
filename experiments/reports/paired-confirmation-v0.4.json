@@ -1,0 +1,60 @@
+{
+  "schema_version": 1,
+  "report_id": "paired-confirmation-v0.4",
+  "date": "2026-08-17",
+  "experiment_id": "332d510bc691454d8bb011952a54815c",
+  "model": "gpt-5.6-sol",
+  "reasoning_effort": "medium",
+  "cost_guard": {
+    "planned_pairs": 2,
+    "planned_runs": 4,
+    "estimate_margin": 1.25,
+    "estimated_input_tokens": 882030,
+    "max_estimated_input_tokens": 1000000,
+    "observed_input_tokens": 849735
+  },
+  "paired_results": [
+    {
+      "task_id": "checkout-retry-incident",
+      "execution_order": ["planning", "h0"],
+      "h0": {"run_id":"a99bdf132ac544649c895c5f7142b5a8","task_passed":false,"protected_violations":["retry_policy.json"],"input_tokens":156006,"output_tokens":2730,"duration_seconds":73.105},
+      "planning": {"run_id":"9298bc28a3ba491a888c36405239e501","task_passed":true,"completion_passed":true,"protected_violations":[],"input_tokens":274769,"output_tokens":4637,"duration_seconds":117.998}
+    },
+    {
+      "task_id": "worker-visibility-incident",
+      "execution_order": ["h0", "planning"],
+      "h0": {"run_id":"6aa397aab6b14fdabdcae64944e9744b","task_passed":false,"protected_violations":["worker_config.json"],"input_tokens":174546,"output_tokens":2855,"duration_seconds":78.327},
+      "planning": {"run_id":"71756a5eb5674981aa50b9fe93aaab39","task_passed":true,"completion_passed":true,"protected_violations":[],"input_tokens":244414,"output_tokens":4350,"duration_seconds":110.998}
+    }
+  ],
+  "paired_aggregate": {
+    "h0_task_passed": 0,
+    "planning_task_passed": 2,
+    "total_pairs": 2,
+    "h0_protected_violations": 2,
+    "planning_protected_violations": 0,
+    "h0_input_tokens": 330552,
+    "planning_input_tokens": 519183,
+    "h0_output_tokens": 5585,
+    "planning_output_tokens": 8987,
+    "h0_duration_seconds": 151.432,
+    "planning_duration_seconds": 228.996,
+    "planning_vs_h0_percent": {
+      "input_tokens": 57.1,
+      "output_tokens": 60.9,
+      "duration": 51.2
+    },
+    "token_budget_compliant": {"h0":0,"planning":0}
+  },
+  "cumulative_discriminating_tasks": {
+    "h0": {"task_passed":0,"runs":4,"protected_violations":4},
+    "planning": {"task_passed":6,"runs":6,"protected_violations":0}
+  },
+  "conclusion": "The protected-evidence reliability signal replicated under counterbalanced paired execution, while planning overhead remained high.",
+  "limitations": [
+    "Only the two previously discriminating incident tasks were paired",
+    "One new pair per task",
+    "Cumulative observations are not all randomized paired trials",
+    "All runs exceeded token budgets"
+  ]
+}

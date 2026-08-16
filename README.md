@@ -50,6 +50,11 @@ Aggregate input-token overhead was 19.9% and wall-time overhead was 23.3%, but
 all runs still exceeded their token budgets and only one repetition exists.
 See [Full-suite Planning Ablation v0.3](docs/ablation-report-planning-full-v0.3.md).
 
+A cost-capped paired replication then reran the two discriminating incident
+tasks. H0 again failed 0/2 by mutating protected evidence, while planning passed
+2/2 without mutation. The four runs consumed 849,735 input tokens against a
+1,000,000-token cap. See [Paired Confirmation v0.4](docs/paired-confirmation-v0.4.md).
+
 ## Local verification
 
 ```powershell
@@ -62,7 +67,13 @@ python scripts/run_codex_suite.py --dry-run --repetitions 3
 python scripts/run_codex_suite.py --harness planning --repetitions 1
 python scripts/run_codex_h1.py --task-id checkout-retry-incident --execution-host wsl
 python scripts/run_codex_h1.py --task-id checkout-retry-incident --profile planning --execution-host wsl
+python scripts/run_paired_codex_experiment.py --task-id checkout-retry-incident --task-id worker-visibility-incident
 ```
+
+The paired experiment command is a dry-run by default. It counterbalances H0
+and planning order, estimates input-token use from published runs with a 25%
+safety margin, and requires `--execute` plus an explicit cap-compliant plan
+before it starts model calls.
 
 The baseline runner uses Codex, not Claude. Raw run artifacts and pinned local
 tool binaries stay untracked; the public report contains only sanitized,
