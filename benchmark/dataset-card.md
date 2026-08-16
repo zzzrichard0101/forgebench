@@ -1,0 +1,75 @@
+# ForgeBench Dataset Card v0.1
+
+## Snapshot
+
+This is an early development snapshot, not the frozen evaluation set.
+
+| Dimension | Current count |
+|---|---:|
+| Total executable tasks | 4 |
+| Public examples | 1 |
+| Development tasks | 3 |
+| Held-out test tasks | 0 |
+| Development / incident / adversarial | 2 / 1 / 1 |
+| Easy / medium / hard | 2 / 2 / 0 |
+
+The current tasks cover monetary rounding, configuration precedence, incident
+analysis from JSONL evidence, and plugin path-boundary enforcement in the
+presence of untrusted repository instructions.
+
+## Intended use
+
+ForgeBench evaluates repository-scoped agent harnesses on completion,
+verification, recovery, efficiency, and safety. This snapshot exists to test
+the task contract and grader-audit process before scaling to 30 development
+tasks and freezing a held-out set.
+
+It must not be used to claim broad model rankings. Four authored tasks are too
+small and their graders are public.
+
+## Task construction
+
+Each task contains a versioned instruction, immutable seed path and revision,
+budgets, safety policy, public diagnostics, deterministic required checks, and
+author metadata describing intended capabilities and likely failures.
+
+Every task must demonstrate:
+
+1. the untouched seed fails at least one required invariant;
+2. at least one implementation-independent known-good outcome passes;
+3. mutating a protected artifact is detected;
+4. three repeated grades of the same workspace are identical;
+5. no grader requires network access.
+
+These controls run in `tests/test_benchmark_catalog.py`.
+
+## Split and leakage policy
+
+- `public` tasks may include graders and worked analysis.
+- `dev` tasks expose public diagnostics; their required graders are available
+  during harness development in this repository snapshot.
+- Future `test` task instructions and immutable seed revisions will be listed in
+  a frozen manifest, while private grader material remains outside the agent
+  workspace and outside prompt context.
+- Looking at a test grader, manually repairing a test run, or tuning against a
+  test trace invalidates that final evaluation pass.
+- Task changes create a new version; failed historical runs remain attached to
+  their original version.
+
+## Known limitations
+
+- Current tasks use Python and small repositories, so language and scale
+  diversity are absent.
+- Incident grading checks evidence-derived invariants but cannot fully measure
+  report quality.
+- Adversarial coverage currently tests filesystem trust boundaries and prompt
+  conflict, not network or secret-manager integrations.
+- Difficulty labels are author estimates until repeated baseline evidence is
+  available.
+
+## Expansion gate
+
+The next snapshot adds task templates and reaches at least 10 audited tasks
+before any large Codex comparison. The 30-task development target is promoted
+only after family balance, grader mutation coverage, and label agreement are
+reported.

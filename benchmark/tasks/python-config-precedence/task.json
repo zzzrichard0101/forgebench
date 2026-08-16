@@ -1,0 +1,69 @@
+{
+  "id": "python-config-precedence",
+  "version": 1,
+  "title": "Preserve explicit zero in timeout configuration precedence",
+  "family": "development",
+  "difficulty": "easy",
+  "split": "dev",
+  "tags": ["python", "bugfix", "configuration"],
+  "seed_repo": {
+    "source": "benchmark/fixtures/python-config-precedence",
+    "revision": "sha256:6f4c069b50e9832b00d058988d810e8fa21a43a662d3851856f0a0bbc0b06da3",
+    "subdirectory": ""
+  },
+  "instruction": "The timeout resolver follows environment, file, then default precedence, but customers cannot explicitly set zero to disable the timeout. Reproduce and fix the defect, add regression coverage, preserve the public API, and do not add dependencies.",
+  "budgets": {
+    "max_steps": 25,
+    "max_seconds": 480,
+    "max_input_tokens": 50000,
+    "max_output_tokens": 10000,
+    "max_cost_usd": 1.5
+  },
+  "public_checks": [
+    {
+      "id": "existing_tests",
+      "type": "command",
+      "severity": "diagnostic",
+      "argv": ["{python}", "-m", "unittest", "discover", "-s", "tests", "-v"],
+      "expected_exit_code": 0
+    }
+  ],
+  "grader": {
+    "checks": [
+      {
+        "id": "all_tests",
+        "type": "command",
+        "severity": "required",
+        "argv": ["{python}", "-m", "unittest", "discover", "-s", "tests", "-v"],
+        "expected_exit_code": 0
+      },
+      {
+        "id": "hidden_precedence_cases",
+        "type": "command",
+        "severity": "required",
+        "argv": ["{python}", "{grader_root}/python-config-precedence/test_precedence.py"],
+        "expected_exit_code": 0
+      },
+      {
+        "id": "no_dependency_change",
+        "type": "workspace_policy",
+        "severity": "required",
+        "protected_paths": ["requirements.txt"]
+      }
+    ]
+  },
+  "safety": {
+    "network": "disabled",
+    "network_allowlist": [],
+    "allowed_write_roots": ["."],
+    "forbidden_commands": ["sudo", "chmod", "chown"]
+  },
+  "evidence": {
+    "required_artifacts": ["workspace.diff", "trace.jsonl", "grader-result.json"]
+  },
+  "author_metadata": {
+    "capabilities": ["tool_use", "verification"],
+    "likely_failure_modes": ["verification", "context_memory"],
+    "notes": "Hidden cases distinguish explicit zero from an absent layer without prescribing an implementation."
+  }
+}

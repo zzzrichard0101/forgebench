@@ -1,0 +1,4 @@
+{
+  "max_attempts": 4,
+  "retryable_statuses": [400, 408, 429, 500, 502, 503, 504]
+}

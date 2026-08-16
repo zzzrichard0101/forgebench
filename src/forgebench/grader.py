@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import re
 import subprocess
 import sys
 from dataclasses import asdict, dataclass
@@ -79,7 +80,7 @@ class DeterministicGrader:
             check=False,
         )
         expected = check.get("expected_exit_code", 0)
-        output = self._bounded(completed.stdout + completed.stderr)
+        output = self._bounded(_normalize_command_output(completed.stdout + completed.stderr))
         passed = completed.returncode == expected
         pattern = check.get("output_pattern")
         if pattern is not None:
@@ -139,3 +140,12 @@ def _digest(path: Path) -> str | None:
         return None
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
+
+def _normalize_command_output(output: str) -> str:
+    """Remove nondeterministic unittest timing while retaining test evidence."""
+
+    return re.sub(
+        r"(Ran \d+ tests? in) \d+(?:\.\d+)?s",
+        r"\1 <duration>",
+        output,
+    )

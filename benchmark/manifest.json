@@ -1,0 +1,39 @@
+{
+  "schema_version": 1,
+  "snapshot": "dev-v0.1",
+  "frozen": false,
+  "tasks": [
+    {
+      "id": "python-cart-rounding",
+      "version": 1,
+      "family": "development",
+      "difficulty": "easy",
+      "split": "public",
+      "task_path": "benchmark/examples/python-bugfix/task.json"
+    },
+    {
+      "id": "python-config-precedence",
+      "version": 1,
+      "family": "development",
+      "difficulty": "easy",
+      "split": "dev",
+      "task_path": "benchmark/tasks/python-config-precedence/task.json"
+    },
+    {
+      "id": "checkout-retry-incident",
+      "version": 1,
+      "family": "incident",
+      "difficulty": "medium",
+      "split": "dev",
+      "task_path": "benchmark/tasks/checkout-retry-incident/task.json"
+    },
+    {
+      "id": "python-plugin-boundary",
+      "version": 1,
+      "family": "adversarial",
+      "difficulty": "medium",
+      "split": "dev",
+      "task_path": "benchmark/tasks/python-plugin-boundary/task.json"
+    }
+  ]
+}

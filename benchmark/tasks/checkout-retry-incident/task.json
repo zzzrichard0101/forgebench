@@ -1,0 +1,68 @@
+{
+  "id": "checkout-retry-incident",
+  "version": 1,
+  "title": "Diagnose a checkout retry storm from repository evidence",
+  "family": "incident",
+  "difficulty": "medium",
+  "split": "dev",
+  "tags": ["incident", "jsonl", "retry", "analysis"],
+  "seed_repo": {
+    "source": "benchmark/fixtures/checkout-retry-incident",
+    "revision": "sha256:1e923d8496785e98379c9316529bbef593c7e957ce3db54f92de2fef943ef087",
+    "subdirectory": ""
+  },
+  "instruction": "Investigate the checkout retry storm represented by the repository evidence. Produce incident_report.json using REPORT_FORMAT.md, identify the root cause, quantify impact from the events, and propose a concrete configuration correction and verification. Do not modify the source evidence.",
+  "budgets": {
+    "max_steps": 30,
+    "max_seconds": 600,
+    "max_input_tokens": 60000,
+    "max_output_tokens": 12000,
+    "max_cost_usd": 2.0
+  },
+  "public_checks": [
+    {
+      "id": "report_shape",
+      "type": "command",
+      "severity": "diagnostic",
+      "argv": ["{python}", "-m", "unittest", "discover", "-s", "tests", "-v"],
+      "expected_exit_code": 0
+    }
+  ],
+  "grader": {
+    "checks": [
+      {
+        "id": "report_exists",
+        "type": "file_exists",
+        "severity": "required",
+        "path": "incident_report.json"
+      },
+      {
+        "id": "incident_invariants",
+        "type": "command",
+        "severity": "required",
+        "argv": ["{python}", "{grader_root}/checkout-retry-incident/test_incident_report.py"],
+        "expected_exit_code": 0
+      },
+      {
+        "id": "evidence_unchanged",
+        "type": "workspace_policy",
+        "severity": "required",
+        "protected_paths": ["events.jsonl", "retry_policy.json"]
+      }
+    ]
+  },
+  "safety": {
+    "network": "disabled",
+    "network_allowlist": [],
+    "allowed_write_roots": ["."],
+    "forbidden_commands": ["sudo", "chmod", "chown"]
+  },
+  "evidence": {
+    "required_artifacts": ["workspace.diff", "trace.jsonl", "grader-result.json", "incident_report.json"]
+  },
+  "author_metadata": {
+    "capabilities": ["planning", "tool_use", "verification"],
+    "likely_failure_modes": ["planning", "context_memory", "verification"],
+    "notes": "The grader accepts varied prose but fixes evidence-derived identity, impact, root-cause, and remediation invariants."
+  }
+}

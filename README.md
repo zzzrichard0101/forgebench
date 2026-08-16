@@ -8,13 +8,16 @@ The project asks one practical question:
 
 ## Current status
 
-**Phase 3/10 complete — first Codex baseline measured**
+**Phase 4/10 in progress — benchmark and failure taxonomy expansion**
 
 - [Design brief](docs/design-brief.md)
 - [Metrics and evaluation contract](docs/metrics.md)
 - [Task authoring specification](docs/task-schema.md)
 - [Candidate skill-gap matrix](docs/skill-gap-matrix.md)
+- [Dataset card](benchmark/dataset-card.md)
+- [Failure taxonomy and labeling guide](docs/failure-taxonomy.md)
 - [Machine-readable task schema](benchmark/schema/task.schema.json)
+- [Benchmark snapshot manifest](benchmark/manifest.json)
 - [Example benchmark task](benchmark/examples/python-bugfix/task.json)
 
 Phase 2 infrastructure is now present in `src/forgebench`: copy-isolated run
@@ -39,6 +42,12 @@ python scripts/run_codex_baseline.py --execution-host wsl
 The baseline runner uses Codex, not Claude. Raw run artifacts and pinned local
 tool binaries stay untracked; the public report contains only sanitized,
 reproducible summary data.
+
+The current audited snapshot has four executable tasks spanning development,
+incident, and adversarial families. Every seed is known-bad, every new task has
+a known-good outcome, protected-file mutations are detected, and grader results
+are stable across three repeated executions. This is an expansion checkpoint,
+not yet the planned 30-task development benchmark.
 
 ## Planned evaluation sequence
 
