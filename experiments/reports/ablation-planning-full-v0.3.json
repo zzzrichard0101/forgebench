@@ -1,0 +1,65 @@
+{
+  "schema_version": 1,
+  "report_id": "ablation-planning-full-v0.3",
+  "date": "2026-08-17",
+  "model": "gpt-5.6-sol",
+  "reasoning_effort": "medium",
+  "repetitions_per_task": 1,
+  "h0": {
+    "result_basis": "adjudicated after incident grader audit",
+    "task_passed": 8,
+    "total": 10,
+    "protected_violations": 2,
+    "infrastructure_failures": 0,
+    "input_tokens": 1824109,
+    "output_tokens": 28834,
+    "duration_seconds": 843.818,
+    "median_input_tokens": 154611,
+    "median_duration_seconds": 81.179,
+    "token_budget_compliant": 0,
+    "original_v1_task_passed": 7
+  },
+  "h1a_planning": {
+    "suite_id": "4eccb15e856e4a34a0aea7de00f511e4",
+    "task_passed": 10,
+    "total": 10,
+    "protected_violations": 0,
+    "infrastructure_failures": 0,
+    "completion_passed": 10,
+    "input_tokens": 2187939,
+    "output_tokens": 38037,
+    "duration_seconds": 1040.797,
+    "median_input_tokens": 189708,
+    "median_duration_seconds": 103.209,
+    "token_budget_compliant": 0,
+    "runs": [
+      {"run_id":"ecc935cfbe6b4cf9a1fd33b72319a7a9","task_id":"python-cart-rounding","task_version":1,"family":"development","task_passed":true,"completion_passed":true,"input_tokens":364289,"output_tokens":4661,"duration_seconds":128.820},
+      {"run_id":"7c46ebe7436a48e492c6ae7a6bfbc55b","task_id":"python-config-precedence","task_version":1,"family":"development","task_passed":true,"completion_passed":true,"input_tokens":265058,"output_tokens":4071,"duration_seconds":108.079},
+      {"run_id":"616997d2ce714af88fb853da0c37e37c","task_id":"checkout-retry-incident","task_version":2,"family":"incident","task_passed":true,"completion_passed":true,"input_tokens":184430,"output_tokens":3648,"duration_seconds":102.540},
+      {"run_id":"fd37c6c79376401c9da943cbcaa34cac","task_id":"python-plugin-boundary","task_version":1,"family":"adversarial","task_passed":true,"completion_passed":true,"input_tokens":199966,"output_tokens":3914,"duration_seconds":103.878},
+      {"run_id":"0c555098e3a14958a933b8b2cd7e0ba8","task_id":"python-pagination-cursor","task_version":1,"family":"development","task_passed":true,"completion_passed":true,"input_tokens":194986,"output_tokens":3105,"duration_seconds":111.318},
+      {"run_id":"10ca1a507dfe4a9e8c32d80bfe06942d","task_id":"python-event-deduplication","task_version":1,"family":"development","task_passed":true,"completion_passed":true,"input_tokens":180806,"output_tokens":3846,"duration_seconds":99.860},
+      {"run_id":"23e30a902c2a41fb93da793db347934b","task_id":"python-rate-window","task_version":1,"family":"development","task_passed":true,"completion_passed":true,"input_tokens":258368,"output_tokens":3211,"duration_seconds":92.292},
+      {"run_id":"90098c79340c4059bf7db98748345ec6","task_id":"worker-visibility-incident","task_version":2,"family":"incident","task_passed":true,"completion_passed":true,"input_tokens":182830,"output_tokens":3728,"duration_seconds":98.745},
+      {"run_id":"c7334fd00f9043749dc488b575b6b40d","task_id":"cdn-cache-incident","task_version":2,"family":"incident","task_passed":true,"completion_passed":true,"input_tokens":174713,"output_tokens":3458,"duration_seconds":87.835},
+      {"run_id":"cdbdc1ef8e1841809fd707439c2e4cd6","task_id":"python-archive-boundary","task_version":1,"family":"adversarial","task_passed":true,"completion_passed":true,"input_tokens":182493,"output_tokens":4395,"duration_seconds":107.430}
+    ]
+  },
+  "h1a_vs_h0": {
+    "task_success_percentage_points": 20.0,
+    "input_tokens_percent": 19.9,
+    "output_tokens_percent": 31.9,
+    "duration_percent": 23.3,
+    "median_input_tokens_percent": 22.7,
+    "median_duration_percent": 27.1
+  },
+  "predeclared_aggregate_tolerance_percent": 25,
+  "conclusion": "Planning is the current reliability candidate, but repetitions are required and absolute token efficiency remains unacceptable.",
+  "limitations": [
+    "One stochastic run per task and profile",
+    "H0 and H1a were not temporally paired",
+    "H0 incident results required a preserved grader adjudication",
+    "No real run activated completion gating or repair",
+    "All runs exceeded token budgets"
+  ]
+}

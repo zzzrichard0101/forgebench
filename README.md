@@ -8,7 +8,7 @@ The project asks one practical question:
 
 ## Current status
 
-**Phase 4/10 in progress — benchmark and failure taxonomy expansion**
+**Phase 5/10 in progress — harness ablation and repeated evaluation**
 
 - [Design brief](docs/design-brief.md)
 - [Metrics and evaluation contract](docs/metrics.md)
@@ -44,6 +44,12 @@ The follow-up [component split](docs/ablation-report-h1-components-v0.2.md)
 showed planning-only also passed 2/2; no real run activated verifier repair, so
 its incremental success benefit remains unproven.
 
+The first full-suite planning ablation passed 10/10 tasks versus the adjudicated
+H0 result of 8/10, with protected-evidence violations falling from two to zero.
+Aggregate input-token overhead was 19.9% and wall-time overhead was 23.3%, but
+all runs still exceeded their token budgets and only one repetition exists.
+See [Full-suite Planning Ablation v0.3](docs/ablation-report-planning-full-v0.3.md).
+
 ## Local verification
 
 ```powershell
@@ -53,6 +59,7 @@ python scripts/validate_task.py benchmark/examples/python-bugfix/task.json
 python scripts/run_codex_baseline.py --list-tasks
 python scripts/run_codex_baseline.py --task-id python-config-precedence --execution-host wsl
 python scripts/run_codex_suite.py --dry-run --repetitions 3
+python scripts/run_codex_suite.py --harness planning --repetitions 1
 python scripts/run_codex_h1.py --task-id checkout-retry-incident --execution-host wsl
 python scripts/run_codex_h1.py --task-id checkout-retry-incident --profile planning --execution-host wsl
 ```

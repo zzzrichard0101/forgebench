@@ -40,6 +40,20 @@ class SuiteAggregationTests(unittest.TestCase):
         self.assertEqual(summary["budget_qualified_unknown"], 1)
         self.assertEqual(summary["budget_qualified_true"], 0)
 
+    def test_h1_top_level_usage_is_aggregated(self) -> None:
+        summary = aggregate_suite(
+            [
+                {
+                    "status": "completed",
+                    "input_tokens": 321,
+                    "output_tokens": 45,
+                    "duration_seconds": 2.5,
+                }
+            ]
+        )
+        self.assertEqual(summary["total_input_tokens"], 321)
+        self.assertEqual(summary["total_output_tokens"], 45)
+
 
 if __name__ == "__main__":
     unittest.main()

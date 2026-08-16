@@ -18,14 +18,20 @@ def aggregate_suite(results: list[dict[str, Any]]) -> dict[str, Any]:
         "budget_qualified_false": sum(value is False for value in qualified),
         "budget_qualified_unknown": sum(value is None for value in qualified),
         "total_input_tokens": sum(
-            int(result.get("trace", {}).get("input_tokens", 0))
+            _usage(result, "input_tokens")
             for result in completed
         ),
         "total_output_tokens": sum(
-            int(result.get("trace", {}).get("output_tokens", 0))
+            _usage(result, "output_tokens")
             for result in completed
         ),
         "total_duration_seconds": round(
             sum(float(result.get("duration_seconds", 0)) for result in completed), 3
         ),
     }
+
+
+def _usage(result: dict[str, Any], field: str) -> int:
+    if field in result:
+        return int(result[field])
+    return int(result.get("trace", {}).get(field, 0))

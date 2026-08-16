@@ -100,6 +100,24 @@ def main() -> int:
         completion_gate=completion_gate,
         max_repair_attempts=max_repair_attempts,
     )
+    token_budget_compliant = (
+        result.input_tokens <= bundle.task["budgets"]["max_input_tokens"]
+        and result.output_tokens <= bundle.task["budgets"]["max_output_tokens"]
+    )
+    time_budget_compliant = (
+        result.duration_seconds <= bundle.task["budgets"]["max_seconds"]
+    )
+    completion_accepted = result.completion.passed or not completion_gate
+    budget_qualified_success = (
+        False
+        if not (
+            result.grade.passed
+            and completion_accepted
+            and token_budget_compliant
+            and time_budget_compliant
+        )
+        else None
+    )
     summary = {
         "schema_version": 1,
         "harness": harness_name,
@@ -118,17 +136,17 @@ def main() -> int:
         "duration_seconds": result.duration_seconds,
         "input_tokens": result.input_tokens,
         "output_tokens": result.output_tokens,
-        "token_budget_compliant": (
-            result.input_tokens <= bundle.task["budgets"]["max_input_tokens"]
-            and result.output_tokens <= bundle.task["budgets"]["max_output_tokens"]
-        ),
+        "token_budget_compliant": token_budget_compliant,
+        "time_budget_compliant": time_budget_compliant,
+        "step_budget_enforced": False,
+        "budget_qualification_complete": False,
+        "budget_qualified_success": budget_qualified_success,
         "run_root": str(result.workspace.parent),
     }
     (result.workspace.parent / "run-summary.json").write_text(
         json.dumps(summary, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
     )
     print(json.dumps(summary, ensure_ascii=False, indent=2))
-    completion_accepted = result.completion.passed or not completion_gate
     return 0 if result.grade.passed and completion_accepted else 1
 
 

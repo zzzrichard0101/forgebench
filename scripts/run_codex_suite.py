@@ -16,7 +16,8 @@ from forgebench.suite import aggregate_suite
 
 ROOT = Path(__file__).resolve().parents[1]
 CATALOG_PATH = ROOT / "benchmark" / "manifest.json"
-SINGLE_RUNNER = ROOT / "scripts" / "run_codex_baseline.py"
+H0_RUNNER = ROOT / "scripts" / "run_codex_baseline.py"
+H1_RUNNER = ROOT / "scripts" / "run_codex_h1.py"
 
 
 def main() -> int:
@@ -26,6 +27,11 @@ def main() -> int:
     parser.add_argument("--execution-host", choices=["auto", "windows", "wsl"], default="auto")
     parser.add_argument("--model", default="gpt-5.6-sol")
     parser.add_argument("--reasoning-effort", default="medium")
+    parser.add_argument(
+        "--harness",
+        choices=["h0", "planning", "verification", "repair"],
+        default="h0",
+    )
     parser.add_argument("--runs-root", type=Path, default=ROOT / "runs")
     parser.add_argument("--dry-run", action="store_true")
     args = parser.parse_args()
@@ -56,6 +62,7 @@ def main() -> int:
         "model": args.model,
         "reasoning_effort": args.reasoning_effort,
         "execution_host": args.execution_host,
+        "harness": args.harness,
         "planned_runs": planned_runs,
         "results": [],
         "summary": aggregate_suite([]),
@@ -63,9 +70,10 @@ def main() -> int:
     _write(output_path, suite)
 
     for planned in planned_runs:
+        runner = H0_RUNNER if args.harness == "h0" else H1_RUNNER
         command = [
             sys.executable,
-            str(SINGLE_RUNNER),
+            str(runner),
             "--task-id",
             planned["task_id"],
             "--execution-host",
@@ -77,6 +85,8 @@ def main() -> int:
             "--runs-root",
             str(args.runs_root),
         ]
+        if args.harness != "h0":
+            command.extend(["--profile", args.harness])
         completed = subprocess.run(
             command,
             cwd=ROOT,
