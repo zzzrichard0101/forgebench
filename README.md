@@ -36,7 +36,8 @@ for the result, limitations, and next experiment.
 $env:PYTHONPATH = "src"
 python -m unittest discover -s tests -v
 python scripts/validate_task.py benchmark/examples/python-bugfix/task.json
-python scripts/run_codex_baseline.py --execution-host wsl
+python scripts/run_codex_baseline.py --list-tasks
+python scripts/run_codex_baseline.py --task-id python-config-precedence --execution-host wsl
 ```
 
 The baseline runner uses Codex, not Claude. Raw run artifacts and pinned local
@@ -48,6 +49,12 @@ incident, and adversarial families. Every seed is known-bad, every new task has
 a known-good outcome, protected-file mutations are detected, and grader results
 are stable across three repeated executions. This is an expansion checkpoint,
 not yet the planned 30-task development benchmark.
+
+The Codex runner now selects any task by ID from the benchmark manifest and
+emits a normalized trace summary plus separate functional, token-budget, and
+time-budget outcomes. A second end-to-end smoke run passed the configuration
+task but exceeded its token budget; see the
+[catalog smoke report](docs/catalog-smoke-report-v0.1.md).
 
 ## Planned evaluation sequence
 

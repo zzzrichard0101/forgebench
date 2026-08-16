@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "report_id": "catalog-smoke-v0.1",
+  "date": "2026-08-16",
+  "run": {
+    "run_id": "a5fcc99e4b954ba196f15c0739363bed",
+    "task_id": "python-config-precedence",
+    "task_version": 1,
+    "provider": "codex-cli",
+    "cli_version": "0.147.0",
+    "model": "gpt-5.6-sol",
+    "reasoning_effort": "medium",
+    "execution_host": "wsl2-ubuntu",
+    "sandbox": "workspace-write",
+    "duration_seconds": 55.356,
+    "exit_code": 0,
+    "timed_out": false,
+    "task_passed": true,
+    "token_budget_compliant": false,
+    "time_budget_compliant": true,
+    "step_budget_enforced": false,
+    "budget_qualification_complete": false,
+    "budget_qualified_success": false,
+    "required_checks": { "passed": 3, "total": 3 },
+    "trace": {
+      "event_count": 19,
+      "command_count": 5,
+      "command_completed": 4,
+      "command_failed": 1,
+      "input_tokens": 130099,
+      "cached_input_tokens": 108800,
+      "output_tokens": 1613,
+      "reasoning_output_tokens": 303
+    },
+    "budgets": {
+      "max_input_tokens": 50000,
+      "max_output_tokens": 10000,
+      "max_seconds": 480
+    }
+  },
+  "interpretation": {
+    "nonzero_command_was_expected_reproduction": true,
+    "claim_scope": "generic runner smoke validation only"
+  }
+}

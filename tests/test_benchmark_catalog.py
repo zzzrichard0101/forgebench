@@ -5,9 +5,8 @@ import unittest
 from dataclasses import asdict
 from pathlib import Path
 
+from forgebench.catalog import BenchmarkCatalog, CatalogError, hash_seed
 from forgebench.grader import DeterministicGrader
-
-from scripts.hash_seed import hash_seed
 from scripts.validate_task import validate_task
 
 
@@ -38,6 +37,17 @@ class BenchmarkCatalogTests(unittest.TestCase):
                 self.assertTrue(seed.is_dir())
                 if task["split"] == "dev":
                     self.assertEqual(task["seed_repo"]["revision"], hash_seed(seed))
+
+    def test_manifest_catalog_resolves_every_task(self) -> None:
+        catalog = BenchmarkCatalog(ROOT, ROOT / "benchmark" / "manifest.json")
+        self.assertEqual(len(catalog.list()), len(self.catalog))
+        for task, _ in self.catalog:
+            self.assertEqual(catalog.get(task["id"]).task, task)
+
+    def test_unknown_catalog_task_is_explicit(self) -> None:
+        catalog = BenchmarkCatalog(ROOT, ROOT / "benchmark" / "manifest.json")
+        with self.assertRaises(CatalogError):
+            catalog.get("missing-task")
 
     def test_catalog_covers_all_task_families(self) -> None:
         self.assertEqual(
