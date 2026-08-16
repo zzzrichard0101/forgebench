@@ -1,4 +1,4 @@
-# ForgeBench Dataset Card v0.2
+# ForgeBench Dataset Card v0.3
 
 ## Snapshot
 
@@ -69,6 +69,13 @@ These controls run in `tests/test_benchmark_catalog.py`.
   conflict, not network or secret-manager integrations.
 - Difficulty labels are author estimates until repeated baseline evidence is
   available.
+
+## Version history
+
+- `dev-v0.3`: incident tasks moved to v2 after the first 10-task baseline found
+  that v1 graders required undisclosed exact identifiers and root-cause labels.
+  Version 2 accepts semantically equivalent identifiers and explanations while
+  retaining evidence, impact, remediation, and protected-file invariants.
 
 ## Expansion gate
 

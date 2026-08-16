@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "snapshot": "dev-v0.2",
+  "snapshot": "dev-v0.3",
   "frozen": false,
   "tasks": [
     {
@@ -21,7 +21,7 @@
     },
     {
       "id": "checkout-retry-incident",
-      "version": 1,
+      "version": 2,
       "family": "incident",
       "difficulty": "medium",
       "split": "dev",
@@ -61,7 +61,7 @@
     },
     {
       "id": "worker-visibility-incident",
-      "version": 1,
+      "version": 2,
       "family": "incident",
       "difficulty": "medium",
       "split": "dev",
@@ -69,7 +69,7 @@
     },
     {
       "id": "cdn-cache-incident",
-      "version": 1,
+      "version": 2,
       "family": "incident",
       "difficulty": "medium",
       "split": "dev",

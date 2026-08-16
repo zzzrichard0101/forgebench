@@ -1,5 +1,5 @@
 {
-  "id": "worker-visibility-incident", "version": 1,
+  "id": "worker-visibility-incident", "version": 2,
   "title": "Diagnose duplicate background job execution", "family": "incident", "difficulty": "medium", "split": "dev",
   "tags": ["incident", "queue", "timeout"],
   "seed_repo": {"source": "benchmark/fixtures/worker-visibility-incident", "revision": "sha256:23af9a447e63a6332ecedccb90a3f1315170378ab3a080629cf64701cdfab3d8", "subdirectory": ""},

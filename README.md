@@ -30,6 +30,12 @@ exceeded its input-token budget; both facts are reported instead of collapsing
 them into one success number. See [Baseline Report v0](docs/baseline-report-v0.md)
 for the result, limitations, and next experiment.
 
+The first complete H0 suite finished 10/10 runs without infrastructure failure.
+After grader audit, Codex passed 8/10 tasks: development 5/5, incident 1/3, and
+adversarial 2/2. Two incident runs made correct diagnoses but violated explicit
+protected-evidence constraints. No run met its input-token budget. See
+[Multi-task Baseline v0.3](docs/multitask-baseline-v0.3.md).
+
 ## Local verification
 
 ```powershell

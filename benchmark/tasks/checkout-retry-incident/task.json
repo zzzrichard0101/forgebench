@@ -1,6 +1,6 @@
 {
   "id": "checkout-retry-incident",
-  "version": 1,
+  "version": 2,
   "title": "Diagnose a checkout retry storm from repository evidence",
   "family": "incident",
   "difficulty": "medium",

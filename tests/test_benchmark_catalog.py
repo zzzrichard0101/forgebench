@@ -126,8 +126,8 @@ class BenchmarkCatalogTests(unittest.TestCase):
     @staticmethod
     def _fix_incident(workspace: Path) -> None:
         report = {
-            "incident_id": "checkout-retry-storm-2026-08-15",
-            "root_cause": "retry_on_non_transient_400",
+            "incident_id": "checkout-400-retries",
+            "root_cause": "HTTP 400 was incorrectly marked retryable",
             "impact": {"affected_requests": 3, "total_retry_attempts": 9},
             "evidence": [
                 "Three requests returned HTTP 400 across four attempts each.",
@@ -192,8 +192,8 @@ class BenchmarkCatalogTests(unittest.TestCase):
     @staticmethod
     def _fix_worker_incident(workspace: Path) -> None:
         report = {
-            "incident_id": "worker-visibility-2026-08-15",
-            "root_cause": "visibility_timeout_below_job_runtime",
+            "incident_id": "duplicate-worker-deliveries",
+            "root_cause": "Visibility timeout is shorter than job runtime",
             "impact": {"duplicated_jobs": 2, "extra_attempts": 2},
             "evidence": [
                 "Visibility timeout is 30 seconds.",
@@ -211,8 +211,8 @@ class BenchmarkCatalogTests(unittest.TestCase):
     @staticmethod
     def _fix_cdn_incident(workspace: Path) -> None:
         report = {
-            "incident_id": "cdn-cache-2026-08-15",
-            "root_cause": "cache_ttl_regression",
+            "incident_id": "stale-web-deployment",
+            "root_cause": "Cache TTL increased from one minute to one hour",
             "impact": {
                 "stale_responses": 499,
                 "affected_regions": ["ap-northeast-2", "us-west-2"],

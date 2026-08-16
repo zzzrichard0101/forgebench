@@ -1,5 +1,5 @@
 {
-  "id": "cdn-cache-incident", "version": 1,
+  "id": "cdn-cache-incident", "version": 2,
   "title": "Diagnose stale responses after a web deployment", "family": "incident", "difficulty": "medium", "split": "dev",
   "tags": ["incident", "cdn", "deployment"],
   "seed_repo": {"source": "benchmark/fixtures/cdn-cache-incident", "revision": "sha256:72bc590bab02b3c9dee9a26e768f02f18aeef9a0884be069899d60d1f7161d12", "subdirectory": ""},

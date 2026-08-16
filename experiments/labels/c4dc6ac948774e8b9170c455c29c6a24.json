@@ -1,0 +1,16 @@
+{
+  "schema_version": 1,
+  "run_id": "c4dc6ac948774e8b9170c455c29c6a24",
+  "task_id": "cdn-cache-incident",
+  "primary_label": "task_grader",
+  "contributing_labels": [],
+  "evidence": [
+    {"source":"grader","id":"incident_invariants","observation":"The only v1 invariant failure was an undisclosed exact incident ID and label."},
+    {"source":"grader","id":"v2_regrade","observation":"The frozen workspace passes all corrected v2 semantic and protected-file checks."}
+  ],
+  "counterfactual": "A semantic v1 grader would have accepted the correct report without any agent behavior change.",
+  "reviewer_id": "portfolio-author",
+  "reviewed_at": "2026-08-16T21:20:00+09:00",
+  "confidence": "high",
+  "ambiguous": false
+}
