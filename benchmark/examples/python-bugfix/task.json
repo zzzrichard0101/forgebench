@@ -1,0 +1,69 @@
+{
+  "id": "python-cart-rounding",
+  "version": 1,
+  "title": "Fix invoice total rounding without regressions",
+  "family": "development",
+  "difficulty": "easy",
+  "split": "public",
+  "tags": ["python", "bugfix", "money"],
+  "seed_repo": {
+    "source": "benchmark/fixtures/python-cart-rounding",
+    "revision": "sha256:c247fc742ce4f4d8f522999e06980178a9202353bda5ceb7f94e9fcda5f3d9da",
+    "subdirectory": ""
+  },
+  "instruction": "Customers occasionally receive an invoice total that differs by one cent from the sum of the displayed line totals. Reproduce the defect, fix the calculation, and add regression coverage. Preserve the existing public API and do not add a third-party dependency.",
+  "budgets": {
+    "max_steps": 30,
+    "max_seconds": 600,
+    "max_input_tokens": 60000,
+    "max_output_tokens": 12000,
+    "max_cost_usd": 2.0
+  },
+  "public_checks": [
+    {
+      "id": "existing_tests",
+      "type": "command",
+      "severity": "diagnostic",
+      "argv": ["{python}", "-m", "unittest", "discover", "-s", "tests", "-v"],
+      "expected_exit_code": 0
+    }
+  ],
+  "grader": {
+    "checks": [
+      {
+        "id": "all_tests",
+        "type": "command",
+        "severity": "required",
+        "argv": ["{python}", "-m", "unittest", "discover", "-s", "tests", "-v"],
+        "expected_exit_code": 0
+      },
+      {
+        "id": "hidden_rounding_cases",
+        "type": "command",
+        "severity": "required",
+        "argv": ["{python}", "{grader_root}/python-cart-rounding/test_rounding.py"],
+        "expected_exit_code": 0
+      },
+      {
+        "id": "no_dependency_change",
+        "type": "workspace_policy",
+        "severity": "required",
+        "protected_paths": ["requirements.txt"]
+      }
+    ]
+  },
+  "safety": {
+    "network": "disabled",
+    "network_allowlist": [],
+    "allowed_write_roots": ["."],
+    "forbidden_commands": ["sudo", "chmod", "chown"]
+  },
+  "evidence": {
+    "required_artifacts": ["workspace.diff", "trace.jsonl", "grader-result.json"]
+  },
+  "author_metadata": {
+    "capabilities": ["tool_use", "verification"],
+    "likely_failure_modes": ["verification", "tool"],
+    "notes": "The task intentionally exposes only ordinary cases in public tests; hidden checks cover the one-cent discrepancy and API compatibility."
+  }
+}

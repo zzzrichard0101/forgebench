@@ -1,0 +1,200 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://forgebench.dev/schema/task.schema.json",
+  "title": "ForgeBench Task",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "version",
+    "title",
+    "family",
+    "difficulty",
+    "split",
+    "seed_repo",
+    "instruction",
+    "budgets",
+    "grader",
+    "safety",
+    "evidence",
+    "author_metadata"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+      "minLength": 3,
+      "maxLength": 80
+    },
+    "version": { "type": "integer", "minimum": 1 },
+    "title": { "type": "string", "minLength": 5, "maxLength": 120 },
+    "family": { "enum": ["development", "incident", "adversarial"] },
+    "difficulty": { "enum": ["easy", "medium", "hard"] },
+    "split": { "enum": ["public", "dev", "test"] },
+    "tags": {
+      "type": "array",
+      "items": { "type": "string", "pattern": "^[a-z0-9_-]+$" },
+      "uniqueItems": true,
+      "default": []
+    },
+    "seed_repo": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["source", "revision", "subdirectory"],
+      "properties": {
+        "source": { "type": "string", "minLength": 1 },
+        "revision": { "type": "string", "minLength": 7 },
+        "subdirectory": { "type": "string" }
+      }
+    },
+    "instruction": { "type": "string", "minLength": 20 },
+    "budgets": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["max_steps", "max_seconds", "max_input_tokens", "max_output_tokens"],
+      "properties": {
+        "max_steps": { "type": "integer", "minimum": 1, "maximum": 500 },
+        "max_seconds": { "type": "integer", "minimum": 10, "maximum": 7200 },
+        "max_input_tokens": { "type": "integer", "minimum": 1 },
+        "max_output_tokens": { "type": "integer", "minimum": 1 },
+        "max_cost_usd": { "type": "number", "exclusiveMinimum": 0 }
+      }
+    },
+    "public_checks": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/check" },
+      "default": []
+    },
+    "grader": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["checks"],
+      "properties": {
+        "checks": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "#/$defs/check" }
+        }
+      }
+    },
+    "safety": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["network", "allowed_write_roots", "forbidden_commands"],
+      "properties": {
+        "network": { "enum": ["disabled", "allowlist"] },
+        "network_allowlist": {
+          "type": "array",
+          "items": { "type": "string" },
+          "default": []
+        },
+        "allowed_write_roots": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "type": "string" }
+        },
+        "forbidden_commands": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      }
+    },
+    "evidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["required_artifacts"],
+      "properties": {
+        "required_artifacts": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      }
+    },
+    "author_metadata": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["capabilities", "likely_failure_modes"],
+      "properties": {
+        "capabilities": {
+          "type": "array",
+          "items": {
+            "enum": [
+              "planning",
+              "replanning",
+              "memory",
+              "tool_use",
+              "verification",
+              "recovery",
+              "safety"
+            ]
+          },
+          "uniqueItems": true
+        },
+        "likely_failure_modes": {
+          "type": "array",
+          "items": {
+            "enum": [
+              "planning",
+              "context_memory",
+              "tool",
+              "verification",
+              "recovery",
+              "budget",
+              "safety",
+              "infrastructure",
+              "task_grader"
+            ]
+          },
+          "uniqueItems": true
+        },
+        "notes": { "type": "string" }
+      }
+    }
+  },
+  "$defs": {
+    "check": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "type", "severity"],
+      "properties": {
+        "id": { "type": "string", "pattern": "^[a-z0-9_]+$" },
+        "type": {
+          "enum": ["command", "file_exists", "file_absent", "json_schema", "workspace_policy"]
+        },
+        "severity": { "enum": ["required", "diagnostic"] },
+        "argv": {
+          "type": "array",
+          "items": { "type": "string" },
+          "minItems": 1
+        },
+        "path": { "type": "string" },
+        "protected_paths": {
+          "type": "array",
+          "items": { "type": "string" },
+          "minItems": 1
+        },
+        "expected_exit_code": { "type": "integer", "default": 0 },
+        "output_pattern": { "type": "string" },
+        "schema_path": { "type": "string" }
+      },
+      "allOf": [
+        {
+          "if": { "properties": { "type": { "const": "command" } } },
+          "then": { "required": ["argv"] }
+        },
+        {
+          "if": {
+            "properties": {
+              "type": { "enum": ["file_exists", "file_absent", "json_schema"] }
+            }
+          },
+          "then": { "required": ["path"] }
+        },
+        {
+          "if": { "properties": { "type": { "const": "json_schema" } } },
+          "then": { "required": ["schema_path"] }
+        }
+      ]
+    }
+  }
+}

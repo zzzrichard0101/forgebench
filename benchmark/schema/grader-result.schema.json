@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://forgebench.dev/schema/grader-result.schema.json",
+  "title": "ForgeBench Grader Result",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["task_id", "task_version", "passed", "checks"],
+  "properties": {
+    "task_id": { "type": "string" },
+    "task_version": { "type": "integer", "minimum": 1 },
+    "passed": { "type": "boolean" },
+    "checks": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["check_id", "check_type", "severity", "passed", "output", "metadata"],
+        "properties": {
+          "check_id": { "type": "string" },
+          "check_type": { "type": "string" },
+          "severity": { "enum": ["required", "diagnostic"] },
+          "passed": { "type": "boolean" },
+          "output": { "type": "string" },
+          "metadata": { "type": "object" }
+        }
+      }
+    }
+  }
+}
+
