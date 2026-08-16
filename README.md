@@ -36,6 +36,11 @@ adversarial 2/2. Two incident runs made correct diagnoses but violated explicit
 protected-evidence constraints. No run met its input-token budget. See
 [Multi-task Baseline v0.3](docs/multitask-baseline-v0.3.md).
 
+The first H1 targeted ablation added a structured plan, immutable constraints,
+deterministic completion checks, and a bounded repair pass. It converted both
+protected-evidence H0 failures into passes, but increased input tokens by 52.9%
+and wall time by 29.8%. See [H1 Ablation v0.1](docs/ablation-report-h1-v0.1.md).
+
 ## Local verification
 
 ```powershell
@@ -45,6 +50,7 @@ python scripts/validate_task.py benchmark/examples/python-bugfix/task.json
 python scripts/run_codex_baseline.py --list-tasks
 python scripts/run_codex_baseline.py --task-id python-config-precedence --execution-host wsl
 python scripts/run_codex_suite.py --dry-run --repetitions 3
+python scripts/run_codex_h1.py --task-id checkout-retry-incident --execution-host wsl
 ```
 
 The baseline runner uses Codex, not Claude. Raw run artifacts and pinned local

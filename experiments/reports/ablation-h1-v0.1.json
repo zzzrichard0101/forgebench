@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "report_id": "ablation-h1-v0.1",
+  "date": "2026-08-16",
+  "comparison_scope": "targeted H0 failures",
+  "model": "gpt-5.6-sol",
+  "reasoning_effort": "medium",
+  "h0": {
+    "task_success": {"passed": 0, "total": 2},
+    "protected_evidence_violations": 2,
+    "input_tokens": 338364,
+    "output_tokens": 5866,
+    "duration_seconds": 162.357,
+    "token_budget_compliant": 0
+  },
+  "h1": {
+    "name": "planning-completion-repair",
+    "task_success": {"passed": 2, "total": 2},
+    "protected_evidence_violations": 0,
+    "input_tokens": 517320,
+    "output_tokens": 7755,
+    "duration_seconds": 210.782,
+    "token_budget_compliant": 0,
+    "repair_passes_used": 0,
+    "runs": [
+      {"run_id":"95f414158f784697a5a310d4e1d3460a","task_id":"checkout-retry-incident","task_version":2,"attempts":1,"task_passed":true,"completion_passed":true,"input_tokens":289733,"output_tokens":3813,"duration_seconds":106.989},
+      {"run_id":"1c78a45d237248779b1c34654ec81fdf","task_id":"worker-visibility-incident","task_version":2,"attempts":1,"task_passed":true,"completion_passed":true,"input_tokens":227587,"output_tokens":3942,"duration_seconds":103.793}
+    ]
+  },
+  "delta": {
+    "task_success_count": 2,
+    "protected_evidence_violations": -2,
+    "input_tokens_percent": 52.9,
+    "output_tokens_percent": 32.2,
+    "duration_percent": 29.8
+  },
+  "limitations": [
+    "Tasks were selected after observing H0 failures.",
+    "One run per task; no variance estimate.",
+    "Planning, immutable constraints, verifier, and repair capability were bundled.",
+    "No H1 run met its token budget."
+  ]
+}

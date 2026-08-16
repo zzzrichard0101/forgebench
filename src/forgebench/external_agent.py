@@ -80,14 +80,14 @@ class ExternalAgentRunner:
                 check=False,
             )
             exit_code = completed.returncode
-            trace_path.write_text(_decode_output(completed.stdout), encoding="utf-8")
+            trace_path.write_text(decode_process_output(completed.stdout), encoding="utf-8")
             (run_root / "external-agent.stderr.txt").write_text(
-                _decode_output(completed.stderr), encoding="utf-8"
+                decode_process_output(completed.stderr), encoding="utf-8"
             )
         except subprocess.TimeoutExpired as exc:
             timed_out = True
-            stdout = _decode_output(exc.stdout)
-            stderr = _decode_output(exc.stderr)
+            stdout = decode_process_output(exc.stdout)
+            stderr = decode_process_output(exc.stderr)
             trace_path.write_text(stdout, encoding="utf-8")
             (run_root / "external-agent.stderr.txt").write_text(stderr, encoding="utf-8")
 
@@ -120,7 +120,7 @@ class ExternalAgentRunner:
         )
 
 
-def _decode_output(value: bytes | str | None) -> str:
+def decode_process_output(value: bytes | str | None) -> str:
     if value is None:
         return ""
     if isinstance(value, str):
