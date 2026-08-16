@@ -40,6 +40,9 @@ The first H1 targeted ablation added a structured plan, immutable constraints,
 deterministic completion checks, and a bounded repair pass. It converted both
 protected-evidence H0 failures into passes, but increased input tokens by 52.9%
 and wall time by 29.8%. See [H1 Ablation v0.1](docs/ablation-report-h1-v0.1.md).
+The follow-up [component split](docs/ablation-report-h1-components-v0.2.md)
+showed planning-only also passed 2/2; no real run activated verifier repair, so
+its incremental success benefit remains unproven.
 
 ## Local verification
 
@@ -51,6 +54,7 @@ python scripts/run_codex_baseline.py --list-tasks
 python scripts/run_codex_baseline.py --task-id python-config-precedence --execution-host wsl
 python scripts/run_codex_suite.py --dry-run --repetitions 3
 python scripts/run_codex_h1.py --task-id checkout-retry-incident --execution-host wsl
+python scripts/run_codex_h1.py --task-id checkout-retry-incident --profile planning --execution-host wsl
 ```
 
 The baseline runner uses Codex, not Claude. Raw run artifacts and pinned local

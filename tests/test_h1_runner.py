@@ -81,6 +81,34 @@ class H1RunnerTests(unittest.TestCase):
             self.assertFalse(manifest["attempts"][0]["completion"]["passed"])
             self.assertTrue(manifest["attempts"][1]["completion"]["passed"])
 
+    def test_planning_profile_records_but_does_not_repair_completion_failure(self) -> None:
+        with tempfile.TemporaryDirectory() as temp:
+            runner = H1Runner(Path(temp) / "runs", DeterministicGrader(GRADERS))
+
+            def command_factory(prompt: str, workspace: Path) -> list[str]:
+                script = (
+                    "from pathlib import Path; "
+                    "Path('worker_config.json').write_text('{}', encoding='utf-8')"
+                )
+                return [sys.executable, "-c", script]
+
+            result = runner.run(
+                task=TASK,
+                seed=SEED,
+                command_factory=command_factory,
+                harness_name="H1a-structured-planning",
+                completion_gate=False,
+                max_repair_attempts=0,
+            )
+
+            self.assertEqual(result.attempts, 1)
+            self.assertFalse(result.completion.passed)
+            self.assertFalse(result.grade.passed)
+            manifest = json.loads(
+                (result.workspace.parent / "h1-manifest.json").read_text(encoding="utf-8")
+            )
+            self.assertFalse(manifest["completion_gate"])
+
 
 if __name__ == "__main__":
     unittest.main()

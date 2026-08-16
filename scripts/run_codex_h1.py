@@ -30,7 +30,11 @@ def main() -> int:
     parser.add_argument("--execution-host", choices=["auto", "windows", "wsl"], default="auto")
     parser.add_argument("--model", default="gpt-5.6-sol")
     parser.add_argument("--reasoning-effort", default="medium")
-    parser.add_argument("--max-repair-attempts", type=int, default=1)
+    parser.add_argument(
+        "--profile",
+        choices=["planning", "verification", "repair"],
+        default="repair",
+    )
     args = parser.parse_args()
 
     catalog = BenchmarkCatalog(ROOT, MANIFEST_PATH)
@@ -82,15 +86,24 @@ def main() -> int:
         ]
 
     runner = H1Runner(args.runs_root, DeterministicGrader(GRADERS))
+    profiles = {
+        "planning": ("H1a-structured-planning", False, 0),
+        "verification": ("H1b-planning-completion", True, 0),
+        "repair": ("H1c-planning-completion-repair", True, 1),
+    }
+    harness_name, completion_gate, max_repair_attempts = profiles[args.profile]
     result = runner.run(
         task=bundle.task,
         seed=bundle.seed_path,
         command_factory=command_factory,
-        max_repair_attempts=args.max_repair_attempts,
+        harness_name=harness_name,
+        completion_gate=completion_gate,
+        max_repair_attempts=max_repair_attempts,
     )
     summary = {
         "schema_version": 1,
-        "harness": "H1-planning-completion-repair",
+        "harness": harness_name,
+        "profile": args.profile,
         "run_id": result.run_id,
         "task_id": bundle.task["id"],
         "task_version": bundle.task["version"],
@@ -115,7 +128,8 @@ def main() -> int:
         json.dumps(summary, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
     )
     print(json.dumps(summary, ensure_ascii=False, indent=2))
-    return 0 if result.grade.passed and result.completion.passed else 1
+    completion_accepted = result.completion.passed or not completion_gate
+    return 0 if result.grade.passed and completion_accepted else 1
 
 
 if __name__ == "__main__":

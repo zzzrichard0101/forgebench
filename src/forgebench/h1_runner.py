@@ -50,6 +50,8 @@ class H1Runner:
         task: dict[str, Any],
         seed: Path,
         command_factory: CommandFactory,
+        harness_name: str = "H1c-planning-completion-repair",
+        completion_gate: bool = True,
         max_repair_attempts: int = 1,
         run_id: str | None = None,
     ) -> H1Result:
@@ -109,7 +111,8 @@ class H1Runner:
                     "completion": completion.as_dict(),
                 }
             )
-            if exit_code == 0 and not timed_out and completion.passed:
+            process_succeeded = exit_code == 0 and not timed_out
+            if process_succeeded and (completion.passed or not completion_gate):
                 break
             if attempt_number <= max_repair_attempts:
                 prompt = completion.repair_prompt()
@@ -125,7 +128,7 @@ class H1Runner:
         output_tokens = sum(item["trace"]["output_tokens"] for item in attempts)
         manifest = {
             "schema_version": 1,
-            "harness": "H1-planning-completion-repair",
+            "harness": harness_name,
             "run_id": run_id,
             "task_id": task["id"],
             "task_version": task["version"],
@@ -133,6 +136,7 @@ class H1Runner:
             "finished_at": datetime.now(timezone.utc).isoformat(),
             "duration_seconds": duration,
             "max_repair_attempts": max_repair_attempts,
+            "completion_gate": completion_gate,
             "attempts": attempts,
             "completion_passed": completion.passed,
             "task_passed": grade.passed,

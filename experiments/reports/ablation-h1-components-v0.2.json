@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "report_id": "ablation-h1-components-v0.2",
+  "date": "2026-08-16",
+  "scope": ["checkout-retry-incident", "worker-visibility-incident"],
+  "model": "gpt-5.6-sol",
+  "reasoning_effort": "medium",
+  "profiles": {
+    "h0": {"task_passed":0,"total":2,"protected_violations":2,"input_tokens":338364,"output_tokens":5866,"duration_seconds":162.357},
+    "h1a_planning": {
+      "task_passed":2,"total":2,"protected_violations":0,"input_tokens":517364,"output_tokens":9198,"duration_seconds":242.896,"completion_blocks":0,"repair_attempts":0,
+      "runs": [
+        {"run_id":"c16164a80d484994a266ddff7b7f9d74","task_id":"checkout-retry-incident","task_version":2,"task_passed":true,"completion_passed":true,"input_tokens":315572,"output_tokens":4968,"duration_seconds":135.028},
+        {"run_id":"7e78ef8bdd314779ae6b2ab0512646d0","task_id":"worker-visibility-incident","task_version":2,"task_passed":true,"completion_passed":true,"input_tokens":201792,"output_tokens":4230,"duration_seconds":107.868}
+      ]
+    },
+    "h1c_capable_observed": {"task_passed":2,"total":2,"protected_violations":0,"input_tokens":517320,"output_tokens":7755,"duration_seconds":210.782,"completion_blocks":0,"repair_attempts":0}
+  },
+  "h1a_vs_h0_percent": {"input_tokens":52.9,"output_tokens":56.8,"duration":49.6},
+  "conclusion": "Planning and immutable constraints were sufficient on the targeted sample; no incremental real-task verifier or repair benefit was observed.",
+  "limitations": ["Post-hoc selected tasks", "One run per task and profile", "Independent stochastic runs", "All profiles exceeded token budgets"]
+}
