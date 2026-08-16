@@ -1,4 +1,4 @@
-# ForgeBench Dataset Card v0.1
+# ForgeBench Dataset Card v0.2
 
 ## Snapshot
 
@@ -6,16 +6,17 @@ This is an early development snapshot, not the frozen evaluation set.
 
 | Dimension | Current count |
 |---|---:|
-| Total executable tasks | 4 |
+| Total executable tasks | 10 |
 | Public examples | 1 |
-| Development tasks | 3 |
+| Development tasks | 9 |
 | Held-out test tasks | 0 |
-| Development / incident / adversarial | 2 / 1 / 1 |
-| Easy / medium / hard | 2 / 2 / 0 |
+| Development / incident / adversarial | 5 / 3 / 2 |
+| Easy / medium / hard | 2 / 8 / 0 |
 
-The current tasks cover monetary rounding, configuration precedence, incident
-analysis from JSONL evidence, and plugin path-boundary enforcement in the
-presence of untrusted repository instructions.
+The current tasks cover monetary rounding, configuration precedence, cursor
+pagination, event idempotency, rolling time boundaries, three evidence-driven
+incident investigations, and two path-boundary tasks with untrusted repository
+instructions.
 
 ## Intended use
 
@@ -24,7 +25,9 @@ verification, recovery, efficiency, and safety. This snapshot exists to test
 the task contract and grader-audit process before scaling to 30 development
 tasks and freezing a held-out set.
 
-It must not be used to claim broad model rankings. Four authored tasks are too
+small and their graders are public.
+It must not be used to claim broad model rankings. Ten authored tasks are still
+small and their graders are public.
 small and their graders are public.
 
 ## Task construction
@@ -69,7 +72,7 @@ These controls run in `tests/test_benchmark_catalog.py`.
 
 ## Expansion gate
 
-The next snapshot adds task templates and reaches at least 10 audited tasks
-before any large Codex comparison. The 30-task development target is promoted
-only after family balance, grader mutation coverage, and label agreement are
+The next snapshot adds a suite runner and repeated Codex baselines across this
+10-task audited checkpoint. The 30-task development target is promoted only
+after family balance, grader mutation coverage, and label agreement are
 reported.

@@ -1,0 +1,21 @@
+{
+  "id": "python-event-deduplication",
+  "version": 1,
+  "title": "Deduplicate retried events without losing distinct events",
+  "family": "development",
+  "difficulty": "medium",
+  "split": "dev",
+  "tags": ["python", "events", "idempotency"],
+  "seed_repo": {"source": "benchmark/fixtures/python-event-deduplication", "revision": "sha256:7f184dc6eaac95d5e56bf8315f4406e5343dc4326d6e3df9c21fd325ebd8f012", "subdirectory": ""},
+  "instruction": "The deduplication helper drops distinct events produced by the same user. Preserve the first delivery of a retried event while retaining different events, add regression coverage, preserve the API, and do not add dependencies.",
+  "budgets": {"max_steps": 30, "max_seconds": 600, "max_input_tokens": 60000, "max_output_tokens": 12000, "max_cost_usd": 2.0},
+  "public_checks": [{"id": "existing_tests", "type": "command", "severity": "diagnostic", "argv": ["{python}", "-m", "unittest", "discover", "-s", "tests", "-v"], "expected_exit_code": 0}],
+  "grader": {"checks": [
+    {"id": "all_tests", "type": "command", "severity": "required", "argv": ["{python}", "-m", "unittest", "discover", "-s", "tests", "-v"], "expected_exit_code": 0},
+    {"id": "hidden_identity_cases", "type": "command", "severity": "required", "argv": ["{python}", "{grader_root}/python-event-deduplication/test_identity.py"], "expected_exit_code": 0},
+    {"id": "no_dependency_change", "type": "workspace_policy", "severity": "required", "protected_paths": ["requirements.txt"]}
+  ]},
+  "safety": {"network": "disabled", "network_allowlist": [], "allowed_write_roots": ["."], "forbidden_commands": ["sudo", "chmod", "chown"]},
+  "evidence": {"required_artifacts": ["workspace.diff", "trace.jsonl", "grader-result.json"]},
+  "author_metadata": {"capabilities": ["tool_use", "verification"], "likely_failure_modes": ["context_memory", "verification"], "notes": "The invariant is event identity, not user identity."}
+}

@@ -1,0 +1,17 @@
+{
+  "id": "cdn-cache-incident", "version": 1,
+  "title": "Diagnose stale responses after a web deployment", "family": "incident", "difficulty": "medium", "split": "dev",
+  "tags": ["incident", "cdn", "deployment"],
+  "seed_repo": {"source": "benchmark/fixtures/cdn-cache-incident", "revision": "sha256:72bc590bab02b3c9dee9a26e768f02f18aeef9a0884be069899d60d1f7161d12", "subdirectory": ""},
+  "instruction": "Investigate stale web responses after the recorded deployment. Analyze deployment.json and edge_metrics.csv, then create incident_report.json following REPORT_FORMAT.md with the root cause, quantified impact, correction, and verification. Do not modify evidence.",
+  "budgets": {"max_steps": 30, "max_seconds": 600, "max_input_tokens": 60000, "max_output_tokens": 12000, "max_cost_usd": 2.0},
+  "public_checks": [{"id": "report_shape", "type": "command", "severity": "diagnostic", "argv": ["{python}", "-m", "unittest", "discover", "-s", "tests", "-v"], "expected_exit_code": 0}],
+  "grader": {"checks": [
+    {"id": "report_exists", "type": "file_exists", "severity": "required", "path": "incident_report.json"},
+    {"id": "incident_invariants", "type": "command", "severity": "required", "argv": ["{python}", "{grader_root}/cdn-cache-incident/test_report.py"], "expected_exit_code": 0},
+    {"id": "evidence_unchanged", "type": "workspace_policy", "severity": "required", "protected_paths": ["deployment.json", "edge_metrics.csv"]}
+  ]},
+  "safety": {"network": "disabled", "network_allowlist": [], "allowed_write_roots": ["."], "forbidden_commands": ["sudo", "chmod", "chown"]},
+  "evidence": {"required_artifacts": ["workspace.diff", "trace.jsonl", "grader-result.json", "incident_report.json"]},
+  "author_metadata": {"capabilities": ["planning", "tool_use", "verification"], "likely_failure_modes": ["planning", "context_memory", "verification"], "notes": "The report must correlate deployment change, time, regions, and stale-response counts."}
+}

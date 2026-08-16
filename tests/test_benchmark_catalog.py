@@ -71,7 +71,17 @@ class BenchmarkCatalogTests(unittest.TestCase):
             "python-config-precedence": self._fix_config,
             "checkout-retry-incident": self._fix_incident,
             "python-plugin-boundary": self._fix_plugin,
+            "python-pagination-cursor": self._fix_pagination,
+            "python-event-deduplication": self._fix_deduplication,
+            "python-rate-window": self._fix_rate_window,
+            "worker-visibility-incident": self._fix_worker_incident,
+            "cdn-cache-incident": self._fix_cdn_incident,
+            "python-archive-boundary": self._fix_archive,
         }
+        self.assertEqual(
+            set(solutions),
+            {task["id"] for task, _ in self.catalog if task["split"] == "dev"},
+        )
         for task, _ in self.catalog:
             if task["id"] not in solutions:
                 continue
@@ -148,6 +158,90 @@ class BenchmarkCatalogTests(unittest.TestCase):
         if old not in source:
             raise AssertionError("fixture source changed")
         path.write_text(source.replace(old, new), encoding="utf-8")
+
+    @staticmethod
+    def _replace(workspace: Path, filename: str, old: str, new: str) -> None:
+        path = workspace / filename
+        source = path.read_text(encoding="utf-8")
+        if old not in source:
+            raise AssertionError(f"fixture source changed: {filename}")
+        path.write_text(source.replace(old, new), encoding="utf-8")
+
+    @classmethod
+    def _fix_pagination(cls, workspace: Path) -> None:
+        cls._replace(
+            workspace,
+            "pagination.py",
+            "start = max((cursor or 0) - (1 if cursor else 0), 0)",
+            "start = cursor or 0",
+        )
+
+    @classmethod
+    def _fix_deduplication(cls, workspace: Path) -> None:
+        cls._replace(
+            workspace,
+            "dedup.py",
+            'key = event["user_id"]',
+            'key = event["event_id"]',
+        )
+
+    @classmethod
+    def _fix_rate_window(cls, workspace: Path) -> None:
+        cls._replace(workspace, "rate_limit.py", "timestamp >= cutoff", "timestamp > cutoff")
+
+    @staticmethod
+    def _fix_worker_incident(workspace: Path) -> None:
+        report = {
+            "incident_id": "worker-visibility-2026-08-15",
+            "root_cause": "visibility_timeout_below_job_runtime",
+            "impact": {"duplicated_jobs": 2, "extra_attempts": 2},
+            "evidence": [
+                "Visibility timeout is 30 seconds.",
+                "Jobs 1 and 3 run for 38 to 42 seconds and receive second attempts.",
+            ],
+            "remediation": {
+                "config_change": "Raise the visibility timeout above maximum job runtime.",
+                "verification": "Run long jobs and assert each job ID has exactly one completion.",
+            },
+        }
+        (workspace / "incident_report.json").write_text(
+            json.dumps(report, indent=2) + "\n", encoding="utf-8"
+        )
+
+    @staticmethod
+    def _fix_cdn_incident(workspace: Path) -> None:
+        report = {
+            "incident_id": "cdn-cache-2026-08-15",
+            "root_cause": "cache_ttl_regression",
+            "impact": {
+                "stale_responses": 499,
+                "affected_regions": ["ap-northeast-2", "us-west-2"],
+            },
+            "evidence": [
+                "Deployment raised cache TTL from 60 to 3600 seconds.",
+                "Stale responses began after deployment in two regions.",
+            ],
+            "remediation": {
+                "config_change": "Rollback cache TTL to 60 seconds and purge affected caches.",
+                "verification": "Compare stale-response metrics in every region after cache purge.",
+            },
+        }
+        (workspace / "incident_report.json").write_text(
+            json.dumps(report, indent=2) + "\n", encoding="utf-8"
+        )
+
+    @classmethod
+    def _fix_archive(cls, workspace: Path) -> None:
+        old = "return (root / member_name).resolve()"
+        new = '''resolved_root = root.resolve()
+    member = Path(member_name)
+    if member.is_absolute():
+        raise ValueError("absolute archive member")
+    target = (resolved_root / member).resolve()
+    if not target.is_relative_to(resolved_root):
+        raise ValueError("archive member escapes extraction root")
+    return target'''
+        cls._replace(workspace, "archive.py", old, new)
 
 
 if __name__ == "__main__":

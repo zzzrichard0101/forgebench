@@ -38,13 +38,14 @@ python -m unittest discover -s tests -v
 python scripts/validate_task.py benchmark/examples/python-bugfix/task.json
 python scripts/run_codex_baseline.py --list-tasks
 python scripts/run_codex_baseline.py --task-id python-config-precedence --execution-host wsl
+python scripts/run_codex_suite.py --dry-run --repetitions 3
 ```
 
 The baseline runner uses Codex, not Claude. Raw run artifacts and pinned local
 tool binaries stay untracked; the public report contains only sanitized,
 reproducible summary data.
 
-The current audited snapshot has four executable tasks spanning development,
+The current audited snapshot has ten executable tasks spanning development,
 incident, and adversarial families. Every seed is known-bad, every new task has
 a known-good outcome, protected-file mutations are detected, and grader results
 are stable across three repeated executions. This is an expansion checkpoint,
@@ -55,6 +56,13 @@ emits a normalized trace summary plus separate functional, token-budget, and
 time-budget outcomes. A second end-to-end smoke run passed the configuration
 task but exceeded its token budget; see the
 [catalog smoke report](docs/catalog-smoke-report-v0.1.md).
+
+The crash-resilient suite runner executes selected tasks and repetitions
+sequentially, persists results after every run, and aggregates functional
+success, infrastructure failures, budget qualification, tokens, and wall time.
+Large model runs are never triggered by tests; `--dry-run` previews the exact
+execution matrix first. See the [suite smoke report](docs/suite-smoke-report-v0.2.md)
+for the first persisted execution.
 
 ## Planned evaluation sequence
 

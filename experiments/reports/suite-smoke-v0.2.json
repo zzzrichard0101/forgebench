@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "report_id": "suite-smoke-v0.2",
+  "date": "2026-08-16",
+  "catalog_snapshot": "dev-v0.2",
+  "catalog_task_count": 10,
+  "suite": {
+    "suite_id": "6d58f86545904b8bb9ccbbedf8186abe",
+    "model": "gpt-5.6-sol",
+    "reasoning_effort": "medium",
+    "execution_host": "wsl2-ubuntu",
+    "results": [
+      {
+        "run_id": "bbb1aefa9a204c02a59ca2dbb5f1531c",
+        "task_id": "python-rate-window",
+        "task_version": 1,
+        "task_passed": true,
+        "token_budget_compliant": false,
+        "time_budget_compliant": true,
+        "budget_qualification_complete": false,
+        "budget_qualified_success": false,
+        "duration_seconds": 53.009,
+        "input_tokens": 149255,
+        "cached_input_tokens": 117760,
+        "output_tokens": 1520,
+        "reasoning_output_tokens": 196,
+        "command_count": 5
+      }
+    ],
+    "summary": {
+      "attempted": 1,
+      "completed": 1,
+      "infrastructure_failures": 0,
+      "task_passed": 1,
+      "token_budget_compliant": 0,
+      "total_input_tokens": 149255,
+      "total_output_tokens": 1520,
+      "total_duration_seconds": 53.009
+    }
+  },
+  "claim_scope": "suite execution smoke validation only"
+}

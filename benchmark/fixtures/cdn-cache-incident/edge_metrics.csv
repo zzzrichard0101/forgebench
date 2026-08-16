@@ -1,0 +1,7 @@
+region,minute,requests,stale_responses
+ap-northeast-2,10:59,1000,0
+ap-northeast-2,11:05,1050,315
+us-west-2,10:59,900,0
+us-west-2,11:05,920,184
+eu-west-1,10:59,800,0
+eu-west-1,11:05,810,0

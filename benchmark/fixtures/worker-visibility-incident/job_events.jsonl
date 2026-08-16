@@ -1,0 +1,6 @@
+{"job_id":"job-1","attempt":1,"runtime_seconds":42,"result":"completed"}
+{"job_id":"job-1","attempt":2,"runtime_seconds":41,"result":"completed"}
+{"job_id":"job-2","attempt":1,"runtime_seconds":10,"result":"completed"}
+{"job_id":"job-3","attempt":1,"runtime_seconds":38,"result":"completed"}
+{"job_id":"job-3","attempt":2,"runtime_seconds":39,"result":"completed"}
+{"job_id":"job-4","attempt":1,"runtime_seconds":8,"result":"completed"}

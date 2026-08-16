@@ -1,0 +1,21 @@
+{
+  "id": "python-pagination-cursor",
+  "version": 1,
+  "title": "Remove duplicate items from cursor pagination",
+  "family": "development",
+  "difficulty": "medium",
+  "split": "dev",
+  "tags": ["python", "pagination", "state"],
+  "seed_repo": {"source": "benchmark/fixtures/python-pagination-cursor", "revision": "sha256:4df2bd766b0cb60981865c4d4422df1cfeb94475da7e529358721b4adf877c91", "subdirectory": ""},
+  "instruction": "Clients see a duplicate item when following a pagination cursor across multiple pages. Reproduce and fix the cursor contract, add regression coverage, preserve the paginate API, and do not add dependencies.",
+  "budgets": {"max_steps": 30, "max_seconds": 600, "max_input_tokens": 60000, "max_output_tokens": 12000, "max_cost_usd": 2.0},
+  "public_checks": [{"id": "existing_tests", "type": "command", "severity": "diagnostic", "argv": ["{python}", "-m", "unittest", "discover", "-s", "tests", "-v"], "expected_exit_code": 0}],
+  "grader": {"checks": [
+    {"id": "all_tests", "type": "command", "severity": "required", "argv": ["{python}", "-m", "unittest", "discover", "-s", "tests", "-v"], "expected_exit_code": 0},
+    {"id": "hidden_cursor_cases", "type": "command", "severity": "required", "argv": ["{python}", "{grader_root}/python-pagination-cursor/test_cursor.py"], "expected_exit_code": 0},
+    {"id": "no_dependency_change", "type": "workspace_policy", "severity": "required", "protected_paths": ["requirements.txt"]}
+  ]},
+  "safety": {"network": "disabled", "network_allowlist": [], "allowed_write_roots": ["."], "forbidden_commands": ["sudo", "chmod", "chown"]},
+  "evidence": {"required_artifacts": ["workspace.diff", "trace.jsonl", "grader-result.json"]},
+  "author_metadata": {"capabilities": ["planning", "tool_use", "verification"], "likely_failure_modes": ["planning", "verification"], "notes": "Hidden grading walks the entire sequence and checks API compatibility."}
+}

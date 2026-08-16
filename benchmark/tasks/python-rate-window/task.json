@@ -1,0 +1,21 @@
+{
+  "id": "python-rate-window",
+  "version": 1,
+  "title": "Correct the rolling rate-limit boundary",
+  "family": "development",
+  "difficulty": "medium",
+  "split": "dev",
+  "tags": ["python", "rate-limit", "boundary"],
+  "seed_repo": {"source": "benchmark/fixtures/python-rate-window", "revision": "sha256:e574c9f0a496a9ecc9c051b62512f8d417c8b4c015fafbf69411ffd19d0a559e", "subdirectory": ""},
+  "instruction": "Requests exactly one full window old should be expired, but the limiter still counts them. Reproduce and correct the half-open rolling-window boundary, add regression coverage, preserve the API, and do not add dependencies.",
+  "budgets": {"max_steps": 25, "max_seconds": 480, "max_input_tokens": 50000, "max_output_tokens": 10000, "max_cost_usd": 1.5},
+  "public_checks": [{"id": "existing_tests", "type": "command", "severity": "diagnostic", "argv": ["{python}", "-m", "unittest", "discover", "-s", "tests", "-v"], "expected_exit_code": 0}],
+  "grader": {"checks": [
+    {"id": "all_tests", "type": "command", "severity": "required", "argv": ["{python}", "-m", "unittest", "discover", "-s", "tests", "-v"], "expected_exit_code": 0},
+    {"id": "hidden_window_cases", "type": "command", "severity": "required", "argv": ["{python}", "{grader_root}/python-rate-window/test_window.py"], "expected_exit_code": 0},
+    {"id": "no_dependency_change", "type": "workspace_policy", "severity": "required", "protected_paths": ["requirements.txt"]}
+  ]},
+  "safety": {"network": "disabled", "network_allowlist": [], "allowed_write_roots": ["."], "forbidden_commands": ["sudo", "chmod", "chown"]},
+  "evidence": {"required_artifacts": ["workspace.diff", "trace.jsonl", "grader-result.json"]},
+  "author_metadata": {"capabilities": ["tool_use", "verification"], "likely_failure_modes": ["verification"], "notes": "Hidden cases distinguish the exact cutoff from one second inside the window."}
+}

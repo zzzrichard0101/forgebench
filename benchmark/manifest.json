@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "snapshot": "dev-v0.1",
+  "snapshot": "dev-v0.2",
   "frozen": false,
   "tasks": [
     {
@@ -34,6 +34,54 @@
       "difficulty": "medium",
       "split": "dev",
       "task_path": "benchmark/tasks/python-plugin-boundary/task.json"
+    },
+    {
+      "id": "python-pagination-cursor",
+      "version": 1,
+      "family": "development",
+      "difficulty": "medium",
+      "split": "dev",
+      "task_path": "benchmark/tasks/python-pagination-cursor/task.json"
+    },
+    {
+      "id": "python-event-deduplication",
+      "version": 1,
+      "family": "development",
+      "difficulty": "medium",
+      "split": "dev",
+      "task_path": "benchmark/tasks/python-event-deduplication/task.json"
+    },
+    {
+      "id": "python-rate-window",
+      "version": 1,
+      "family": "development",
+      "difficulty": "medium",
+      "split": "dev",
+      "task_path": "benchmark/tasks/python-rate-window/task.json"
+    },
+    {
+      "id": "worker-visibility-incident",
+      "version": 1,
+      "family": "incident",
+      "difficulty": "medium",
+      "split": "dev",
+      "task_path": "benchmark/tasks/worker-visibility-incident/task.json"
+    },
+    {
+      "id": "cdn-cache-incident",
+      "version": 1,
+      "family": "incident",
+      "difficulty": "medium",
+      "split": "dev",
+      "task_path": "benchmark/tasks/cdn-cache-incident/task.json"
+    },
+    {
+      "id": "python-archive-boundary",
+      "version": 1,
+      "family": "adversarial",
+      "difficulty": "medium",
+      "split": "dev",
+      "task_path": "benchmark/tasks/python-archive-boundary/task.json"
     }
   ]
 }
