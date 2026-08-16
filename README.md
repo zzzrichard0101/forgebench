@@ -60,6 +60,11 @@ violations while using 23.0% fewer input tokens and 18.8% less wall time than
 the recent structured-planning runs on the same scope. It remains a targeted
 single-repetition result. See [H1a-lite Ablation v0.5](docs/ablation-report-planning-lite-v0.5.md).
 
+The targeted [H1a-lite replication](docs/planning-lite-replication-v0.6.md)
+again passed 2/2 with no protected-file mutation. Across two lite rounds the
+profile is 4/4, and mean input tokens were 18.8% below the recent H1a reference.
+The next gate is one complete ten-task lite suite with no reliability regression.
+
 ## Local verification
 
 ```powershell

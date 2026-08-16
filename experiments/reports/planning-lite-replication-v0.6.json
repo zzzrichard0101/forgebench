@@ -1,0 +1,34 @@
+{
+  "schema_version": 1,
+  "report_id": "planning-lite-replication-v0.6",
+  "date": "2026-08-17",
+  "suite_id": "0cf67288396a4fdb97ddb190debaf523",
+  "model": "gpt-5.6-sol",
+  "reasoning_effort": "medium",
+  "profile": "planning-lite",
+  "round_2_runs": [
+    {"run_id":"b02a0a38703141bb8a4ce724adf806fc","task_id":"checkout-retry-incident","task_version":2,"task_passed":true,"completion_passed":true,"attempts":1,"protected_violations":[],"input_tokens":245643,"output_tokens":3334,"duration_seconds":90.154,"token_budget_compliant":false},
+    {"run_id":"c25fef32867d493882d8d6690403e0eb","task_id":"worker-visibility-incident","task_version":2,"task_passed":true,"completion_passed":true,"attempts":1,"protected_violations":[],"input_tokens":197411,"output_tokens":3445,"duration_seconds":91.552,"token_budget_compliant":false}
+  ],
+  "rounds": {
+    "lite_1": {"task_passed":2,"total":2,"protected_violations":0,"input_tokens":399978,"output_tokens":7256,"duration_seconds":185.862},
+    "lite_2": {"task_passed":2,"total":2,"protected_violations":0,"input_tokens":443054,"output_tokens":6779,"duration_seconds":181.706},
+    "lite_mean": {"input_tokens":421516,"output_tokens":7017.5,"duration_seconds":183.784},
+    "recent_h1a": {"task_passed":2,"total":2,"protected_violations":0,"input_tokens":519183,"output_tokens":8987,"duration_seconds":228.996},
+    "recent_h0": {"task_passed":0,"total":2,"protected_violations":2,"input_tokens":330552,"output_tokens":5585,"duration_seconds":151.432}
+  },
+  "lite_mean_vs_h1a_percent": {"input_tokens":-18.8,"output_tokens":-21.9,"duration":-19.7},
+  "lite_mean_vs_h0_percent": {"input_tokens":27.5,"output_tokens":25.6,"duration":21.4},
+  "cumulative_lite": {"task_passed":4,"runs":4,"protected_violations":0,"token_budget_compliant":0},
+  "acceptance_rule_for_full_suite": {
+    "minimum_task_passed": 10,
+    "maximum_input_tokens_exclusive": 2187939
+  },
+  "conclusion": "H1a-lite replicated targeted reliability and directional efficiency gains over H1a; full-suite evaluation is warranted.",
+  "limitations": [
+    "Two incident tasks only",
+    "Two lite observations per task",
+    "Structured H1a and H0 comparators are historical",
+    "All lite runs exceeded token budgets"
+  ]
+}
