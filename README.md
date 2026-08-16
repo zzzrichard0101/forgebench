@@ -8,7 +8,7 @@ The project asks one practical question:
 
 ## Current status
 
-**Phase 5/10 in progress — harness ablation and repeated evaluation**
+**Phase 6/10 in progress — context policy and recovery engineering**
 
 - [Design brief](docs/design-brief.md)
 - [Metrics and evaluation contract](docs/metrics.md)
@@ -64,6 +64,11 @@ The targeted [H1a-lite replication](docs/planning-lite-replication-v0.6.md)
 again passed 2/2 with no protected-file mutation. Across two lite rounds the
 profile is 4/4, and mean input tokens were 18.8% below the recent H1a reference.
 The next gate is one complete ten-task lite suite with no reliability regression.
+
+That [full-suite lite evaluation](docs/planning-lite-full-suite-v0.7.md) scored
+9/10. It cut input tokens by 20.3% and wall time by 25.7% versus H1a, but missed
+one hidden plugin boundary despite passing public completion checks. H1a-lite
+therefore remains a cost profile rather than replacing the 10/10 H1a default.
 
 ## Local verification
 

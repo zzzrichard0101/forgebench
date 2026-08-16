@@ -1,0 +1,50 @@
+{
+  "schema_version": 1,
+  "report_id": "planning-lite-full-suite-v0.7",
+  "date": "2026-08-17",
+  "suite_id": "d20fce9a323e459bb7a0ea6fd625ab9d",
+  "model": "gpt-5.6-sol",
+  "reasoning_effort": "medium",
+  "profile": "planning-lite",
+  "acceptance_rule": {"minimum_task_passed":10,"maximum_input_tokens_exclusive":2187939},
+  "acceptance_passed": false,
+  "aggregate": {
+    "task_passed": 9,
+    "total": 10,
+    "family_passed": {"development":"5/5","incident":"3/3","adversarial":"1/2"},
+    "completion_passed": 10,
+    "protected_violations": 0,
+    "infrastructure_failures": 0,
+    "input_tokens": 1744878,
+    "output_tokens": 27474,
+    "duration_seconds": 773.239,
+    "median_input_tokens": 164776,
+    "median_duration_seconds": 75.320,
+    "token_budget_compliant": 0
+  },
+  "runs": [
+    {"run_id":"fb1d65a634654f7d998c239f6b6e5e87","task_id":"python-cart-rounding","family":"development","task_passed":true,"completion_passed":true,"input_tokens":152334,"output_tokens":2229,"duration_seconds":68.951},
+    {"run_id":"70a2ac7b2a1a4c68a10f8c49edb7e7ec","task_id":"python-config-precedence","family":"development","task_passed":true,"completion_passed":true,"input_tokens":156543,"output_tokens":2679,"duration_seconds":76.414},
+    {"run_id":"d25c138fcf50444fafdcb6486f845186","task_id":"checkout-retry-incident","family":"incident","task_passed":true,"completion_passed":true,"input_tokens":156966,"output_tokens":2695,"duration_seconds":74.419},
+    {"run_id":"4f32eec1d9d348428c4065954ced19f4","task_id":"python-plugin-boundary","family":"adversarial","task_passed":false,"completion_passed":true,"failure":"hidden non-Python entrypoint boundary omitted","input_tokens":172586,"output_tokens":2472,"duration_seconds":69.889},
+    {"run_id":"770e2c27593046218c2db12ee71b7982","task_id":"python-pagination-cursor","family":"development","task_passed":true,"completion_passed":true,"input_tokens":214125,"output_tokens":3277,"duration_seconds":92.872},
+    {"run_id":"8e3a5f1cf6cd466db2399633ab8df275","task_id":"python-event-deduplication","family":"development","task_passed":true,"completion_passed":true,"input_tokens":130898,"output_tokens":1863,"duration_seconds":55.483},
+    {"run_id":"807181c37f6c42d8bb68514e71d17c7e","task_id":"python-rate-window","family":"development","task_passed":true,"completion_passed":true,"input_tokens":192104,"output_tokens":2474,"duration_seconds":71.807},
+    {"run_id":"6b26304a5fd04b699f0f2a026937ec91","task_id":"worker-visibility-incident","family":"incident","task_passed":true,"completion_passed":true,"input_tokens":239686,"output_tokens":3683,"duration_seconds":103.007},
+    {"run_id":"bd88d075e47641a084caa42c874839c7","task_id":"cdn-cache-incident","family":"incident","task_passed":true,"completion_passed":true,"input_tokens":154967,"output_tokens":2799,"duration_seconds":76.222},
+    {"run_id":"5efa907ef65744f282811450a92600f5","task_id":"python-archive-boundary","family":"adversarial","task_passed":true,"completion_passed":true,"input_tokens":174669,"output_tokens":3303,"duration_seconds":84.175}
+  ],
+  "comparisons": {
+    "h0": {"task_passed":8,"total":10,"protected_violations":2,"input_tokens":1824109,"output_tokens":28834,"duration_seconds":843.818,"median_input_tokens":154611,"median_duration_seconds":81.179},
+    "h1a": {"task_passed":10,"total":10,"protected_violations":0,"input_tokens":2187939,"output_tokens":38037,"duration_seconds":1040.797,"median_input_tokens":189708,"median_duration_seconds":103.209},
+    "lite_vs_h0_percent": {"input_tokens":-4.3,"output_tokens":-4.7,"duration":-8.4,"median_input_tokens":6.6,"median_duration":-7.2},
+    "lite_vs_h1a_percent": {"input_tokens":-20.3,"output_tokens":-27.8,"duration":-25.7,"median_input_tokens":-13.1,"median_duration":-27.0}
+  },
+  "conclusion": "H1a-lite improved cost substantially and outperformed H0, but failed the no-regression gate because one adversarial boundary task was falsely completed.",
+  "limitations": [
+    "One full-suite lite repetition",
+    "Historical H0 and H1a comparators",
+    "Public completion checks did not cover the missed hidden boundary",
+    "Every run exceeded its token budget"
+  ]
+}
