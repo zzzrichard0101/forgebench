@@ -1,0 +1,36 @@
+{
+  "schema_version": 1,
+  "report_id": "ablation-planning-lite-v0.5",
+  "date": "2026-08-17",
+  "suite_id": "88cfca1cf436475893f3f98245e3dfbe",
+  "model": "gpt-5.6-sol",
+  "reasoning_effort": "medium",
+  "profile": "planning-lite",
+  "runs": [
+    {"run_id":"a84e13d97e064e40984b209d208b5bcf","task_id":"checkout-retry-incident","task_version":2,"task_passed":true,"completion_passed":true,"attempts":1,"protected_violations":[],"input_tokens":202201,"output_tokens":3610,"duration_seconds":91.896,"token_budget_compliant":false},
+    {"run_id":"84095476090940d098272630860a714c","task_id":"worker-visibility-incident","task_version":2,"task_passed":true,"completion_passed":true,"attempts":1,"protected_violations":[],"input_tokens":197777,"output_tokens":3646,"duration_seconds":93.966,"token_budget_compliant":false}
+  ],
+  "aggregate": {
+    "task_passed": 2,
+    "total": 2,
+    "completion_passed": 2,
+    "protected_violations": 0,
+    "input_tokens": 399978,
+    "output_tokens": 7256,
+    "duration_seconds": 185.862,
+    "token_budget_compliant": 0
+  },
+  "comparison": {
+    "recent_h0": {"task_passed":0,"total":2,"protected_violations":2,"input_tokens":330552,"output_tokens":5585,"duration_seconds":151.432},
+    "recent_h1a": {"task_passed":2,"total":2,"protected_violations":0,"input_tokens":519183,"output_tokens":8987,"duration_seconds":228.996},
+    "lite_vs_h0_percent": {"input_tokens":21.0,"output_tokens":29.9,"duration":22.7},
+    "lite_vs_h1a_percent": {"input_tokens":-23.0,"output_tokens":-19.3,"duration":-18.8}
+  },
+  "conclusion": "H1a-lite retained 2/2 reliability while reducing measured cost versus recent structured-planning runs; replication is required.",
+  "limitations": [
+    "Two previously discriminating incident tasks only",
+    "One H1a-lite run per task",
+    "H1a-lite was not randomized into the preceding pair",
+    "No run met its token budget"
+  ]
+}

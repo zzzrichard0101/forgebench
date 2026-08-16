@@ -51,6 +51,7 @@ class H1Runner:
         seed: Path,
         command_factory: CommandFactory,
         harness_name: str = "H1c-planning-completion-repair",
+        prompt_style: str = "structured",
         completion_gate: bool = True,
         max_repair_attempts: int = 1,
         run_id: str | None = None,
@@ -61,7 +62,7 @@ class H1Runner:
         run_root = workspace.parent
         started_at = datetime.now(timezone.utc)
         started_clock = time.perf_counter()
-        prompt = build_h1_prompt(task)
+        prompt = build_h1_prompt(task, style=prompt_style)
         attempts: list[dict[str, Any]] = []
         completion: CompletionResult | None = None
 
@@ -137,6 +138,7 @@ class H1Runner:
             "duration_seconds": duration,
             "max_repair_attempts": max_repair_attempts,
             "completion_gate": completion_gate,
+            "prompt_style": prompt_style,
             "attempts": attempts,
             "completion_passed": completion.passed,
             "task_passed": grade.passed,
@@ -158,8 +160,19 @@ class H1Runner:
         )
 
 
-def build_h1_prompt(task: dict[str, Any]) -> str:
+def build_h1_prompt(task: dict[str, Any], style: str = "structured") -> str:
     immutable = list(protected_paths(task))
+    if style == "lite":
+        return f"""{task['instruction']}
+
+ForgeBench H1-lite protocol:
+- First create .forgebench/plan.json with: a one-sentence objective; 2-4 steps, each containing action and verification; 1-3 completion_checks; and immutable_paths exactly {json.dumps(immutable)}.
+- Treat every immutable path as read-only. Put recommendations only in the requested deliverable.
+- Inspect only files needed for the task, make only the requested change, run public checks once, inspect the final diff, then stop.
+- Stay in this repository. No network or hidden graders.
+"""
+    if style != "structured":
+        raise ValueError(f"unknown H1 prompt style: {style}")
     return f"""{task['instruction']}
 
 ForgeBench H1 protocol:

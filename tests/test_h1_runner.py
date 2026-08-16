@@ -5,7 +5,7 @@ import unittest
 from pathlib import Path
 
 from forgebench.grader import DeterministicGrader
-from forgebench.h1_runner import H1Runner
+from forgebench.h1_runner import H1Runner, build_h1_prompt
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -19,6 +19,14 @@ GRADERS = ROOT / "benchmark" / "graders"
 
 
 class H1RunnerTests(unittest.TestCase):
+    def test_lite_prompt_keeps_schema_and_immutable_contract_concise(self) -> None:
+        prompt = build_h1_prompt(TASK, style="lite")
+        self.assertIn("2-4 steps", prompt)
+        self.assertIn("worker_config.json", prompt)
+        self.assertIn("job_events.jsonl", prompt)
+        self.assertIn("read-only", prompt)
+        self.assertLess(len(prompt), len(build_h1_prompt(TASK)))
+
     def test_failed_completion_check_triggers_repair_in_same_workspace(self) -> None:
         with tempfile.TemporaryDirectory() as temp:
             runner = H1Runner(Path(temp) / "runs", DeterministicGrader(GRADERS))

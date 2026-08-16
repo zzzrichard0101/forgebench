@@ -32,7 +32,7 @@ def main() -> int:
     parser.add_argument("--reasoning-effort", default="medium")
     parser.add_argument(
         "--profile",
-        choices=["planning", "verification", "repair"],
+        choices=["planning", "planning-lite", "verification", "repair"],
         default="repair",
     )
     args = parser.parse_args()
@@ -87,16 +87,18 @@ def main() -> int:
 
     runner = H1Runner(args.runs_root, DeterministicGrader(GRADERS))
     profiles = {
-        "planning": ("H1a-structured-planning", False, 0),
-        "verification": ("H1b-planning-completion", True, 0),
-        "repair": ("H1c-planning-completion-repair", True, 1),
+        "planning": ("H1a-structured-planning", "structured", False, 0),
+        "planning-lite": ("H1a-lite-bounded-planning", "lite", False, 0),
+        "verification": ("H1b-planning-completion", "structured", True, 0),
+        "repair": ("H1c-planning-completion-repair", "structured", True, 1),
     }
-    harness_name, completion_gate, max_repair_attempts = profiles[args.profile]
+    harness_name, prompt_style, completion_gate, max_repair_attempts = profiles[args.profile]
     result = runner.run(
         task=bundle.task,
         seed=bundle.seed_path,
         command_factory=command_factory,
         harness_name=harness_name,
+        prompt_style=prompt_style,
         completion_gate=completion_gate,
         max_repair_attempts=max_repair_attempts,
     )

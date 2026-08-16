@@ -55,6 +55,11 @@ tasks. H0 again failed 0/2 by mutating protected evidence, while planning passed
 2/2 without mutation. The four runs consumed 849,735 input tokens against a
 1,000,000-token cap. See [Paired Confirmation v0.4](docs/paired-confirmation-v0.4.md).
 
+The first H1a-lite optimization retained 2/2 success and zero protected-file
+violations while using 23.0% fewer input tokens and 18.8% less wall time than
+the recent structured-planning runs on the same scope. It remains a targeted
+single-repetition result. See [H1a-lite Ablation v0.5](docs/ablation-report-planning-lite-v0.5.md).
+
 ## Local verification
 
 ```powershell
@@ -67,6 +72,7 @@ python scripts/run_codex_suite.py --dry-run --repetitions 3
 python scripts/run_codex_suite.py --harness planning --repetitions 1
 python scripts/run_codex_h1.py --task-id checkout-retry-incident --execution-host wsl
 python scripts/run_codex_h1.py --task-id checkout-retry-incident --profile planning --execution-host wsl
+python scripts/run_codex_h1.py --task-id checkout-retry-incident --profile planning-lite --execution-host wsl
 python scripts/run_paired_codex_experiment.py --task-id checkout-retry-incident --task-id worker-visibility-incident
 ```
 

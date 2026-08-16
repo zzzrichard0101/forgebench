@@ -29,7 +29,7 @@ def main() -> int:
     parser.add_argument("--reasoning-effort", default="medium")
     parser.add_argument(
         "--harness",
-        choices=["h0", "planning", "verification", "repair"],
+        choices=["h0", "planning", "planning-lite", "verification", "repair"],
         default="h0",
     )
     parser.add_argument("--runs-root", type=Path, default=ROOT / "runs")
