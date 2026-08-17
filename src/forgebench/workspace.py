@@ -9,7 +9,13 @@ class WorkspaceError(ValueError):
     pass
 
 
-def create_isolated_workspace(seed: Path, runs_root: Path, run_id: str) -> Path:
+def create_isolated_workspace(
+    seed: Path,
+    runs_root: Path,
+    run_id: str,
+    *,
+    preserve_symlinks: bool = False,
+) -> Path:
     """Copy a seed directory into a new, validated run-owned workspace."""
 
     seed = seed.resolve(strict=True)
@@ -21,7 +27,7 @@ def create_isolated_workspace(seed: Path, runs_root: Path, run_id: str) -> Path:
     if target.exists():
         raise WorkspaceError(f"run workspace already exists: {target}")
     target.parent.mkdir(parents=True, exist_ok=False)
-    shutil.copytree(seed, target)
+    shutil.copytree(seed, target, symlinks=preserve_symlinks)
     return target
 
 
