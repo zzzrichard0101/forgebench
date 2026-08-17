@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "experiment_id": "h2-fault-injection-v0.1",
+  "date": "2026-08-17",
+  "status": "predeclared",
+  "control": {
+    "context_policy": "UnboundedContextPolicy",
+    "recovery_policy": null
+  },
+  "treatment": {
+    "context_policy": {
+      "name": "BoundedContextPolicy",
+      "max_observations": 8,
+      "max_chars": 12000,
+      "max_item_chars": 4000
+    },
+    "recovery_policy": {
+      "name": "BoundedToolRecoveryPolicy",
+      "max_retries": 1,
+      "timeout_multiplier": 2,
+      "maximum_timeout_seconds": 120
+    }
+  },
+  "injections": [
+    {
+      "id": "transient-timeout",
+      "behavior": "first command attempt times out and the second succeeds",
+      "expected_treatment": "retry_once_then_succeed"
+    },
+    {
+      "id": "stale-output-pressure",
+      "behavior": "large stale successful outputs precede a decisive failed observation",
+      "expected_treatment": "retain_failure_under_context_budget"
+    },
+    {
+      "id": "deterministic-invalid-call",
+      "behavior": "invalid workspace path or forbidden executable",
+      "expected_treatment": "do_not_retry"
+    }
+  ],
+  "repetitions_per_injection": 3,
+  "acceptance": {
+    "minimum_transient_recovery_rate": 0.7,
+    "maximum_deterministic_retries": 0,
+    "maximum_context_chars": 12000,
+    "maximum_successful_run_overhead_percent": 25,
+    "maximum_safety_regressions": 0
+  }
+}

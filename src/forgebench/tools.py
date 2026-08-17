@@ -62,8 +62,20 @@ class ToolGateway:
             return ToolResult(call.name, False, f"unknown tool: {call.name}")
         try:
             return handler(call.arguments)
+        except subprocess.TimeoutExpired as exc:
+            return ToolResult(
+                call.name,
+                False,
+                f"TimeoutExpired: command exceeded {exc.timeout} seconds",
+                {"error_kind": "timeout", "timeout_seconds": exc.timeout},
+            )
         except (KeyError, TypeError, ValueError, OSError, WorkspaceError) as exc:
-            return ToolResult(call.name, False, f"{type(exc).__name__}: {exc}")
+            return ToolResult(
+                call.name,
+                False,
+                f"{type(exc).__name__}: {exc}",
+                {"error_kind": "deterministic"},
+            )
 
     def _read_file(self, args: dict[str, Any]) -> ToolResult:
         path = resolve_workspace_path(self.workspace, _string(args, "path"), must_exist=True)
@@ -163,4 +175,3 @@ def _schema(name: str, properties: dict[str, str], required: list[str]) -> dict[
             "additionalProperties": False,
         },
     }
-

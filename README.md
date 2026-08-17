@@ -70,6 +70,12 @@ That [full-suite lite evaluation](docs/planning-lite-full-suite-v0.7.md) scored
 one hidden plugin boundary despite passing public completion checks. H1a-lite
 therefore remains a cost profile rather than replacing the 10/10 H1a default.
 
+Phase 6 now has explicit [context and recovery policies](docs/context-recovery-design-v0.1.md):
+failed observations are prioritized inside a bounded context window, transient
+timeouts receive at most one capped retry, deterministic failures are not
+retried, and every compaction or recovery decision is trace-visible. Controlled
+fault-injection evaluation is the next checkpoint.
+
 ## Local verification
 
 ```powershell
