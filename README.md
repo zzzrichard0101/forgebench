@@ -102,6 +102,14 @@ risk: the known plugin false completion and one previously successful archive
 boundary task. This is a leakage-controlled routing plausibility check, not a
 held-out accuracy result.
 
+The first [adaptive development replay](docs/adaptive-replay-report-v0.2.md)
+then routed the known plugin false completion to one Codex deep-verification
+pass and routed a passing archive task directly to finish. The plugin changed
+from hidden fail to pass; the archive stayed passing with zero additional model
+tokens. However, the extra ephemeral process pushed two-task aggregate input
+16.2% above the historical H1a reference. The mechanism gate passed, but a
+general reliability-cost claim has not.
+
 ## Local verification
 
 ```powershell
@@ -119,6 +127,7 @@ python scripts/run_codex_h1.py --task-id python-plugin-boundary --profile planni
 python scripts/run_paired_codex_experiment.py --task-id checkout-retry-incident --task-id worker-visibility-incident
 python scripts/run_fault_injection.py
 python scripts/run_model_recovery_smoke.py --execution-host wsl
+python scripts/run_adaptive_replay.py --task-id python-plugin-boundary --source-run-id <planning-lite-run-id> --execution-host wsl
 ```
 
 The paired experiment command is a dry-run by default. It counterbalances H0

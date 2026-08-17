@@ -1,0 +1,75 @@
+{
+  "schema_version": 1,
+  "experiment": "adaptive-replay-v0.2",
+  "evaluation_type": "development_workspace_replay",
+  "harness": "H1a-adaptive-replay-v0.1",
+  "policy_version": "completion-risk-v0.2",
+  "pilot_v0_1": {
+    "run_id": "cd4d96355ad9484697fa266117d4d795",
+    "task_id": "python-plugin-boundary",
+    "result": "policy_evidence_failure",
+    "detail": "Any negative marker was treated as complete coverage, so a containment test masked the missing file-type dimension.",
+    "deep_verification_attempted": false,
+    "task_passed_after": false
+  },
+  "cells": [
+    {
+      "task_id": "python-plugin-boundary",
+      "source_run_id": "4f32eec1d9d348428c4065954ced19f4",
+      "adaptive_run_id": "2a86205be4ef4599b04c1cb0d576416d",
+      "routing": "high",
+      "missing_dimension": "file_type",
+      "deep_verification_attempted": true,
+      "task_passed_before": false,
+      "task_passed_after": true,
+      "completion_passed_after": true,
+      "source_workspace_unchanged": true,
+      "adaptive_input_tokens": 97108,
+      "adaptive_output_tokens": 2058,
+      "adaptive_duration_seconds": 53.858
+    },
+    {
+      "task_id": "python-archive-boundary",
+      "source_run_id": "5efa907ef65744f282811450a92600f5",
+      "adaptive_run_id": "4a64d240aea044998eadff21afaa297e",
+      "routing": "low",
+      "covered_dimension": "containment",
+      "deep_verification_attempted": false,
+      "task_passed_before": true,
+      "task_passed_after": true,
+      "completion_passed_after": true,
+      "source_workspace_unchanged": true,
+      "adaptive_input_tokens": 0,
+      "adaptive_output_tokens": 0,
+      "adaptive_duration_seconds": 0.4
+    }
+  ],
+  "acceptance": {
+    "functional_gate_passed": true,
+    "routing_gate_passed": true,
+    "source_preservation_gate_passed": true,
+    "token_cap_passed": true,
+    "total_adaptive_input_tokens": 97108,
+    "max_total_adaptive_input_tokens": 250000
+  },
+  "descriptive_cost_comparison": {
+    "scope": "the same two tasks using previously published single runs",
+    "h1a_input_tokens": 382459,
+    "h1a_lite_plus_adaptive_input_tokens": 444363,
+    "input_delta_vs_h1a_percent": 16.2,
+    "h1a_output_tokens": 8309,
+    "h1a_lite_plus_adaptive_output_tokens": 7833,
+    "output_delta_vs_h1a_percent": -5.7,
+    "h1a_duration_seconds": 211.308,
+    "h1a_lite_plus_adaptive_duration_seconds": 208.322,
+    "duration_delta_vs_h1a_percent": -1.4
+  },
+  "conclusion": "Selective routing repaired the known development false completion and skipped an unnecessary model call on the passing archive task, but the separate ephemeral replay made input-token efficiency worse than the historical H1a reference.",
+  "limitations": [
+    "Both tasks are development cases and the plugin failure was already known.",
+    "The comparison replays historical H1a-lite workspaces instead of running a fresh randomized pair.",
+    "The H1a cost reference is historical and not temporally paired.",
+    "Only two boundary tasks and one deep-verification model call were measured.",
+    "No held-out reliability or general efficiency claim is supported."
+  ]
+}
