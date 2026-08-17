@@ -1,0 +1,71 @@
+{
+  "schema_version": 1,
+  "experiment": "adaptive-packet-v0.2",
+  "evaluation_type": "development_workspace_replay",
+  "harness": "H1a-adaptive-replay-v0.1",
+  "policy_version": "completion-risk-v0.2",
+  "evidence_packet_version": "evidence-packet-v0.2",
+  "pilot_v0_1": {
+    "run_id": "4408df71ea0247ef9b5f0063b50ea218",
+    "packet_chars": 2506,
+    "input_tokens": 64172,
+    "output_tokens": 1072,
+    "duration_seconds": 34.823,
+    "task_passed_after": false,
+    "failure": "The file_type label was interpreted as regular-file status only; a non-Python regular file remained accepted."
+  },
+  "valid_run": {
+    "run_id": "f8e6bfe15c1f40afb99717a4221bedff",
+    "source_run_id": "4f32eec1d9d348428c4065954ced19f4",
+    "task_id": "python-plugin-boundary",
+    "packet_chars": 2506,
+    "packet_char_cap": 24000,
+    "packet_sha256": "cdf20ea35ca781d899dc88f9158d4769bd110c7cbc413891f70bd4b523bfe722",
+    "deep_verification_attempted": true,
+    "task_passed_before": false,
+    "task_passed_after": true,
+    "completion_passed_after": true,
+    "source_workspace_unchanged": true,
+    "input_tokens": 64921,
+    "output_tokens": 1847,
+    "duration_seconds": 47.224
+  },
+  "comparison_to_full_replay": {
+    "full_run_id": "2a86205be4ef4599b04c1cb0d576416d",
+    "full_input_tokens": 97108,
+    "packet_input_tokens": 64921,
+    "input_delta_percent": -33.1,
+    "full_output_tokens": 2058,
+    "packet_output_tokens": 1847,
+    "output_delta_percent": -10.3,
+    "full_duration_seconds": 53.858,
+    "packet_duration_seconds": 47.224,
+    "duration_delta_percent": -12.3
+  },
+  "descriptive_two_task_cost": {
+    "scope": "historical plugin and archive H1a-lite runs plus packet verification and low-risk routing",
+    "h1a_input_tokens": 382459,
+    "h1a_lite_plus_packet_input_tokens": 412176,
+    "input_delta_vs_h1a_percent": 7.8,
+    "h1a_output_tokens": 8309,
+    "h1a_lite_plus_packet_output_tokens": 7622,
+    "output_delta_vs_h1a_percent": -8.3,
+    "h1a_duration_seconds": 211.308,
+    "h1a_lite_plus_packet_duration_seconds": 201.688,
+    "duration_delta_vs_h1a_percent": -4.6
+  },
+  "acceptance": {
+    "functional_gate_passed": true,
+    "packet_cap_passed": true,
+    "input_below_full_replay_passed": true,
+    "source_preservation_gate_passed": true
+  },
+  "conclusion": "A dimension-complete evidence packet preserved the development repair while reducing adaptive input by 33.1% versus full replay. End-to-end input remains 7.8% above the historical two-task H1a reference, so the overall reliability-cost target is not yet met.",
+  "limitations": [
+    "The plugin failure was already known and used for development.",
+    "Only one valid packet-backed model call was measured.",
+    "Full replay and packet replay are stochastic, non-paired calls.",
+    "The two-task H1a comparison uses historical runs.",
+    "No held-out or general efficiency claim is supported."
+  ]
+}

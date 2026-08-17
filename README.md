@@ -110,6 +110,14 @@ tokens. However, the extra ephemeral process pushed two-task aggregate input
 16.2% above the historical H1a reference. The mechanism gate passed, but a
 general reliability-cost claim has not.
 
+The follow-up [Evidence Packet v0.2 evaluation](docs/adaptive-evidence-packet-v0.2.md)
+reduced the focused verification input from 97,108 to 64,921 tokens (-33.1%)
+while preserving the plugin repair. A recorded v0.1 packet saved tokens but
+misinterpreted the missing file-type dimension and failed; v0.2 requires a
+minimum probe set per dimension. End-to-end input on the two development tasks
+is still 7.8% above the historical H1a reference, so the main cost target remains
+open.
+
 ## Local verification
 
 ```powershell
@@ -128,6 +136,7 @@ python scripts/run_paired_codex_experiment.py --task-id checkout-retry-incident 
 python scripts/run_fault_injection.py
 python scripts/run_model_recovery_smoke.py --execution-host wsl
 python scripts/run_adaptive_replay.py --task-id python-plugin-boundary --source-run-id <planning-lite-run-id> --execution-host wsl
+python scripts/run_adaptive_replay.py --task-id python-plugin-boundary --source-run-id <planning-lite-run-id> --evidence-mode packet --execution-host wsl
 ```
 
 The paired experiment command is a dry-run by default. It counterbalances H0
