@@ -83,6 +83,23 @@ These are targets, not guaranteed claims:
 
 Missing a target does not authorize changing its definition after results are known.
 
+### Adaptive-verification amendment (2026-08-17)
+
+The frozen primary definitions above remain unchanged. ADR 0003 adds the
+following diagnostic metrics for H1a-adaptive:
+
+| Metric | Definition | Direction |
+|---|---|---|
+| Accepted false completion | completion policy accepts, hidden required grader fails | lower |
+| False-completion detection recall | false completions escalated before acceptance / all counterfactual false completions | higher |
+| Escalation rate | runs sent to deep verification / eligible runs | diagnostic |
+| Unnecessary-escalation rate | passing pre-escalation artifacts escalated without new risk evidence / escalated runs | lower |
+| True-success cost | aggregate tokens, time, or cost / hidden-grader successes | lower |
+
+These metrics use only observable run state and do not infer private model
+reasoning. The implementation contract is defined in
+[`adaptive-verification-design-v0.1.md`](adaptive-verification-design-v0.1.md).
+
 ## 7. Exclusion and rerun policy
 
 - All attempted runs receive an ID before model execution.
@@ -100,4 +117,3 @@ Missing a target does not authorize changing its definition after results are kn
 - Grader results are deterministic across three repeated executions.
 - Hidden checks test outcomes and invariants, not a single exact implementation.
 - A task cannot be promoted to the test split until its grader passes audit.
-

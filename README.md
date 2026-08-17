@@ -8,7 +8,7 @@ The project asks one practical question:
 
 ## Current status
 
-**Phase 6/10 in progress — context policy and recovery engineering**
+**Phase 6/10 complete — next focus: adaptive verification**
 
 - [Design brief](docs/design-brief.md)
 - [Metrics and evaluation contract](docs/metrics.md)
@@ -73,8 +73,7 @@ therefore remains a cost profile rather than replacing the 10/10 H1a default.
 Phase 6 now has explicit [context and recovery policies](docs/context-recovery-design-v0.1.md):
 failed observations are prioritized inside a bounded context window, transient
 timeouts receive at most one capped retry, deterministic failures are not
-retried, and every compaction or recovery decision is trace-visible. Controlled
-fault-injection evaluation is the next checkpoint.
+retried, and every compaction or recovery decision is trace-visible.
 
 The first [H2 fault-injection report](docs/fault-injection-report-h2-v0.1.md)
 passed its deterministic mechanism gate: transient recovery improved from 0/3
@@ -87,6 +86,14 @@ then placed Codex behind the typed tool loop. Both control and H2 produced the
 correct artifact, while H2's same-step timeout recovery reduced model calls
 from four to three, input tokens by 26.2%, and wall time by 25.2%. This is one
 paired synthetic smoke run, not a general performance claim.
+
+The next primary question is now [adaptive verification](docs/adaptive-verification-design-v0.1.md).
+H1a-lite exposed one accepted false completion: public completion evidence
+passed while a hidden plugin boundary failed. ForgeBench will compare a
+predeclared `H1a-adaptive` risk gate against H0, H1a, and H1a-lite, escalating
+only completion attempts with trace-visible risk signals. The observed failure
+is development evidence and cannot count as held-out proof. This change is
+recorded in [ADR 0003](docs/adr/0003-adaptive-verification-focus.md).
 
 ## Local verification
 
@@ -139,8 +146,9 @@ for the first persisted execution.
 1. Freeze task format, metrics, and data split rules.
 2. Build an isolated runner and append-only trace format.
 3. Measure a minimal-loop baseline.
-4. Add one harness component at a time.
-5. Evaluate on a frozen held-out set and a second model.
+4. Build and freeze an adaptive completion-risk policy on development tasks.
+5. Compare H0, H1a, H1a-lite, and H1a-adaptive on a frozen held-out set.
+6. Check whether the result transfers to a second model.
 
 ## Reproducibility principle
 

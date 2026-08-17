@@ -3,6 +3,11 @@
 Status: **frozen for Phase 1**  
 Date: 2026-08-16
 
+> Phase 1 history remains frozen. The post-baseline research priority and scale
+> target are amended by [ADR 0003](adr/0003-adaptive-verification-focus.md):
+> adaptive verification is now primary, while meta-harness search and a 50-task
+> benchmark are stretch scope.
+
 ## 1. Problem
 
 Modern coding agents can write plausible code but often fail on long-horizon work in less visible ways: they stop after partial progress, forget constraints, misuse tools, fail to recover from errors, or declare success without checking the repository state.
@@ -169,4 +174,3 @@ The following decisions are frozen until the first baseline is complete:
 - A task run is never silently discarded; exclusions require a recorded reason.
 
 Changes require a dated architecture decision record and invalidate comparisons when they alter the evaluation contract.
-

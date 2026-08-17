@@ -41,12 +41,15 @@
 - 오래된 기억, 실패하는 tool, timeout, 부분 성공이 포함된 과제
 - 선택 사항: 게임 제작 도메인 pack(밸런스 데이터 검증, asset metadata 정리, gameplay telemetry 분석)
 
-핵심 연구 질문은 다음과 같다.
+초기 component ablation 이후 핵심 연구 질문을 다음과 같이 좁힌다.
 
-1. 최소 agent loop 대비 어떤 harness 구성요소가 task success를 높이는가?
-2. false completion과 장기 과제 중단을 어떻게 줄이는가?
-3. 성능 향상이 특정 모델·task에 과적합되지 않는가?
-4. 성능, 비용, 지연, 안전성 사이의 trade-off는 무엇인가?
+> 모든 작업에 비싼 검증을 적용하지 않고, false completion 위험이 높은
+> 완료 시도만 선택적으로 깊게 검증해 reliability와 비용을 함께 개선할
+> 수 있는가?
+
+H0 8/10, H1a 10/10, H1a-lite 9/10의 흐름과 H1a-lite에서 실제로 관찰한
+completion-acceptance failure를 출발점으로 삼는다. 기존 planning, context,
+recovery 결과는 이 질문을 지지하는 구성요소 증거로 유지한다.
 
 ### 3.2 시스템 범위
 
@@ -61,19 +64,21 @@ Working Memory   policy / timeout / retry
    ↓
 Completion Verifier
    ↓
-Trace Store → Evaluator → Failure Analyzer → Experiment Report
-                                      ↓
-                               Meta-Harness Optimizer
+Completion Risk Gate
+   ├─ Low risk ────────────────┐
+   └─ High risk → Deep Verification / Repair
+                               ↓
+Final Artifact → Trace Store → Hidden Evaluator → Experiment Report
 ```
 
 MVP에서 반드시 구현할 것:
 
-- model adapter 2종 이상과 고정 가능한 model/config manifest
+- Codex model adapter와 고정 가능한 model/config manifest
 - filesystem/shell/search/test 도구와 structured result
 - step·token·시간·비용 budget
 - 계획, 재계획, 종료 및 escalation 정책
 - append-only event trace와 replay 가능한 run manifest
-- deterministic grader + 선택적 LLM judge
+- deterministic grader + completion risk gate + selective deep verification
 - baseline과 개선 harness 사이의 재현 가능한 실험 runner
 - 최소한의 대시보드 또는 정적 HTML report
 
@@ -83,14 +88,17 @@ MVP에서 반드시 구현할 것:
 - 과도한 웹 UI
 - vector DB를 사용했다는 사실 자체
 - 모델 fine-tuning
+- learned risk classifier와 자동 meta-harness search
+- 두 번째 model adapter(최종 transfer 예산이 확보되면 추가)
 
 ### 3.3 Benchmark 설계
 
 #### Task set
 
-- 총 50개 이상: `dev 30 / incident 10 / adversarial 10`
-- 난이도: easy 15, medium 20, hard 15
-- 공개 예제 10개, 개발 세트 20개, 끝까지 숨겨 두는 test 세트 20개
+- 최소 30개의 감사된 task: 현재 10개는 development discovery set으로 유지
+- boundary, invalid input, unsupported case, protected evidence, incomplete
+  verification, hidden generalization 범주를 의도적으로 포함
+- 별도 stratified held-out set은 risk rule과 threshold를 동결한 뒤에만 실행
 - 각 task는 `task.yaml`, seed repo, setup script, grader, expected invariants를 가진다.
 - task 작성자 의도를 숨긴 채 다른 사람이 재실행할 수 있어야 한다.
 
@@ -105,6 +113,10 @@ MVP에서 반드시 구현할 것:
 | 일반화 | held-out task/model 성능, 난이도별 성능 |
 | 안전 | 금지된 파일/명령 접근, 불필요한 변경, secret 노출 시도 차단 |
 
+Adaptive verification에는 `true success`, `accepted false completion`,
+`detected failure`, escalation rate, unnecessary escalation rate를 별도로
+보고한다. completion gate 통과와 hidden grader 실패를 혼동하지 않는다.
+
 LLM judge만으로 성공을 판정하지 않는다. 가능한 항목은 테스트, 파일 상태, schema, command exit code 등의 deterministic grader로 평가하고, 품질처럼 기계 판정이 어려운 항목만 사전 정의 rubric을 가진 judge로 보완한다.
 
 #### 실험 규칙
@@ -113,15 +125,16 @@ LLM judge만으로 성공을 판정하지 않는다. 가능한 항목은 테스�
 - 모든 비교에서 model/version, temperature, task set, budget 고정
 - stochastic run은 task당 최소 3회 반복
 - 평균만 쓰지 않고 bootstrap 95% CI 또는 paired 결과 제시
-- 변경 하나씩 ablation: `+planning`, `+completion check`, `+memory`, `+recovery`, `+meta-harness`
+- 비교 정책: `H0`, `H1a`, `H1a-lite`, `H1a-adaptive`
+- H1a-adaptive risk rule, threshold, escalation action은 held-out 실행 전에 동결
 - 실패 trace를 최소 6개 범주로 라벨링: planning, context/memory, tool, verification, recovery, budget
 - test set은 설계 완료 후 동결하고 최종 2회만 실행
 
 ### 3.4 목표 결과(사전에 선언하되 조작하지 않기)
 
-- baseline 대비 held-out task success `+10%p` 이상
-- false completion `30% 이상 감소`
-- 성공당 비용 증가는 `25% 이내`, 또는 비용이 늘면 Pareto frontier로 설명
+- H1a-lite 대비 accepted false completion 감소
+- H1a에 실질적으로 가까운 held-out reliability
+- H1a 대비 aggregate token과 wall time의 유의미한 절감
 - tool 장애 주입 task의 recovery success `70% 이상`
 - 적어도 한 개선이 두 번째 모델에서도 방향성 재현
 
@@ -166,8 +179,8 @@ ForgeBench를 작은 서비스로 운영하며 production 기준을 증명한다
 | 4 | benchmark 30개, failure taxonomy | dataset card, labeling guide | grader mutation test 통과, dev/test 분리 |
 | 5 | planning·replanning·completion verifier | ablation report 1 | false completion 전후 수치 확보 |
 | 6 | memory·context policy·tool recovery | ablation report 2 | 장애 주입 결과와 비용 trade-off 확보 |
-| 7 | benchmark 50개 완성, 두 모델 비교 | frozen test manifest | test set 동결, 데이터 누수 점검 |
-| 8 | trace 기반 meta-harness 후보 생성·선택 | optimizer report | train/dev에서 개선, 과적합 검사 가능 |
+| 7 | Completion Risk Gate와 selective deep verification | adaptive design + ablation report | risk decision과 escalation이 trace로 재현됨 |
+| 8 | 최소 30개 completion-risk benchmark 완성 | frozen held-out manifest | rule/threshold 동결, 데이터 누수 점검 |
 | 9 | service화, 관측성, 안전·복구 | demo URL/영상, postmortem | 100-run 또는 7-day 운영 증거 |
 | 10 | 최종 held-out 평가와 지원 패키지 | report, README, 5분 demo, 1-page PDF | 제3자가 15분 내 재현 시작 가능 |
 
@@ -245,7 +258,9 @@ forgebench/
 
 예시(실제 수치로 교체):
 
-> 50개 장기 실행 coding task와 deterministic grader를 설계하고 planning·completion verification·tool recovery를 단계적으로 도입해, 동일 모델/예산 조건에서 held-out success를 42%→57%로 높이고 false completion을 35% 줄임.
+> 30개 completion-risk coding task와 deterministic hidden grader를 설계하고,
+> 저비용 policy의 false completion을 선택적으로 탐지하는 adaptive verification
+> gate를 구현해 동일 Codex·budget 조건에서 reliability-cost trade-off를 개선함.
 
 ### 면접 대비 질문
 
@@ -256,7 +271,7 @@ forgebench/
 - memory가 도움이 된 경우와 해가 된 경우는?
 - agent가 “완료했다”고 거짓 판단하는 것을 어떻게 탐지했는가?
 - 비용을 두 배 쓰면 얻는 성능과 production에서의 선택은?
-- Meta-Harness가 dev set에 과적합되지 않았다는 증거는?
+- Risk Gate가 관찰한 plugin failure나 dev set에 과적합되지 않았다는 증거는?
 - 악의적 repo/task가 tool을 통해 할 수 있는 피해를 어떻게 제한했는가?
 - Claude Code/Codex를 개발에 사용했을 때 사람이 맡은 판단은 무엇인가?
 
@@ -316,4 +331,3 @@ forgebench/
   https://www.krafton.ai/blog/posts/2026-04-03-prompt-to-policy/prompt-to-policy_en.html
 - Online Agent-as-a-Judge: 수동 평가가 놓치는 행동을 상황 생성 evaluator로 유도하고 trajectory evidence로 평가  
   https://krafton.ai/portfolio/online-agent-as-a-judge-situation-generating-evaluation-for-interactive-agents/
-
