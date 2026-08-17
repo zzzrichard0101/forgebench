@@ -33,10 +33,17 @@ def main() -> int:
         default="h0",
     )
     parser.add_argument("--runs-root", type=Path, default=ROOT / "runs")
+    parser.add_argument(
+        "--risk-shadow",
+        action="store_true",
+        help="Record Completion Risk Gate decisions for H1 profiles.",
+    )
     parser.add_argument("--dry-run", action="store_true")
     args = parser.parse_args()
     if args.repetitions < 1:
         parser.error("--repetitions must be at least 1")
+    if args.risk_shadow and args.harness == "h0":
+        parser.error("--risk-shadow requires an H1 harness profile")
 
     catalog = BenchmarkCatalog(ROOT, CATALOG_PATH)
     task_ids = args.task_ids or [bundle.task["id"] for bundle in catalog.list()]
@@ -63,6 +70,7 @@ def main() -> int:
         "reasoning_effort": args.reasoning_effort,
         "execution_host": args.execution_host,
         "harness": args.harness,
+        "risk_mode": "shadow" if args.risk_shadow else "off",
         "planned_runs": planned_runs,
         "results": [],
         "summary": aggregate_suite([]),
@@ -87,6 +95,8 @@ def main() -> int:
         ]
         if args.harness != "h0":
             command.extend(["--profile", args.harness])
+            if args.risk_shadow:
+                command.append("--risk-shadow")
         completed = subprocess.run(
             command,
             cwd=ROOT,

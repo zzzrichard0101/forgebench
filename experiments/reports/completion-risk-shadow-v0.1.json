@@ -1,0 +1,34 @@
+{
+  "schema_version": 1,
+  "experiment": "completion-risk-shadow-v0.1",
+  "evaluation_type": "static_public_evidence_screen",
+  "policy_version": "completion-risk-v0.1",
+  "threshold": 3,
+  "aggregate": {
+    "tasks": 10,
+    "high_risk": 2,
+    "low_risk": 8
+  },
+  "tasks": [
+    {"task_id":"python-cart-rounding","score":0,"level":"low","signals":[]},
+    {"task_id":"python-config-precedence","score":0,"level":"low","signals":[]},
+    {"task_id":"checkout-retry-incident","score":0,"level":"low","signals":[]},
+    {"task_id":"python-plugin-boundary","score":3,"level":"high","signals":["R001_BOUNDARY_SENSITIVE_SURFACE","R002_MISSING_NEGATIVE_PUBLIC_EVIDENCE"]},
+    {"task_id":"python-pagination-cursor","score":0,"level":"low","signals":[]},
+    {"task_id":"python-event-deduplication","score":0,"level":"low","signals":[]},
+    {"task_id":"python-rate-window","score":1,"level":"low","signals":["R001_BOUNDARY_SENSITIVE_SURFACE"]},
+    {"task_id":"worker-visibility-incident","score":0,"level":"low","signals":[]},
+    {"task_id":"cdn-cache-incident","score":0,"level":"low","signals":[]},
+    {"task_id":"python-archive-boundary","score":3,"level":"high","signals":["R001_BOUNDARY_SENSITIVE_SURFACE","R002_MISSING_NEGATIVE_PUBLIC_EVIDENCE"]}
+  ],
+  "retrospective_labels": {
+    "known_h1a_lite_false_completion_flagged": 1,
+    "known_h1a_lite_successes_flagged": 1
+  },
+  "limitations": [
+    "The known python-plugin-boundary failure influenced the research direction, so this is development evidence only.",
+    "This static screen has no final artifact, execution trace, or plan-derived signal.",
+    "No model run or selective deep verification occurred.",
+    "The archive-boundary alert is a potential unnecessary escalation, not proof that the rule is wrong."
+  ]
+}

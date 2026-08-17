@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "experiment": "completion-risk-shadow-v0.1",
+  "evaluation_type": "static_public_evidence_screen",
+  "policy_version": "completion-risk-v0.1",
+  "threshold": 3,
+  "rules": [
+    {
+      "id": "R001_BOUNDARY_SENSITIVE_SURFACE",
+      "weight": 1
+    },
+    {
+      "id": "R002_MISSING_NEGATIVE_PUBLIC_EVIDENCE",
+      "weight": 2
+    },
+    {
+      "id": "R003_UNRESOLVED_PLAN_ASSUMPTION",
+      "weight": 2
+    }
+  ],
+  "data_scope": "audited development snapshot of 10 tasks",
+  "hidden_grader_visible_to_policy": false,
+  "changes_execution": false
+}

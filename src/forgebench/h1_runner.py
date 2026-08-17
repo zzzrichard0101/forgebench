@@ -11,8 +11,10 @@ from typing import Any, Callable
 
 from .codex_trace import CodexTraceSummary, summarize_codex_trace
 from .completion import CompletionResult, CompletionVerifier, protected_paths
+from .completion_risk import CompletionRiskDecision, CompletionRiskPolicy
 from .external_agent import decode_process_output
 from .grader import DeterministicGrader, GradeResult
+from .trace import TraceWriter
 from .workspace import create_isolated_workspace, initialize_git_workspace
 
 
@@ -29,6 +31,7 @@ class H1Result:
     grade: GradeResult
     input_tokens: int
     output_tokens: int
+    risk_decision: CompletionRiskDecision | None = None
 
 
 class H1Runner:
@@ -54,6 +57,7 @@ class H1Runner:
         prompt_style: str = "structured",
         completion_gate: bool = True,
         max_repair_attempts: int = 1,
+        risk_policy: CompletionRiskPolicy | None = None,
         run_id: str | None = None,
     ) -> H1Result:
         run_id = run_id or uuid.uuid4().hex
@@ -120,9 +124,20 @@ class H1Runner:
                 if exit_code != 0 or timed_out:
                     prompt += f"\nThe previous Codex process exit was {exit_code}; timed_out={timed_out}."
 
-        grade = self.grader.grade(task, workspace, seed)
         if completion is None:
             raise RuntimeError("H1 runner completed without an attempt")
+        risk_decision = None
+        if risk_policy is not None:
+            risk_decision = risk_policy.evaluate(
+                task=task,
+                workspace=workspace,
+                completion=completion,
+            )
+            TraceWriter(run_root / "harness-trace.jsonl", run_id).append(
+                "completion_risk_decision", risk_decision.as_dict()
+            )
+
+        grade = self.grader.grade(task, workspace, seed)
         grade.write(run_root / "grader-result.json")
         duration = round(time.perf_counter() - started_clock, 3)
         input_tokens = sum(item["trace"]["input_tokens"] for item in attempts)
@@ -141,6 +156,10 @@ class H1Runner:
             "prompt_style": prompt_style,
             "attempts": attempts,
             "completion_passed": completion.passed,
+            "risk_mode": "shadow" if risk_policy is not None else "off",
+            "risk_decision": (
+                risk_decision.as_dict() if risk_decision is not None else None
+            ),
             "task_passed": grade.passed,
             "input_tokens": input_tokens,
             "output_tokens": output_tokens,
@@ -157,6 +176,7 @@ class H1Runner:
             grade,
             input_tokens,
             output_tokens,
+            risk_decision,
         )
 
 

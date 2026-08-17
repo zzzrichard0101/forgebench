@@ -9,6 +9,7 @@ import shutil
 from pathlib import Path
 
 from forgebench.catalog import BenchmarkCatalog
+from forgebench.completion_risk import CompletionRiskPolicy
 from forgebench.grader import DeterministicGrader
 from forgebench.h1_runner import H1Runner
 from run_codex_baseline import (
@@ -30,6 +31,11 @@ def main() -> int:
     parser.add_argument("--execution-host", choices=["auto", "windows", "wsl"], default="auto")
     parser.add_argument("--model", default="gpt-5.6-sol")
     parser.add_argument("--reasoning-effort", default="medium")
+    parser.add_argument(
+        "--risk-shadow",
+        action="store_true",
+        help="Record Completion Risk Gate decisions without changing execution.",
+    )
     parser.add_argument(
         "--profile",
         choices=["planning", "planning-lite", "verification", "repair"],
@@ -101,6 +107,7 @@ def main() -> int:
         prompt_style=prompt_style,
         completion_gate=completion_gate,
         max_repair_attempts=max_repair_attempts,
+        risk_policy=CompletionRiskPolicy() if args.risk_shadow else None,
     )
     token_budget_compliant = (
         result.input_tokens <= bundle.task["budgets"]["max_input_tokens"]
@@ -134,6 +141,10 @@ def main() -> int:
         "execution_host": execution_host,
         "attempts": result.attempts,
         "completion_passed": result.completion.passed,
+        "risk_mode": "shadow" if args.risk_shadow else "off",
+        "risk_decision": (
+            result.risk_decision.as_dict() if result.risk_decision is not None else None
+        ),
         "task_passed": result.grade.passed,
         "duration_seconds": result.duration_seconds,
         "input_tokens": result.input_tokens,

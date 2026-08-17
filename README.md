@@ -95,6 +95,13 @@ only completion attempts with trace-visible risk signals. The observed failure
 is development evidence and cannot count as held-out proof. This change is
 recorded in [ADR 0003](docs/adr/0003-adaptive-verification-focus.md).
 
+The first [Completion Risk Gate shadow screen](docs/completion-risk-shadow-v0.1.md)
+now records deterministic rule IDs, weights, evidence, and escalation decisions
+without changing execution. On the ten development tasks it marked 2/10 high
+risk: the known plugin false completion and one previously successful archive
+boundary task. This is a leakage-controlled routing plausibility check, not a
+held-out accuracy result.
+
 ## Local verification
 
 ```powershell
@@ -108,6 +115,7 @@ python scripts/run_codex_suite.py --harness planning --repetitions 1
 python scripts/run_codex_h1.py --task-id checkout-retry-incident --execution-host wsl
 python scripts/run_codex_h1.py --task-id checkout-retry-incident --profile planning --execution-host wsl
 python scripts/run_codex_h1.py --task-id checkout-retry-incident --profile planning-lite --execution-host wsl
+python scripts/run_codex_h1.py --task-id python-plugin-boundary --profile planning-lite --risk-shadow --execution-host wsl
 python scripts/run_paired_codex_experiment.py --task-id checkout-retry-incident --task-id worker-visibility-incident
 python scripts/run_fault_injection.py
 python scripts/run_model_recovery_smoke.py --execution-host wsl
