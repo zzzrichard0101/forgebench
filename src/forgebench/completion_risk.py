@@ -9,7 +9,7 @@ from typing import Any, Literal
 from .completion import CompletionResult
 
 
-POLICY_VERSION = "completion-risk-v0.1"
+POLICY_VERSION = "completion-risk-v0.2"
 DEFAULT_THRESHOLD = 3
 
 BOUNDARY_TERMS = {
@@ -41,6 +41,29 @@ NEGATIVE_TEST_TERMS = {
     "traversal",
     "unsafe",
     "unsupported",
+}
+
+DIMENSION_MARKERS = {
+    "containment": {
+        "absolute",
+        "escape",
+        "outside",
+        "parent",
+        "traversal",
+    },
+    "file_type": {
+        ".txt",
+        "extension",
+        "file_type",
+        "non_python",
+        "suffix",
+    },
+    "limit_edge": {
+        "at_limit",
+        "boundary",
+        "equal_limit",
+    },
+    "negative_case": NEGATIVE_TEST_TERMS,
 }
 
 ASSUMPTION_TERMS = {
@@ -101,7 +124,9 @@ class CompletionRiskPolicy:
         boundary_sensitive = bool(boundary_hits)
 
         public_evidence, scanned_files = _public_verification_evidence(task, workspace)
-        negative_hits = _matching_terms(public_evidence, NEGATIVE_TEST_TERMS)
+        required_dimensions = _required_dimensions(public_text, boundary_sensitive)
+        covered_dimensions = _covered_dimensions(public_evidence)
+        missing_dimensions = sorted(required_dimensions - covered_dimensions)
         plan_text = _read_plan_text(workspace)
         assumption_hits = _matching_terms(plan_text, ASSUMPTION_TERMS)
 
@@ -119,17 +144,20 @@ class CompletionRiskPolicy:
             ),
             RiskSignal(
                 rule_id="R002_MISSING_NEGATIVE_PUBLIC_EVIDENCE",
-                triggered=boundary_sensitive and not negative_hits,
+                triggered=boundary_sensitive and bool(missing_dimensions),
                 weight=2,
                 detail=(
-                    "boundary-sensitive task has no visible negative-case marker"
-                    if boundary_sensitive and not negative_hits
-                    else "negative-case evidence exists or the task is not boundary-sensitive"
+                    "one or more public contract dimensions lack negative evidence"
+                    if boundary_sensitive and missing_dimensions
+                    else "required negative-evidence dimensions are covered or not applicable"
                 ),
                 evidence=(
-                    tuple(f"scanned:{path}" for path in scanned_files)
-                    if not negative_hits
-                    else tuple(f"marker:{term}" for term in negative_hits)
+                    tuple(f"missing:{name}" for name in missing_dimensions)
+                    + tuple(
+                        f"covered:{name}"
+                        for name in sorted(required_dimensions & covered_dimensions)
+                    )
+                    + tuple(f"scanned:{path}" for path in scanned_files)
                 ),
             ),
             RiskSignal(
@@ -236,3 +264,28 @@ def _matching_terms(text: str, terms: set[str]) -> list[str]:
         if re.search(pattern, text):
             matches.append(term)
     return matches
+
+
+def _required_dimensions(text: str, boundary_sensitive: bool) -> set[str]:
+    if not boundary_sensitive:
+        return set()
+    dimensions: set[str] = set()
+    if any(term in text for term in ("path traversal", "path-traversal", "outside")):
+        dimensions.add("containment")
+    if "archive" in text:
+        dimensions.add("containment")
+    if "python" in text and any(term in text for term in ("entrypoint", "plugin")):
+        dimensions.add("file_type")
+    if any(term in text for term in ("rate-limit", "rate limit", "rolling rate")):
+        dimensions.add("limit_edge")
+    if not dimensions:
+        dimensions.add("negative_case")
+    return dimensions
+
+
+def _covered_dimensions(text: str) -> set[str]:
+    covered: set[str] = set()
+    for dimension, markers in DIMENSION_MARKERS.items():
+        if any(marker in text for marker in markers):
+            covered.add(dimension)
+    return covered

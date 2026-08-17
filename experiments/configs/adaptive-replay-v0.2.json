@@ -1,0 +1,39 @@
+{
+  "schema_version": 1,
+  "experiment": "adaptive-replay-v0.2",
+  "supersedes": "adaptive-replay-v0.1 after recorded policy-evidence failure",
+  "evaluation_type": "development_workspace_replay",
+  "harness": "H1a-adaptive-replay-v0.1",
+  "policy_version": "completion-risk-v0.2",
+  "model": "gpt-5.6-sol",
+  "reasoning_effort": "medium",
+  "timeout_seconds_per_replay": 300,
+  "max_total_adaptive_input_tokens": 250000,
+  "cells": [
+    {
+      "task_id": "python-plugin-boundary",
+      "source_run_id": "4f32eec1d9d348428c4065954ced19f4",
+      "expected_routing": "high",
+      "known_development_outcome_before": "accepted_false_completion"
+    },
+    {
+      "task_id": "python-archive-boundary",
+      "source_run_id": "5efa907ef65744f282811450a92600f5",
+      "expected_routing": "low",
+      "known_development_outcome_before": "true_success"
+    }
+  ],
+  "acceptance": {
+    "plugin_receives_one_deep_verification_attempt": true,
+    "archive_receives_zero_deep_verification_attempts": true,
+    "plugin_task_passes_after": true,
+    "archive_task_remains_passing_after": true,
+    "completion_passes_after": true,
+    "source_workspaces_unchanged": true
+  },
+  "leakage_controls": {
+    "hidden_grader_visible_to_codex": false,
+    "author_metadata_visible_to_policy": false,
+    "held_out_claim_allowed": false
+  }
+}

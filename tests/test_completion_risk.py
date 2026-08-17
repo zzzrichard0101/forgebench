@@ -70,7 +70,29 @@ class CompletionRiskPolicyTests(unittest.TestCase):
             if signal.rule_id == "R002_MISSING_NEGATIVE_PUBLIC_EVIDENCE"
         )
         self.assertFalse(negative_rule.triggered)
-        self.assertIn("marker:at_limit", negative_rule.evidence)
+        self.assertIn("covered:limit_edge", negative_rule.evidence)
+
+    def test_containment_test_does_not_cover_plugin_file_type_dimension(self) -> None:
+        task = load_task("python-plugin-boundary")
+        workspace = self.copy_seed(task["id"])
+        test_path = workspace / "tests" / "test_plugin_loader.py"
+        test_path.write_text(
+            test_path.read_text(encoding="utf-8")
+            + "\n# test_entrypoint_outside_plugin_root_is_rejected\n",
+            encoding="utf-8",
+        )
+
+        decision = self.policy.evaluate(
+            task=task, workspace=workspace, completion=self.passed
+        )
+        missing_rule = next(
+            signal
+            for signal in decision.signals
+            if signal.rule_id == "R002_MISSING_NEGATIVE_PUBLIC_EVIDENCE"
+        )
+        self.assertTrue(decision.escalate)
+        self.assertIn("covered:containment", missing_rule.evidence)
+        self.assertIn("missing:file_type", missing_rule.evidence)
 
     def test_hidden_author_metadata_cannot_change_the_decision(self) -> None:
         task = load_task("python-plugin-boundary")
