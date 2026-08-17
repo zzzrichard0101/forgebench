@@ -10,9 +10,28 @@ from typing import Any
 from .completion_risk import CompletionRiskDecision
 
 
-PACKET_VERSION = "evidence-packet-v0.1"
+PACKET_VERSION = "evidence-packet-v0.2"
 DEFAULT_MAX_CHARS = 24_000
 TEXT_SUFFIXES = {".json", ".py", ".js", ".ts"}
+DIMENSION_PROBE_RECIPES = {
+    "containment": (
+        "relative parent traversal",
+        "absolute path outside the trusted root",
+    ),
+    "file_type": (
+        "non-regular filesystem object such as a directory",
+        "regular file whose extension or category differs from the accepted positive example",
+    ),
+    "limit_edge": (
+        "value immediately below the limit",
+        "value exactly at the limit",
+        "value immediately above the limit",
+    ),
+    "negative_case": (
+        "malformed input",
+        "well-formed but unsupported input",
+    ),
+}
 
 
 @dataclass(frozen=True)
@@ -88,6 +107,19 @@ def build_evidence_packet(
         for signal in decision.signals
         if signal.triggered
     )
+    missing_dimensions = sorted(
+        {
+            evidence.removeprefix("missing:")
+            for signal in decision.signals
+            if signal.triggered
+            for evidence in signal.evidence
+            if evidence.startswith("missing:")
+        }
+    )
+    verification_requirements = {
+        dimension: list(DIMENSION_PROBE_RECIPES.get(dimension, ("unsupported input",)))
+        for dimension in missing_dimensions
+    }
     public_task = {
         "id": task["id"],
         "version": task["version"],
@@ -112,6 +144,7 @@ def build_evidence_packet(
             "score": decision.score,
             "threshold": decision.threshold,
             "signals": fired,
+            "verification_requirements": verification_requirements,
         },
         "public_checks": checks,
         "changed_paths": tuple(changed),
@@ -196,4 +229,3 @@ def _safe_file(workspace: Path, relative: str) -> Path | None:
     if resolved != workspace and not resolved.is_relative_to(workspace):
         return None
     return resolved if resolved.is_file() else None
-

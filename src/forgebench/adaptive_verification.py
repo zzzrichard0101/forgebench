@@ -255,7 +255,7 @@ def build_deep_verification_prompt(
         packet_json = json.dumps(packet.as_dict(), ensure_ascii=False, separators=(",", ":"))
         return f"""ForgeBench focused adaptive verification.
 
-Use the bounded evidence packet below as the starting context. Do not inventory the repository or reread unrelated files. Inspect a packet-listed file only when needed to edit it, derive one focused check for each missing contract dimension, run the declared public check, and stop after one bounded repair.
+Use the bounded evidence packet below as the starting context. Do not inventory the repository or reread unrelated files. Inspect a packet-listed file only when needed to edit it. For every missing contract dimension, execute every listed verification requirement rather than choosing only one example. Repair any exposed defect, run the declared public check, and stop after one bounded repair.
 Do not access hidden graders or author metadata. Preserve immutable files and the public API.
 
 EVIDENCE_PACKET_JSON

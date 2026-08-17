@@ -119,6 +119,13 @@ class AdaptiveVerificationRunnerTests(unittest.TestCase):
             self.assertLessEqual(packet.total_chars, 4000)
             self.assertIn("plugin_loader.py", packet.changed_paths)
             self.assertIn("tests/test_plugin_loader.py", [item.path for item in packet.files])
+            self.assertEqual(
+                len(packet.risk["verification_requirements"]["file_type"]), 2
+            )
+            self.assertIn(
+                "extension",
+                packet.risk["verification_requirements"]["file_type"][1],
+            )
             self.assertNotIn("author_metadata", serialized)
             self.assertNotIn("hidden_boundary_cases", serialized)
             secret_content = (SEED / "secret.txt").read_text(encoding="utf-8").strip()
