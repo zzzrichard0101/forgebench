@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "report_id": "fault-injection-h2-v0.1",
+  "date": "2026-08-17",
+  "source_experiment_id": "h2-fault-injection-v0.1",
+  "claim_scope": "deterministic harness mechanism; not a model-quality benchmark",
+  "repetitions_per_cell": 3,
+  "cells": [
+    {"scenario":"transient-timeout","variant":"control","runs":3,"tool_calls":3,"retries":0,"final_tool_success":0},
+    {"scenario":"transient-timeout","variant":"treatment","runs":3,"tool_calls":6,"retries":3,"final_tool_success":3},
+    {"scenario":"deterministic-invalid-call","variant":"control","runs":3,"tool_calls":3,"retries":0,"final_tool_success":0},
+    {"scenario":"deterministic-invalid-call","variant":"treatment","runs":3,"tool_calls":3,"retries":0,"final_tool_success":0},
+    {"scenario":"stale-output-pressure","variant":"control","runs":3,"mean_retained_chars":40105,"failure_retained":3},
+    {"scenario":"stale-output-pressure","variant":"treatment","runs":3,"mean_retained_chars":12000,"failure_retained":3}
+  ],
+  "summary": {
+    "transient_recovery_rate": {"control":0.0,"treatment":1.0},
+    "deterministic_treatment_retries": 0,
+    "context_treatment_limit_passed": true,
+    "context_treatment_failures_retained": 3,
+    "context_reduction_percent": 70.1,
+    "safety_regressions": 0,
+    "mechanism_acceptance_passed": true
+  },
+  "limitations": [
+    "Deterministic model adapter isolates harness behavior",
+    "No model-quality or repository-task success claim",
+    "Injected failures are synthetic",
+    "Model-backed recovery evaluation remains pending"
+  ]
+}

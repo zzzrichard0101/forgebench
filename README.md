@@ -76,6 +76,12 @@ timeouts receive at most one capped retry, deterministic failures are not
 retried, and every compaction or recovery decision is trace-visible. Controlled
 fault-injection evaluation is the next checkpoint.
 
+The first [H2 fault-injection report](docs/fault-injection-report-h2-v0.1.md)
+passed its deterministic mechanism gate: transient recovery improved from 0/3
+to 3/3, deterministic failures triggered zero retries, and decisive failure
+evidence was retained while context text fell from 40,105 to 12,000 characters.
+This is harness evidence, not yet a model-quality benchmark claim.
+
 ## Local verification
 
 ```powershell
@@ -90,6 +96,7 @@ python scripts/run_codex_h1.py --task-id checkout-retry-incident --execution-hos
 python scripts/run_codex_h1.py --task-id checkout-retry-incident --profile planning --execution-host wsl
 python scripts/run_codex_h1.py --task-id checkout-retry-incident --profile planning-lite --execution-host wsl
 python scripts/run_paired_codex_experiment.py --task-id checkout-retry-incident --task-id worker-visibility-incident
+python scripts/run_fault_injection.py
 ```
 
 The paired experiment command is a dry-run by default. It counterbalances H0
