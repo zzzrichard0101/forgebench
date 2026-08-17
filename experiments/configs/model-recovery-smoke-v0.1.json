@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "experiment_id": "model-recovery-smoke-v0.1",
+  "date": "2026-08-17",
+  "status": "predeclared",
+  "model": "gpt-5.6-sol",
+  "reasoning_effort": "medium",
+  "repetitions": 1,
+  "max_model_steps": 5,
+  "max_total_input_tokens": 1000000,
+  "task": "Read source.json through the typed tools and copy the exact JSON object to result.json. If a tool fails transiently, recover without changing source.json. Finish only after result.json is written.",
+  "injection": "the first typed read_file call for source.json returns a timeout",
+  "control": {"context_policy":"unbounded","recovery_policy":null},
+  "treatment": {"context_policy":"bounded","recovery_policy":{"max_retries":1,"timeout_multiplier":2}},
+  "acceptance": {
+    "treatment_task_passed": true,
+    "maximum_source_mutations": 0,
+    "treatment_model_calls_no_more_than_control": true
+  },
+  "claim_scope": "model-backed recovery smoke; one paired repetition"
+}

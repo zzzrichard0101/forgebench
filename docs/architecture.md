@@ -30,3 +30,9 @@ usage metadata.
 output, workspace-policy tests, and a trace representation before they can be
 enabled for evaluated runs.
 
+`CodexCliModelAdapter` is the first model-backed implementation of the
+provider-neutral boundary. It invokes non-interactive Codex JSONL once per
+decision and accepts only a typed `tool` or `finish` object. Codex cannot execute
+the evaluated task tools directly in this mode; `AgentRunner` and `ToolGateway`
+remain the policy and trace owners. The per-turn ephemeral process is an
+evaluation prototype, not the intended production transport.

@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "report_id": "model-backed-recovery-smoke-v0.1",
+  "date": "2026-08-17",
+  "model": "gpt-5.6-sol",
+  "reasoning_effort": "medium",
+  "cli_version": "0.147.0",
+  "valid_experiment_id": "56db25da77dc4db5aeb9d52dea3cd0aa",
+  "pilot_infrastructure_failure": {
+    "experiment_id": "89edcda31f2642f0a608486cdeef2a99",
+    "failed_cells": 2,
+    "cause": "action parser rejected a single example wrapper",
+    "input_tokens": 28422,
+    "eligible_for_agent_metrics": false
+  },
+  "control": {
+    "run_id": "71719dc037b44bc6aea1d120e3364735",
+    "task_passed": true,
+    "source_unchanged": true,
+    "model_calls": 4,
+    "gateway_calls": 3,
+    "input_tokens": 57088,
+    "output_tokens": 113,
+    "duration_seconds": 26.946
+  },
+  "treatment": {
+    "run_id": "42ed7ee1c1124ca0bbfebdf3ab851803",
+    "task_passed": true,
+    "source_unchanged": true,
+    "model_calls": 3,
+    "gateway_calls": 3,
+    "input_tokens": 42119,
+    "output_tokens": 96,
+    "duration_seconds": 20.159,
+    "harness_retries": 1
+  },
+  "treatment_vs_control_percent": {
+    "model_calls": -25.0,
+    "input_tokens": -26.2,
+    "output_tokens": -15.0,
+    "duration": -25.2
+  },
+  "smoke_acceptance_passed": true,
+  "claim_scope": "one paired model-backed recovery smoke",
+  "limitations": [
+    "One paired repetition",
+    "Synthetic copy task and injected timeout",
+    "No context compaction occurred",
+    "One ephemeral Codex process per model decision",
+    "No general recovery-success claim"
+  ]
+}

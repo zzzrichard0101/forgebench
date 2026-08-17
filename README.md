@@ -82,6 +82,12 @@ to 3/3, deterministic failures triggered zero retries, and decisive failure
 evidence was retained while context text fell from 40,105 to 12,000 characters.
 This is harness evidence, not yet a model-quality benchmark claim.
 
+The first [model-backed recovery smoke](docs/model-backed-recovery-smoke-v0.1.md)
+then placed Codex behind the typed tool loop. Both control and H2 produced the
+correct artifact, while H2's same-step timeout recovery reduced model calls
+from four to three, input tokens by 26.2%, and wall time by 25.2%. This is one
+paired synthetic smoke run, not a general performance claim.
+
 ## Local verification
 
 ```powershell
@@ -97,6 +103,7 @@ python scripts/run_codex_h1.py --task-id checkout-retry-incident --profile plann
 python scripts/run_codex_h1.py --task-id checkout-retry-incident --profile planning-lite --execution-host wsl
 python scripts/run_paired_codex_experiment.py --task-id checkout-retry-incident --task-id worker-visibility-incident
 python scripts/run_fault_injection.py
+python scripts/run_model_recovery_smoke.py --execution-host wsl
 ```
 
 The paired experiment command is a dry-run by default. It counterbalances H0
