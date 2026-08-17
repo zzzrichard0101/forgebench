@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "experiment": "adaptive-packet-v0.1",
+  "evaluation_type": "development_workspace_replay",
+  "harness": "H1a-adaptive-replay-v0.1",
+  "policy_version": "completion-risk-v0.2",
+  "evidence_packet_version": "evidence-packet-v0.1",
+  "evidence_max_chars": 24000,
+  "model": "gpt-5.6-sol",
+  "reasoning_effort": "medium",
+  "timeout_seconds": 300,
+  "task_id": "python-plugin-boundary",
+  "source_run_id": "4f32eec1d9d348428c4065954ced19f4",
+  "full_replay_reference": {
+    "run_id": "2a86205be4ef4599b04c1cb0d576416d",
+    "input_tokens": 97108,
+    "output_tokens": 2058,
+    "duration_seconds": 53.858
+  },
+  "acceptance": {
+    "risk_route_is_high": true,
+    "one_deep_verification_attempt": true,
+    "task_passes_after": true,
+    "completion_passes_after": true,
+    "source_workspace_unchanged": true,
+    "packet_chars_at_most": 24000,
+    "input_tokens_below_full_replay": 97108
+  },
+  "leakage_controls": {
+    "hidden_grader_visible_to_codex": false,
+    "author_metadata_in_packet": false,
+    "protected_file_contents_in_packet": false,
+    "held_out_claim_allowed": false
+  }
+}

@@ -32,6 +32,8 @@ def main() -> int:
     parser.add_argument("--model", default="gpt-5.6-sol")
     parser.add_argument("--reasoning-effort", default="medium")
     parser.add_argument("--timeout-seconds", type=int, default=300)
+    parser.add_argument("--evidence-mode", choices=["full", "packet"], default="full")
+    parser.add_argument("--evidence-max-chars", type=int, default=24000)
     args = parser.parse_args()
 
     catalog = BenchmarkCatalog(ROOT, MANIFEST_PATH)
@@ -102,6 +104,8 @@ def main() -> int:
         source_run_id=args.source_run_id,
         command_factory=command_factory,
         timeout_seconds=args.timeout_seconds,
+        evidence_mode=args.evidence_mode,
+        evidence_max_chars=args.evidence_max_chars,
     )
     summary = {
         "schema_version": 1,
@@ -114,6 +118,16 @@ def main() -> int:
         "model": args.model,
         "reasoning_effort": args.reasoning_effort,
         "execution_host": execution_host,
+        "evidence_mode": args.evidence_mode,
+        "evidence_packet": (
+            {
+                "packet_version": result.evidence_packet.packet_version,
+                "content_sha256": result.evidence_packet.content_sha256,
+                "total_chars": result.evidence_packet.total_chars,
+            }
+            if result.evidence_packet is not None
+            else None
+        ),
         "risk_decision": result.risk_decision.as_dict(),
         "deep_verification_attempted": result.attempted,
         "exit_code": result.exit_code,
@@ -135,4 +149,3 @@ def main() -> int:
 
 if __name__ == "__main__":
     raise SystemExit(main())
-

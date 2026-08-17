@@ -5,6 +5,9 @@ import unittest
 from pathlib import Path
 
 from forgebench.adaptive_verification import AdaptiveVerificationRunner
+from forgebench.completion import CompletionVerifier
+from forgebench.completion_risk import CompletionRiskPolicy
+from forgebench.evidence_packet import build_evidence_packet
 from forgebench.grader import DeterministicGrader
 from forgebench.workspace import create_isolated_workspace, initialize_git_workspace
 
@@ -73,6 +76,7 @@ class AdaptiveVerificationRunnerTests(unittest.TestCase):
                 source_workspace=source,
                 source_run_id="source-lite",
                 command_factory=command_factory,
+                evidence_mode="packet",
             )
 
             self.assertEqual(invocations, 1)
@@ -80,6 +84,8 @@ class AdaptiveVerificationRunnerTests(unittest.TestCase):
             self.assertTrue(result.attempted)
             self.assertFalse(result.grade_before.passed)
             self.assertTrue(result.grade_after.passed)
+            self.assertIsNotNone(result.evidence_packet)
+            self.assertTrue((result.workspace.parent / "evidence-packet.json").is_file())
             self.assertEqual((source / "plugin_loader.py").read_bytes(), source_before)
             self.assertEqual(
                 (result.pre_escalation_workspace / "plugin_loader.py").read_bytes(),
@@ -92,6 +98,32 @@ class AdaptiveVerificationRunnerTests(unittest.TestCase):
             )
             self.assertFalse(manifest["task_passed_before"])
             self.assertTrue(manifest["task_passed_after"])
+            self.assertEqual(manifest["evidence_mode"], "packet")
+
+    def test_packet_is_bounded_and_excludes_hidden_task_metadata(self) -> None:
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            source = self._make_source_workspace(root)
+            completion = CompletionVerifier().verify(TASK, source, SEED)
+            decision = CompletionRiskPolicy().evaluate(
+                task=TASK, workspace=source, completion=completion
+            )
+            packet = build_evidence_packet(
+                task=TASK,
+                workspace=source,
+                decision=decision,
+                max_chars=4000,
+            )
+            serialized = json.dumps(packet.as_dict(), ensure_ascii=False)
+
+            self.assertLessEqual(packet.total_chars, 4000)
+            self.assertIn("plugin_loader.py", packet.changed_paths)
+            self.assertIn("tests/test_plugin_loader.py", [item.path for item in packet.files])
+            self.assertNotIn("author_metadata", serialized)
+            self.assertNotIn("hidden_boundary_cases", serialized)
+            secret_content = (SEED / "secret.txt").read_text(encoding="utf-8").strip()
+            self.assertIn("secret.txt", serialized)
+            self.assertNotIn(secret_content, serialized)
 
 
 if __name__ == "__main__":

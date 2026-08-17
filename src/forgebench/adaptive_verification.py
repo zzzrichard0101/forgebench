@@ -10,12 +10,13 @@ import uuid
 from dataclasses import asdict, dataclass
 from datetime import datetime, timezone
 from pathlib import Path
-from typing import Any, Callable
+from typing import Any, Callable, Literal
 
 from .codex_trace import CodexTraceSummary, summarize_codex_trace
 from .completion import CompletionResult, CompletionVerifier
 from .completion_risk import CompletionRiskDecision, CompletionRiskPolicy
 from .external_agent import decode_process_output
+from .evidence_packet import EvidencePacket, build_evidence_packet
 from .grader import DeterministicGrader, GradeResult
 from .trace import TraceWriter
 from .workspace import create_isolated_workspace
@@ -40,6 +41,7 @@ class AdaptiveVerificationResult:
     completion_after: CompletionResult
     grade_before: GradeResult
     grade_after: GradeResult
+    evidence_packet: EvidencePacket | None
 
 
 class AdaptiveVerificationRunner:
@@ -67,10 +69,14 @@ class AdaptiveVerificationRunner:
         source_run_id: str,
         command_factory: CommandFactory,
         timeout_seconds: int = 300,
+        evidence_mode: Literal["full", "packet"] = "full",
+        evidence_max_chars: int = 24_000,
         run_id: str | None = None,
     ) -> AdaptiveVerificationResult:
         if timeout_seconds <= 0:
             raise ValueError("adaptive verification timeout must be positive")
+        if evidence_mode not in {"full", "packet"}:
+            raise ValueError(f"unknown evidence mode: {evidence_mode}")
         run_id = run_id or uuid.uuid4().hex
         source_workspace = source_workspace.resolve(strict=True)
         workspace = create_isolated_workspace(
@@ -105,10 +111,31 @@ class AdaptiveVerificationRunner:
         input_tokens = 0
         output_tokens = 0
         attempt_record: dict[str, Any] | None = None
+        packet: EvidencePacket | None = None
 
         if decision.escalate:
             attempted = True
-            prompt = build_deep_verification_prompt(task, decision)
+            if evidence_mode == "packet":
+                packet = build_evidence_packet(
+                    task=task,
+                    workspace=workspace,
+                    decision=decision,
+                    max_chars=evidence_max_chars,
+                )
+                (run_root / "evidence-packet.json").write_text(
+                    json.dumps(packet.as_dict(), ensure_ascii=False, indent=2) + "\n",
+                    encoding="utf-8",
+                )
+                trace.append(
+                    "evidence_packet_created",
+                    {
+                        "packet_version": packet.packet_version,
+                        "content_sha256": packet.content_sha256,
+                        "total_chars": packet.total_chars,
+                        "changed_paths": list(packet.changed_paths),
+                    },
+                )
+            prompt = build_deep_verification_prompt(task, decision, packet=packet)
             command = command_factory(prompt, workspace)
             raw_trace_path = run_root / "deep-verification.jsonl"
             stderr_path = run_root / "deep-verification.stderr.txt"
@@ -168,6 +195,17 @@ class AdaptiveVerificationRunner:
             "started_at": started_at.isoformat(),
             "finished_at": datetime.now(timezone.utc).isoformat(),
             "timeout_seconds": timeout_seconds,
+            "evidence_mode": evidence_mode,
+            "evidence_packet": (
+                {
+                    "packet_version": packet.packet_version,
+                    "content_sha256": packet.content_sha256,
+                    "total_chars": packet.total_chars,
+                    "path": "evidence-packet.json",
+                }
+                if packet is not None
+                else None
+            ),
             "risk_decision": decision.as_dict(),
             "deep_verification_attempted": attempted,
             "deep_verification": attempt_record,
@@ -198,17 +236,32 @@ class AdaptiveVerificationRunner:
             completion_after=completion_after,
             grade_before=grade_before,
             grade_after=grade_after,
+            evidence_packet=packet,
         )
 
 
 def build_deep_verification_prompt(
-    task: dict[str, Any], decision: CompletionRiskDecision
+    task: dict[str, Any],
+    decision: CompletionRiskDecision,
+    *,
+    packet: EvidencePacket | None = None,
 ) -> str:
     fired = [signal for signal in decision.signals if signal.triggered]
     evidence = "\n".join(
         f"- {signal.rule_id}: {signal.detail}; evidence={list(signal.evidence)}"
         for signal in fired
     )
+    if packet is not None:
+        packet_json = json.dumps(packet.as_dict(), ensure_ascii=False, separators=(",", ":"))
+        return f"""ForgeBench focused adaptive verification.
+
+Use the bounded evidence packet below as the starting context. Do not inventory the repository or reread unrelated files. Inspect a packet-listed file only when needed to edit it, derive one focused check for each missing contract dimension, run the declared public check, and stop after one bounded repair.
+Do not access hidden graders or author metadata. Preserve immutable files and the public API.
+
+EVIDENCE_PACKET_JSON
+{packet_json}
+END_EVIDENCE_PACKET
+"""
     return f"""{task['instruction']}
 
 ForgeBench adaptive deep-verification pass:
