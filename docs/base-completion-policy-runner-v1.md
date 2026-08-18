@@ -66,6 +66,7 @@ the existing adaptive replay command. Random-k refuses to run until
 
 ## Remaining work
 
-v1 replays one base completion at a time. The next layer must build a frozen
-multi-base assignment manifest, generate call-matched Random-k selections, and
-aggregate policy outcomes without reading hidden labels during routing.
+v1 replays one base completion at a time. The follow-up
+[multi-base assignment manifest](multi-base-assignment-manifest-v1.md) now
+freezes public-only routing and call-matched Random-k selections across a base
+collection. Outcome aggregation remains separate.

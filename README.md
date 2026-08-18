@@ -8,7 +8,7 @@ The project asks one practical question:
 
 ## Current status
 
-**Phase 7 shared-base runner complete — next focus: frozen multi-base assignments**
+**Phase 7 comparison infrastructure complete — next focus: benchmark expansion**
 
 - [Design brief](docs/design-brief.md)
 - [Metrics and evaluation contract](docs/metrics.md)
@@ -149,6 +149,12 @@ separately. A real development smoke confirmed that Accept-All and Probe-All
 shared the same known false completion while only Probe-All exposed the missing
 non-Python boundary at zero model tokens.
 
+The [multi-base assignment manifest](docs/multi-base-assignment-manifest-v1.md)
+now freezes public-only routing across a base collection. Random-k receives the
+same number of model calls as Risk-Hierarchical within each task-family stratum,
+using a deterministic seed-derived rank. Each replay validates the manifest
+hash, task version, base hash, and expected probe/model routing.
+
 ## Local verification
 
 ```powershell
@@ -173,6 +179,7 @@ python scripts/run_adaptive_replay.py --task-id python-plugin-boundary --source-
 python scripts/run_adaptive_replay.py --task-id python-plugin-boundary --source-run-id <planning-lite-run-id> --evidence-mode probe-packet --execution-host wsl
 python scripts/seal_base_completion.py --task-id python-plugin-boundary --source-run-id <planning-lite-run-id> --base-id <base-id>
 python scripts/run_policy_replay.py --task-id python-plugin-boundary --base-id <base-id> --policy probe_all
+python scripts/plan_policy_comparison.py --entry python-plugin-boundary=<base-id> --manifest-id <manifest-id> --random-seed 1729
 ```
 
 Both persisted-session commands must use the same `--codex-home` when session
