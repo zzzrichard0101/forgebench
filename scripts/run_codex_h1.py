@@ -4,11 +4,13 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 import platform
 import shutil
 from pathlib import Path
 
 from forgebench.catalog import BenchmarkCatalog
+from forgebench.codex_command import build_exec_command
 from forgebench.completion_risk import CompletionRiskPolicy
 from forgebench.grader import DeterministicGrader
 from forgebench.h1_runner import H1Runner
@@ -28,6 +30,11 @@ def main() -> int:
     parser.add_argument("--task-id", required=True)
     parser.add_argument("--runs-root", type=Path, default=ROOT / "runs")
     parser.add_argument("--codex-bin", type=Path)
+    parser.add_argument(
+        "--codex-home",
+        type=Path,
+        help="Override CODEX_HOME (use the same directory when resuming a session).",
+    )
     parser.add_argument("--execution-host", choices=["auto", "windows", "wsl"], default="auto")
     parser.add_argument("--model", default="gpt-5.6-sol")
     parser.add_argument("--reasoning-effort", default="medium")
@@ -35,6 +42,11 @@ def main() -> int:
         "--risk-shadow",
         action="store_true",
         help="Record Completion Risk Gate decisions without changing execution.",
+    )
+    parser.add_argument(
+        "--persist-session",
+        action="store_true",
+        help="Persist the Codex session so a later adaptive pass can resume it.",
     )
     parser.add_argument(
         "--profile",
@@ -48,6 +60,8 @@ def main() -> int:
     execution_host = args.execution_host
     if execution_host == "auto":
         execution_host = "wsl" if platform.system() == "Windows" else "windows"
+    codex_home = (args.codex_home or (Path.home() / ".codex")).resolve(strict=True)
+    os.environ["CODEX_HOME"] = str(codex_home)
 
     if execution_host == "wsl":
         codex = (args.codex_bin or find_local_linux_codex()).resolve(strict=True)
@@ -60,7 +74,7 @@ def main() -> int:
             "Ubuntu",
             "--",
             "env",
-            f"CODEX_HOME={windows_to_wsl(Path.home() / '.codex')}",
+            f"CODEX_HOME={windows_to_wsl(codex_home)}",
             windows_to_wsl(codex),
         ]
         map_workspace = windows_to_wsl
@@ -70,26 +84,14 @@ def main() -> int:
         map_workspace = str
 
     def command_factory(prompt: str, workspace: Path) -> list[str]:
-        return [
-            *prefix,
-            "--ask-for-approval",
-            "never",
-            "exec",
-            "--json",
-            "--ephemeral",
-            "--ignore-user-config",
-            "--ignore-rules",
-            "--skip-git-repo-check",
-            "--sandbox",
-            "workspace-write",
-            "--model",
-            args.model,
-            "--config",
-            f'model_reasoning_effort="{args.reasoning_effort}"',
-            "--cd",
-            map_workspace(workspace),
-            prompt,
-        ]
+        return build_exec_command(
+            prefix=prefix,
+            prompt=prompt,
+            workspace=map_workspace(workspace),
+            model=args.model,
+            reasoning_effort=args.reasoning_effort,
+            persist_session=args.persist_session,
+        )
 
     runner = H1Runner(args.runs_root, DeterministicGrader(GRADERS))
     profiles = {
@@ -142,6 +144,8 @@ def main() -> int:
         "attempts": result.attempts,
         "completion_passed": result.completion.passed,
         "risk_mode": "shadow" if args.risk_shadow else "off",
+        "session_persistence": "persisted" if args.persist_session else "ephemeral",
+        "session_id": result.session_id,
         "risk_decision": (
             result.risk_decision.as_dict() if result.risk_decision is not None else None
         ),

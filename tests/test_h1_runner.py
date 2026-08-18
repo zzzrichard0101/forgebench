@@ -20,6 +20,54 @@ GRADERS = ROOT / "benchmark" / "graders"
 
 
 class H1RunnerTests(unittest.TestCase):
+    def test_trace_session_id_is_propagated_to_manifest(self) -> None:
+        with tempfile.TemporaryDirectory() as temp:
+            runner = H1Runner(Path(temp) / "runs", DeterministicGrader(GRADERS))
+            session_id = "01a00b3b-7a93-7eb1-8329-c683c8034510"
+
+            def command_factory(prompt: str, workspace: Path) -> list[str]:
+                plan = {
+                    "objective": "Diagnose duplicate jobs without changing evidence.",
+                    "steps": [
+                        {"action": "Analyze", "verification": "Recount attempts"},
+                        {"action": "Report", "verification": "Validate JSON"},
+                    ],
+                    "immutable_paths": ["worker_config.json", "job_events.jsonl"],
+                    "completion_checks": ["report exists", "evidence unchanged"],
+                }
+                report = {
+                    "incident_id": "worker-duplicate",
+                    "root_cause": "Visibility timeout is below job runtime",
+                    "impact": {"duplicated_jobs": 2, "extra_attempts": 2},
+                    "evidence": ["Timeout is 30 seconds", "Jobs exceed timeout"],
+                    "remediation": {
+                        "config_change": "Raise visibility timeout",
+                        "verification": "Confirm jobs complete exactly once",
+                    },
+                }
+                script = (
+                    "import json; from pathlib import Path; "
+                    f"print(json.dumps({{'type':'thread.started','thread_id':{session_id!r}}})); "
+                    f"print(json.dumps({{'type':'turn.completed','usage':{{'input_tokens':3,'output_tokens':2}}}})); "
+                    "root=Path.cwd(); (root/'.forgebench').mkdir(exist_ok=True); "
+                    f"(root/'.forgebench'/'plan.json').write_text({json.dumps(json.dumps(plan))}, encoding='utf-8'); "
+                    f"(root/'incident_report.json').write_text({json.dumps(json.dumps(report))}, encoding='utf-8')"
+                )
+                return [sys.executable, "-c", script]
+
+            result = runner.run(
+                task=TASK,
+                seed=SEED,
+                command_factory=command_factory,
+                max_repair_attempts=0,
+            )
+            manifest = json.loads(
+                (result.workspace.parent / "h1-manifest.json").read_text(encoding="utf-8")
+            )
+
+            self.assertEqual(result.session_id, session_id)
+            self.assertEqual(manifest["session_id"], session_id)
+
     def test_lite_prompt_keeps_schema_and_immutable_contract_concise(self) -> None:
         prompt = build_h1_prompt(TASK, style="lite")
         self.assertIn("2-4 steps", prompt)

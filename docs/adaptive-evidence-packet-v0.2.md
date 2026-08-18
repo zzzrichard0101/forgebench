@@ -66,10 +66,10 @@ efficiency target remains unmet.
 ## Decision
 
 Keep Evidence Packet v0.2 as the focused verification interface. Do not freeze
-the held-out policy yet. The next cost reduction should remove model-led probe
-rediscovery where possible: generate deterministic probe fixtures from the
-dimension recipe, run them first, and call Codex only with the failing probe and
-minimal affected files.
+the held-out policy yet. The next cost reduction should remove model-led
+rediscovery. Session reuse is tested first because it can preserve the source
+agent's repository context directly; deterministic probe fixtures remain the
+fallback when a source session is unavailable.
 
 ## Limitations
 
@@ -77,4 +77,3 @@ minimal affected files.
 - One valid model call cannot estimate variance.
 - Packet and full replay calls are stochastic and not paired.
 - Historical H1a references are descriptive only.
-

@@ -118,6 +118,14 @@ minimum probe set per dimension. End-to-end input on the two development tasks
 is still 7.8% above the historical H1a reference, so the main cost target remains
 open.
 
+The next optimization, [Adaptive Session Reuse v0.1](docs/adaptive-session-reuse-design-v0.1.md),
+is now implemented. H1 runs can persist and record a Codex session, and the
+adaptive pass can resume it inside a copied workspace while retaining Evidence
+Packet v0.2. All 68 deterministic tests pass. The live cost comparison is still
+pending because the current managed execution environment denied outbound model
+connections before sampling; that zero-token infrastructure failure is not
+counted as an agent result.
+
 ## Local verification
 
 ```powershell
@@ -132,12 +140,17 @@ python scripts/run_codex_h1.py --task-id checkout-retry-incident --execution-hos
 python scripts/run_codex_h1.py --task-id checkout-retry-incident --profile planning --execution-host wsl
 python scripts/run_codex_h1.py --task-id checkout-retry-incident --profile planning-lite --execution-host wsl
 python scripts/run_codex_h1.py --task-id python-plugin-boundary --profile planning-lite --risk-shadow --execution-host wsl
+python scripts/run_codex_h1.py --task-id python-plugin-boundary --profile planning-lite --risk-shadow --persist-session --execution-host wsl
 python scripts/run_paired_codex_experiment.py --task-id checkout-retry-incident --task-id worker-visibility-incident
 python scripts/run_fault_injection.py
 python scripts/run_model_recovery_smoke.py --execution-host wsl
 python scripts/run_adaptive_replay.py --task-id python-plugin-boundary --source-run-id <planning-lite-run-id> --execution-host wsl
 python scripts/run_adaptive_replay.py --task-id python-plugin-boundary --source-run-id <planning-lite-run-id> --evidence-mode packet --execution-host wsl
+python scripts/run_adaptive_replay.py --task-id python-plugin-boundary --source-run-id <persisted-planning-lite-run-id> --evidence-mode packet --resume-source-session --execution-host wsl
 ```
+
+Both persisted-session commands must use the same `--codex-home` when session
+storage is isolated from the default Codex home.
 
 The paired experiment command is a dry-run by default. It counterbalances H0
 and planning order, estimates input-token use from published runs with a 25%

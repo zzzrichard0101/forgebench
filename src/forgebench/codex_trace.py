@@ -16,8 +16,9 @@ class CodexTraceSummary:
     cached_input_tokens: int
     output_tokens: int
     reasoning_output_tokens: int
+    session_id: str | None = None
 
-    def as_dict(self) -> dict[str, int]:
+    def as_dict(self) -> dict[str, int | str | None]:
         return asdict(self)
 
     def budget_compliant(self, budgets: dict[str, Any]) -> bool:
@@ -46,7 +47,12 @@ def summarize_codex_trace(path: Path) -> CodexTraceSummary:
         and event.get("item", {}).get("type") == "command_execution"
     ]
     usage: dict[str, int] = {}
+    session_id: str | None = None
     for event in events:
+        if event.get("type") == "thread.started":
+            value = event.get("thread_id")
+            if isinstance(value, str) and value:
+                session_id = value
         if event.get("type") == "turn.completed":
             usage = event.get("usage", {})
     return CodexTraceSummary(
@@ -58,4 +64,5 @@ def summarize_codex_trace(path: Path) -> CodexTraceSummary:
         cached_input_tokens=int(usage.get("cached_input_tokens", 0)),
         output_tokens=int(usage.get("output_tokens", 0)),
         reasoning_output_tokens=int(usage.get("reasoning_output_tokens", 0)),
+        session_id=session_id,
     )
