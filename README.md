@@ -126,12 +126,15 @@ fell 12.8% and output fell 8.4%, but no price-weighted cost claim is made. Fresh
 Evidence Packet v0.2 remains the reference path; session reuse stays an
 experimental mode.
 
-The next [Probe-First design](docs/adaptive-probe-first-design-v0.1.md) is now
-implemented at mechanism level. A public-contract adapter runs deterministic
-file-type probes before a model call. Correct high-risk workspaces can
-short-circuit with zero model tokens; failed or unsupported probes fall back to
-one Evidence Packet repair. The first live development replay is predeclared but
-not yet reported.
+The [Probe-First result](docs/adaptive-probe-first-report-v0.1.md) adds a
+public-contract adapter before adaptive repair. In the first predeclared
+development replay, the adapter exposed the omitted non-Python-file case before
+the model call and one fresh Codex turn repaired it. Total input fell from 64,921
+to 47,847 tokens (26.3%) and duration fell from 47.224s to 39.863s (15.6%) versus
+the fresh Evidence Packet reference. Uncached input rose from 8,601 to 12,775,
+so this is a total-context and latency result, not a price-weighted cost claim.
+The deterministic correct-workspace test also verifies the zero-model-token
+short-circuit. This remains development evidence, not a held-out benchmark.
 
 ## Local verification
 

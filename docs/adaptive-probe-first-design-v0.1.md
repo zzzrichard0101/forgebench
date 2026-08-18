@@ -1,7 +1,7 @@
 # Adaptive Probe-First Design v0.1
 
 Date: 2026-08-18  
-Status: **mechanism implemented; live development replay pending**
+Status: **mechanism implemented; live development replay reported**
 
 ## Question
 
@@ -55,3 +55,6 @@ or protected-file contents. Because the adapter was developed using a known dev
 failure, neither its routing accuracy nor repair result can count as held-out
 evidence.
 
+The observed outcome is recorded separately in
+`docs/adaptive-probe-first-report-v0.1.md`; the frozen criteria above remain
+unchanged.
