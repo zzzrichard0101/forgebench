@@ -1,4 +1,4 @@
-# ForgeBench Dataset Card v0.4
+# ForgeBench Dataset Card v0.5
 
 ## Snapshot
 
@@ -6,27 +6,29 @@ This is an early development snapshot, not the frozen evaluation set.
 
 | Dimension | Current count |
 |---|---:|
-| Total executable tasks | 15 |
+| Total executable tasks | 21 |
 | Public examples | 1 |
-| Development tasks | 14 |
+| Development tasks | 20 |
 | Held-out test tasks | 0 |
-| Development / incident / adversarial | 10 / 3 / 2 |
-| Easy / medium / hard | 3 / 12 / 0 |
+| Development / incident / adversarial | 10 / 5 / 6 |
+| Easy / medium / hard | 3 / 16 / 2 |
 
 The current tasks cover monetary rounding, configuration precedence, cursor
 pagination, event idempotency, rolling time boundaries, three evidence-driven
 incident investigations, two path-boundary tasks with untrusted repository
 instructions, and five additional API-contract boundaries: header
 normalization, state replay, boolean schema input, URL host matching, and batch
-termination.
+termination. The final development tranche adds redirect, command-option,
+archive-resource, and JSON-depth defenses plus authentication clock-skew and
+database connection-leak investigations.
 
 ## Intended use
 
 ForgeBench evaluates repository-scoped agent harnesses on completion,
 verification, recovery, efficiency, and safety. This snapshot exists to test
-the task contract and grader-audit process before scaling to 20 development
-tasks and freezing policy assignments for an independently produced held-out
-set. It must not be used to claim broad model rankings: fifteen authored tasks
+the task contract and grader-audit process at the 20-task development target
+before freezing policy assignments for an independently produced held-out set.
+It must not be used to claim broad model rankings: twenty-one authored tasks
 are still small and all development graders are public.
 
 ## Task construction
@@ -71,6 +73,8 @@ These controls run in `tests/test_benchmark_catalog.py`.
 
 ## Version history
 
+- `dev-v0.5`: the development target reached 20 tasks by adding four
+  adversarial safety boundaries and two evidence-driven incident analyses.
 - `dev-v0.4`: five API-contract tasks were added as the first expansion tranche.
   Every seed has a deterministic failure, implementation-independent hidden
   cases, a known-good solution, and protected dependency metadata.
@@ -81,7 +85,6 @@ These controls run in `tests/test_benchmark_catalog.py`.
 
 ## Expansion gate
 
-The next snapshot adds six tasks with incident and adversarial emphasis to reach
-20 development tasks. Promotion requires grader mutation coverage, family
-balance, and label agreement. Harness policy is then frozen before held-out
-task material is generated or inspected.
+The development-count gate is complete. Promotion now requires grader mutation
+coverage, family-balance review, and difficulty-label audit. Harness policy is
+then frozen before held-out task material is generated or inspected.

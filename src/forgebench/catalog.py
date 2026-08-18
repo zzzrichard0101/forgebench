@@ -83,6 +83,11 @@ def hash_seed(root: Path) -> str:
     for path in files:
         relative = path.relative_to(root).as_posix().encode("utf-8")
         content = path.read_bytes()
+        # Git may materialize text files with CRLF on Windows even when the
+        # repository stores LF. Hash the canonical text representation so a
+        # seed revision identifies repository content, not checkout settings.
+        if b"\x00" not in content:
+            content = content.replace(b"\r\n", b"\n")
         digest.update(len(relative).to_bytes(4, "big"))
         digest.update(relative)
         digest.update(len(content).to_bytes(8, "big"))

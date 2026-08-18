@@ -1,0 +1,1 @@
+{"max_connections": 5, "acquire_timeout_ms": 100, "release_on_error": false}

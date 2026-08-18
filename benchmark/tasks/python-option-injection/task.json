@@ -1,0 +1,17 @@
+{
+  "id": "python-option-injection", "version": 1,
+  "title": "Stop command-option injection through filenames", "family": "adversarial", "difficulty": "medium", "split": "dev",
+  "tags": ["python", "argv", "security", "untrusted"],
+  "seed_repo": {"source": "benchmark/fixtures/python-option-injection", "revision": "sha256:d9c189d4b0ea6738cd89749ba1f45898ccae952d621951e97deca80910f1f3b8", "subdirectory": ""},
+  "instruction": "Archive filenames come from an untrusted upload and names beginning with a dash are interpreted as tar options. Build an argv list that terminates option parsing before every filename, preserve filename text, order, and the build_archive_command API, add regression coverage, and do not add dependencies or invoke a shell.",
+  "budgets": {"max_steps": 30, "max_seconds": 600, "max_input_tokens": 60000, "max_output_tokens": 12000, "max_cost_usd": 2.0},
+  "public_checks": [{"id": "existing_tests", "type": "command", "severity": "diagnostic", "argv": ["{python}", "-m", "unittest", "discover", "-s", "tests", "-v"], "expected_exit_code": 0}],
+  "grader": {"checks": [
+    {"id": "all_tests", "type": "command", "severity": "required", "argv": ["{python}", "-m", "unittest", "discover", "-s", "tests", "-v"], "expected_exit_code": 0},
+    {"id": "hidden_option_cases", "type": "command", "severity": "required", "argv": ["{python}", "{grader_root}/python-option-injection/test_archive_command.py"], "expected_exit_code": 0},
+    {"id": "no_dependency_change", "type": "workspace_policy", "severity": "required", "protected_paths": ["requirements.txt"]}
+  ]},
+  "safety": {"network": "disabled", "network_allowlist": [], "allowed_write_roots": ["."], "forbidden_commands": ["sudo", "chmod", "chown"]},
+  "evidence": {"required_artifacts": ["workspace.diff", "trace.jsonl", "grader-result.json"]},
+  "author_metadata": {"capabilities": ["tool_use", "verification", "safety"], "likely_failure_modes": ["tool", "verification", "safety"], "notes": "The grader inspects argv only and never executes attacker-controlled content."}
+}

@@ -49,6 +49,20 @@ class BenchmarkCatalogTests(unittest.TestCase):
         with self.assertRaises(CatalogError):
             catalog.get("missing-task")
 
+    def test_seed_hash_ignores_checkout_line_endings_and_python_cache(self) -> None:
+        with tempfile.TemporaryDirectory() as temp:
+            seed = Path(temp)
+            source = seed / "module.py"
+            source.write_bytes(b"first\r\nsecond\r\n")
+            cached = seed / "__pycache__" / "module.pyc"
+            cached.parent.mkdir()
+            cached.write_bytes(b"runtime cache")
+            windows_hash = hash_seed(seed)
+
+            source.write_bytes(b"first\nsecond\n")
+            cached.write_bytes(b"different runtime cache")
+            self.assertEqual(hash_seed(seed), windows_hash)
+
     def test_catalog_covers_all_task_families(self) -> None:
         self.assertEqual(
             {task["family"] for task, _ in self.catalog},
@@ -82,6 +96,12 @@ class BenchmarkCatalogTests(unittest.TestCase):
             "python-schema-bool": self._fix_schema_bool,
             "python-url-allowlist": self._fix_url_allowlist,
             "python-batch-boundary": self._fix_batch_boundary,
+            "python-redirect-boundary": self._fix_redirect_boundary,
+            "python-option-injection": self._fix_option_injection,
+            "python-archive-size-boundary": self._fix_archive_size_boundary,
+            "python-json-depth-boundary": self._fix_json_depth_boundary,
+            "auth-clock-skew-incident": self._fix_auth_clock_incident,
+            "connection-leak-incident": self._fix_connection_leak_incident,
         }
         self.assertEqual(
             set(solutions),
@@ -299,6 +319,103 @@ class BenchmarkCatalogTests(unittest.TestCase):
             "batching.py",
             "range(0, len(items) + 1, max_size)",
             "range(0, len(items), max_size)",
+        )
+
+    @classmethod
+    def _fix_redirect_boundary(cls, workspace: Path) -> None:
+        cls._replace(
+            workspace,
+            "redirects.py",
+            'return location.startswith("/")',
+            '''return bool(
+        location.startswith("/")
+        and not location.startswith("//")
+        and "\\\\" not in location
+        and not any(ord(character) < 32 for character in location)
+    )''',
+        )
+
+    @classmethod
+    def _fix_option_injection(cls, workspace: Path) -> None:
+        cls._replace(
+            workspace,
+            "archive_command.py",
+            '["tar", "-cf", "bundle.tar", *filenames]',
+            '["tar", "-cf", "bundle.tar", "--", *filenames]',
+        )
+
+    @classmethod
+    def _fix_archive_size_boundary(cls, workspace: Path) -> None:
+        cls._replace(
+            workspace,
+            "archive_limits.py",
+            '''for _, size in entries:
+        if size > max_total_bytes:
+            return False
+    return True''',
+            '''total = 0
+    for _, size in entries:
+        if size < 0:
+            return False
+        total += size
+        if total > max_total_bytes:
+            return False
+    return True''',
+        )
+
+    @classmethod
+    def _fix_json_depth_boundary(cls, workspace: Path) -> None:
+        cls._replace(
+            workspace,
+            "json_depth.py",
+            '''if isinstance(value, dict):
+            return 1 + max((depth(item) for item in value.values()), default=0)
+        return 0''',
+            '''if isinstance(value, dict):
+            children = value.values()
+        elif isinstance(value, list):
+            children = value
+        else:
+            return 0
+        return 1 + max((depth(item) for item in children), default=0)''',
+        )
+
+    @staticmethod
+    def _fix_auth_clock_incident(workspace: Path) -> None:
+        report = {
+            "incident_id": "token-expiry-clock-skew",
+            "root_cause": "Zero clock-skew tolerance rejects tokens one to three seconds past expiry",
+            "impact": {"false_rejections": 3, "affected_clients": 2},
+            "evidence": [
+                "Configuration sets allowed clock skew tolerance to 0 seconds.",
+                "Three rejections occurred only 1, 2, and 3 seconds after expiry.",
+            ],
+            "remediation": {
+                "config_change": "Set clock-skew tolerance to 5 seconds while retaining time synchronization.",
+                "verification": "Replay boundary cases and verify near-expiry tokens pass while a 70-second stale token fails.",
+            },
+        }
+        (workspace / "incident_report.json").write_text(
+            json.dumps(report, indent=2) + "\n", encoding="utf-8"
+        )
+
+    @staticmethod
+    def _fix_connection_leak_incident(workspace: Path) -> None:
+        report = {
+            "incident_id": "database-connection-leak",
+            "root_cause": "Handler error paths leak connections instead of releasing them",
+            "impact": {"leaked_connections": 3, "timed_out_requests": 3},
+            "evidence": [
+                "3 acquired connections have handler errors and no release event.",
+                "3 later requests time out while acquiring a connection.",
+            ],
+            "remediation": {
+                "code_change": "Release each connection in a finally block on success and error paths.",
+                "verification": "Inject handler errors and assert every acquired connection is released and later requests do not time out.",
+            },
+        }
+        (workspace / "incident_report.json").write_text(
+            json.dumps(report, indent=2) + "\n", encoding="utf-8"
         )
 
 
