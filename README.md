@@ -8,7 +8,7 @@ The project asks one practical question:
 
 ## Current status
 
-**Phase 8 policy frozen — held-out authoring is now permitted under the leakage protocol**
+**Phase 9 held-out intake firewall ready — awaiting an independent ten-task package**
 
 - [Design brief](docs/design-brief.md)
 - [Metrics and evaluation contract](docs/metrics.md)
@@ -23,6 +23,7 @@ The project asks one practical question:
 - [Benchmark expansion v0.5](docs/benchmark-expansion-v0.5.md)
 - [Development grader audit v0.5](docs/dev-grader-audit-v0.5.md)
 - [Selective verification policy freeze v1](docs/policy-freeze-v1.md)
+- [Held-out intake firewall v1](docs/heldout-intake-v1.md)
 
 Phase 2 infrastructure is now present in `src/forgebench`: copy-isolated run
 workspaces, a typed tool gateway, a provider-neutral model adapter, and
