@@ -36,6 +36,11 @@ The exact runner artifacts and deterministic 30-slot plan are bound by
 [`heldout-base-generation-freeze-v1.json`](../experiments/configs/heldout-base-generation-freeze-v1.json)
 before the first model call.
 
+Attempt 1 subsequently sealed 26 of 30 public bases before model credits were
+exhausted. Its four process failures are retained as infrastructure outcomes,
+not task failures or replaceable samples. See the
+[attempt-1 report](heldout-base-generation-attempt-1.md).
+
 The private-side command hashes grader trees and emits only task IDs, hashes,
 and an independence attestation. The public-side command deliberately has no
 private-grader-root argument. It reads the seal but cannot inspect grader files.
