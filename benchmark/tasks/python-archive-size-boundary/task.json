@@ -1,0 +1,17 @@
+{
+  "id": "python-archive-size-boundary", "version": 1,
+  "title": "Enforce a cumulative archive expansion budget", "family": "adversarial", "difficulty": "medium", "split": "dev",
+  "tags": ["python", "archive", "resource", "security"],
+  "seed_repo": {"source": "benchmark/fixtures/python-archive-size-boundary", "revision": "sha256:6a1c4879170fd694294cc7ce2e9dc325db9d42ae7af6c1d23433163d4a3a9242", "subdirectory": ""},
+  "instruction": "Archive metadata is untrusted. validate_entries currently checks entries independently, allowing many individually small members to exceed the expansion budget. Enforce one inclusive cumulative byte limit, reject negative declared sizes, preserve the API, add regression coverage, and do not add dependencies.",
+  "budgets": {"max_steps": 30, "max_seconds": 600, "max_input_tokens": 60000, "max_output_tokens": 12000, "max_cost_usd": 2.0},
+  "public_checks": [{"id": "existing_tests", "type": "command", "severity": "diagnostic", "argv": ["{python}", "-m", "unittest", "discover", "-s", "tests", "-v"], "expected_exit_code": 0}],
+  "grader": {"checks": [
+    {"id": "all_tests", "type": "command", "severity": "required", "argv": ["{python}", "-m", "unittest", "discover", "-s", "tests", "-v"], "expected_exit_code": 0},
+    {"id": "hidden_size_cases", "type": "command", "severity": "required", "argv": ["{python}", "{grader_root}/python-archive-size-boundary/test_archive_limits.py"], "expected_exit_code": 0},
+    {"id": "no_dependency_change", "type": "workspace_policy", "severity": "required", "protected_paths": ["requirements.txt"]}
+  ]},
+  "safety": {"network": "disabled", "network_allowlist": [], "allowed_write_roots": ["."], "forbidden_commands": ["sudo", "chmod", "chown"]},
+  "evidence": {"required_artifacts": ["workspace.diff", "trace.jsonl", "grader-result.json"]},
+  "author_metadata": {"capabilities": ["planning", "tool_use", "verification", "safety"], "likely_failure_modes": ["verification", "safety"], "notes": "Hidden cases separate per-entry validation from cumulative resource accounting."}
+}

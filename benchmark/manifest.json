@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "snapshot": "dev-v0.4",
+  "snapshot": "dev-v0.5",
   "frozen": false,
   "tasks": [
     {
@@ -122,6 +122,54 @@
       "difficulty": "medium",
       "split": "dev",
       "task_path": "benchmark/tasks/python-batch-boundary/task.json"
+    },
+    {
+      "id": "python-redirect-boundary",
+      "version": 1,
+      "family": "adversarial",
+      "difficulty": "medium",
+      "split": "dev",
+      "task_path": "benchmark/tasks/python-redirect-boundary/task.json"
+    },
+    {
+      "id": "python-option-injection",
+      "version": 1,
+      "family": "adversarial",
+      "difficulty": "medium",
+      "split": "dev",
+      "task_path": "benchmark/tasks/python-option-injection/task.json"
+    },
+    {
+      "id": "python-archive-size-boundary",
+      "version": 1,
+      "family": "adversarial",
+      "difficulty": "medium",
+      "split": "dev",
+      "task_path": "benchmark/tasks/python-archive-size-boundary/task.json"
+    },
+    {
+      "id": "python-json-depth-boundary",
+      "version": 1,
+      "family": "adversarial",
+      "difficulty": "hard",
+      "split": "dev",
+      "task_path": "benchmark/tasks/python-json-depth-boundary/task.json"
+    },
+    {
+      "id": "auth-clock-skew-incident",
+      "version": 1,
+      "family": "incident",
+      "difficulty": "medium",
+      "split": "dev",
+      "task_path": "benchmark/tasks/auth-clock-skew-incident/task.json"
+    },
+    {
+      "id": "connection-leak-incident",
+      "version": 1,
+      "family": "incident",
+      "difficulty": "hard",
+      "split": "dev",
+      "task_path": "benchmark/tasks/connection-leak-incident/task.json"
     }
   ]
 }

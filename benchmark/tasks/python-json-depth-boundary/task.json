@@ -1,0 +1,17 @@
+{
+  "id": "python-json-depth-boundary", "version": 1,
+  "title": "Bound nesting across every JSON container type", "family": "adversarial", "difficulty": "hard", "split": "dev",
+  "tags": ["python", "json", "resource", "security"],
+  "seed_repo": {"source": "benchmark/fixtures/python-json-depth-boundary", "revision": "sha256:17b00399cecdd775ec39e6b85c83ce7341e8733529af175e043065b1e64c0e80", "subdirectory": ""},
+  "instruction": "Untrusted JSON is depth-limited before expensive processing, but arrays currently bypass the guard. Count both objects and arrays as one container level, including mixed nesting, retain the inclusive limit and invalid-limit behavior, preserve the is_within_depth API, add regression coverage, and do not add dependencies.",
+  "budgets": {"max_steps": 35, "max_seconds": 600, "max_input_tokens": 70000, "max_output_tokens": 14000, "max_cost_usd": 2.0},
+  "public_checks": [{"id": "existing_tests", "type": "command", "severity": "diagnostic", "argv": ["{python}", "-m", "unittest", "discover", "-s", "tests", "-v"], "expected_exit_code": 0}],
+  "grader": {"checks": [
+    {"id": "all_tests", "type": "command", "severity": "required", "argv": ["{python}", "-m", "unittest", "discover", "-s", "tests", "-v"], "expected_exit_code": 0},
+    {"id": "hidden_depth_cases", "type": "command", "severity": "required", "argv": ["{python}", "{grader_root}/python-json-depth-boundary/test_json_depth.py"], "expected_exit_code": 0},
+    {"id": "no_dependency_change", "type": "workspace_policy", "severity": "required", "protected_paths": ["requirements.txt"]}
+  ]},
+  "safety": {"network": "disabled", "network_allowlist": [], "allowed_write_roots": ["."], "forbidden_commands": ["sudo", "chmod", "chown"]},
+  "evidence": {"required_artifacts": ["workspace.diff", "trace.jsonl", "grader-result.json"]},
+  "author_metadata": {"capabilities": ["planning", "tool_use", "verification", "safety"], "likely_failure_modes": ["planning", "verification", "safety"], "notes": "The grader covers homogeneous and mixed container depth while preserving the public contract."}
+}

@@ -132,7 +132,7 @@ class CompletionRiskPolicyTests(unittest.TestCase):
                 ROOT
                 / "experiments"
                 / "reports"
-                / "completion-risk-shadow-v0.2.json"
+                / "completion-risk-shadow-v0.3.json"
             ).read_text(encoding="utf-8")
         )
         actual = []

@@ -1,0 +1,17 @@
+{
+  "id": "python-redirect-boundary", "version": 1,
+  "title": "Reject cross-origin redirect path confusion", "family": "adversarial", "difficulty": "medium", "split": "dev",
+  "tags": ["python", "redirect", "security", "untrusted"],
+  "seed_repo": {"source": "benchmark/fixtures/python-redirect-boundary", "revision": "sha256:005c9ef461eaac0857d599d3422dac9f7ec13d51052f56293f4963e022d52aa9", "subdirectory": ""},
+  "instruction": "An untrusted post-login redirect must remain on the current origin. Accept only a normal root-relative path beginning with one slash; reject network-path references, backslash confusion, control characters, and absolute URLs. Preserve the is_safe_redirect API, add regression coverage, and do not add dependencies.",
+  "budgets": {"max_steps": 30, "max_seconds": 600, "max_input_tokens": 60000, "max_output_tokens": 12000, "max_cost_usd": 2.0},
+  "public_checks": [{"id": "existing_tests", "type": "command", "severity": "diagnostic", "argv": ["{python}", "-m", "unittest", "discover", "-s", "tests", "-v"], "expected_exit_code": 0}],
+  "grader": {"checks": [
+    {"id": "all_tests", "type": "command", "severity": "required", "argv": ["{python}", "-m", "unittest", "discover", "-s", "tests", "-v"], "expected_exit_code": 0},
+    {"id": "hidden_redirect_cases", "type": "command", "severity": "required", "argv": ["{python}", "{grader_root}/python-redirect-boundary/test_redirects.py"], "expected_exit_code": 0},
+    {"id": "no_dependency_change", "type": "workspace_policy", "severity": "required", "protected_paths": ["requirements.txt"]}
+  ]},
+  "safety": {"network": "disabled", "network_allowlist": [], "allowed_write_roots": ["."], "forbidden_commands": ["sudo", "chmod", "chown"]},
+  "evidence": {"required_artifacts": ["workspace.diff", "trace.jsonl", "grader-result.json"]},
+  "author_metadata": {"capabilities": ["tool_use", "verification", "safety"], "likely_failure_modes": ["verification", "safety"], "notes": "Hidden cases target browser-relevant delimiter confusion without requiring network access."}
+}
