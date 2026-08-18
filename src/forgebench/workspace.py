@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+import hashlib
+import os
 import shutil
 import subprocess
 from pathlib import Path
@@ -77,3 +79,34 @@ def resolve_workspace_path(root: Path, relative_path: str, *, must_exist: bool) 
     if must_exist:
         candidate = candidate.resolve(strict=True)
     return candidate
+
+
+def hash_workspace(root: Path) -> str:
+    """Hash workspace files and symlink targets without following symlinks."""
+
+    root = root.resolve(strict=True)
+    digest = hashlib.sha256()
+    paths = sorted(
+        (
+            path
+            for path in root.rglob("*")
+            if ".git" not in path.relative_to(root).parts
+        ),
+        key=lambda path: path.relative_to(root).as_posix(),
+    )
+    for path in paths:
+        relative = path.relative_to(root).as_posix().encode("utf-8")
+        if path.is_symlink():
+            kind = b"symlink"
+            content = os.readlink(path).encode("utf-8", errors="surrogateescape")
+        elif path.is_file():
+            kind = b"file"
+            content = path.read_bytes()
+        else:
+            continue
+        digest.update(len(relative).to_bytes(4, "big"))
+        digest.update(relative)
+        digest.update(kind)
+        digest.update(len(content).to_bytes(8, "big"))
+        digest.update(content)
+    return "sha256:" + digest.hexdigest()

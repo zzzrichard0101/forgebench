@@ -1,8 +1,6 @@
 from __future__ import annotations
 
-import hashlib
 import json
-import os
 import shutil
 import subprocess
 import time
@@ -20,7 +18,7 @@ from .evidence_packet import EvidencePacket, build_evidence_packet
 from .external_agent import decode_process_output
 from .grader import DeterministicGrader, GradeResult
 from .trace import TraceWriter
-from .workspace import create_isolated_workspace
+from .workspace import create_isolated_workspace, hash_workspace
 
 
 CommandFactory = Callable[[str, Path], list[str]]
@@ -112,9 +110,6 @@ class AdaptiveVerificationRunner:
         if decision.escalate:
             snapshot = run_root / "pre-escalation-workspace"
             shutil.copytree(workspace, snapshot, symlinks=True)
-        grade_before = self.grader.grade(task, snapshot or workspace, seed)
-        grade_before.write(run_root / "pre-escalation-grader-result.json")
-
         attempted = False
         exit_code: int | None = None
         timed_out = False
@@ -234,6 +229,11 @@ class AdaptiveVerificationRunner:
                 }
                 trace.append("deep_verification_attempt", attempt_record)
 
+        # Hidden grading happens only after routing and model work are sealed.
+        # The pre-escalation snapshot preserves the counterfactual base artifact
+        # without making its label available to the routing decision or prompt.
+        grade_before = self.grader.grade(task, snapshot or workspace, seed)
+        grade_before.write(run_root / "pre-escalation-grader-result.json")
         completion_after = self.verifier.verify(task, workspace, seed)
         grade_after = self.grader.grade(task, workspace, seed)
         grade_after.write(run_root / "grader-result.json")
@@ -245,9 +245,7 @@ class AdaptiveVerificationRunner:
             "task_id": task["id"],
             "task_version": task["version"],
             "source_run_id": source_run_id,
-            "source_workspace_hash": _hash_workspace_without_following_symlinks(
-                source_workspace
-            ),
+            "source_workspace_hash": hash_workspace(source_workspace),
             "started_at": started_at.isoformat(),
             "finished_at": datetime.now(timezone.utc).isoformat(),
             "timeout_seconds": timeout_seconds,
@@ -359,27 +357,3 @@ def _safe_trace_summary(path: Path) -> CodexTraceSummary:
         return summarize_codex_trace(path)
     except ValueError:
         return CodexTraceSummary(0, 0, 0, 0, 0, 0, 0, 0)
-
-
-def _hash_workspace_without_following_symlinks(root: Path) -> str:
-    digest = hashlib.sha256()
-    paths = sorted(
-        (path for path in root.rglob("*") if ".git" not in path.relative_to(root).parts),
-        key=lambda path: path.relative_to(root).as_posix(),
-    )
-    for path in paths:
-        relative = path.relative_to(root).as_posix().encode("utf-8")
-        if path.is_symlink():
-            kind = b"symlink"
-            content = os.readlink(path).encode("utf-8", errors="surrogateescape")
-        elif path.is_file():
-            kind = b"file"
-            content = path.read_bytes()
-        else:
-            continue
-        digest.update(len(relative).to_bytes(4, "big"))
-        digest.update(relative)
-        digest.update(kind)
-        digest.update(len(content).to_bytes(8, "big"))
-        digest.update(content)
-    return "sha256:" + digest.hexdigest()
