@@ -1,0 +1,6 @@
+time,node,serial,result
+10:00:00,edge-a,OLD,ok
+10:00:10,edge-b,NEW,unknown_issuer
+10:00:20,edge-c,OLD,ok
+10:01:00,edge-b,NEW,unknown_issuer
+10:02:00,edge-b,NEW,ok

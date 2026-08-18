@@ -1,0 +1,4 @@
+{"request":"r1","tenant":"north","path":"/profile","cache_key":"/profile","result_tenant":"north"}
+{"request":"r2","tenant":"south","path":"/profile","cache_key":"/profile","result_tenant":"north"}
+{"request":"r3","tenant":"south","path":"/orders","cache_key":"/orders","result_tenant":"south"}
+{"request":"r4","tenant":"east","path":"/profile","cache_key":"/profile","result_tenant":"north"}

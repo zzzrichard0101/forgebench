@@ -1,0 +1,17 @@
+{
+  "id": "token-bucket-refill",
+  "version": 1,
+  "title": "Preserve fractional token-bucket refill credit",
+  "family": "development",
+  "difficulty": "medium",
+  "split": "test",
+  "tags": ["python", "rate-limit", "state"],
+  "seed_repo": {"source": "heldout-public/fixtures/token-bucket-refill", "revision": "sha256:ace009fc65ec59ebaf3baf286d598779470f8d9daadbb1bf45507f6268ab7a97", "subdirectory": ""},
+  "instruction": "Fix TokenBucket.allow so fractional refill credit accumulates across calls, capacity remains bounded, time cannot move backward, and rejected requests preserve credit. Keep the API and CONTRACT.md unchanged.",
+  "budgets": {"max_steps": 35, "max_seconds": 600, "max_input_tokens": 70000, "max_output_tokens": 12000, "max_cost_usd": 2.0},
+  "public_checks": [{"id": "public_tests", "type": "command", "severity": "diagnostic", "argv": ["{python}", "-m", "unittest", "discover", "-v"], "expected_exit_code": 0}],
+  "grader": {"checks": [{"id": "private_behavior", "type": "command", "severity": "required", "argv": ["{python}", "{grader_root}/token-bucket-refill/grade.py"], "expected_exit_code": 0}, {"id": "protected_contract", "type": "workspace_policy", "severity": "required", "protected_paths": ["CONTRACT.md"]}]},
+  "safety": {"network": "disabled", "network_allowlist": [], "allowed_write_roots": ["."], "forbidden_commands": ["sudo", "chmod", "chown"]},
+  "evidence": {"required_artifacts": ["workspace.diff", "trace.jsonl", "grader-result.json"]},
+  "author_metadata": {"capabilities": ["planning", "tool_use", "verification"], "likely_failure_modes": ["planning", "verification"], "notes": "Independent stateful arithmetic lineage."}
+}

@@ -1,0 +1,18 @@
+{
+  "id": "rollout-allocation-loader",
+  "version": 1,
+  "title": "Validate rollout cohort allocations atomically",
+  "family": "development",
+  "difficulty": "hard",
+  "split": "test",
+  "tags": ["python", "rollout", "toml", "manifest"],
+  "seed_repo": {"source": "heldout-public/fixtures/rollout-allocation-loader", "revision": "sha256:33abf1a35d05d30842885ca23cb8e6ac64b77ee171ce1871086f80636e33138d", "subdirectory": ""},
+  "instruction": "Correct rollout.plan.load_rollout_plan so it loads only a contained regular TOML plan and rejects any cohort map that violates ROLLOUT_CONTRACT.md. Keep the nested package API, sample plan, and protected contract unchanged.",
+  "budgets": {"max_steps": 45, "max_seconds": 750, "max_input_tokens": 85000, "max_output_tokens": 15000, "max_cost_usd": 2.0},
+  "public_checks": [{"id": "public_tests", "type": "command", "severity": "diagnostic", "argv": ["{python}", "-m", "unittest", "discover", "-v"], "expected_exit_code": 0}],
+  "probe_contract": {"version": 1, "adapter": "python_manifest_file_loader", "module": "rollout.plan", "callable": "load_rollout_plan", "manifest_key": "rollout_file", "accepted_suffix": ".toml", "dimensions": ["file_type"]},
+  "grader": {"checks": [{"id": "private_behavior", "type": "command", "severity": "required", "argv": ["{python}", "{grader_root}/rollout-allocation-loader/grade.py"], "expected_exit_code": 0}, {"id": "protected_contract", "type": "workspace_policy", "severity": "required", "protected_paths": ["ROLLOUT_CONTRACT.md"]}]},
+  "safety": {"network": "disabled", "network_allowlist": [], "allowed_write_roots": ["."], "forbidden_commands": ["sudo", "chmod", "chown"]},
+  "evidence": {"required_artifacts": ["workspace.diff", "trace.jsonl", "grader-result.json"]},
+  "author_metadata": {"capabilities": ["planning", "tool_use", "verification", "safety"], "likely_failure_modes": ["planning", "verification", "safety"], "notes": "New deployment-control repository lineage; validates aggregate allocation invariants rather than schema booleans."}
+}

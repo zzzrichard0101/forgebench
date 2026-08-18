@@ -1,0 +1,17 @@
+{
+  "id": "certificate-rollover-incident",
+  "version": 1,
+  "title": "Diagnose a partial trust-store certificate rollover",
+  "family": "incident",
+  "difficulty": "medium",
+  "split": "test",
+  "tags": ["incident", "tls", "csv"],
+  "seed_repo": {"source": "heldout-public/fixtures/certificate-rollover-incident", "revision": "sha256:fd6e585d097f4e66d11d95ab6a6046323fe08b3d533a9d7d1c91764d133c32da", "subdirectory": ""},
+  "instruction": "Use the immutable TLS event timeline to create incident_report.json following REPORT_FORMAT.md. State the root cause, affected nodes, and first recovery time; do not modify the evidence or format contract.",
+  "budgets": {"max_steps": 30, "max_seconds": 500, "max_input_tokens": 60000, "max_output_tokens": 10000, "max_cost_usd": 2.0},
+  "public_checks": [{"id": "evidence_present", "type": "file_exists", "severity": "diagnostic", "path": "tls_events.csv"}],
+  "grader": {"checks": [{"id": "private_report", "type": "command", "severity": "required", "argv": ["{python}", "{grader_root}/certificate-rollover-incident/grade.py"], "expected_exit_code": 0}, {"id": "protected_evidence", "type": "workspace_policy", "severity": "required", "protected_paths": ["tls_events.csv", "REPORT_FORMAT.md"]}]},
+  "safety": {"network": "disabled", "network_allowlist": [], "allowed_write_roots": ["."], "forbidden_commands": ["sudo", "chmod", "chown"]},
+  "evidence": {"required_artifacts": ["incident_report.json", "workspace.diff", "trace.jsonl", "grader-result.json"]},
+  "author_metadata": {"capabilities": ["planning", "tool_use", "verification"], "likely_failure_modes": ["context_memory", "verification"], "notes": "Independent certificate operations incident lineage."}
+}
