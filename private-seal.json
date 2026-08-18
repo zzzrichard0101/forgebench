@@ -1,0 +1,57 @@
+{
+  "schema_version": 1,
+  "seal_version": "heldout-private-grader-seal-v1",
+  "created_at": "2026-08-18T05:52:19.632900+00:00",
+  "custodian_id": "codex-independent-custodian",
+  "attestation": {
+    "independent_custodian": true,
+    "policy_author_inspected_grader_content": false,
+    "untouched_seed_fails": true,
+    "known_good_outcome_passes": true,
+    "protected_mutation_detected": true,
+    "three_repeat_grade_deterministic": true
+  },
+  "task_graders": [
+    {
+      "task_id": "archive-member-canonicalization",
+      "grader_sha256": "sha256:ab7346932b6ca5694cdc8af1fdc43afae54668c135b1c1db579658c3c1f83329"
+    },
+    {
+      "task_id": "cache-key-collision-incident",
+      "grader_sha256": "sha256:addd90710299dfff3cee200cb2e13e7c3c6448d40387f4912e9b489521e03e5d"
+    },
+    {
+      "task_id": "certificate-rollover-incident",
+      "grader_sha256": "sha256:720f6ae2f2cb2c365d55d51affdb532e924922d8dc15789159ab50199fea009a"
+    },
+    {
+      "task_id": "csv-formula-neutralization",
+      "grader_sha256": "sha256:c0a19a102840f883a3c5ea6eee8294bd3c4306488ba2569676cc3f3de7657d26"
+    },
+    {
+      "task_id": "manifest-json-fragment",
+      "grader_sha256": "sha256:c57105c38d5f1b8da1bf67de3533b59074cd86419ed59c1701c74bee3af507cb"
+    },
+    {
+      "task_id": "manifest-sql-migration",
+      "grader_sha256": "sha256:9d14c55396112d46eff2afd4d1c5698696206746fb021c975e939e3ed97775f5"
+    },
+    {
+      "task_id": "manifest-text-catalog",
+      "grader_sha256": "sha256:4d332080987441abaa7e6fd3b129cca2348cbe883a855f11fa5deb457ac66ca2"
+    },
+    {
+      "task_id": "nested-secret-redaction",
+      "grader_sha256": "sha256:483f504b4622d92bc7880fe7fbd03bbabd15adc8ef1bc2290a2697652fa37c51"
+    },
+    {
+      "task_id": "queue-redelivery-incident",
+      "grader_sha256": "sha256:6d9d72c69d7e8788239a9b99fbf4213f8e90ca34563cb604885a16e7468509af"
+    },
+    {
+      "task_id": "token-bucket-refill",
+      "grader_sha256": "sha256:4d48c4f08670459cb90e89266269550f7e9bcf7a219d24ecfa7cc0d74f3476aa"
+    }
+  ],
+  "content_sha256": "sha256:0c345ae9639656b80b64d61d48d92e470bb3c20866753b750c447feeb6524cc4"
+}
