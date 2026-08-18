@@ -1,0 +1,36 @@
+{
+  "schema_version": 1,
+  "experiment": "shared-base-policy-replay-smoke-v1",
+  "status": "passed",
+  "claim_scope": "development mechanism check only",
+  "source_run_id": "3ba463d2bff1464bba1d0a035a39182c",
+  "base_id": "dev-plugin-base-v1",
+  "task_id": "python-plugin-boundary",
+  "base_workspace_hash": "sha256:1157d7a2891f93aef5bb12cf519736a33ce4b07e0db6dbc6c0147c650b5d4062",
+  "public_completion_eligible": true,
+  "hidden_base_passed": false,
+  "policies": [
+    {
+      "policy": "accept_all",
+      "run_id": "55ca2ad5ecf647f8babf7173c1c11fe4",
+      "base_hash_matched": true,
+      "probe_attempted": false,
+      "model_attempted": false,
+      "model_tokens": 0,
+      "hidden_task_passed_after": false
+    },
+    {
+      "policy": "probe_all",
+      "run_id": "a91e0bbe5ae549fb9f0bad0c2c392d66",
+      "base_hash_matched": true,
+      "probe_attempted": true,
+      "probe_supported": true,
+      "probe_passed": false,
+      "exposed_case": "plugin_non_python_regular_file",
+      "model_attempted": false,
+      "model_tokens": 0,
+      "hidden_task_passed_after": false
+    }
+  ],
+  "sealed_base_unchanged_after_replays": true
+}

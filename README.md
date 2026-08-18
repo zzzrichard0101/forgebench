@@ -8,7 +8,7 @@ The project asks one practical question:
 
 ## Current status
 
-**Phase 7 protocol defined — next focus: shared base-completion policy runner**
+**Phase 7 shared-base runner complete — next focus: frozen multi-base assignments**
 
 - [Design brief](docs/design-brief.md)
 - [Metrics and evaluation contract](docs/metrics.md)
@@ -142,6 +142,13 @@ compare Accept-All, Verify-All, Random-k, Probe-All, direct risk routing, and th
 hierarchical risk policy. The primary novelty claim is gated on a held-out
 reliability-cost advantage, not on false completion or probing alone.
 
+The first [shared base-completion runner](docs/base-completion-policy-runner-v1.md)
+now seals one public-gate-passing artifact and replays each policy from an
+identical hash-checked copy. Public records and hidden labels are stored
+separately. A real development smoke confirmed that Accept-All and Probe-All
+shared the same known false completion while only Probe-All exposed the missing
+non-Python boundary at zero model tokens.
+
 ## Local verification
 
 ```powershell
@@ -164,6 +171,8 @@ python scripts/run_adaptive_replay.py --task-id python-plugin-boundary --source-
 python scripts/run_adaptive_replay.py --task-id python-plugin-boundary --source-run-id <planning-lite-run-id> --evidence-mode packet --execution-host wsl
 python scripts/run_adaptive_replay.py --task-id python-plugin-boundary --source-run-id <persisted-planning-lite-run-id> --evidence-mode packet --resume-source-session --execution-host wsl
 python scripts/run_adaptive_replay.py --task-id python-plugin-boundary --source-run-id <planning-lite-run-id> --evidence-mode probe-packet --execution-host wsl
+python scripts/seal_base_completion.py --task-id python-plugin-boundary --source-run-id <planning-lite-run-id> --base-id <base-id>
+python scripts/run_policy_replay.py --task-id python-plugin-boundary --base-id <base-id> --policy probe_all
 ```
 
 Both persisted-session commands must use the same `--codex-home` when session
