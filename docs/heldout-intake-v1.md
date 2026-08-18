@@ -23,6 +23,19 @@ Registration confirms provenance and intake validity; it is not a performance
 result. The next action is to generate and seal three shared base completions
 per task before replaying the frozen comparison policies.
 
+Preview the frozen 30-slot public-only matrix without consuming an execution:
+
+```powershell
+python scripts/run_heldout_base_completions.py
+```
+
+The real command requires `--execute`. It invokes no private grader, retains
+visible and infrastructure failures instead of silently replacing them, and
+supports `--resume` only for slots that never reached a terminal record.
+The exact runner artifacts and deterministic 30-slot plan are bound by
+[`heldout-base-generation-freeze-v1.json`](../experiments/configs/heldout-base-generation-freeze-v1.json)
+before the first model call.
+
 The private-side command hashes grader trees and emits only task IDs, hashes,
 and an independence attestation. The public-side command deliberately has no
 private-grader-root argument. It reads the seal but cannot inspect grader files.

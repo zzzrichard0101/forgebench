@@ -8,7 +8,7 @@ The project asks one practical question:
 
 ## Current status
 
-**Phase 9 held-out v1 registered — next: seal three shared base completions per task**
+**Phase 9 held-out execution runner frozen — next: generate 30 shared base completions**
 
 - [Design brief](docs/design-brief.md)
 - [Metrics and evaluation contract](docs/metrics.md)
@@ -26,6 +26,7 @@ The project asks one practical question:
 - [Held-out intake firewall v1](docs/heldout-intake-v1.md)
 - [Registered held-out v1 package](heldout-public/README.md)
 - [Held-out v1 machine-readable registration](experiments/reports/heldout-intake-v1.json)
+- [Held-out base-generation execution freeze](experiments/configs/heldout-base-generation-freeze-v1.json)
 
 Phase 2 infrastructure is now present in `src/forgebench`: copy-isolated run
 workspaces, a typed tool gateway, a provider-neutral model adapter, and
@@ -188,6 +189,7 @@ python scripts/seal_base_completion.py --task-id python-plugin-boundary --source
 python scripts/run_policy_replay.py --task-id python-plugin-boundary --base-id <base-id> --policy probe_all
 python scripts/plan_policy_comparison.py --entry python-plugin-boundary=<base-id> --manifest-id <manifest-id> --random-seed 1729
 python scripts/validate_heldout_intake.py --heldout-manifest heldout-public/manifest.json --private-seal private-seal.json
+python scripts/run_heldout_base_completions.py
 ```
 
 Both persisted-session commands must use the same `--codex-home` when session
