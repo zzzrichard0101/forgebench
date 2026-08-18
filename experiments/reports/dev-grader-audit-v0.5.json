@@ -1,0 +1,82 @@
+{
+  "schema_version": 1,
+  "audit": "development-grader-audit-v0.5",
+  "date": "2026-08-18",
+  "dataset_snapshot": "dev-v0.5",
+  "scope": {
+    "development_tasks": 20,
+    "public_examples_excluded": 1,
+    "audited_task_ids": [
+      "python-config-precedence",
+      "checkout-retry-incident",
+      "python-plugin-boundary",
+      "python-pagination-cursor",
+      "python-event-deduplication",
+      "python-rate-window",
+      "worker-visibility-incident",
+      "cdn-cache-incident",
+      "python-archive-boundary",
+      "python-header-normalization",
+      "python-state-idempotency",
+      "python-schema-bool",
+      "python-url-allowlist",
+      "python-batch-boundary",
+      "python-redirect-boundary",
+      "python-option-injection",
+      "python-archive-size-boundary",
+      "python-json-depth-boundary",
+      "auth-clock-skew-incident",
+      "connection-leak-incident"
+    ]
+  },
+  "distribution": {
+    "family": {"development": 9, "incident": 5, "adversarial": 6},
+    "difficulty": {"easy": 2, "medium": 16, "hard": 2}
+  },
+  "automated_controls": {
+    "schema_and_manifest_valid": "20/20",
+    "content_addressed_seed_valid": "20/20",
+    "known_bad_seed_fails": "20/20",
+    "three_repeat_grade_deterministic": "20/20",
+    "known_good_outcome_passes": "20/20",
+    "protected_mutation_detected": "20/20",
+    "grader_source_independence_screen": "20/20",
+    "cross_platform_seed_hash_regression": "pass"
+  },
+  "grader_review": {
+    "implementation_tasks": "Behavioral API checks; source-text and AST matching are prohibited by regression test.",
+    "incident_tasks": "Only incident_report.json is inspected; evidence files remain protected and impact values are evidence-derived.",
+    "network_required": false,
+    "untrusted_commands_executed": false
+  },
+  "findings": [
+    {
+      "id": "F001",
+      "severity": "blocking",
+      "area": "policy_freeze",
+      "finding": "The only implemented deterministic probe routes by the development task ID python-plugin-boundary and is explicitly ineligible for held-out claims.",
+      "impact": "On held-out tasks, Risk-Hierarchical collapses to direct model escalation for high-risk items, weakening the primary P5 versus P4 comparison.",
+      "required_action": "Implement and test a contract-dimension or interface-schema probe route that does not branch on held-out task identity."
+    },
+    {
+      "id": "F002",
+      "severity": "limitation",
+      "area": "difficulty",
+      "finding": "Difficulty labels for the eleven newly added tasks are author estimates without repeated model baselines.",
+      "required_action": "Retain labels as provisional and report empirical solve rates after development base generation."
+    },
+    {
+      "id": "F003",
+      "severity": "limitation",
+      "area": "language_diversity",
+      "finding": "All implementation tasks currently use Python.",
+      "required_action": "Do not claim cross-language generality in the portfolio result."
+    }
+  ],
+  "decision": {
+    "grader_audit": "pass_with_declared_limitations",
+    "policy_freeze": "blocked",
+    "held_out_authoring_allowed": false,
+    "blocking_finding": "F001"
+  }
+}
