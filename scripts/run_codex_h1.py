@@ -152,6 +152,7 @@ def main() -> int:
         "task_passed": result.grade.passed,
         "duration_seconds": result.duration_seconds,
         "input_tokens": result.input_tokens,
+        "cached_input_tokens": result.cached_input_tokens,
         "output_tokens": result.output_tokens,
         "token_budget_compliant": token_budget_compliant,
         "time_budget_compliant": time_budget_compliant,

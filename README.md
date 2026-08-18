@@ -118,13 +118,13 @@ minimum probe set per dimension. End-to-end input on the two development tasks
 is still 7.8% above the historical H1a reference, so the main cost target remains
 open.
 
-The next optimization, [Adaptive Session Reuse v0.1](docs/adaptive-session-reuse-design-v0.1.md),
-is now implemented. H1 runs can persist and record a Codex session, and the
-adaptive pass can resume it inside a copied workspace while retaining Evidence
-Packet v0.2. All 68 deterministic tests pass. The live cost comparison is still
-pending because the current managed execution environment denied outbound model
-connections before sampling; that zero-token infrastructure failure is not
-counted as an agent result.
+The next optimization, [Adaptive Session Reuse v0.1](docs/adaptive-session-reuse-report-v0.1.md),
+resumed the source agent inside a copied workspace and repaired the hidden
+failure, but failed its total-input efficiency gate: the adaptive increment was
+94,539 tokens versus 64,921 for a fresh packet process (+45.6%). Uncached input
+fell 12.8% and output fell 8.4%, but no price-weighted cost claim is made. Fresh
+Evidence Packet v0.2 remains the reference path; session reuse stays an
+experimental mode.
 
 ## Local verification
 

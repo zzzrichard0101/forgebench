@@ -30,6 +30,7 @@ class H1Result:
     completion: CompletionResult
     grade: GradeResult
     input_tokens: int
+    cached_input_tokens: int
     output_tokens: int
     risk_decision: CompletionRiskDecision | None = None
     session_id: str | None = None
@@ -142,6 +143,9 @@ class H1Runner:
         grade.write(run_root / "grader-result.json")
         duration = round(time.perf_counter() - started_clock, 3)
         input_tokens = sum(item["trace"]["input_tokens"] for item in attempts)
+        cached_input_tokens = sum(
+            item["trace"]["cached_input_tokens"] for item in attempts
+        )
         output_tokens = sum(item["trace"]["output_tokens"] for item in attempts)
         session_id = next(
             (
@@ -171,6 +175,7 @@ class H1Runner:
             ),
             "task_passed": grade.passed,
             "input_tokens": input_tokens,
+            "cached_input_tokens": cached_input_tokens,
             "output_tokens": output_tokens,
             "session_id": session_id,
         }
@@ -185,6 +190,7 @@ class H1Runner:
             completion=completion,
             grade=grade,
             input_tokens=input_tokens,
+            cached_input_tokens=cached_input_tokens,
             output_tokens=output_tokens,
             risk_decision=risk_decision,
             session_id=session_id,

@@ -1,7 +1,7 @@
 # Adaptive Session Reuse Design v0.1
 
 Date: 2026-08-18  
-Status: **implementation complete; live cost result pending**
+Status: **implemented and evaluated; total-input efficiency gate failed**
 
 ## Problem
 
@@ -45,11 +45,10 @@ This remains development evidence and cannot support a held-out claim.
 
 ## Verification status
 
-All 68 deterministic repository tests pass, including command construction,
-ephemeral-default preservation, session-ID propagation, and explicit replay
-workspace selection. A live run in the current managed environment created and
-recorded a session ID, then failed before sampling because outbound Codex model
-connections were denied. It consumed zero model tokens and is excluded from
-agent-quality and cost results. The live acceptance check remains pending in a
-network-enabled execution environment.
-
+All 69 deterministic repository tests pass, including command construction,
+ephemeral-default preservation, session-ID propagation, explicit replay
+workspace selection, and cumulative-to-delta usage accounting. The completed
+development evaluation is reported in
+[`adaptive-session-reuse-report-v0.1.md`](adaptive-session-reuse-report-v0.1.md).
+Functional repair passed, but additional total input was 94,539 tokens, so the
+predeclared `< 64,921` efficiency gate failed.

@@ -132,6 +132,49 @@ class AdaptiveVerificationRunnerTests(unittest.TestCase):
             self.assertIn("secret.txt", serialized)
             self.assertNotIn(secret_content, serialized)
 
+    def test_resumed_cumulative_usage_is_reported_as_turn_delta(self) -> None:
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            source = self._make_source_workspace(root)
+
+            def command_factory(prompt: str, workspace: Path) -> list[str]:
+                script = (
+                    "import json; from pathlib import Path; "
+                    "p=Path('plugin_loader.py'); s=p.read_text(encoding='utf-8'); "
+                    "s=s.replace('if not entrypoint.is_relative_to(root):', "
+                    "'if not entrypoint.is_relative_to(root) or entrypoint.suffix != \".py\":'); "
+                    "p.write_text(s, encoding='utf-8'); "
+                    "print(json.dumps({'type':'turn.completed','usage':"
+                    "{'input_tokens':110,'cached_input_tokens':105,'output_tokens':20}}))"
+                )
+                return [sys.executable, "-c", script]
+
+            runner = AdaptiveVerificationRunner(
+                root / "adaptive", DeterministicGrader(GRADERS)
+            )
+            result = runner.run(
+                task=TASK,
+                seed=SEED,
+                source_workspace=source,
+                source_run_id="source-lite",
+                command_factory=command_factory,
+                input_token_offset=100,
+                cached_input_token_offset=100,
+                output_token_offset=15,
+            )
+            manifest = json.loads(
+                (result.workspace.parent / "adaptive-manifest.json").read_text(
+                    encoding="utf-8"
+                )
+            )
+
+            self.assertEqual(result.input_tokens, 10)
+            self.assertEqual(result.cached_input_tokens, 5)
+            self.assertEqual(result.output_tokens, 5)
+            self.assertEqual(
+                manifest["deep_verification"]["usage_delta"]["input_tokens"], 10
+            )
+
 
 if __name__ == "__main__":
     unittest.main()

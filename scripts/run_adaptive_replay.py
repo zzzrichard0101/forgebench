@@ -63,6 +63,22 @@ def main() -> int:
     source_session_id = source_summary.get("session_id")
     if args.resume_source_session and not source_session_id:
         raise ValueError("source run does not contain a persisted session_id")
+    if args.resume_source_session and source_summary.get("attempts") != 1:
+        raise ValueError("session replay currently requires a one-attempt source run")
+    input_token_offset = (
+        int(source_summary.get("input_tokens", 0)) if args.resume_source_session else 0
+    )
+    source_manifest = json.loads(
+        (source_root / "h1-manifest.json").read_text(encoding="utf-8")
+    )
+    cached_input_token_offset = (
+        int(source_manifest["attempts"][0]["trace"].get("cached_input_tokens", 0))
+        if args.resume_source_session
+        else 0
+    )
+    output_token_offset = (
+        int(source_summary.get("output_tokens", 0)) if args.resume_source_session else 0
+    )
 
     execution_host = args.execution_host
     if execution_host == "auto":
@@ -120,6 +136,9 @@ def main() -> int:
         timeout_seconds=args.timeout_seconds,
         evidence_mode=args.evidence_mode,
         evidence_max_chars=args.evidence_max_chars,
+        input_token_offset=input_token_offset,
+        cached_input_token_offset=cached_input_token_offset,
+        output_token_offset=output_token_offset,
     )
     summary = {
         "schema_version": 1,
@@ -135,6 +154,11 @@ def main() -> int:
         "evidence_mode": args.evidence_mode,
         "session_mode": "resumed" if args.resume_source_session else "fresh",
         "source_session_id": source_session_id if args.resume_source_session else None,
+        "usage_offset": {
+            "input_tokens": input_token_offset,
+            "cached_input_tokens": cached_input_token_offset,
+            "output_tokens": output_token_offset,
+        },
         "evidence_packet": (
             {
                 "packet_version": result.evidence_packet.packet_version,
@@ -152,6 +176,7 @@ def main() -> int:
         "task_passed_after": result.grade_after.passed,
         "completion_passed_after": result.completion_after.passed,
         "input_tokens": result.input_tokens,
+        "cached_input_tokens": result.cached_input_tokens,
         "output_tokens": result.output_tokens,
         "duration_seconds": result.duration_seconds,
         "run_root": str(result.workspace.parent),
