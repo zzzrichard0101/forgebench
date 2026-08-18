@@ -3,7 +3,25 @@
 ## Outcome
 
 ForgeBench now has a two-party intake path for the ten-task held-out snapshot.
-It does not contain actual held-out tasks or graders yet.
+The independently authored public `heldout-v1` task package and its private
+grader seal are now registered. Private grader implementations remain outside
+the repository and were not inspected during public intake.
+
+## Registered snapshot
+
+- status: `accepted_not_executed`;
+- tasks: 10 (`development` 4, `incident` 3, `adversarial` 3);
+- transferable probe contracts: 3;
+- public catalog: `sha256:8e726ea4f5523f34ac05afe01eb014a730f5eceb99a475ed34833d1c56a7ed34`;
+- private seal: `sha256:aee74ae33f37d19c311c28066d877e88e55699335e12efc00d3570c0abddf632`;
+- frozen policy: `sha256:1b779f87242da24975167f935540fe0107e963841d5a89cb5e96453e4f87e9ff`;
+- declared held-out attempts used: 0 of 2.
+
+The machine-readable registration is
+[`experiments/reports/heldout-intake-v1.json`](../experiments/reports/heldout-intake-v1.json).
+Registration confirms provenance and intake validity; it is not a performance
+result. The next action is to generate and seal three shared base completions
+per task before replaying the frozen comparison policies.
 
 The private-side command hashes grader trees and emits only task IDs, hashes,
 and an independence attestation. The public-side command deliberately has no

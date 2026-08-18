@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "registration": "heldout-intake-v1",
+  "registered_at": "2026-08-18",
+  "source_commit": "b16386bb0cc269b7609bd48ee8625b7a34ce260b",
+  "status": "accepted_not_executed",
+  "intake": {
+    "schema_version": 1,
+    "intake_version": "heldout-intake-v1",
+    "snapshot": "heldout-v1",
+    "task_count": 10,
+    "family_counts": {
+      "adversarial": 3,
+      "development": 4,
+      "incident": 3
+    },
+    "transferable_probe_tasks": 3,
+    "public_catalog_sha256": "sha256:8e726ea4f5523f34ac05afe01eb014a730f5eceb99a475ed34833d1c56a7ed34",
+    "private_seal_sha256": "sha256:aee74ae33f37d19c311c28066d877e88e55699335e12efc00d3570c0abddf632",
+    "policy_freeze_sha256": "sha256:1b779f87242da24975167f935540fe0107e963841d5a89cb5e96453e4f87e9ff"
+  },
+  "custody": {
+    "custodian_id": "codex-independent-custodian",
+    "policy_author_inspected_grader_content": false,
+    "grader_material_in_repository": false,
+    "seal_is_cryptographic_identity_signature": false
+  },
+  "execution_control": {
+    "declared_attempts_used": 0,
+    "maximum_attempts": 2,
+    "next_action": "generate_and_seal_three_base_completions_per_task"
+  },
+  "limitations": [
+    "The seal is tamper-evident but does not cryptographically prove custodian identity.",
+    "Private grader quality is represented by the independent custodian attestation and was not re-inspected during public intake.",
+    "Registration is not a held-out performance result."
+  ]
+}
