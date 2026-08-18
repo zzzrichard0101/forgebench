@@ -1,0 +1,70 @@
+{
+  "schema_version": 1,
+  "report": "heldout-base-generation-attempt-1",
+  "attempt_id": "heldout-v1-attempt-1",
+  "status": "incomplete_infrastructure_failure",
+  "started_at": "2026-08-18T06:22:57.964220+00:00",
+  "finished_at": "2026-08-18T07:08:23.004342+00:00",
+  "plan_sha256": "sha256:2a1dc798f9fdda2d66f55c2571bb486341c0ae574ddf08dd813dce09c69df7e3",
+  "raw_execution_sha256": "sha256:6725e2ba15a707b8e7b0d9d13947c88f4d27962b11225032572438a3ebcd9acf",
+  "raw_runner_counts": {
+    "eligible_public": 26,
+    "visible_failure": 4,
+    "infrastructure_failure": 0
+  },
+  "audited_counts": {
+    "eligible_public": 26,
+    "visible_failure": 0,
+    "infrastructure_failure": 4,
+    "incomplete": 0
+  },
+  "raw_status_correction": {
+    "affected_slots": 4,
+    "reason": "Runner v1 labeled every non-eligible terminal process as a visible failure. Nonzero Codex processes with turn.failed events are infrastructure failures. Raw traces and state remain unchanged."
+  },
+  "usage": {
+    "input_tokens": 4052735,
+    "cached_input_tokens": 3403264,
+    "output_tokens": 101544,
+    "duration_seconds": 2721.218
+  },
+  "base_record_count": 26,
+  "base_record_catalog_sha256": "sha256:b538c5f0492c0a7f973f0b7f05fbd0772cdf0f4a314aa88a3416d10cb9577249",
+  "infrastructure_slots": [
+    {
+      "task_id": "token-bucket-refill",
+      "repetition": 3,
+      "run_id": "6cbba540625e448dbd5b1feeb1837f66",
+      "process_exit_code": 1,
+      "process_error_category": "model_credits_exhausted"
+    },
+    {
+      "task_id": "unicode-account-identifier",
+      "repetition": 1,
+      "run_id": "43f5749d3e7a4f5a948ec797664138f0",
+      "process_exit_code": 1,
+      "process_error_category": "model_credits_exhausted"
+    },
+    {
+      "task_id": "unicode-account-identifier",
+      "repetition": 2,
+      "run_id": "2677ecff20aa4df9afb60a60c953a353",
+      "process_exit_code": 1,
+      "process_error_category": "model_credits_exhausted"
+    },
+    {
+      "task_id": "unicode-account-identifier",
+      "repetition": 3,
+      "run_id": "62295ba42d004bb4af2f40cd8cd8cf23",
+      "process_exit_code": 1,
+      "process_error_category": "model_credits_exhausted"
+    }
+  ],
+  "decision": {
+    "primary_comparison_ready": false,
+    "heldout_attempts_used": 1,
+    "heldout_attempts_remaining": 1,
+    "retry_failed_slots_in_place": false,
+    "required_next_action": "restore model credits and execute a newly frozen full attempt-2 matrix"
+  }
+}
