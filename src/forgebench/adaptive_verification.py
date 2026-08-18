@@ -36,6 +36,7 @@ class AdaptiveVerificationResult:
     timed_out: bool
     duration_seconds: float
     input_tokens: int
+    cached_input_tokens: int
     output_tokens: int
     completion_before: CompletionResult
     completion_after: CompletionResult
@@ -71,12 +72,17 @@ class AdaptiveVerificationRunner:
         timeout_seconds: int = 300,
         evidence_mode: Literal["full", "packet"] = "full",
         evidence_max_chars: int = 24_000,
+        input_token_offset: int = 0,
+        cached_input_token_offset: int = 0,
+        output_token_offset: int = 0,
         run_id: str | None = None,
     ) -> AdaptiveVerificationResult:
         if timeout_seconds <= 0:
             raise ValueError("adaptive verification timeout must be positive")
         if evidence_mode not in {"full", "packet"}:
             raise ValueError(f"unknown evidence mode: {evidence_mode}")
+        if min(input_token_offset, cached_input_token_offset, output_token_offset) < 0:
+            raise ValueError("token offsets must be non-negative")
         run_id = run_id or uuid.uuid4().hex
         source_workspace = source_workspace.resolve(strict=True)
         workspace = create_isolated_workspace(
@@ -109,6 +115,7 @@ class AdaptiveVerificationRunner:
         exit_code: int | None = None
         timed_out = False
         input_tokens = 0
+        cached_input_tokens = 0
         output_tokens = 0
         attempt_record: dict[str, Any] | None = None
         packet: EvidencePacket | None = None
@@ -167,14 +174,33 @@ class AdaptiveVerificationRunner:
                     decode_process_output(exc.stderr), encoding="utf-8"
                 )
             summary = _safe_trace_summary(raw_trace_path)
-            input_tokens = summary.input_tokens
-            output_tokens = summary.output_tokens
+            if summary.input_tokens < input_token_offset:
+                raise ValueError("input token offset exceeds cumulative trace usage")
+            if summary.cached_input_tokens < cached_input_token_offset:
+                raise ValueError("cached input token offset exceeds cumulative trace usage")
+            if summary.output_tokens < output_token_offset:
+                raise ValueError("output token offset exceeds cumulative trace usage")
+            input_tokens = summary.input_tokens - input_token_offset
+            cached_input_tokens = (
+                summary.cached_input_tokens - cached_input_token_offset
+            )
+            output_tokens = summary.output_tokens - output_token_offset
             attempt_record = {
                 "exit_code": exit_code,
                 "timed_out": timed_out,
                 "duration_seconds": round(time.perf_counter() - attempt_started, 3),
                 "trace_path": raw_trace_path.name,
                 "trace": summary.as_dict(),
+                "usage_offset": {
+                    "input_tokens": input_token_offset,
+                    "cached_input_tokens": cached_input_token_offset,
+                    "output_tokens": output_token_offset,
+                },
+                "usage_delta": {
+                    "input_tokens": input_tokens,
+                    "cached_input_tokens": cached_input_tokens,
+                    "output_tokens": output_tokens,
+                },
             }
             trace.append("deep_verification_attempt", attempt_record)
 
@@ -195,6 +221,11 @@ class AdaptiveVerificationRunner:
             "started_at": started_at.isoformat(),
             "finished_at": datetime.now(timezone.utc).isoformat(),
             "timeout_seconds": timeout_seconds,
+            "usage_offset": {
+                "input_tokens": input_token_offset,
+                "cached_input_tokens": cached_input_token_offset,
+                "output_tokens": output_token_offset,
+            },
             "evidence_mode": evidence_mode,
             "evidence_packet": (
                 {
@@ -214,6 +245,7 @@ class AdaptiveVerificationRunner:
             "task_passed_before": grade_before.passed,
             "task_passed_after": grade_after.passed,
             "input_tokens": input_tokens,
+            "cached_input_tokens": cached_input_tokens,
             "output_tokens": output_tokens,
             "duration_seconds": duration,
         }
@@ -231,6 +263,7 @@ class AdaptiveVerificationRunner:
             timed_out=timed_out,
             duration_seconds=duration,
             input_tokens=input_tokens,
+            cached_input_tokens=cached_input_tokens,
             output_tokens=output_tokens,
             completion_before=completion_before,
             completion_after=completion_after,

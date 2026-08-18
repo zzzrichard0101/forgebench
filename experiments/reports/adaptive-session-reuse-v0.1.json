@@ -1,0 +1,70 @@
+{
+  "schema_version": 1,
+  "experiment": "adaptive-session-reuse-v0.1",
+  "evaluation_type": "development_fresh_run_and_workspace_replay",
+  "model": "gpt-5.6-sol",
+  "reasoning_effort": "medium",
+  "task_id": "python-plugin-boundary",
+  "source_run": {
+    "run_id": "3ba463d2bff1464bba1d0a035a39182c",
+    "session_id": "01a01311-d7c1-7fe3-9c81-66772cf71538",
+    "completion_passed": true,
+    "task_passed": false,
+    "risk_level": "high",
+    "input_tokens": 250505,
+    "cached_input_tokens": 223488,
+    "output_tokens": 3990,
+    "duration_seconds": 109.513
+  },
+  "adaptive_run": {
+    "run_id": "78c8b3bfe6444cdab0fa60ece621b1e4",
+    "session_mode": "resumed",
+    "packet_version": "evidence-packet-v0.2",
+    "packet_chars": 2388,
+    "cumulative_input_tokens": 345044,
+    "cumulative_cached_input_tokens": 310528,
+    "cumulative_output_tokens": 5681,
+    "additional_input_tokens": 94539,
+    "additional_cached_input_tokens": 87040,
+    "additional_uncached_input_tokens": 7499,
+    "additional_output_tokens": 1691,
+    "duration_seconds": 50.582,
+    "task_passed_before": false,
+    "task_passed_after": true,
+    "completion_passed_after": true,
+    "source_workspace_unchanged": true
+  },
+  "fresh_packet_reference": {
+    "run_id": "f8e6bfe15c1f40afb99717a4221bedff",
+    "input_tokens": 64921,
+    "cached_input_tokens": 56320,
+    "uncached_input_tokens": 8601,
+    "output_tokens": 1847,
+    "duration_seconds": 47.224
+  },
+  "comparison_percent": {
+    "total_input": 45.6,
+    "cached_input": 54.5,
+    "uncached_input": -12.8,
+    "output": -8.4,
+    "duration": 7.1
+  },
+  "acceptance": {
+    "source_session_id_recorded": true,
+    "risk_route_is_high": true,
+    "one_deep_verification_attempt": true,
+    "task_passes_after": true,
+    "completion_passes_after": true,
+    "source_workspace_unchanged": true,
+    "adaptive_input_tokens_below_64921": false,
+    "functional_gate_passed": true,
+    "efficiency_gate_passed": false
+  },
+  "decision": "Keep fresh Evidence Packet v0.2 as the reference path; retain session reuse as experimental and move next to deterministic probe-first routing.",
+  "limitations": [
+    "Known development failure, not held-out evidence.",
+    "Fresh and resumed calls were not randomized pairs.",
+    "Token counts are not converted to billed cost.",
+    "Only one resumed run was measured."
+  ]
+}

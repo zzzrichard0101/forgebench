@@ -1,0 +1,36 @@
+{
+  "schema_version": 1,
+  "experiment": "adaptive-session-reuse-v0.1",
+  "evaluation_type": "development_fresh_run_and_workspace_replay",
+  "harness": "H1a-lite plus H1a-adaptive-replay-v0.1",
+  "policy_version": "completion-risk-v0.2",
+  "evidence_packet_version": "evidence-packet-v0.2",
+  "model": "gpt-5.6-sol",
+  "reasoning_effort": "medium",
+  "timeout_seconds_per_run": 300,
+  "task_id": "python-plugin-boundary",
+  "source_profile": "planning-lite",
+  "source_session_persistence": "persisted",
+  "adaptive_session_mode": "resume_source_session",
+  "fresh_process_reference": {
+    "run_id": "f8e6bfe15c1f40afb99717a4221bedff",
+    "input_tokens": 64921,
+    "output_tokens": 1847,
+    "duration_seconds": 47.224
+  },
+  "acceptance": {
+    "source_session_id_recorded": true,
+    "risk_route_is_high": true,
+    "one_deep_verification_attempt": true,
+    "task_passes_after": true,
+    "completion_passes_after": true,
+    "source_workspace_unchanged": true,
+    "adaptive_input_tokens_below_fresh_process": 64921
+  },
+  "leakage_controls": {
+    "hidden_grader_visible_to_codex": false,
+    "author_metadata_in_packet": false,
+    "protected_file_contents_in_packet": false,
+    "held_out_claim_allowed": false
+  }
+}

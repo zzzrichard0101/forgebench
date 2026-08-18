@@ -9,6 +9,7 @@ from forgebench.codex_trace import summarize_codex_trace
 class CodexTraceTests(unittest.TestCase):
     def test_trace_summary_and_budget_qualification(self) -> None:
         events = [
+            {"type": "thread.started", "thread_id": "session-123"},
             {"type": "turn.started"},
             {
                 "type": "item.completed",
@@ -36,7 +37,8 @@ class CodexTraceTests(unittest.TestCase):
             )
             summary = summarize_codex_trace(path)
 
-        self.assertEqual(summary.event_count, 4)
+        self.assertEqual(summary.event_count, 5)
+        self.assertEqual(summary.session_id, "session-123")
         self.assertEqual(summary.command_count, 2)
         self.assertEqual(summary.command_completed, 1)
         self.assertEqual(summary.command_failed, 1)

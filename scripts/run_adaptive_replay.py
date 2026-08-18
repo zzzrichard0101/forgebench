@@ -4,12 +4,14 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 import platform
 import shutil
 from pathlib import Path
 
 from forgebench.adaptive_verification import AdaptiveVerificationRunner
 from forgebench.catalog import BenchmarkCatalog
+from forgebench.codex_command import build_exec_command, build_resume_command
 from forgebench.grader import DeterministicGrader
 from run_codex_baseline import (
     GRADERS,
@@ -28,12 +30,22 @@ def main() -> int:
     parser.add_argument("--source-run-id", required=True)
     parser.add_argument("--runs-root", type=Path, default=ROOT / "runs")
     parser.add_argument("--codex-bin", type=Path)
+    parser.add_argument(
+        "--codex-home",
+        type=Path,
+        help="Override CODEX_HOME; must match the persisted source session home.",
+    )
     parser.add_argument("--execution-host", choices=["auto", "windows", "wsl"], default="auto")
     parser.add_argument("--model", default="gpt-5.6-sol")
     parser.add_argument("--reasoning-effort", default="medium")
     parser.add_argument("--timeout-seconds", type=int, default=300)
     parser.add_argument("--evidence-mode", choices=["full", "packet"], default="full")
     parser.add_argument("--evidence-max-chars", type=int, default=24000)
+    parser.add_argument(
+        "--resume-source-session",
+        action="store_true",
+        help="Resume the persisted source Codex session in the isolated replay workspace.",
+    )
     args = parser.parse_args()
 
     catalog = BenchmarkCatalog(ROOT, MANIFEST_PATH)
@@ -48,10 +60,31 @@ def main() -> int:
         raise ValueError("source run task does not match --task-id")
     if source_summary.get("profile") != "planning-lite":
         raise ValueError("adaptive replay requires a planning-lite source run")
+    source_session_id = source_summary.get("session_id")
+    if args.resume_source_session and not source_session_id:
+        raise ValueError("source run does not contain a persisted session_id")
+    if args.resume_source_session and source_summary.get("attempts") != 1:
+        raise ValueError("session replay currently requires a one-attempt source run")
+    input_token_offset = (
+        int(source_summary.get("input_tokens", 0)) if args.resume_source_session else 0
+    )
+    source_manifest = json.loads(
+        (source_root / "h1-manifest.json").read_text(encoding="utf-8")
+    )
+    cached_input_token_offset = (
+        int(source_manifest["attempts"][0]["trace"].get("cached_input_tokens", 0))
+        if args.resume_source_session
+        else 0
+    )
+    output_token_offset = (
+        int(source_summary.get("output_tokens", 0)) if args.resume_source_session else 0
+    )
 
     execution_host = args.execution_host
     if execution_host == "auto":
         execution_host = "wsl" if platform.system() == "Windows" else "windows"
+    codex_home = (args.codex_home or (Path.home() / ".codex")).resolve(strict=True)
+    os.environ["CODEX_HOME"] = str(codex_home)
     if execution_host == "wsl":
         codex = (args.codex_bin or find_local_linux_codex()).resolve(strict=True)
         wsl = shutil.which("wsl.exe") or shutil.which("wsl")
@@ -63,7 +96,7 @@ def main() -> int:
             "Ubuntu",
             "--",
             "env",
-            f"CODEX_HOME={windows_to_wsl(Path.home() / '.codex')}",
+            f"CODEX_HOME={windows_to_wsl(codex_home)}",
             windows_to_wsl(codex),
         ]
         map_workspace = windows_to_wsl
@@ -73,26 +106,23 @@ def main() -> int:
         map_workspace = str
 
     def command_factory(prompt: str, workspace: Path) -> list[str]:
-        return [
-            *prefix,
-            "--ask-for-approval",
-            "never",
-            "exec",
-            "--json",
-            "--ephemeral",
-            "--ignore-user-config",
-            "--ignore-rules",
-            "--skip-git-repo-check",
-            "--sandbox",
-            "workspace-write",
-            "--model",
-            args.model,
-            "--config",
-            f'model_reasoning_effort="{args.reasoning_effort}"',
-            "--cd",
-            map_workspace(workspace),
-            prompt,
-        ]
+        if args.resume_source_session:
+            return build_resume_command(
+                prefix=prefix,
+                session_id=source_session_id,
+                prompt=prompt,
+                workspace=map_workspace(workspace),
+                model=args.model,
+                reasoning_effort=args.reasoning_effort,
+            )
+        return build_exec_command(
+            prefix=prefix,
+            prompt=prompt,
+            workspace=map_workspace(workspace),
+            model=args.model,
+            reasoning_effort=args.reasoning_effort,
+            persist_session=False,
+        )
 
     runner = AdaptiveVerificationRunner(
         args.runs_root, DeterministicGrader(GRADERS)
@@ -106,6 +136,9 @@ def main() -> int:
         timeout_seconds=args.timeout_seconds,
         evidence_mode=args.evidence_mode,
         evidence_max_chars=args.evidence_max_chars,
+        input_token_offset=input_token_offset,
+        cached_input_token_offset=cached_input_token_offset,
+        output_token_offset=output_token_offset,
     )
     summary = {
         "schema_version": 1,
@@ -119,6 +152,13 @@ def main() -> int:
         "reasoning_effort": args.reasoning_effort,
         "execution_host": execution_host,
         "evidence_mode": args.evidence_mode,
+        "session_mode": "resumed" if args.resume_source_session else "fresh",
+        "source_session_id": source_session_id if args.resume_source_session else None,
+        "usage_offset": {
+            "input_tokens": input_token_offset,
+            "cached_input_tokens": cached_input_token_offset,
+            "output_tokens": output_token_offset,
+        },
         "evidence_packet": (
             {
                 "packet_version": result.evidence_packet.packet_version,
@@ -136,6 +176,7 @@ def main() -> int:
         "task_passed_after": result.grade_after.passed,
         "completion_passed_after": result.completion_after.passed,
         "input_tokens": result.input_tokens,
+        "cached_input_tokens": result.cached_input_tokens,
         "output_tokens": result.output_tokens,
         "duration_seconds": result.duration_seconds,
         "run_root": str(result.workspace.parent),
