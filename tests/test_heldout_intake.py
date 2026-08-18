@@ -19,6 +19,11 @@ POLICY_FREEZE = (
     / "configs"
     / "selective-verification-policy-freeze-v1.json"
 )
+REGISTERED_MANIFEST = ROOT / "heldout-public" / "manifest.json"
+REGISTERED_SEAL = ROOT / "private-seal.json"
+REGISTRATION_REPORT = (
+    ROOT / "experiments" / "reports" / "heldout-intake-v1.json"
+)
 
 
 class HeldoutIntakeTests(unittest.TestCase):
@@ -115,6 +120,21 @@ class HeldoutIntakeTests(unittest.TestCase):
             self.assertEqual(result.task_count, 10)
             self.assertEqual(result.transferable_probe_tasks, 3)
             self.assertEqual(set(result.family_counts), {"development", "incident", "adversarial"})
+
+    def test_registered_snapshot_matches_frozen_intake(self) -> None:
+        result = validate_heldout_intake(
+            public_root=ROOT,
+            heldout_manifest_path=REGISTERED_MANIFEST,
+            development_manifest_path=DEVELOPMENT_MANIFEST,
+            private_seal_path=REGISTERED_SEAL,
+            policy_freeze_path=POLICY_FREEZE,
+            policy_repository_root=ROOT,
+        )
+        report = json.loads(REGISTRATION_REPORT.read_text(encoding="utf-8"))
+        self.assertEqual(report["status"], "accepted_not_executed")
+        self.assertEqual(report["intake"], result.as_dict())
+        self.assertEqual(report["execution_control"]["declared_attempts_used"], 0)
+        self.assertEqual(report["execution_control"]["maximum_attempts"], 2)
 
     def test_public_intake_api_cannot_receive_private_grader_root(self) -> None:
         parameters = inspect.signature(validate_heldout_intake).parameters

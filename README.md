@@ -8,7 +8,7 @@ The project asks one practical question:
 
 ## Current status
 
-**Phase 9 held-out intake firewall ready — awaiting an independent ten-task package**
+**Phase 9 held-out v1 registered — next: seal three shared base completions per task**
 
 - [Design brief](docs/design-brief.md)
 - [Metrics and evaluation contract](docs/metrics.md)
@@ -24,6 +24,8 @@ The project asks one practical question:
 - [Development grader audit v0.5](docs/dev-grader-audit-v0.5.md)
 - [Selective verification policy freeze v1](docs/policy-freeze-v1.md)
 - [Held-out intake firewall v1](docs/heldout-intake-v1.md)
+- [Registered held-out v1 package](heldout-public/README.md)
+- [Held-out v1 machine-readable registration](experiments/reports/heldout-intake-v1.json)
 
 Phase 2 infrastructure is now present in `src/forgebench`: copy-isolated run
 workspaces, a typed tool gateway, a provider-neutral model adapter, and
@@ -185,6 +187,7 @@ python scripts/run_adaptive_replay.py --task-id python-plugin-boundary --source-
 python scripts/seal_base_completion.py --task-id python-plugin-boundary --source-run-id <planning-lite-run-id> --base-id <base-id>
 python scripts/run_policy_replay.py --task-id python-plugin-boundary --base-id <base-id> --policy probe_all
 python scripts/plan_policy_comparison.py --entry python-plugin-boundary=<base-id> --manifest-id <manifest-id> --random-seed 1729
+python scripts/validate_heldout_intake.py --heldout-manifest heldout-public/manifest.json --private-seal private-seal.json
 ```
 
 Both persisted-session commands must use the same `--codex-home` when session
