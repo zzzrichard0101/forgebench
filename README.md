@@ -8,7 +8,7 @@ The project asks one practical question:
 
 ## Current status
 
-**Phase 6/10 complete — next focus: adaptive verification**
+**Phase 7 protocol defined — next focus: shared base-completion policy runner**
 
 - [Design brief](docs/design-brief.md)
 - [Metrics and evaluation contract](docs/metrics.md)
@@ -135,6 +135,12 @@ the fresh Evidence Packet reference. Uncached input rose from 8,601 to 12,775,
 so this is a total-context and latency result, not a price-weighted cost claim.
 The deterministic correct-workspace test also verifies the zero-model-token
 short-circuit. This remains development evidence, not a held-out benchmark.
+
+The next-stage [Selective Verification Research Protocol v1](docs/selective-verification-research-protocol-v1.md)
+now defines the paper-level test: reuse identical frozen base completions and
+compare Accept-All, Verify-All, Random-k, Probe-All, direct risk routing, and the
+hierarchical risk policy. The primary novelty claim is gated on a held-out
+reliability-cost advantage, not on false completion or probing alone.
 
 ## Local verification
 

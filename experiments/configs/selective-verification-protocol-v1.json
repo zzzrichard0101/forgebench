@@ -1,0 +1,72 @@
+{
+  "schema_version": 1,
+  "protocol": "selective-post-completion-verification-v1",
+  "status": "development_protocol",
+  "date": "2026-08-18",
+  "primary_model_family": "codex",
+  "eligibility": {
+    "agent_terminated_normally": true,
+    "public_completion_gate": "pass"
+  },
+  "minimum_dataset": {
+    "development_tasks": 20,
+    "held_out_tasks": 10,
+    "base_trajectories_per_task": 3,
+    "split_unit": [
+      "task_template",
+      "repository_lineage",
+      "contract_family"
+    ]
+  },
+  "policies": [
+    "accept_all",
+    "verify_all",
+    "random_k_call_matched",
+    "probe_all",
+    "risk_model_direct",
+    "risk_hierarchical",
+    "oracle_k_diagnostic"
+  ],
+  "risk_estimators": [
+    "boundary_keyword_baseline",
+    "structured_deterministic_rules",
+    "regularized_logistic_if_supported",
+    "bounded_llm_judge_optional"
+  ],
+  "primary_policy": "risk_hierarchical",
+  "hidden_evidence_firewall": {
+    "risk_features": false,
+    "probe_inputs": false,
+    "model_verification_prompt": false,
+    "routing_runtime": false,
+    "post_routing_evaluation_join_only": true
+  },
+  "current_task_id_probe_held_out_eligible": false,
+  "comparison_matching": {
+    "random_k_primary": "model_call_count",
+    "random_k_secondary": "nearest_actual_token_budget",
+    "shared_frozen_base_completions": true
+  },
+  "primary_metrics": [
+    "accepted_false_completion_rate",
+    "false_completion_recall",
+    "false_negative_rate",
+    "risk_coverage_curve",
+    "final_hidden_success_rate",
+    "verification_model_calls",
+    "verification_input_tokens",
+    "verification_output_tokens",
+    "verification_wall_time",
+    "hard_safety_violation_rate"
+  ],
+  "claim_gate": [
+    "risk_hierarchical_beats_accept_all_on_false_completion",
+    "risk_hierarchical_beats_random_k_at_matched_calls",
+    "risk_hierarchical_is_cheaper_than_verify_all_at_comparable_reliability_or_is_pareto_nondominated",
+    "probe_all_does_not_fully_explain_the_gain",
+    "no_hard_safety_regression"
+  ],
+  "held_out_execution_limit": 2,
+  "numeric_margins": "freeze_in_policy_manifest_after_dev_before_held_out",
+  "cross_model_transfer": "optional_strengthening_experiment"
+}
