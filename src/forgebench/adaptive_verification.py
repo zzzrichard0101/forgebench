@@ -15,8 +15,9 @@ from typing import Any, Callable, Literal
 from .codex_trace import CodexTraceSummary, summarize_codex_trace
 from .completion import CompletionResult, CompletionVerifier
 from .completion_risk import CompletionRiskDecision, CompletionRiskPolicy
-from .external_agent import decode_process_output
+from .deterministic_probe import DeterministicProbeResult, DeterministicProbeRunner
 from .evidence_packet import EvidencePacket, build_evidence_packet
+from .external_agent import decode_process_output
 from .grader import DeterministicGrader, GradeResult
 from .trace import TraceWriter
 from .workspace import create_isolated_workspace
@@ -43,6 +44,7 @@ class AdaptiveVerificationResult:
     grade_before: GradeResult
     grade_after: GradeResult
     evidence_packet: EvidencePacket | None
+    deterministic_probe: DeterministicProbeResult | None
 
 
 class AdaptiveVerificationRunner:
@@ -55,11 +57,13 @@ class AdaptiveVerificationRunner:
         *,
         verifier: CompletionVerifier | None = None,
         risk_policy: CompletionRiskPolicy | None = None,
+        probe_runner: DeterministicProbeRunner | None = None,
     ) -> None:
         self.runs_root = runs_root
         self.grader = grader
         self.verifier = verifier or CompletionVerifier()
         self.risk_policy = risk_policy or CompletionRiskPolicy()
+        self.probe_runner = probe_runner or DeterministicProbeRunner()
 
     def run(
         self,
@@ -70,7 +74,7 @@ class AdaptiveVerificationRunner:
         source_run_id: str,
         command_factory: CommandFactory,
         timeout_seconds: int = 300,
-        evidence_mode: Literal["full", "packet"] = "full",
+        evidence_mode: Literal["full", "packet", "probe-packet"] = "full",
         evidence_max_chars: int = 24_000,
         input_token_offset: int = 0,
         cached_input_token_offset: int = 0,
@@ -79,7 +83,7 @@ class AdaptiveVerificationRunner:
     ) -> AdaptiveVerificationResult:
         if timeout_seconds <= 0:
             raise ValueError("adaptive verification timeout must be positive")
-        if evidence_mode not in {"full", "packet"}:
+        if evidence_mode not in {"full", "packet", "probe-packet"}:
             raise ValueError(f"unknown evidence mode: {evidence_mode}")
         if min(input_token_offset, cached_input_token_offset, output_token_offset) < 0:
             raise ValueError("token offsets must be non-negative")
@@ -119,10 +123,23 @@ class AdaptiveVerificationRunner:
         output_tokens = 0
         attempt_record: dict[str, Any] | None = None
         packet: EvidencePacket | None = None
+        probe: DeterministicProbeResult | None = None
 
         if decision.escalate:
-            attempted = True
-            if evidence_mode == "packet":
+            if evidence_mode == "probe-packet":
+                probe = self.probe_runner.run(
+                    task=task,
+                    workspace=workspace,
+                    decision=decision,
+                )
+                (run_root / "deterministic-probe.json").write_text(
+                    json.dumps(probe.as_dict(), ensure_ascii=False, indent=2) + "\n",
+                    encoding="utf-8",
+                )
+                trace.append("deterministic_probe", probe.as_dict())
+
+            model_required = not (probe is not None and probe.supported and probe.passed)
+            if model_required and evidence_mode in {"packet", "probe-packet"}:
                 packet = build_evidence_packet(
                     task=task,
                     workspace=workspace,
@@ -142,67 +159,80 @@ class AdaptiveVerificationRunner:
                         "changed_paths": list(packet.changed_paths),
                     },
                 )
-            prompt = build_deep_verification_prompt(task, decision, packet=packet)
-            command = command_factory(prompt, workspace)
-            raw_trace_path = run_root / "deep-verification.jsonl"
-            stderr_path = run_root / "deep-verification.stderr.txt"
-            attempt_started = time.perf_counter()
-            try:
-                process = subprocess.run(
-                    command,
-                    cwd=workspace,
-                    capture_output=True,
-                    text=False,
-                    timeout=timeout_seconds,
-                    shell=False,
-                    check=False,
+            if not model_required:
+                trace.append(
+                    "deep_verification_short_circuited",
+                    {"reason": "all_supported_deterministic_probes_passed"},
                 )
-                exit_code = process.returncode
-                raw_trace_path.write_text(
-                    decode_process_output(process.stdout), encoding="utf-8"
+            else:
+                attempted = True
+                prompt = build_deep_verification_prompt(
+                    task, decision, packet=packet, probe=probe
                 )
-                stderr_path.write_text(
-                    decode_process_output(process.stderr), encoding="utf-8"
+                command = command_factory(prompt, workspace)
+                raw_trace_path = run_root / "deep-verification.jsonl"
+                stderr_path = run_root / "deep-verification.stderr.txt"
+                attempt_started = time.perf_counter()
+                try:
+                    process = subprocess.run(
+                        command,
+                        cwd=workspace,
+                        capture_output=True,
+                        text=False,
+                        timeout=timeout_seconds,
+                        shell=False,
+                        check=False,
+                    )
+                    exit_code = process.returncode
+                    raw_trace_path.write_text(
+                        decode_process_output(process.stdout), encoding="utf-8"
+                    )
+                    stderr_path.write_text(
+                        decode_process_output(process.stderr), encoding="utf-8"
+                    )
+                except subprocess.TimeoutExpired as exc:
+                    timed_out = True
+                    exit_code = -1
+                    raw_trace_path.write_text(
+                        decode_process_output(exc.stdout), encoding="utf-8"
+                    )
+                    stderr_path.write_text(
+                        decode_process_output(exc.stderr), encoding="utf-8"
+                    )
+                summary = _safe_trace_summary(raw_trace_path)
+                if summary.input_tokens < input_token_offset:
+                    raise ValueError("input token offset exceeds cumulative trace usage")
+                if summary.cached_input_tokens < cached_input_token_offset:
+                    raise ValueError(
+                        "cached input token offset exceeds cumulative trace usage"
+                    )
+                if summary.output_tokens < output_token_offset:
+                    raise ValueError("output token offset exceeds cumulative trace usage")
+                input_tokens = summary.input_tokens - input_token_offset
+                cached_input_tokens = (
+                    summary.cached_input_tokens - cached_input_token_offset
                 )
-            except subprocess.TimeoutExpired as exc:
-                timed_out = True
-                exit_code = -1
-                raw_trace_path.write_text(
-                    decode_process_output(exc.stdout), encoding="utf-8"
-                )
-                stderr_path.write_text(
-                    decode_process_output(exc.stderr), encoding="utf-8"
-                )
-            summary = _safe_trace_summary(raw_trace_path)
-            if summary.input_tokens < input_token_offset:
-                raise ValueError("input token offset exceeds cumulative trace usage")
-            if summary.cached_input_tokens < cached_input_token_offset:
-                raise ValueError("cached input token offset exceeds cumulative trace usage")
-            if summary.output_tokens < output_token_offset:
-                raise ValueError("output token offset exceeds cumulative trace usage")
-            input_tokens = summary.input_tokens - input_token_offset
-            cached_input_tokens = (
-                summary.cached_input_tokens - cached_input_token_offset
-            )
-            output_tokens = summary.output_tokens - output_token_offset
-            attempt_record = {
-                "exit_code": exit_code,
-                "timed_out": timed_out,
-                "duration_seconds": round(time.perf_counter() - attempt_started, 3),
-                "trace_path": raw_trace_path.name,
-                "trace": summary.as_dict(),
-                "usage_offset": {
-                    "input_tokens": input_token_offset,
-                    "cached_input_tokens": cached_input_token_offset,
-                    "output_tokens": output_token_offset,
-                },
-                "usage_delta": {
-                    "input_tokens": input_tokens,
-                    "cached_input_tokens": cached_input_tokens,
-                    "output_tokens": output_tokens,
-                },
-            }
-            trace.append("deep_verification_attempt", attempt_record)
+                output_tokens = summary.output_tokens - output_token_offset
+                attempt_record = {
+                    "exit_code": exit_code,
+                    "timed_out": timed_out,
+                    "duration_seconds": round(
+                        time.perf_counter() - attempt_started, 3
+                    ),
+                    "trace_path": raw_trace_path.name,
+                    "trace": summary.as_dict(),
+                    "usage_offset": {
+                        "input_tokens": input_token_offset,
+                        "cached_input_tokens": cached_input_token_offset,
+                        "output_tokens": output_token_offset,
+                    },
+                    "usage_delta": {
+                        "input_tokens": input_tokens,
+                        "cached_input_tokens": cached_input_tokens,
+                        "output_tokens": output_tokens,
+                    },
+                }
+                trace.append("deep_verification_attempt", attempt_record)
 
         completion_after = self.verifier.verify(task, workspace, seed)
         grade_after = self.grader.grade(task, workspace, seed)
@@ -237,6 +267,10 @@ class AdaptiveVerificationRunner:
                 if packet is not None
                 else None
             ),
+            "deterministic_probe": probe.as_dict() if probe is not None else None,
+            "deep_verification_short_circuited": bool(
+                probe is not None and probe.supported and probe.passed
+            ),
             "risk_decision": decision.as_dict(),
             "deep_verification_attempted": attempted,
             "deep_verification": attempt_record,
@@ -270,6 +304,7 @@ class AdaptiveVerificationRunner:
             grade_before=grade_before,
             grade_after=grade_after,
             evidence_packet=packet,
+            deterministic_probe=probe,
         )
 
 
@@ -278,6 +313,7 @@ def build_deep_verification_prompt(
     decision: CompletionRiskDecision,
     *,
     packet: EvidencePacket | None = None,
+    probe: DeterministicProbeResult | None = None,
 ) -> str:
     fired = [signal for signal in decision.signals if signal.triggered]
     evidence = "\n".join(
@@ -285,15 +321,25 @@ def build_deep_verification_prompt(
         for signal in fired
     )
     if packet is not None:
-        packet_json = json.dumps(packet.as_dict(), ensure_ascii=False, separators=(",", ":"))
+        packet_json = json.dumps(
+            packet.as_dict(), ensure_ascii=False, separators=(",", ":")
+        )
+        probe_json = (
+            json.dumps(probe.as_dict(), ensure_ascii=False, separators=(",", ":"))
+            if probe is not None
+            else "null"
+        )
         return f"""ForgeBench focused adaptive verification.
 
-Use the bounded evidence packet below as the starting context. Do not inventory the repository or reread unrelated files. Inspect a packet-listed file only when needed to edit it. For every missing contract dimension, execute every listed verification requirement rather than choosing only one example. Repair any exposed defect, run the declared public check, and stop after one bounded repair.
+Use the bounded evidence packet and deterministic probe result below as the starting context. Do not inventory the repository or reread unrelated files. Treat a probe outcome of `failed` as public evidence that the implementation accepted an invalid case; treat `error` as probe infrastructure failure, not proof of a defect. Inspect a packet-listed file only when needed to edit it. Repair any exposed defect, run the declared public check, and stop after one bounded repair.
 Do not access hidden graders or author metadata. Preserve immutable files and the public API.
 
 EVIDENCE_PACKET_JSON
 {packet_json}
 END_EVIDENCE_PACKET
+DETERMINISTIC_PROBE_JSON
+{probe_json}
+END_DETERMINISTIC_PROBE
 """
     return f"""{task['instruction']}
 

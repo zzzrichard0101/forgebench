@@ -175,6 +175,48 @@ class AdaptiveVerificationRunnerTests(unittest.TestCase):
                 manifest["deep_verification"]["usage_delta"]["input_tokens"], 10
             )
 
+    def test_passing_probe_short_circuits_model_call(self) -> None:
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            source = self._make_source_workspace(root)
+            implementation = source / "plugin_loader.py"
+            text = implementation.read_text(encoding="utf-8")
+            text = text.replace(
+                'if not entrypoint.is_relative_to(root):',
+                'if not entrypoint.is_relative_to(root) or '
+                'entrypoint.suffix != ".py" or not entrypoint.is_file():',
+            )
+            implementation.write_text(text, encoding="utf-8")
+
+            def command_factory(prompt: str, workspace: Path) -> list[str]:
+                self.fail("model command must not be constructed when probes pass")
+
+            runner = AdaptiveVerificationRunner(
+                root / "adaptive", DeterministicGrader(GRADERS)
+            )
+            result = runner.run(
+                task=TASK,
+                seed=SEED,
+                source_workspace=source,
+                source_run_id="source-lite",
+                command_factory=command_factory,
+                evidence_mode="probe-packet",
+            )
+
+            self.assertTrue(result.risk_decision.escalate)
+            self.assertIsNotNone(result.deterministic_probe)
+            self.assertTrue(result.deterministic_probe.passed)
+            self.assertFalse(result.attempted)
+            self.assertEqual(result.input_tokens, 0)
+            self.assertTrue(result.grade_before.passed)
+            self.assertTrue(result.grade_after.passed)
+            manifest = json.loads(
+                (result.workspace.parent / "adaptive-manifest.json").read_text(
+                    encoding="utf-8"
+                )
+            )
+            self.assertTrue(manifest["deep_verification_short_circuited"])
+
 
 if __name__ == "__main__":
     unittest.main()

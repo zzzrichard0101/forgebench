@@ -1,0 +1,46 @@
+{
+  "schema_version": 1,
+  "experiment": "adaptive-probe-first-v0.1",
+  "evaluation_type": "development_workspace_replay",
+  "harness": "H1a-adaptive-replay-v0.1",
+  "policy_version": "completion-risk-v0.2",
+  "probe_version": "deterministic-probe-v0.1",
+  "probe_adapter": "python-plugin-file-type-v0.1",
+  "evidence_packet_version": "evidence-packet-v0.2",
+  "model": "gpt-5.6-sol",
+  "reasoning_effort": "medium",
+  "timeout_seconds": 300,
+  "task_id": "python-plugin-boundary",
+  "source_run_id": "3ba463d2bff1464bba1d0a035a39182c",
+  "evidence_mode": "probe-packet",
+  "fresh_packet_reference": {
+    "run_id": "f8e6bfe15c1f40afb99717a4221bedff",
+    "input_tokens": 64921,
+    "cached_input_tokens": 56320,
+    "output_tokens": 1847,
+    "duration_seconds": 47.224
+  },
+  "acceptance": {
+    "risk_route_is_high": true,
+    "probe_is_supported": true,
+    "non_python_regular_file_probe_fails_before_model": true,
+    "one_deep_verification_attempt": true,
+    "task_passes_after": true,
+    "completion_passes_after": true,
+    "source_workspace_unchanged": true,
+    "input_tokens_below_fresh_packet": 64921
+  },
+  "short_circuit_mechanism_gate": {
+    "correct_high_risk_workspace_probes_pass": true,
+    "deep_verification_attempts": 0,
+    "model_input_tokens": 0
+  },
+  "leakage_controls": {
+    "probe_source": "public task contract and public API only",
+    "hidden_grader_visible_to_probe": false,
+    "hidden_grader_visible_to_codex": false,
+    "author_metadata_visible": false,
+    "protected_file_contents_in_packet": false,
+    "held_out_claim_allowed": false
+  }
+}

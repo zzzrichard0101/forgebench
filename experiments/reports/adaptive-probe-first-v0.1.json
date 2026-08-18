@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "experiment": "adaptive-probe-first-v0.1",
+  "status": "passed",
+  "run_id": "cafb3099562141ac9601c71c35560931",
+  "source_run_id": "3ba463d2bff1464bba1d0a035a39182c",
+  "probe": {
+    "supported": true,
+    "passed": false,
+    "duration_seconds": 0.094,
+    "directory_entrypoint": "passed",
+    "non_python_regular_file": "failed"
+  },
+  "result": {
+    "deep_verification_attempts": 1,
+    "task_passed_before": false,
+    "task_passed_after": true,
+    "completion_passed_after": true,
+    "source_workspace_unchanged": true,
+    "input_tokens": 47847,
+    "cached_input_tokens": 35072,
+    "uncached_input_tokens": 12775,
+    "output_tokens": 1133,
+    "duration_seconds": 39.863
+  },
+  "fresh_packet_reference": {
+    "run_id": "f8e6bfe15c1f40afb99717a4221bedff",
+    "input_tokens": 64921,
+    "cached_input_tokens": 56320,
+    "uncached_input_tokens": 8601,
+    "output_tokens": 1847,
+    "duration_seconds": 47.224
+  },
+  "relative_change_percent": {
+    "input_tokens": -26.3,
+    "cached_input_tokens": -37.7,
+    "uncached_input_tokens": 48.5,
+    "output_tokens": -38.7,
+    "duration_seconds": -15.6
+  },
+  "mechanism_test": {
+    "correct_high_risk_workspace_short_circuits": true,
+    "model_input_tokens": 0
+  },
+  "claim_scope": "single known development failure; not held-out evidence",
+  "price_weighted_cost_claim": false
+}

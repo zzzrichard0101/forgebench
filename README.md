@@ -126,6 +126,16 @@ fell 12.8% and output fell 8.4%, but no price-weighted cost claim is made. Fresh
 Evidence Packet v0.2 remains the reference path; session reuse stays an
 experimental mode.
 
+The [Probe-First result](docs/adaptive-probe-first-report-v0.1.md) adds a
+public-contract adapter before adaptive repair. In the first predeclared
+development replay, the adapter exposed the omitted non-Python-file case before
+the model call and one fresh Codex turn repaired it. Total input fell from 64,921
+to 47,847 tokens (26.3%) and duration fell from 47.224s to 39.863s (15.6%) versus
+the fresh Evidence Packet reference. Uncached input rose from 8,601 to 12,775,
+so this is a total-context and latency result, not a price-weighted cost claim.
+The deterministic correct-workspace test also verifies the zero-model-token
+short-circuit. This remains development evidence, not a held-out benchmark.
+
 ## Local verification
 
 ```powershell
@@ -147,6 +157,7 @@ python scripts/run_model_recovery_smoke.py --execution-host wsl
 python scripts/run_adaptive_replay.py --task-id python-plugin-boundary --source-run-id <planning-lite-run-id> --execution-host wsl
 python scripts/run_adaptive_replay.py --task-id python-plugin-boundary --source-run-id <planning-lite-run-id> --evidence-mode packet --execution-host wsl
 python scripts/run_adaptive_replay.py --task-id python-plugin-boundary --source-run-id <persisted-planning-lite-run-id> --evidence-mode packet --resume-source-session --execution-host wsl
+python scripts/run_adaptive_replay.py --task-id python-plugin-boundary --source-run-id <planning-lite-run-id> --evidence-mode probe-packet --execution-host wsl
 ```
 
 Both persisted-session commands must use the same `--codex-home` when session

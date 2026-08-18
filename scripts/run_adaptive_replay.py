@@ -39,7 +39,11 @@ def main() -> int:
     parser.add_argument("--model", default="gpt-5.6-sol")
     parser.add_argument("--reasoning-effort", default="medium")
     parser.add_argument("--timeout-seconds", type=int, default=300)
-    parser.add_argument("--evidence-mode", choices=["full", "packet"], default="full")
+    parser.add_argument(
+        "--evidence-mode",
+        choices=["full", "packet", "probe-packet"],
+        default="full",
+    )
     parser.add_argument("--evidence-max-chars", type=int, default=24000)
     parser.add_argument(
         "--resume-source-session",
@@ -166,6 +170,11 @@ def main() -> int:
                 "total_chars": result.evidence_packet.total_chars,
             }
             if result.evidence_packet is not None
+            else None
+        ),
+        "deterministic_probe": (
+            result.deterministic_probe.as_dict()
+            if result.deterministic_probe is not None
             else None
         ),
         "risk_decision": result.risk_decision.as_dict(),
