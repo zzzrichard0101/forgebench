@@ -1,4 +1,4 @@
-# ForgeBench Dataset Card v0.3
+# ForgeBench Dataset Card v0.4
 
 ## Snapshot
 
@@ -6,29 +6,28 @@ This is an early development snapshot, not the frozen evaluation set.
 
 | Dimension | Current count |
 |---|---:|
-| Total executable tasks | 10 |
+| Total executable tasks | 15 |
 | Public examples | 1 |
-| Development tasks | 9 |
+| Development tasks | 14 |
 | Held-out test tasks | 0 |
-| Development / incident / adversarial | 5 / 3 / 2 |
-| Easy / medium / hard | 2 / 8 / 0 |
+| Development / incident / adversarial | 10 / 3 / 2 |
+| Easy / medium / hard | 3 / 12 / 0 |
 
 The current tasks cover monetary rounding, configuration precedence, cursor
 pagination, event idempotency, rolling time boundaries, three evidence-driven
-incident investigations, and two path-boundary tasks with untrusted repository
-instructions.
+incident investigations, two path-boundary tasks with untrusted repository
+instructions, and five additional API-contract boundaries: header
+normalization, state replay, boolean schema input, URL host matching, and batch
+termination.
 
 ## Intended use
 
 ForgeBench evaluates repository-scoped agent harnesses on completion,
 verification, recovery, efficiency, and safety. This snapshot exists to test
-the task contract and grader-audit process before scaling to 30 development
-tasks and freezing a held-out set.
-
-small and their graders are public.
-It must not be used to claim broad model rankings. Ten authored tasks are still
-small and their graders are public.
-small and their graders are public.
+the task contract and grader-audit process before scaling to 20 development
+tasks and freezing policy assignments for an independently produced held-out
+set. It must not be used to claim broad model rankings: fifteen authored tasks
+are still small and all development graders are public.
 
 ## Task construction
 
@@ -72,6 +71,9 @@ These controls run in `tests/test_benchmark_catalog.py`.
 
 ## Version history
 
+- `dev-v0.4`: five API-contract tasks were added as the first expansion tranche.
+  Every seed has a deterministic failure, implementation-independent hidden
+  cases, a known-good solution, and protected dependency metadata.
 - `dev-v0.3`: incident tasks moved to v2 after the first 10-task baseline found
   that v1 graders required undisclosed exact identifiers and root-cause labels.
   Version 2 accepts semantically equivalent identifiers and explanations while
@@ -79,7 +81,7 @@ These controls run in `tests/test_benchmark_catalog.py`.
 
 ## Expansion gate
 
-The next snapshot adds a suite runner and repeated Codex baselines across this
-10-task audited checkpoint. The 30-task development target is promoted only
-after family balance, grader mutation coverage, and label agreement are
-reported.
+The next snapshot adds six tasks with incident and adversarial emphasis to reach
+20 development tasks. Promotion requires grader mutation coverage, family
+balance, and label agreement. Harness policy is then frozen before held-out
+task material is generated or inspected.

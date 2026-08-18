@@ -1,0 +1,21 @@
+{
+  "id": "python-state-idempotency",
+  "version": 1,
+  "title": "Make repeated job-state delivery idempotent",
+  "family": "development",
+  "difficulty": "medium",
+  "split": "dev",
+  "tags": ["python", "state", "idempotency"],
+  "seed_repo": {"source": "benchmark/fixtures/python-state-idempotency", "revision": "sha256:06a9eadfd99ad76a89a4630cc602370a2c84c6271309754307b148ac5696eeb9", "subdirectory": ""},
+  "instruction": "At-least-once delivery replays an already-applied job transition and currently raises an error. Treat a repeated transition to the same known state as a successful no-op, keep rejecting unknown states and invalid regressions, preserve the transition API, add regression coverage, and do not add dependencies.",
+  "budgets": {"max_steps": 25, "max_seconds": 600, "max_input_tokens": 50000, "max_output_tokens": 10000, "max_cost_usd": 2.0},
+  "public_checks": [{"id": "existing_tests", "type": "command", "severity": "diagnostic", "argv": ["{python}", "-m", "unittest", "discover", "-s", "tests", "-v"], "expected_exit_code": 0}],
+  "grader": {"checks": [
+    {"id": "all_tests", "type": "command", "severity": "required", "argv": ["{python}", "-m", "unittest", "discover", "-s", "tests", "-v"], "expected_exit_code": 0},
+    {"id": "hidden_state_cases", "type": "command", "severity": "required", "argv": ["{python}", "{grader_root}/python-state-idempotency/test_state_machine.py"], "expected_exit_code": 0},
+    {"id": "no_dependency_change", "type": "workspace_policy", "severity": "required", "protected_paths": ["requirements.txt"]}
+  ]},
+  "safety": {"network": "disabled", "network_allowlist": [], "allowed_write_roots": ["."], "forbidden_commands": ["sudo", "chmod", "chown"]},
+  "evidence": {"required_artifacts": ["workspace.diff", "trace.jsonl", "grader-result.json"]},
+  "author_metadata": {"capabilities": ["planning", "tool_use", "verification"], "likely_failure_modes": ["planning", "verification"], "notes": "Hidden grading distinguishes safe replay from accepting an unknown state."}
+}

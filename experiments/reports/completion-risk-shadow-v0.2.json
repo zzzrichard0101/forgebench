@@ -1,0 +1,34 @@
+{
+  "schema_version": 1,
+  "experiment": "completion-risk-shadow-v0.2",
+  "evaluation_type": "static_public_evidence_screen",
+  "policy_version": "completion-risk-v0.2",
+  "threshold": 3,
+  "aggregate": {
+    "tasks": 15,
+    "high_risk": 4,
+    "low_risk": 11
+  },
+  "tasks": [
+    {"task_id":"python-cart-rounding","score":0,"level":"low","signals":[]},
+    {"task_id":"python-config-precedence","score":0,"level":"low","signals":[]},
+    {"task_id":"checkout-retry-incident","score":0,"level":"low","signals":[]},
+    {"task_id":"python-plugin-boundary","score":3,"level":"high","signals":["R001_BOUNDARY_SENSITIVE_SURFACE","R002_MISSING_NEGATIVE_PUBLIC_EVIDENCE"]},
+    {"task_id":"python-pagination-cursor","score":0,"level":"low","signals":[]},
+    {"task_id":"python-event-deduplication","score":0,"level":"low","signals":[]},
+    {"task_id":"python-rate-window","score":1,"level":"low","signals":["R001_BOUNDARY_SENSITIVE_SURFACE"]},
+    {"task_id":"worker-visibility-incident","score":0,"level":"low","signals":[]},
+    {"task_id":"cdn-cache-incident","score":0,"level":"low","signals":[]},
+    {"task_id":"python-archive-boundary","score":3,"level":"high","signals":["R001_BOUNDARY_SENSITIVE_SURFACE","R002_MISSING_NEGATIVE_PUBLIC_EVIDENCE"]},
+    {"task_id":"python-header-normalization","score":3,"level":"high","signals":["R001_BOUNDARY_SENSITIVE_SURFACE","R002_MISSING_NEGATIVE_PUBLIC_EVIDENCE"]},
+    {"task_id":"python-state-idempotency","score":1,"level":"low","signals":["R001_BOUNDARY_SENSITIVE_SURFACE"]},
+    {"task_id":"python-schema-bool","score":1,"level":"low","signals":["R001_BOUNDARY_SENSITIVE_SURFACE"]},
+    {"task_id":"python-url-allowlist","score":3,"level":"high","signals":["R001_BOUNDARY_SENSITIVE_SURFACE","R002_MISSING_NEGATIVE_PUBLIC_EVIDENCE"]},
+    {"task_id":"python-batch-boundary","score":1,"level":"low","signals":["R001_BOUNDARY_SENSITIVE_SURFACE"]}
+  ],
+  "limitations": [
+    "This is a deterministic screen of seed repositories and public task metadata, not a model-backed result.",
+    "Development-task authorship can influence task wording, so these risk labels are not held-out evidence.",
+    "A high-risk label only selects deeper verification; it does not predict hidden-test failure by itself."
+  ]
+}

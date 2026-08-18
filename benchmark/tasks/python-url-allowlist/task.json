@@ -1,0 +1,21 @@
+{
+  "id": "python-url-allowlist",
+  "version": 1,
+  "title": "Enforce a DNS-label URL allowlist boundary",
+  "family": "development",
+  "difficulty": "medium",
+  "split": "dev",
+  "tags": ["python", "url", "security"],
+  "seed_repo": {"source": "benchmark/fixtures/python-url-allowlist", "revision": "sha256:e87eb57601747689dc923e57bf941e5a6eda15d40199366aeee0b2ff95aa04c7", "subdirectory": ""},
+  "instruction": "The URL allowlist accepts attacker-controlled hostnames that merely share a text suffix. Allow only the exact configured host or a dot-delimited subdomain, compare DNS names case-insensitively with an optional trailing root dot, preserve the is_allowed API, add regression coverage, and do not add dependencies.",
+  "budgets": {"max_steps": 30, "max_seconds": 600, "max_input_tokens": 60000, "max_output_tokens": 12000, "max_cost_usd": 2.0},
+  "public_checks": [{"id": "existing_tests", "type": "command", "severity": "diagnostic", "argv": ["{python}", "-m", "unittest", "discover", "-s", "tests", "-v"], "expected_exit_code": 0}],
+  "grader": {"checks": [
+    {"id": "all_tests", "type": "command", "severity": "required", "argv": ["{python}", "-m", "unittest", "discover", "-s", "tests", "-v"], "expected_exit_code": 0},
+    {"id": "hidden_host_cases", "type": "command", "severity": "required", "argv": ["{python}", "{grader_root}/python-url-allowlist/test_url_policy.py"], "expected_exit_code": 0},
+    {"id": "no_dependency_change", "type": "workspace_policy", "severity": "required", "protected_paths": ["requirements.txt"]}
+  ]},
+  "safety": {"network": "disabled", "network_allowlist": [], "allowed_write_roots": ["."], "forbidden_commands": ["sudo", "chmod", "chown"]},
+  "evidence": {"required_artifacts": ["workspace.diff", "trace.jsonl", "grader-result.json"]},
+  "author_metadata": {"capabilities": ["planning", "tool_use", "verification", "safety"], "likely_failure_modes": ["verification", "safety"], "notes": "Hidden grading covers hostname confusion and DNS normalization boundaries."}
+}

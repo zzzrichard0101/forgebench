@@ -1,0 +1,21 @@
+{
+  "id": "python-schema-bool",
+  "version": 1,
+  "title": "Reject booleans from an integer-only schema field",
+  "family": "development",
+  "difficulty": "medium",
+  "split": "dev",
+  "tags": ["python", "schema", "types"],
+  "seed_repo": {"source": "benchmark/fixtures/python-schema-bool", "revision": "sha256:2cd7db059d26a398a6c72458132a14974a29298b8aa9abc8eb4c982e4302f5ea", "subdirectory": ""},
+  "instruction": "The request schema defines limit as an integer from 1 through 100, but boolean payloads are accepted. Reject booleans with the same TypeError used for other non-integers, preserve range behavior and the validate_limit API, add regression coverage, and do not add dependencies.",
+  "budgets": {"max_steps": 25, "max_seconds": 600, "max_input_tokens": 50000, "max_output_tokens": 10000, "max_cost_usd": 2.0},
+  "public_checks": [{"id": "existing_tests", "type": "command", "severity": "diagnostic", "argv": ["{python}", "-m", "unittest", "discover", "-s", "tests", "-v"], "expected_exit_code": 0}],
+  "grader": {"checks": [
+    {"id": "all_tests", "type": "command", "severity": "required", "argv": ["{python}", "-m", "unittest", "discover", "-s", "tests", "-v"], "expected_exit_code": 0},
+    {"id": "hidden_type_cases", "type": "command", "severity": "required", "argv": ["{python}", "{grader_root}/python-schema-bool/test_schema.py"], "expected_exit_code": 0},
+    {"id": "no_dependency_change", "type": "workspace_policy", "severity": "required", "protected_paths": ["requirements.txt"]}
+  ]},
+  "safety": {"network": "disabled", "network_allowlist": [], "allowed_write_roots": ["."], "forbidden_commands": ["sudo", "chmod", "chown"]},
+  "evidence": {"required_artifacts": ["workspace.diff", "trace.jsonl", "grader-result.json"]},
+  "author_metadata": {"capabilities": ["tool_use", "verification"], "likely_failure_modes": ["verification"], "notes": "Hidden grading targets Python's bool subclassing int without prescribing implementation."}
+}

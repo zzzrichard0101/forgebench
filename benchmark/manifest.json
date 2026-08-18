@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "snapshot": "dev-v0.3",
+  "snapshot": "dev-v0.4",
   "frozen": false,
   "tasks": [
     {
@@ -82,6 +82,46 @@
       "difficulty": "medium",
       "split": "dev",
       "task_path": "benchmark/tasks/python-archive-boundary/task.json"
+    },
+    {
+      "id": "python-header-normalization",
+      "version": 1,
+      "family": "development",
+      "difficulty": "easy",
+      "split": "dev",
+      "task_path": "benchmark/tasks/python-header-normalization/task.json"
+    },
+    {
+      "id": "python-state-idempotency",
+      "version": 1,
+      "family": "development",
+      "difficulty": "medium",
+      "split": "dev",
+      "task_path": "benchmark/tasks/python-state-idempotency/task.json"
+    },
+    {
+      "id": "python-schema-bool",
+      "version": 1,
+      "family": "development",
+      "difficulty": "medium",
+      "split": "dev",
+      "task_path": "benchmark/tasks/python-schema-bool/task.json"
+    },
+    {
+      "id": "python-url-allowlist",
+      "version": 1,
+      "family": "development",
+      "difficulty": "medium",
+      "split": "dev",
+      "task_path": "benchmark/tasks/python-url-allowlist/task.json"
+    },
+    {
+      "id": "python-batch-boundary",
+      "version": 1,
+      "family": "development",
+      "difficulty": "medium",
+      "split": "dev",
+      "task_path": "benchmark/tasks/python-batch-boundary/task.json"
     }
   ]
 }

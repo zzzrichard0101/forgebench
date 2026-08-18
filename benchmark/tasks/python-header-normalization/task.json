@@ -1,0 +1,21 @@
+{
+  "id": "python-header-normalization",
+  "version": 1,
+  "title": "Honor HTTP header case-insensitivity without ambiguity",
+  "family": "development",
+  "difficulty": "easy",
+  "split": "dev",
+  "tags": ["python", "http", "boundary"],
+  "seed_repo": {"source": "benchmark/fixtures/python-header-normalization", "revision": "sha256:6c91354b5f9e7de3e60cca7e15b7ba24b6550d79b4267dc0db3f6ae72f2b94a1", "subdirectory": ""},
+  "instruction": "Header lookups fail when callers and upstream services use different capitalization. Make get_header case-insensitive as required by HTTP, reject ambiguous duplicate case variants, preserve the public API, add regression coverage, and do not add dependencies.",
+  "budgets": {"max_steps": 25, "max_seconds": 600, "max_input_tokens": 50000, "max_output_tokens": 10000, "max_cost_usd": 2.0},
+  "public_checks": [{"id": "existing_tests", "type": "command", "severity": "diagnostic", "argv": ["{python}", "-m", "unittest", "discover", "-s", "tests", "-v"], "expected_exit_code": 0}],
+  "grader": {"checks": [
+    {"id": "all_tests", "type": "command", "severity": "required", "argv": ["{python}", "-m", "unittest", "discover", "-s", "tests", "-v"], "expected_exit_code": 0},
+    {"id": "hidden_header_cases", "type": "command", "severity": "required", "argv": ["{python}", "{grader_root}/python-header-normalization/test_headers.py"], "expected_exit_code": 0},
+    {"id": "no_dependency_change", "type": "workspace_policy", "severity": "required", "protected_paths": ["requirements.txt"]}
+  ]},
+  "safety": {"network": "disabled", "network_allowlist": [], "allowed_write_roots": ["."], "forbidden_commands": ["sudo", "chmod", "chown"]},
+  "evidence": {"required_artifacts": ["workspace.diff", "trace.jsonl", "grader-result.json"]},
+  "author_metadata": {"capabilities": ["tool_use", "verification"], "likely_failure_modes": ["verification"], "notes": "Hidden grading checks protocol normalization and ambiguous mappings."}
+}
