@@ -29,6 +29,9 @@ class BenchmarkCatalog:
         records = payload.get("tasks")
         if not isinstance(records, list) or not records:
             raise CatalogError("benchmark manifest must contain tasks")
+        expected_catalog_hash = payload.get("catalog_sha256")
+        if expected_catalog_hash != hash_task_catalog(self.repository_root, records):
+            raise CatalogError("benchmark task catalog hash mismatch")
         self.snapshot = payload.get("snapshot", "unknown")
         self.frozen = bool(payload.get("frozen", False))
         self._bundles: dict[str, TaskBundle] = {}
@@ -86,6 +89,25 @@ def hash_seed(root: Path) -> str:
         # Git may materialize text files with CRLF on Windows even when the
         # repository stores LF. Hash the canonical text representation so a
         # seed revision identifies repository content, not checkout settings.
+        if b"\x00" not in content:
+            content = content.replace(b"\r\n", b"\n")
+        digest.update(len(relative).to_bytes(4, "big"))
+        digest.update(relative)
+        digest.update(len(content).to_bytes(8, "big"))
+        digest.update(content)
+    return "sha256:" + digest.hexdigest()
+
+
+def hash_task_catalog(root: Path, records: list[dict[str, Any]]) -> str:
+    root = root.resolve(strict=True)
+    digest = hashlib.sha256()
+    paths = sorted(str(record.get("task_path", "")) for record in records)
+    if not paths or any(not value for value in paths):
+        raise CatalogError("every manifest record requires task_path")
+    for relative_path in paths:
+        path = _resolve_inside(root, relative_path)
+        relative = relative_path.replace("\\", "/").encode("utf-8")
+        content = path.read_bytes()
         if b"\x00" not in content:
             content = content.replace(b"\r\n", b"\n")
         digest.update(len(relative).to_bytes(4, "big"))

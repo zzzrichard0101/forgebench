@@ -1,7 +1,7 @@
 # Selective Post-Completion Verification Research Protocol v1
 
 Date: 2026-08-18  
-Status: **development protocol; freeze before held-out authoring and execution**
+Status: **policy frozen before held-out authoring and execution**
 
 ## 1. Research identity
 
@@ -122,6 +122,14 @@ or a prior held-out failure.
 The existing `python-plugin-boundary` adapter is development-only because its
 task ID and known failure influenced its design. It cannot support a transfer or
 held-out claim.
+
+The frozen v1 implementation replaces task-ID selection with the public
+`probe_contract` interface schema. Its first registered adapter,
+`python_manifest_file_loader`, supports the `file_type` dimension and selects
+only from adapter, module, callable, manifest-key, and accepted-suffix fields.
+Changing only a task ID cannot change the route. This adapter is held-out
+eligible for previously unseen tasks that independently satisfy that public
+interface contract; it is not evidence of general probe coverage.
 
 Held-out-eligible probes must route by a predeclared contract dimension or
 interface schema, not by a held-out task ID. Each probe records:

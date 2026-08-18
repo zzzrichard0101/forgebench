@@ -101,6 +101,10 @@ def validate_task(task: Any) -> list[str]:
     else:
         _validate_checks(public_checks, "public_checks", errors)
 
+    probe_contract = task.get("probe_contract")
+    if probe_contract is not None:
+        _validate_probe_contract(probe_contract, errors)
+
     safety = task.get("safety")
     _require_mapping_fields(
         safety,
@@ -153,6 +157,45 @@ def _validate_checks(checks: list[Any], path: str, errors: list[str]) -> None:
             errors.append(f"{item_path}.path is required")
         if check_type == "json_schema" and not check.get("schema_path"):
             errors.append(f"{item_path}.schema_path is required")
+
+
+def _validate_probe_contract(value: Any, errors: list[str]) -> None:
+    required = {
+        "version",
+        "adapter",
+        "module",
+        "callable",
+        "manifest_key",
+        "accepted_suffix",
+        "dimensions",
+    }
+    _require_mapping_fields(value, "probe_contract", required, errors)
+    if not isinstance(value, dict):
+        return
+    if set(value) != required:
+        errors.append("probe_contract contains unsupported fields")
+    if value.get("version") != 1:
+        errors.append("probe_contract.version must be 1")
+    if value.get("adapter") != "python_manifest_file_loader":
+        errors.append("probe_contract.adapter is unsupported")
+    patterns = {
+        "module": r"[A-Za-z_][A-Za-z0-9_]*(?:\.[A-Za-z_][A-Za-z0-9_]*)*",
+        "callable": r"[A-Za-z_][A-Za-z0-9_]*",
+        "manifest_key": r"[A-Za-z_][A-Za-z0-9_]*",
+        "accepted_suffix": r"\.[A-Za-z0-9]+",
+    }
+    for field, pattern in patterns.items():
+        field_value = value.get(field)
+        if not isinstance(field_value, str) or re.fullmatch(pattern, field_value) is None:
+            errors.append(f"probe_contract.{field} is invalid")
+    dimensions = value.get("dimensions")
+    if (
+        not isinstance(dimensions, list)
+        or "file_type" not in dimensions
+        or len(dimensions) != len(set(dimensions))
+        or any(item != "file_type" for item in dimensions)
+    ):
+        errors.append("probe_contract.dimensions must uniquely include file_type")
 
 
 def main() -> int:

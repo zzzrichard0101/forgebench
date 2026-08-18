@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "protocol": "selective-post-completion-verification-v1",
-  "status": "development_protocol",
+  "status": "policy_frozen_before_held_out",
   "date": "2026-08-18",
   "primary_model_family": "codex",
   "eligibility": {
@@ -12,6 +12,7 @@
     "development_tasks": 20,
     "held_out_tasks": 10,
     "base_trajectories_per_task": 3,
+    "minimum_transferable_probe_contract_tasks": 3,
     "split_unit": [
       "task_template",
       "repository_lineage",
@@ -42,6 +43,14 @@
     "post_routing_evaluation_join_only": true
   },
   "current_task_id_probe_held_out_eligible": false,
+  "transferable_probe_contract": {
+    "version": 1,
+    "selection_key": "probe_contract.adapter",
+    "adapter": "python_manifest_file_loader",
+    "dimensions": ["file_type"],
+    "task_id_used_for_selection": false,
+    "held_out_eligible": true
+  },
   "comparison_matching": {
     "random_k_primary": "model_call_count",
     "random_k_secondary": "nearest_actual_token_budget",
@@ -67,6 +76,12 @@
     "no_hard_safety_regression"
   ],
   "held_out_execution_limit": 2,
-  "numeric_margins": "freeze_in_policy_manifest_after_dev_before_held_out",
+  "numeric_margins": {
+    "accepted_false_completion_reduction_tasks_min": 1,
+    "recovered_false_completion_delta_vs_random_k_min": 1,
+    "verify_all_reliability_tolerance_tasks": 1,
+    "verification_compute_reduction_vs_verify_all_percent_min": 20,
+    "hard_safety_violation_delta_max": 0
+  },
   "cross_model_transfer": "optional_strengthening_experiment"
 }

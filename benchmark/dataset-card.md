@@ -1,4 +1,4 @@
-# ForgeBench Dataset Card v0.5
+# ForgeBench Dataset Card v0.6
 
 ## Snapshot
 
@@ -73,6 +73,9 @@ These controls run in `tests/test_benchmark_catalog.py`.
 
 ## Version history
 
+- `dev-v0.6`: `python-plugin-boundary` moved to v2 when its public transferable
+  probe contract was added. The manifest now hashes every complete task document
+  rather than binding only task paths and seed revisions.
 - `dev-v0.5`: the development target reached 20 tasks by adding four
   adversarial safety boundaries and two evidence-driven incident analyses.
 - `dev-v0.4`: five API-contract tasks were added as the first expansion tranche.

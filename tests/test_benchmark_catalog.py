@@ -5,7 +5,7 @@ import unittest
 from dataclasses import asdict
 from pathlib import Path
 
-from forgebench.catalog import BenchmarkCatalog, CatalogError, hash_seed
+from forgebench.catalog import BenchmarkCatalog, CatalogError, hash_seed, hash_task_catalog
 from forgebench.grader import DeterministicGrader
 from scripts.validate_task import validate_task
 
@@ -43,6 +43,14 @@ class BenchmarkCatalogTests(unittest.TestCase):
         self.assertEqual(len(catalog.list()), len(self.catalog))
         for task, _ in self.catalog:
             self.assertEqual(catalog.get(task["id"]).task, task)
+
+    def test_manifest_hash_binds_every_task_document(self) -> None:
+        manifest = json.loads(
+            (ROOT / "benchmark" / "manifest.json").read_text(encoding="utf-8")
+        )
+        self.assertEqual(
+            manifest["catalog_sha256"], hash_task_catalog(ROOT, manifest["tasks"])
+        )
 
     def test_unknown_catalog_task_is_explicit(self) -> None:
         catalog = BenchmarkCatalog(ROOT, ROOT / "benchmark" / "manifest.json")

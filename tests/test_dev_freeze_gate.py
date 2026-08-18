@@ -7,8 +7,6 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 MANIFEST_PATH = ROOT / "benchmark" / "manifest.json"
 AUDIT_PATH = ROOT / "experiments" / "reports" / "dev-grader-audit-v0.5.json"
-PROTOCOL_PATH = ROOT / "experiments" / "configs" / "selective-verification-protocol-v1.json"
-PROBE_SOURCE = ROOT / "src" / "forgebench" / "deterministic_probe.py"
 
 
 class DevelopmentFreezeGateTests(unittest.TestCase):
@@ -20,7 +18,8 @@ class DevelopmentFreezeGateTests(unittest.TestCase):
         ]
 
     def test_audit_scope_and_distribution_match_the_frozen_snapshot(self) -> None:
-        self.assertEqual(self.manifest["snapshot"], self.audit["dataset_snapshot"])
+        self.assertEqual(self.audit["dataset_snapshot"], "dev-v0.5")
+        self.assertEqual(self.manifest["snapshot"], "dev-v0.6")
         self.assertEqual(len(self.dev_records), 20)
         self.assertEqual(
             [record["id"] for record in self.dev_records],
@@ -57,11 +56,7 @@ class DevelopmentFreezeGateTests(unittest.TestCase):
                 else:
                     self.assertIn('Path("incident_report.json").read_text', source)
 
-    def test_policy_freeze_remains_blocked_until_probe_is_transferable(self) -> None:
-        protocol = json.loads(PROTOCOL_PATH.read_text(encoding="utf-8"))
-        probe_source = PROBE_SOURCE.read_text(encoding="utf-8")
-        self.assertFalse(protocol["current_task_id_probe_held_out_eligible"])
-        self.assertIn('task.get("id") != "python-plugin-boundary"', probe_source)
+    def test_audit_preserves_the_original_freeze_blocker(self) -> None:
         self.assertEqual(self.audit["decision"]["policy_freeze"], "blocked")
         self.assertFalse(self.audit["decision"]["held_out_authoring_allowed"])
         self.assertEqual(self.audit["decision"]["blocking_finding"], "F001")

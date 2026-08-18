@@ -1,0 +1,97 @@
+{
+  "schema_version": 1,
+  "freeze_version": "selective-verification-policy-freeze-v1",
+  "status": "frozen",
+  "frozen_at": "2026-08-18",
+  "protocol": {
+    "id": "selective-post-completion-verification-v1",
+    "path": "experiments/configs/selective-verification-protocol-v1.json"
+  },
+  "dataset": {
+    "snapshot": "dev-v0.6",
+    "development_tasks": 20,
+    "held_out_tasks_required": 10,
+    "base_trajectories_per_task": 3,
+    "minimum_transferable_probe_contract_tasks": 3
+  },
+  "primary_policy": "risk_hierarchical",
+  "comparison_policies": [
+    "accept_all",
+    "verify_all",
+    "random_k_call_matched",
+    "probe_all",
+    "risk_model_direct",
+    "risk_hierarchical",
+    "oracle_k_diagnostic"
+  ],
+  "risk_estimator": {
+    "id": "structured_deterministic_rules",
+    "version": "completion-risk-v0.2",
+    "threshold": 3,
+    "rules": [
+      {"id": "R001_BOUNDARY_SENSITIVE_SURFACE", "weight": 1},
+      {"id": "R002_MISSING_NEGATIVE_PUBLIC_EVIDENCE", "weight": 2},
+      {"id": "R003_UNRESOLVED_PLAN_ASSUMPTION", "weight": 2}
+    ],
+    "hidden_evidence_allowed": false
+  },
+  "probe": {
+    "version": "deterministic-probe-v0.2",
+    "selection": "public_probe_contract_only",
+    "task_id_used_for_selection": false,
+    "registered_adapters": ["python-manifest-file-loader-v1"],
+    "unsupported_high_risk_route": "bounded_model_verification"
+  },
+  "model_verification": {
+    "provider": "codex-cli",
+    "cli_version": "0.147.0",
+    "model": "gpt-5.6-sol",
+    "reasoning_effort": "medium",
+    "max_attempts_per_policy_replay": 1,
+    "timeout_seconds": 300,
+    "evidence_packet_version": "evidence-packet-v0.2",
+    "evidence_max_chars": 24000
+  },
+  "random_k": {
+    "seed": 1729,
+    "method": "sha256_rank_within_task_family",
+    "stratification": "task_family",
+    "primary_match": "model_call_count",
+    "secondary_report": "nearest_actual_token_budget"
+  },
+  "practical_margins": {
+    "accepted_false_completion_reduction_tasks_min": 1,
+    "recovered_false_completion_delta_vs_random_k_min": 1,
+    "verify_all_reliability_tolerance_tasks": 1,
+    "verification_compute_reduction_vs_verify_all_percent_min": 20,
+    "hard_safety_violation_delta_max": 0
+  },
+  "held_out_controls": {
+    "authoring_allowed_after_this_freeze": true,
+    "independent_generation_or_review_required": true,
+    "grader_visible_to_policy_or_agent": false,
+    "execution_limit": 2,
+    "changes_require_new_freeze_version": true
+  },
+  "artifacts": [
+    {"path": "experiments/configs/selective-verification-protocol-v1.json", "sha256": "sha256:1610bb06cc2e3f8040810692920a99924575a603c42d022410d6ba9919dadf67"},
+    {"path": "benchmark/manifest.json", "sha256": "sha256:e9543158c85ab1a6ec56ab24f3cd0753393db9d2d473690f6986b9cfe3ae3409"},
+    {"path": "benchmark/schema/task.schema.json", "sha256": "sha256:6d466d11e9e58a42a6ca1f708bee88691dcd2bcf73d29018b557802c76695b8d"},
+    {"path": "src/forgebench/catalog.py", "sha256": "sha256:50c3858e49a8e33d394b42605932d51ac1cb9aefb52e212dbf746ba795bfc9d9"},
+    {"path": "src/forgebench/completion_risk.py", "sha256": "sha256:cf91107a4a9f6438ac2b2091fe5849e4d557ee4ea0bd2dea2abd87b0620fa7a5"},
+    {"path": "src/forgebench/deterministic_probe.py", "sha256": "sha256:4d447f96e471864c9eacc18d012c3e56bb92ae93436f2d5d42a8682e95955377"},
+    {"path": "src/forgebench/evidence_packet.py", "sha256": "sha256:bcce6ac71c8f8c6e57b89f8fc1120632129bd50bce25e93762a0d25f6cb7559e"},
+    {"path": "src/forgebench/adaptive_verification.py", "sha256": "sha256:17adb662259ca48b6e9d91e60059aaeed6dfe0955786e97e5c2f11ead273bf66"},
+    {"path": "src/forgebench/base_completion.py", "sha256": "sha256:7f3cf4872b2d27d317e3d7ce794bf01128b96423801e279b95255464885f96f7"},
+    {"path": "src/forgebench/comparison_manifest.py", "sha256": "sha256:002dfc1769a9e70bcffdf9d39ac19c624ad6999dc06f44d6575b5d32ae78d4d4"},
+    {"path": "src/forgebench/completion.py", "sha256": "sha256:167bdfff771ff6d34670dd5d7600b0ff665b1509cad0db59d2696d9ba9abd483"},
+    {"path": "src/forgebench/workspace.py", "sha256": "sha256:929930e9dfb4afc208719911401760fd2e095d411cf91a2adcee40ac01352379"},
+    {"path": "src/forgebench/grader.py", "sha256": "sha256:15ee9c4b943cbb8e604458f3897785f0d4a8a3afedd49fae935535b60ddff396"},
+    {"path": "src/forgebench/codex_command.py", "sha256": "sha256:509afa8eeaa53e7f4271cbb55551670e7a59d1049b6f4e3c6c923b6c1345aee3"},
+    {"path": "scripts/run_policy_replay.py", "sha256": "sha256:c633f614f3e463868ed8e5125259504ada2bae04facc48f9f35f50ecd1d685c4"},
+    {"path": "scripts/plan_policy_comparison.py", "sha256": "sha256:1ab4c9f3c3840ddf989e30a65a9160f2e9344422eeaebb4ef15d823118711e41"},
+    {"path": "scripts/run_codex_baseline.py", "sha256": "sha256:893898d6ab0cc2d8c7a94c98daae440fc6546c8877c3fa56634c6d78f7cc7640"},
+    {"path": "scripts/validate_task.py", "sha256": "sha256:aaba818ce8ca7d4d5e7e97d482bb35041856d7d5f5216bad46b7a8e3974db13c"}
+  ],
+  "content_sha256": "sha256:1b779f87242da24975167f935540fe0107e963841d5a89cb5e96453e4f87e9ff"
+}

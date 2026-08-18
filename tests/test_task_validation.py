@@ -39,6 +39,20 @@ class TaskValidationTests(unittest.TestCase):
         task["budgets"]["max_steps"] = 0
         self.assertTrue(validate_task(task))
 
+    def test_probe_contract_rejects_code_like_module_names(self) -> None:
+        task = copy.deepcopy(self.valid_task)
+        task["probe_contract"] = {
+            "version": 1,
+            "adapter": "python_manifest_file_loader",
+            "module": "plugin_loader;raise SystemExit",
+            "callable": "load_plugin",
+            "manifest_key": "entrypoint",
+            "accepted_suffix": ".py",
+            "dimensions": ["file_type"],
+        }
+        errors = validate_task(task)
+        self.assertIn("probe_contract.module is invalid", errors)
+
 
 if __name__ == "__main__":
     unittest.main()
