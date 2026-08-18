@@ -126,6 +126,13 @@ fell 12.8% and output fell 8.4%, but no price-weighted cost claim is made. Fresh
 Evidence Packet v0.2 remains the reference path; session reuse stays an
 experimental mode.
 
+The next [Probe-First design](docs/adaptive-probe-first-design-v0.1.md) is now
+implemented at mechanism level. A public-contract adapter runs deterministic
+file-type probes before a model call. Correct high-risk workspaces can
+short-circuit with zero model tokens; failed or unsupported probes fall back to
+one Evidence Packet repair. The first live development replay is predeclared but
+not yet reported.
+
 ## Local verification
 
 ```powershell
@@ -147,6 +154,7 @@ python scripts/run_model_recovery_smoke.py --execution-host wsl
 python scripts/run_adaptive_replay.py --task-id python-plugin-boundary --source-run-id <planning-lite-run-id> --execution-host wsl
 python scripts/run_adaptive_replay.py --task-id python-plugin-boundary --source-run-id <planning-lite-run-id> --evidence-mode packet --execution-host wsl
 python scripts/run_adaptive_replay.py --task-id python-plugin-boundary --source-run-id <persisted-planning-lite-run-id> --evidence-mode packet --resume-source-session --execution-host wsl
+python scripts/run_adaptive_replay.py --task-id python-plugin-boundary --source-run-id <planning-lite-run-id> --evidence-mode probe-packet --execution-host wsl
 ```
 
 Both persisted-session commands must use the same `--codex-home` when session
