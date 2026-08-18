@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "seal_version": "heldout-private-grader-seal-v1",
-  "created_at": "2026-08-18T05:52:19.632900+00:00",
+  "created_at": "2026-08-18T06:05:02.242706+00:00",
   "custodian_id": "codex-independent-custodian",
   "attestation": {
     "independent_custodian": true,
@@ -13,12 +13,12 @@
   },
   "task_graders": [
     {
-      "task_id": "archive-member-canonicalization",
-      "grader_sha256": "sha256:ab7346932b6ca5694cdc8af1fdc43afae54668c135b1c1db579658c3c1f83329"
-    },
-    {
       "task_id": "cache-key-collision-incident",
       "grader_sha256": "sha256:addd90710299dfff3cee200cb2e13e7c3c6448d40387f4912e9b489521e03e5d"
+    },
+    {
+      "task_id": "campaign-template-bundle",
+      "grader_sha256": "sha256:b8b56bd79e1a8ca9963f441365d9f13e8351876e6f783589b752887879cd8d11"
     },
     {
       "task_id": "certificate-rollover-incident",
@@ -29,29 +29,29 @@
       "grader_sha256": "sha256:c0a19a102840f883a3c5ea6eee8294bd3c4306488ba2569676cc3f3de7657d26"
     },
     {
-      "task_id": "manifest-json-fragment",
-      "grader_sha256": "sha256:c57105c38d5f1b8da1bf67de3533b59074cd86419ed59c1701c74bee3af507cb"
-    },
-    {
-      "task_id": "manifest-sql-migration",
-      "grader_sha256": "sha256:9d14c55396112d46eff2afd4d1c5698696206746fb021c975e939e3ed97775f5"
-    },
-    {
-      "task_id": "manifest-text-catalog",
-      "grader_sha256": "sha256:4d332080987441abaa7e6fd3b129cca2348cbe883a855f11fa5deb457ac66ca2"
+      "task_id": "database-migration-lock-incident",
+      "grader_sha256": "sha256:d8a8fcced287a1aa806c9dc367deef58afce35771fef91ce4b919c6ef1ef8e76"
     },
     {
       "task_id": "nested-secret-redaction",
       "grader_sha256": "sha256:483f504b4622d92bc7880fe7fbd03bbabd15adc8ef1bc2290a2697652fa37c51"
     },
     {
-      "task_id": "queue-redelivery-incident",
-      "grader_sha256": "sha256:6d9d72c69d7e8788239a9b99fbf4213f8e90ca34563cb604885a16e7468509af"
+      "task_id": "regional-tax-table-loader",
+      "grader_sha256": "sha256:381e598ecbe131cea27b140cd73427cd3bc0e0fe643abadc88b117b2c9d1eaf0"
+    },
+    {
+      "task_id": "rollout-allocation-loader",
+      "grader_sha256": "sha256:2e186de4345f9aac048e1ff7bb85cd1e4ac5ce151ff2db2f7dc5c12d5b655cfc"
     },
     {
       "task_id": "token-bucket-refill",
       "grader_sha256": "sha256:4d48c4f08670459cb90e89266269550f7e9bcf7a219d24ecfa7cc0d74f3476aa"
+    },
+    {
+      "task_id": "unicode-account-identifier",
+      "grader_sha256": "sha256:0b5384497d4d791644a730d6205db62592319d36756b6a28f01ecb0ef04affcb"
     }
   ],
-  "content_sha256": "sha256:0c345ae9639656b80b64d61d48d92e470bb3c20866753b750c447feeb6524cc4"
+  "content_sha256": "sha256:aee74ae33f37d19c311c28066d877e88e55699335e12efc00d3570c0abddf632"
 }

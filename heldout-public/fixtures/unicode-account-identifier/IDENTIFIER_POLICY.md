@@ -1,0 +1,1 @@
+Account identifiers use NFKC plus case-folding, reject Unicode format controls, and reject identifiers that mix Latin, Greek, or Cyrillic scripts. Availability checks must not silently accept unsafe candidates.

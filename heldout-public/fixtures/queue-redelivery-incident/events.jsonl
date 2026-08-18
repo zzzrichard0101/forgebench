@@ -1,5 +1,0 @@
-{"time":"09:00:00","message":"A","attempt":1,"worker":"w1","outcome":"timeout"}
-{"time":"09:00:05","message":"B","attempt":1,"worker":"w2","outcome":"ok"}
-{"time":"09:00:30","message":"A","attempt":2,"worker":"w3","outcome":"timeout"}
-{"time":"09:01:00","message":"A","attempt":3,"worker":"w1","outcome":"ok"}
-{"time":"09:01:05","message":"C","attempt":1,"worker":"w2","outcome":"ok"}

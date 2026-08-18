@@ -1,18 +1,18 @@
 {
   "schema_version": 1,
   "snapshot": "heldout-v1",
-  "catalog_sha256": "sha256:50e3d4a99561bba1cee14c62bf2f1556b724a0dd9a581658a6810270249539d3",
+  "catalog_sha256": "sha256:8e726ea4f5523f34ac05afe01eb014a730f5eceb99a475ed34833d1c56a7ed34",
   "frozen": true,
   "tasks": [
-    {"id": "archive-member-canonicalization", "version": 1, "family": "adversarial", "difficulty": "hard", "split": "test", "task_path": "heldout-public/tasks/archive-member-canonicalization/task.json", "task_sha256": "sha256:8e08ac456e2b240b5c4a18fd1f8aa0f6d12fe9364d847880a7e69370df19a94e"},
     {"id": "cache-key-collision-incident", "version": 1, "family": "incident", "difficulty": "hard", "split": "test", "task_path": "heldout-public/tasks/cache-key-collision-incident/task.json", "task_sha256": "sha256:349ffd3ab2ae56ff3f550a88a27fa559e1add9a92ee0c53f30201a3ec00610ef"},
+    {"id": "campaign-template-bundle", "version": 1, "family": "development", "difficulty": "medium", "split": "test", "task_path": "heldout-public/tasks/campaign-template-bundle/task.json", "task_sha256": "sha256:c942d9572c536c0123c74f95398ac8ccef3937c8628613e72aaf52742cc9af22"},
     {"id": "certificate-rollover-incident", "version": 1, "family": "incident", "difficulty": "medium", "split": "test", "task_path": "heldout-public/tasks/certificate-rollover-incident/task.json", "task_sha256": "sha256:1355791536c9cb3b50ca538e66b1829e5bd379df15854c75b16cb91e346be964"},
     {"id": "csv-formula-neutralization", "version": 1, "family": "adversarial", "difficulty": "medium", "split": "test", "task_path": "heldout-public/tasks/csv-formula-neutralization/task.json", "task_sha256": "sha256:9398bb4464116e96c3d19356af8a2404906e6484b98677ad8d7ed59d2ab31959"},
-    {"id": "manifest-json-fragment", "version": 1, "family": "development", "difficulty": "medium", "split": "test", "task_path": "heldout-public/tasks/manifest-json-fragment/task.json", "task_sha256": "sha256:9a9a50c2fda304879a368e9897634a81dcf8999e42bdc5c7c8ada9b9623f5dbe"},
-    {"id": "manifest-sql-migration", "version": 1, "family": "development", "difficulty": "hard", "split": "test", "task_path": "heldout-public/tasks/manifest-sql-migration/task.json", "task_sha256": "sha256:019eebfabc9867d27b0c53d25ebd7e2ee32bc007e0aded7f72ab98244e0f1992"},
-    {"id": "manifest-text-catalog", "version": 1, "family": "development", "difficulty": "medium", "split": "test", "task_path": "heldout-public/tasks/manifest-text-catalog/task.json", "task_sha256": "sha256:b3b96a7961ee5cd75d4b745accb89c2883397dcf2f1fa8123d3b6cd288b35851"},
+    {"id": "database-migration-lock-incident", "version": 1, "family": "incident", "difficulty": "hard", "split": "test", "task_path": "heldout-public/tasks/database-migration-lock-incident/task.json", "task_sha256": "sha256:efc2ca610c0c45e8c67c48f8aa6a20e19456397ffe99ef97e145b760084168d9"},
     {"id": "nested-secret-redaction", "version": 1, "family": "adversarial", "difficulty": "medium", "split": "test", "task_path": "heldout-public/tasks/nested-secret-redaction/task.json", "task_sha256": "sha256:576fc6c8dc2f982c5141b0388a65e789d67b46519aef1d64e3b062e9058e9e0d"},
-    {"id": "queue-redelivery-incident", "version": 1, "family": "incident", "difficulty": "medium", "split": "test", "task_path": "heldout-public/tasks/queue-redelivery-incident/task.json", "task_sha256": "sha256:bfe3ca3dd5f61c36a28fbfafcc1daa5104d53a8fdcf2d46756d09a5e71b11d36"},
-    {"id": "token-bucket-refill", "version": 1, "family": "development", "difficulty": "medium", "split": "test", "task_path": "heldout-public/tasks/token-bucket-refill/task.json", "task_sha256": "sha256:291435a4bfac5440f1240a14f045c904e5a1bffdc0a37a42c68603c16f1f02ec"}
+    {"id": "regional-tax-table-loader", "version": 1, "family": "development", "difficulty": "hard", "split": "test", "task_path": "heldout-public/tasks/regional-tax-table-loader/task.json", "task_sha256": "sha256:0e9b270b614bd731dbe88a1c8478eccc0115d48121e7f8a3047aaf9a36cd955f"},
+    {"id": "rollout-allocation-loader", "version": 1, "family": "development", "difficulty": "hard", "split": "test", "task_path": "heldout-public/tasks/rollout-allocation-loader/task.json", "task_sha256": "sha256:9c90e3bc499fd2ae7f286bc038b16fe46e71b7efe2b2f66f746a8422db9bfd92"},
+    {"id": "token-bucket-refill", "version": 1, "family": "development", "difficulty": "medium", "split": "test", "task_path": "heldout-public/tasks/token-bucket-refill/task.json", "task_sha256": "sha256:291435a4bfac5440f1240a14f045c904e5a1bffdc0a37a42c68603c16f1f02ec"},
+    {"id": "unicode-account-identifier", "version": 1, "family": "adversarial", "difficulty": "hard", "split": "test", "task_path": "heldout-public/tasks/unicode-account-identifier/task.json", "task_sha256": "sha256:17ad590d241bc03d0ff98c47c1c9a4ba18bc8d493ce5a97528f7947223bcad83"}
   ]
 }

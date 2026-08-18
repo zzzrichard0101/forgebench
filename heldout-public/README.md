@@ -9,6 +9,8 @@ from this repository and are represented only by the root-level
 The snapshot covers development, incident, and adversarial work. Three tasks
 publish the transferable `python_manifest_file_loader` probe contract. The
 manifest content-addresses both every task document and every seed fixture.
+The replacement-by-replacement comparison against the development catalog is
+documented in [LINEAGE_AUDIT.md](LINEAGE_AUDIT.md).
 
 The private seal is tamper-evident rather than a cryptographic identity
 signature. Its custodian identity and independence statement are procedural

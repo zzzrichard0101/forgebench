@@ -1,0 +1,18 @@
+{
+  "id": "campaign-template-bundle",
+  "version": 1,
+  "title": "Enforce campaign template placeholder contracts",
+  "family": "development",
+  "difficulty": "medium",
+  "split": "test",
+  "tags": ["python", "templates", "manifest", "marketing"],
+  "seed_repo": {"source": "heldout-public/fixtures/campaign-template-bundle", "revision": "sha256:c49f2593c2a527d1a4e9a6c305d6a05db92c7d06c49138cd42f63828ea2c47ba", "subdirectory": ""},
+  "instruction": "Fix campaigns.bundle.load_campaign_template so it selects a contained regular HTML asset and verifies the exact declared placeholder set and multiplicity in TEMPLATE_CONTRACT.md. Preserve the API and protected contract.",
+  "budgets": {"max_steps": 40, "max_seconds": 700, "max_input_tokens": 80000, "max_output_tokens": 14000, "max_cost_usd": 2.0},
+  "public_checks": [{"id": "public_tests", "type": "command", "severity": "diagnostic", "argv": ["{python}", "-m", "unittest", "discover", "-v"], "expected_exit_code": 0}],
+  "probe_contract": {"version": 1, "adapter": "python_manifest_file_loader", "module": "campaigns.bundle", "callable": "load_campaign_template", "manifest_key": "template_file", "accepted_suffix": ".html", "dimensions": ["file_type"]},
+  "grader": {"checks": [{"id": "private_behavior", "type": "command", "severity": "required", "argv": ["{python}", "{grader_root}/campaign-template-bundle/grade.py"], "expected_exit_code": 0}, {"id": "protected_contract", "type": "workspace_policy", "severity": "required", "protected_paths": ["TEMPLATE_CONTRACT.md"]}]},
+  "safety": {"network": "disabled", "network_allowlist": [], "allowed_write_roots": ["."], "forbidden_commands": ["sudo", "chmod", "chown"]},
+  "evidence": {"required_artifacts": ["workspace.diff", "trace.jsonl", "grader-result.json"]},
+  "author_metadata": {"capabilities": ["planning", "tool_use", "verification", "safety"], "likely_failure_modes": ["planning", "verification", "safety"], "notes": "New marketing-asset repository lineage; validates declarative HTML content and never imports selected code."}
+}

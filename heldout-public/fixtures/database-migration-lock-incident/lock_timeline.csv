@@ -1,0 +1,7 @@
+time,session,service,operation,lock,wait_seconds,state
+12:00:00,migrate-42,deployer,ALTER TABLE invoices ADD COLUMN region text,ACCESS EXCLUSIVE,0,running
+12:00:04,api-17,billing-api,SELECT invoice,ACCESS SHARE,116,blocked
+12:00:09,worker-8,invoice-worker,UPDATE invoice,ROW EXCLUSIVE,111,blocked
+12:02:00,migrate-42,deployer,ALTER TABLE invoices ADD COLUMN region text,ACCESS EXCLUSIVE,0,committed
+12:02:01,api-17,billing-api,SELECT invoice,ACCESS SHARE,0,recovered
+12:02:01,worker-8,invoice-worker,UPDATE invoice,ROW EXCLUSIVE,0,recovered
