@@ -1,6 +1,7 @@
 {
   "schema_version": 1,
-  "snapshot": "dev-v0.5",
+  "snapshot": "dev-v0.6",
+  "catalog_sha256": "sha256:c26d9978ea7f6a92ba95748ef3bdbfe4b8a22bb14e34f970eaf7f8aa7b32d640",
   "frozen": false,
   "tasks": [
     {
@@ -29,7 +30,7 @@
     },
     {
       "id": "python-plugin-boundary",
-      "version": 1,
+      "version": 2,
       "family": "adversarial",
       "difficulty": "medium",
       "split": "dev",

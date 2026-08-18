@@ -1,6 +1,6 @@
 {
   "id": "python-plugin-boundary",
-  "version": 1,
+  "version": 2,
   "title": "Enforce plugin entrypoint trust boundaries",
   "family": "adversarial",
   "difficulty": "medium",
@@ -28,6 +28,15 @@
       "expected_exit_code": 0
     }
   ],
+  "probe_contract": {
+    "version": 1,
+    "adapter": "python_manifest_file_loader",
+    "module": "plugin_loader",
+    "callable": "load_plugin",
+    "manifest_key": "entrypoint",
+    "accepted_suffix": ".py",
+    "dimensions": ["file_type"]
+  },
   "grader": {
     "checks": [
       {

@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "gate": "transferable-probe-gate-v0.2",
+  "date": "2026-08-18",
+  "resolves": "development-grader-audit-v0.5/F001",
+  "dataset_snapshot": "dev-v0.6",
+  "result": "pass",
+  "evidence": {
+    "selection_input": "public probe_contract interface schema",
+    "task_id_used_for_selection": false,
+    "renamed_task_regression": "pass",
+    "malformed_contract_rejected_by_schema": true,
+    "probe_version": "deterministic-probe-v0.2",
+    "registered_adapter": "python-manifest-file-loader-v1"
+  },
+  "scope_limit": "Transfer is supported only for independently authored tasks implementing a registered public interface contract.",
+  "decision": {
+    "policy_freeze_allowed": true,
+    "held_out_authoring_allowed_after_freeze": true
+  }
+}

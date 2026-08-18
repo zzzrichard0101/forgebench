@@ -3,6 +3,7 @@ from __future__ import annotations
 import subprocess
 import sys
 import time
+import re
 from dataclasses import asdict, dataclass
 from pathlib import Path
 from typing import Any, Literal
@@ -10,7 +11,8 @@ from typing import Any, Literal
 from .completion_risk import CompletionRiskDecision
 
 
-PROBE_VERSION = "deterministic-probe-v0.1"
+PROBE_VERSION = "deterministic-probe-v0.2"
+TRANSFERABLE_ADAPTER = "python_manifest_file_loader"
 
 
 @dataclass(frozen=True)
@@ -43,8 +45,9 @@ class DeterministicProbeResult:
 class DeterministicProbeRunner:
     """Run public-contract probes before allocating another model turn.
 
-    v0.1 intentionally exposes one explicit development adapter. Unsupported
-    tasks return a traceable fallback result instead of guessing an invocation.
+    v0.2 selects a declarative public interface contract, never a task ID.
+    Unsupported contracts return a traceable fallback instead of guessing an
+    invocation.
     """
 
     def run(
@@ -58,7 +61,8 @@ class DeterministicProbeRunner:
         if timeout_seconds <= 0:
             raise ValueError("probe timeout must be positive")
         missing = _missing_dimensions(decision)
-        if task.get("id") != "python-plugin-boundary" or "file_type" not in missing:
+        contract = _validated_contract(task.get("probe_contract"))
+        if contract is None or "file_type" not in missing:
             return DeterministicProbeResult(
                 probe_version=PROBE_VERSION,
                 adapter_id=None,
@@ -74,20 +78,17 @@ class DeterministicProbeRunner:
                 workspace=workspace,
                 probe_id=probe_id,
                 dimension="file_type",
-                setup=setup,
+                contract=contract,
                 timeout_seconds=timeout_seconds,
             )
-            for probe_id, setup in (
-                ("plugin_directory_entrypoint", "(root / 'main.py').mkdir()"),
-                (
-                    "plugin_non_python_regular_file",
-                    "(root / 'notes.txt').write_text('not Python', encoding='utf-8')",
-                ),
+            for probe_id in (
+                "plugin_directory_entrypoint",
+                "plugin_non_python_regular_file",
             )
         )
         return DeterministicProbeResult(
             probe_version=PROBE_VERSION,
-            adapter_id="python-plugin-file-type-v0.1",
+            adapter_id="python-manifest-file-loader-v1",
             supported=True,
             passed=all(case.outcome == "passed" for case in cases),
             cases=cases,
@@ -100,23 +101,38 @@ def _run_case(
     workspace: Path,
     probe_id: str,
     dimension: str,
-    setup: str,
+    contract: dict[str, Any],
     timeout_seconds: int,
 ) -> ProbeCaseResult:
-    entrypoint = "main.py" if "directory" in probe_id else "notes.txt"
+    suffix = contract["accepted_suffix"]
+    entrypoint = f"entry{suffix}" if "directory" in probe_id else (
+        "notes.bin" if suffix == ".txt" else "notes.txt"
+    )
+    setup = (
+        "(root / entrypoint).mkdir()"
+        if "directory" in probe_id
+        else "(root / entrypoint).write_text('unsupported file', encoding='utf-8')"
+    )
     script = f"""
+import importlib
 import json
 import tempfile
 from pathlib import Path
-from plugin_loader import load_plugin
+
+module = importlib.import_module({contract['module']!r})
+loader = getattr(module, {contract['callable']!r})
 
 with tempfile.TemporaryDirectory() as temporary_directory:
     root = Path(temporary_directory)
+    entrypoint = {entrypoint!r}
     {setup}
     manifest = root / "plugin.json"
-    manifest.write_text(json.dumps({{"entrypoint": {entrypoint!r}}}), encoding="utf-8")
+    manifest.write_text(
+        json.dumps({{{contract['manifest_key']!r}: entrypoint}}),
+        encoding="utf-8",
+    )
     try:
-        load_plugin(root, manifest)
+        loader(root, manifest)
     except Exception as exc:
         print(type(exc).__name__)
     else:
@@ -156,6 +172,28 @@ with tempfile.TemporaryDirectory() as temporary_directory:
         stdout=_bounded(completed.stdout),
         stderr=_bounded(completed.stderr),
     )
+
+
+def _validated_contract(value: object) -> dict[str, Any] | None:
+    if not isinstance(value, dict):
+        return None
+    if value.get("version") != 1 or value.get("adapter") != TRANSFERABLE_ADAPTER:
+        return None
+    if "file_type" not in value.get("dimensions", []):
+        return None
+    patterns = {
+        "module": r"[A-Za-z_][A-Za-z0-9_]*(?:\.[A-Za-z_][A-Za-z0-9_]*)*",
+        "callable": r"[A-Za-z_][A-Za-z0-9_]*",
+        "manifest_key": r"[A-Za-z_][A-Za-z0-9_]*",
+        "accepted_suffix": r"\.[A-Za-z0-9]+",
+    }
+    if any(
+        not isinstance(value.get(field), str)
+        or re.fullmatch(pattern, value[field]) is None
+        for field, pattern in patterns.items()
+    ):
+        return None
+    return value
 
 
 def _missing_dimensions(decision: CompletionRiskDecision) -> set[str]:

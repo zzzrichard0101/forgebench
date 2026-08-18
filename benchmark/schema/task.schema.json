@@ -65,6 +65,9 @@
       "items": { "$ref": "#/$defs/check" },
       "default": []
     },
+    "probe_contract": {
+      "$ref": "#/$defs/probe_contract"
+    },
     "grader": {
       "type": "object",
       "additionalProperties": false,
@@ -152,6 +155,45 @@
     }
   },
   "$defs": {
+    "probe_contract": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "version",
+        "adapter",
+        "module",
+        "callable",
+        "manifest_key",
+        "accepted_suffix",
+        "dimensions"
+      ],
+      "properties": {
+        "version": { "const": 1 },
+        "adapter": { "const": "python_manifest_file_loader" },
+        "module": {
+          "type": "string",
+          "pattern": "^[A-Za-z_][A-Za-z0-9_]*(?:\\.[A-Za-z_][A-Za-z0-9_]*)*$"
+        },
+        "callable": {
+          "type": "string",
+          "pattern": "^[A-Za-z_][A-Za-z0-9_]*$"
+        },
+        "manifest_key": {
+          "type": "string",
+          "pattern": "^[A-Za-z_][A-Za-z0-9_]*$"
+        },
+        "accepted_suffix": {
+          "type": "string",
+          "pattern": "^\\.[A-Za-z0-9]+$"
+        },
+        "dimensions": {
+          "type": "array",
+          "items": { "enum": ["file_type"] },
+          "contains": { "const": "file_type" },
+          "uniqueItems": true
+        }
+      }
+    },
     "check": {
       "type": "object",
       "additionalProperties": false,
