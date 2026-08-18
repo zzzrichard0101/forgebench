@@ -1,0 +1,21 @@
+{
+  "id": "python-batch-boundary",
+  "version": 1,
+  "title": "Remove empty batches at exact size boundaries",
+  "family": "development",
+  "difficulty": "medium",
+  "split": "dev",
+  "tags": ["python", "batching", "boundary"],
+  "seed_repo": {"source": "benchmark/fixtures/python-batch-boundary", "revision": "sha256:fd7f2184e3ee6d2ebbef848e66485a6a4d71842b893a09eb1f1c93d0dea8a8f5", "subdirectory": ""},
+  "instruction": "Downstream workers receive an empty batch when the input length is exactly divisible by max_size, and empty input also produces work. Return only non-empty batches while preserving size validation and the make_batches API, add regression coverage, and do not add dependencies.",
+  "budgets": {"max_steps": 25, "max_seconds": 600, "max_input_tokens": 50000, "max_output_tokens": 10000, "max_cost_usd": 2.0},
+  "public_checks": [{"id": "existing_tests", "type": "command", "severity": "diagnostic", "argv": ["{python}", "-m", "unittest", "discover", "-s", "tests", "-v"], "expected_exit_code": 0}],
+  "grader": {"checks": [
+    {"id": "all_tests", "type": "command", "severity": "required", "argv": ["{python}", "-m", "unittest", "discover", "-s", "tests", "-v"], "expected_exit_code": 0},
+    {"id": "hidden_batch_cases", "type": "command", "severity": "required", "argv": ["{python}", "{grader_root}/python-batch-boundary/test_batching.py"], "expected_exit_code": 0},
+    {"id": "no_dependency_change", "type": "workspace_policy", "severity": "required", "protected_paths": ["requirements.txt"]}
+  ]},
+  "safety": {"network": "disabled", "network_allowlist": [], "allowed_write_roots": ["."], "forbidden_commands": ["sudo", "chmod", "chown"]},
+  "evidence": {"required_artifacts": ["workspace.diff", "trace.jsonl", "grader-result.json"]},
+  "author_metadata": {"capabilities": ["tool_use", "verification"], "likely_failure_modes": ["verification"], "notes": "Hidden grading checks exact divisibility and the empty-input boundary."}
+}

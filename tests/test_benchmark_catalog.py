@@ -77,6 +77,11 @@ class BenchmarkCatalogTests(unittest.TestCase):
             "worker-visibility-incident": self._fix_worker_incident,
             "cdn-cache-incident": self._fix_cdn_incident,
             "python-archive-boundary": self._fix_archive,
+            "python-header-normalization": self._fix_header_normalization,
+            "python-state-idempotency": self._fix_state_idempotency,
+            "python-schema-bool": self._fix_schema_bool,
+            "python-url-allowlist": self._fix_url_allowlist,
+            "python-batch-boundary": self._fix_batch_boundary,
         }
         self.assertEqual(
             set(solutions),
@@ -242,6 +247,59 @@ class BenchmarkCatalogTests(unittest.TestCase):
         raise ValueError("archive member escapes extraction root")
     return target'''
         cls._replace(workspace, "archive.py", old, new)
+
+    @classmethod
+    def _fix_header_normalization(cls, workspace: Path) -> None:
+        cls._replace(
+            workspace,
+            "headers.py",
+            "return headers.get(name)",
+            '''matches = [value for key, value in headers.items() if key.casefold() == name.casefold()]
+    if len(matches) > 1:
+        raise ValueError("ambiguous header variants")
+    return matches[0] if matches else None''',
+        )
+
+    @classmethod
+    def _fix_state_idempotency(cls, workspace: Path) -> None:
+        cls._replace(
+            workspace,
+            "state_machine.py",
+            '''if target not in ALLOWED.get(current, set()):''',
+            '''if current in ALLOWED and current == target:
+        return current
+    if target not in ALLOWED.get(current, set()):''',
+        )
+
+    @classmethod
+    def _fix_schema_bool(cls, workspace: Path) -> None:
+        cls._replace(
+            workspace,
+            "schema.py",
+            "if not isinstance(value, int):",
+            "if type(value) is not int:",
+        )
+
+    @classmethod
+    def _fix_url_allowlist(cls, workspace: Path) -> None:
+        cls._replace(
+            workspace,
+            "url_policy.py",
+            '''host = urlsplit(url).hostname
+    return bool(host and host.endswith(allowed_host))''',
+            '''host = (urlsplit(url).hostname or "").rstrip(".").casefold()
+    allowed = allowed_host.rstrip(".").casefold()
+    return bool(allowed and (host == allowed or host.endswith("." + allowed)))''',
+        )
+
+    @classmethod
+    def _fix_batch_boundary(cls, workspace: Path) -> None:
+        cls._replace(
+            workspace,
+            "batching.py",
+            "range(0, len(items) + 1, max_size)",
+            "range(0, len(items), max_size)",
+        )
 
 
 if __name__ == "__main__":

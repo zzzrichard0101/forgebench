@@ -8,7 +8,7 @@ The project asks one practical question:
 
 ## Current status
 
-**Phase 7 comparison infrastructure complete — next focus: benchmark expansion**
+**Phase 8 benchmark expansion in progress — 14/20 development tasks complete**
 
 - [Design brief](docs/design-brief.md)
 - [Metrics and evaluation contract](docs/metrics.md)
@@ -19,6 +19,7 @@ The project asks one practical question:
 - [Machine-readable task schema](benchmark/schema/task.schema.json)
 - [Benchmark snapshot manifest](benchmark/manifest.json)
 - [Example benchmark task](benchmark/examples/python-bugfix/task.json)
+- [Benchmark expansion v0.4](docs/benchmark-expansion-v0.4.md)
 
 Phase 2 infrastructure is now present in `src/forgebench`: copy-isolated run
 workspaces, a typed tool gateway, a provider-neutral model adapter, and
