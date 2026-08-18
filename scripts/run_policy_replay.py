@@ -12,6 +12,10 @@ from pathlib import Path
 from forgebench.base_completion import BaseCompletionStore, PolicyReplayRunner
 from forgebench.catalog import BenchmarkCatalog
 from forgebench.codex_command import build_exec_command
+from forgebench.comparison_manifest import (
+    load_comparison_manifest,
+    validate_assignment,
+)
 from forgebench.grader import DeterministicGrader
 from run_codex_baseline import (
     GRADERS,
@@ -42,6 +46,11 @@ def main() -> int:
     parser.add_argument("--runs-root", type=Path, default=ROOT / "runs")
     parser.add_argument("--base-root", type=Path)
     parser.add_argument("--policy-runs-root", type=Path)
+    parser.add_argument(
+        "--assignment-manifest",
+        type=Path,
+        help="Frozen multi-base assignment manifest used to validate this replay.",
+    )
     parser.add_argument("--codex-bin", type=Path)
     parser.add_argument("--codex-home", type=Path)
     parser.add_argument(
@@ -62,6 +71,21 @@ def main() -> int:
     base_root = args.base_root or (args.runs_root / "base-completions")
     policy_runs_root = args.policy_runs_root or (args.runs_root / "policy-replays")
     base = BaseCompletionStore(base_root).load(args.base_id)
+    assignment_manifest = None
+    assignment = None
+    if args.assignment_manifest is not None:
+        assignment_manifest = load_comparison_manifest(args.assignment_manifest)
+        assignment = validate_assignment(
+            manifest=assignment_manifest,
+            base=base,
+            task=bundle.task,
+            policy=args.policy,
+        )
+        if args.policy == "random_k_call_matched":
+            planned = bool(assignment["model_selected"])
+            if args.random_selected is not None and args.random_selected != planned:
+                raise ValueError("CLI Random-k selection conflicts with frozen manifest")
+            args.random_selected = planned
 
     model_required = args.policy in {
         "verify_all",
@@ -118,6 +142,23 @@ def main() -> int:
         random_selected=args.random_selected,
         timeout_seconds=args.timeout_seconds,
     )
+    if assignment is not None:
+        if result.model_attempted != bool(assignment["model_selected"]):
+            raise RuntimeError("observed model routing differs from frozen assignment")
+        observed_probe = result.deterministic_probe is not None
+        if observed_probe != bool(assignment["probe_selected"]):
+            raise RuntimeError("observed probe routing differs from frozen assignment")
+        replay_manifest_path = result.workspace.parent / "policy-replay-manifest.json"
+        replay_manifest = json.loads(replay_manifest_path.read_text(encoding="utf-8"))
+        replay_manifest["assignment_manifest"] = {
+            "manifest_id": assignment_manifest.manifest_id,
+            "content_sha256": assignment_manifest.content_sha256,
+            "path": str(assignment_manifest.path),
+        }
+        replay_manifest_path.write_text(
+            json.dumps(replay_manifest, ensure_ascii=False, indent=2) + "\n",
+            encoding="utf-8",
+        )
     output = {
         "schema_version": 1,
         "harness": "policy-replay-v1",
@@ -127,6 +168,14 @@ def main() -> int:
         "base_workspace_hash": result.base_workspace_hash,
         "task_id": args.task_id,
         "selected": result.selected,
+        "assignment_manifest": (
+            {
+                "manifest_id": assignment_manifest.manifest_id,
+                "content_sha256": assignment_manifest.content_sha256,
+            }
+            if assignment_manifest is not None
+            else None
+        ),
         "provider": "codex-cli" if model_required else None,
         "cli_version": PINNED_CODEX_VERSION if model_required else None,
         "model": args.model if model_required else None,
