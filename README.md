@@ -8,7 +8,7 @@ The project asks one practical question:
 
 ## Current status
 
-**Phase 10 private-evaluation handoff — 150 targets hash-bound for external grading**
+**Phase 10 held-out evaluation complete — primary claim rejected, negative result sealed**
 
 - [Design brief](docs/design-brief.md)
 - [Metrics and evaluation contract](docs/metrics.md)
@@ -39,6 +39,9 @@ The project asks one practical question:
 - [Held-out model-policy result freeze](experiments/configs/heldout-model-policy-result-freeze-v1.json)
 - [Private evaluation handoff](docs/private-evaluation-handoff-v1.md)
 - [Frozen private evaluation request](experiments/configs/heldout-private-evaluation-request-v1.json)
+- [Held-out private policy evaluation](docs/heldout-private-policy-evaluation-v1.md)
+- [Machine-readable final evaluation](experiments/reports/heldout-private-policy-evaluation-v1.json)
+- [Final evaluation freeze](experiments/configs/heldout-final-evaluation-freeze-v1.json)
 
 Phase 2 infrastructure is now present in `src/forgebench`: copy-isolated run
 workspaces, a typed tool gateway, a provider-neutral model adapter, and
@@ -180,8 +183,11 @@ now complete: 120/120 policy/base cells, 57 model calls, and 9 probes were
 sealed without reading hidden labels or invoking the private grader. All record
 and workspace hashes verified. Verify-All introduced one visible protected-file
 regression, leaving 119/120 public completion gates passing after replay. The
-next gate is an external sealed-label join; no reliability winner is claimed
-before that evaluation.
+external [private policy evaluation](docs/heldout-private-policy-evaluation-v1.md)
+then found that all 30 bases and all 120 model-policy replays failed the hidden
+grader. P5 recovered 0/30 false completions, the frozen primary claim gate
+failed, and Verify-All added one hard-safety violation. ForgeBench therefore
+reports a leakage-controlled negative result rather than a reliability winner.
 
 ## Local verification
 
