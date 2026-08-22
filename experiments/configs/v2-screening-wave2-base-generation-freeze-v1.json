@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "freeze_version": "v2-screening-wave2-base-generation-freeze-v1",
+  "status": "frozen",
+  "dataset": {
+    "snapshot": "v2-screening-wave2-tasks-v1",
+    "public_catalog_sha256": "sha256:0a30356af3e339afc19f75b1cece13c8850f64588d815b76f35191c0f871c855",
+    "private_grader_seal_sha256": "sha256:2023e8b322de9a59a8ad4171c0cf0e3231c26ca3facb54e525defdb4b3c30875",
+    "task_ids": [
+      "v2-access-rule-resolver",
+      "v2-config-layer-transaction",
+      "v2-query-pair-encoder",
+      "v2-shared-lease-pool",
+      "v2-stream-secret-redactor",
+      "v2-webhook-replay-gate"
+    ]
+  },
+  "execution": {
+    "harness": "H1a-lite-bounded-planning",
+    "model": "gpt-5.6-sol",
+    "reasoning_effort": "medium",
+    "cli_version": "0.147.0",
+    "repetitions_per_task": 3,
+    "expected_slots": 18,
+    "network": "disabled",
+    "hidden_grader_available_to_runner": false,
+    "selective_case_execution_allowed": false,
+    "outcome_based_case_exclusion_allowed": false
+  },
+  "artifacts": [
+    {
+      "path": "benchmark/v2-development-wave2/manifest.json",
+      "sha256": "sha256:9952a7d37f468ae9ae926c7a849bd737f2f143d51df0e448cb8457483aebfe11"
+    },
+    {
+      "path": "experiments/configs/v2-stage-a-preregistration-v1.json",
+      "sha256": "sha256:029014b56189d6362d0e78d257489ba4a7c71004a50db9d29c54e0d81837d711"
+    },
+    {
+      "path": "scripts/run_v2_screening_wave2_bases.py",
+      "sha256": "sha256:ef9213ca7edc8f91b7c2d7f67ce5439f4ff0e4b9101dd29d74c0005e700684b1"
+    }
+  ],
+  "content_sha256": "sha256:93b3e6aba6ee9f34d5c111fa738f5f1fb6cab63c7cf508e91328c1b3f536f3fb"
+}
