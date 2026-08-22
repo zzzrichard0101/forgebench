@@ -18,7 +18,7 @@
   "artifacts": [
     {"path": "experiments/configs/heldout-base-generation-freeze-v2.json", "sha256": "sha256:24e57250bc2bf0d365d1a1aa2a804cf535ffd57c732fe32d1a8b935723dd320f"},
     {"path": "scripts/recover_heldout_attempt_2.py", "sha256": "sha256:1506b3ec6229d40f6243107dc107818e025aa393b6aa5a1d50d91b130cad6794"},
-    {"path": "src/forgebench/heldout_execution_recovery.py", "sha256": "sha256:4019330c23e544b08ffcbbfcfa2aa89ce4644f467aa486a2fb57b95013cbee84"}
+    {"path": "src/forgebench/heldout_execution_recovery.py", "sha256": "sha256:54ec1fc313e7eb25d2be21e18b2b577609461067cc5597d906542782b1e075ec"}
   ],
-  "content_sha256": "sha256:604bcc276daeb78272a514ab129504f54d17f95ac1d70563dbca6257a654249f"
+  "content_sha256": "sha256:bac5024327fde8ffbd8967b5a287a381e26b936b2fd5c01ed6cc75ab9bf75255"
 }

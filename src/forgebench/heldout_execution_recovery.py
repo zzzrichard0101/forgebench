@@ -87,7 +87,8 @@ def execute_recovery(
     expected_plan_sha256: str,
 ) -> dict[str, Any]:
     plan = build_recovery_plan(
-        attempt_root=attempt_root, isolated_base_root=isolated_base_root
+        attempt_root=attempt_root,
+        isolated_base_root=isolated_base_root.relative_to(repository_root),
     )
     if plan["content_sha256"] != expected_plan_sha256:
         raise RecoveryError("live recovery plan does not match the frozen plan")
