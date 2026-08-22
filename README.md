@@ -8,7 +8,7 @@ The project asks one practical question:
 
 ## Current status
 
-**Phase 9 public-policy replay preflight — 60 grader-free, zero-model slots frozen**
+**Phase 9 public-policy replay complete — 60/60 sealed; Probe-All support collapsed to 0/30**
 
 - [Design brief](docs/design-brief.md)
 - [Metrics and evaluation contract](docs/metrics.md)
@@ -33,6 +33,7 @@ The project asks one practical question:
 - [Held-out base-generation attempt 2](docs/heldout-base-generation-attempt-2.md)
 - [Held-out policy assignment v1](docs/heldout-policy-assignment-v1.md)
 - [Held-out public-policy replay freeze](experiments/configs/heldout-public-policy-replay-freeze-v1.json)
+- [Held-out public-policy replay report](docs/heldout-public-policy-replay-v1.md)
 
 Phase 2 infrastructure is now present in `src/forgebench`: copy-isolated run
 workspaces, a typed tool gateway, a provider-neutral model adapter, and

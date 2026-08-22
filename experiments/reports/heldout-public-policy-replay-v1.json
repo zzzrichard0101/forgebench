@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "report": "heldout-public-policy-replay-v1",
+  "batch_id": "heldout-v1-public-policies-v1",
+  "status": "complete",
+  "plan_sha256": "sha256:fa46fb9cfbbb25b87a74e3931919db36446cb5f58def2e88ff47d9affee38ba1",
+  "assignment_manifest_sha256": "sha256:c275ccbe34243c90f8548f55ea6b48708a75124bdcab2c96b623365d06cb9083",
+  "raw_execution_sha256": "sha256:972e4224648e001d1903960563aa96162ec12d594b57c0039ff22b59261cc76c",
+  "replay_record_catalog_sha256": "sha256:a975a62650edbd74bfb60a541eec2d3817d89321894b859de2f92e9b1dfceaec",
+  "counts": {
+    "completed": 60,
+    "infrastructure_failure": 0,
+    "accept_all": 30,
+    "probe_all": 30
+  },
+  "public_evaluation": {
+    "completion_passed_after": 60,
+    "probe_attempted": 30,
+    "probe_supported": 0,
+    "probe_passed": 0,
+    "record_hash_failures": 0
+  },
+  "usage": {
+    "model_calls": 0,
+    "input_tokens": 0,
+    "cached_input_tokens": 0,
+    "output_tokens": 0,
+    "summed_duration_seconds": 5.288
+  },
+  "evaluation_boundary": {
+    "private_grader_invocations": 0,
+    "hidden_labels_read": false,
+    "hidden_task_outcomes": "deferred"
+  },
+  "limitation": "Probe-All created a probe result for every base, but the frozen adapter supported none because probe selection also requires a risk signal naming the missing file_type dimension. Probe-All therefore performed no effective contract test in this held-out population.",
+  "required_next_action": "freeze and execute the 57 model-backed replays without hidden evaluation"
+}
