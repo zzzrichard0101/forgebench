@@ -17,6 +17,7 @@ The project asks one practical question:
 - [V2 machine-readable preregistration](experiments/configs/v2-stage-a-preregistration-v1.json)
 - [V2 development corpus contract](docs/v2/development-corpus-contract-v1.md)
 - [V2 screening task authoring report](docs/v2/screening-task-authoring-v1.md)
+- [V2 screening base population v1](docs/v2/screening-base-population-v1.md)
 
 - [Design brief](docs/design-brief.md)
 - [Metrics and evaluation contract](docs/metrics.md)

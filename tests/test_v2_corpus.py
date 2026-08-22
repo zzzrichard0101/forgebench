@@ -116,6 +116,16 @@ class V2CorpusTests(unittest.TestCase):
             self.assertEqual(audit.passing_control_clusters, 1)
             self.assertFalse(audit.validation_gate_population_ready)
 
+    def test_public_base_id_accepts_sealed_store_identifiers(self) -> None:
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            manifest, manifest_path, _, _ = self._package(root)
+            manifest["cases"][0]["base_id"] = "v2-screening--task--r1"
+            manifest["content_sha256"] = payload_hash(manifest)
+            manifest_path.write_text(json.dumps(manifest), encoding="utf-8")
+            public = self._validate(root, manifest_path)
+            self.assertEqual(public.payload["cases"][0]["base_id"], "v2-screening--task--r1")
+
     def test_public_manifest_rejects_hidden_fields(self) -> None:
         with tempfile.TemporaryDirectory() as temp:
             root = Path(temp)
