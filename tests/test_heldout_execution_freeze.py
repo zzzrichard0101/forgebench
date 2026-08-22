@@ -16,6 +16,12 @@ FREEZE = (
     / "configs"
     / "heldout-base-generation-freeze-v1.json"
 )
+FREEZE_V2 = (
+    ROOT
+    / "experiments"
+    / "configs"
+    / "heldout-base-generation-freeze-v2.json"
+)
 
 
 class HeldoutExecutionFreezeTests(unittest.TestCase):
@@ -39,6 +45,43 @@ class HeldoutExecutionFreezeTests(unittest.TestCase):
         environment["PYTHONPATH"] = str(ROOT / "src")
         completed = subprocess.run(
             [sys.executable, str(ROOT / "scripts" / "run_heldout_base_completions.py")],
+            cwd=ROOT,
+            env=environment,
+            capture_output=True,
+            text=True,
+            check=True,
+        )
+        plan = json.loads(completed.stdout)
+        generation = payload["base_generation"]
+        self.assertEqual(plan["content_sha256"], generation["dry_run_plan_sha256"])
+        self.assertEqual(len(plan["slots"]), generation["slot_count"])
+        self.assertFalse(plan["hidden_grader_available_to_runner"])
+
+    def test_second_attempt_plan_and_audit_are_frozen(self) -> None:
+        payload = json.loads(FREEZE_V2.read_text(encoding="utf-8"))
+        unsigned = dict(payload)
+        expected = unsigned.pop("content_sha256")
+        encoded = json.dumps(
+            unsigned,
+            ensure_ascii=False,
+            sort_keys=True,
+            separators=(",", ":"),
+        ).encode("utf-8")
+        self.assertEqual(expected, "sha256:" + hashlib.sha256(encoded).hexdigest())
+        for artifact in payload["artifacts"]:
+            self.assertEqual(
+                artifact["sha256"], canonical_file_hash(ROOT / artifact["path"])
+            )
+
+        environment = dict(os.environ)
+        environment["PYTHONPATH"] = str(ROOT / "src")
+        completed = subprocess.run(
+            [
+                sys.executable,
+                str(ROOT / "scripts" / "run_heldout_base_completions.py"),
+                "--attempt-id",
+                payload["attempt_id"],
+            ],
             cwd=ROOT,
             env=environment,
             capture_output=True,

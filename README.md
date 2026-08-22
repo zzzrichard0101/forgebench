@@ -8,7 +8,7 @@ The project asks one practical question:
 
 ## Current status
 
-**Phase 9 held-out attempt 1 retained — 26/30 bases sealed; attempt 2 awaits model credits**
+**Phase 9 held-out attempt 2 preflight — credits restored and the final 30-slot plan is frozen**
 
 - [Design brief](docs/design-brief.md)
 - [Metrics and evaluation contract](docs/metrics.md)
@@ -27,6 +27,7 @@ The project asks one practical question:
 - [Registered held-out v1 package](heldout-public/README.md)
 - [Held-out v1 machine-readable registration](experiments/reports/heldout-intake-v1.json)
 - [Held-out base-generation execution freeze](experiments/configs/heldout-base-generation-freeze-v1.json)
+- [Held-out base-generation attempt-2 freeze](experiments/configs/heldout-base-generation-freeze-v2.json)
 - [Held-out base-generation attempt 1](docs/heldout-base-generation-attempt-1.md)
 
 Phase 2 infrastructure is now present in `src/forgebench`: copy-isolated run
