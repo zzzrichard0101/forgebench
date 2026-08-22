@@ -9,9 +9,11 @@ description = "A reproducible harness laboratory for long-horizon engineering ag
 requires-python = ">=3.11"
 dependencies = []
 
+[project.optional-dependencies]
+portfolio = ["reportlab>=5,<6"]
+
 [tool.setuptools]
 package-dir = {"" = "src"}
 
 [tool.setuptools.packages.find]
 where = ["src"]
-
