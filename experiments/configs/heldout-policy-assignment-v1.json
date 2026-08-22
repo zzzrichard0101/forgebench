@@ -1,0 +1,2182 @@
+{
+  "schema_version": 1,
+  "manifest_version": "policy-assignment-v1",
+  "manifest_id": "heldout-v1-policy-assignment-v1",
+  "created_at": "2026-08-22T12:38:48.884832+00:00",
+  "random_seed": 1729,
+  "random_method": "sha256_rank_within_task_family",
+  "stratification": "task_family",
+  "policy_order": [
+    "accept_all",
+    "verify_all",
+    "random_k_call_matched",
+    "probe_all",
+    "risk_model_direct",
+    "risk_hierarchical"
+  ],
+  "bases": [
+    {
+      "base_id": "heldout-v1--cache-key-collision-incident--r1",
+      "source_run_id": "ad5965bfc6504c0d9e14868dffb6f042",
+      "task_id": "cache-key-collision-incident",
+      "task_version": 1,
+      "stratum": "incident",
+      "base_workspace_hash": "sha256:4cb8fcb872e3b0d2d15f6739a83bdbd5b2a15680215ab6846d715b124cc9577c",
+      "public_completion_eligible": true,
+      "risk_decision": {
+        "policy_version": "completion-risk-v0.2",
+        "eligible": true,
+        "score": 0,
+        "threshold": 3,
+        "level": "low",
+        "escalate": false,
+        "signals": [
+          {
+            "rule_id": "R001_BOUNDARY_SENSITIVE_SURFACE",
+            "triggered": false,
+            "weight": 1,
+            "detail": "no boundary-sensitive semantics found in public task text",
+            "evidence": []
+          },
+          {
+            "rule_id": "R002_MISSING_NEGATIVE_PUBLIC_EVIDENCE",
+            "triggered": false,
+            "weight": 2,
+            "detail": "required negative-evidence dimensions are covered or not applicable",
+            "evidence": []
+          },
+          {
+            "rule_id": "R003_UNRESOLVED_PLAN_ASSUMPTION",
+            "triggered": false,
+            "weight": 2,
+            "detail": "no unresolved-assumption marker found in the public plan",
+            "evidence": []
+          }
+        ]
+      },
+      "probe_route": null,
+      "policies": {
+        "accept_all": {
+          "probe_selected": false,
+          "model_selected": false
+        },
+        "verify_all": {
+          "probe_selected": false,
+          "model_selected": true
+        },
+        "probe_all": {
+          "probe_selected": true,
+          "model_selected": false
+        },
+        "risk_model_direct": {
+          "probe_selected": false,
+          "model_selected": false
+        },
+        "risk_hierarchical": {
+          "probe_selected": false,
+          "model_selected": false
+        },
+        "random_k_call_matched": {
+          "probe_selected": false,
+          "model_selected": false
+        }
+      },
+      "random_rank": "4b393a16888b8fccd004246a40b747e394f995079549d92c207ca0fea634fa81"
+    },
+    {
+      "base_id": "heldout-v1--cache-key-collision-incident--r2",
+      "source_run_id": "04dfa2c099a44385840bdad7902a2bc7",
+      "task_id": "cache-key-collision-incident",
+      "task_version": 1,
+      "stratum": "incident",
+      "base_workspace_hash": "sha256:63bc4fed1612ab7a5abd052578013b4d8652ae11857498a7ab328a1466e85da3",
+      "public_completion_eligible": true,
+      "risk_decision": {
+        "policy_version": "completion-risk-v0.2",
+        "eligible": true,
+        "score": 0,
+        "threshold": 3,
+        "level": "low",
+        "escalate": false,
+        "signals": [
+          {
+            "rule_id": "R001_BOUNDARY_SENSITIVE_SURFACE",
+            "triggered": false,
+            "weight": 1,
+            "detail": "no boundary-sensitive semantics found in public task text",
+            "evidence": []
+          },
+          {
+            "rule_id": "R002_MISSING_NEGATIVE_PUBLIC_EVIDENCE",
+            "triggered": false,
+            "weight": 2,
+            "detail": "required negative-evidence dimensions are covered or not applicable",
+            "evidence": []
+          },
+          {
+            "rule_id": "R003_UNRESOLVED_PLAN_ASSUMPTION",
+            "triggered": false,
+            "weight": 2,
+            "detail": "no unresolved-assumption marker found in the public plan",
+            "evidence": []
+          }
+        ]
+      },
+      "probe_route": null,
+      "policies": {
+        "accept_all": {
+          "probe_selected": false,
+          "model_selected": false
+        },
+        "verify_all": {
+          "probe_selected": false,
+          "model_selected": true
+        },
+        "probe_all": {
+          "probe_selected": true,
+          "model_selected": false
+        },
+        "risk_model_direct": {
+          "probe_selected": false,
+          "model_selected": false
+        },
+        "risk_hierarchical": {
+          "probe_selected": false,
+          "model_selected": false
+        },
+        "random_k_call_matched": {
+          "probe_selected": false,
+          "model_selected": false
+        }
+      },
+      "random_rank": "d24c3b70d187c17dd12603ce5355f030710e7cee614cf1223c3af05065767dd1"
+    },
+    {
+      "base_id": "heldout-v1--cache-key-collision-incident--r3",
+      "source_run_id": "5f71a738dc4f4790bebc43d604920873",
+      "task_id": "cache-key-collision-incident",
+      "task_version": 1,
+      "stratum": "incident",
+      "base_workspace_hash": "sha256:b2cd786e0ce2e59c0b17bb7ad671ee04297167138d5e3bc64572bd19e90eb8a7",
+      "public_completion_eligible": true,
+      "risk_decision": {
+        "policy_version": "completion-risk-v0.2",
+        "eligible": true,
+        "score": 0,
+        "threshold": 3,
+        "level": "low",
+        "escalate": false,
+        "signals": [
+          {
+            "rule_id": "R001_BOUNDARY_SENSITIVE_SURFACE",
+            "triggered": false,
+            "weight": 1,
+            "detail": "no boundary-sensitive semantics found in public task text",
+            "evidence": []
+          },
+          {
+            "rule_id": "R002_MISSING_NEGATIVE_PUBLIC_EVIDENCE",
+            "triggered": false,
+            "weight": 2,
+            "detail": "required negative-evidence dimensions are covered or not applicable",
+            "evidence": []
+          },
+          {
+            "rule_id": "R003_UNRESOLVED_PLAN_ASSUMPTION",
+            "triggered": false,
+            "weight": 2,
+            "detail": "no unresolved-assumption marker found in the public plan",
+            "evidence": []
+          }
+        ]
+      },
+      "probe_route": null,
+      "policies": {
+        "accept_all": {
+          "probe_selected": false,
+          "model_selected": false
+        },
+        "verify_all": {
+          "probe_selected": false,
+          "model_selected": true
+        },
+        "probe_all": {
+          "probe_selected": true,
+          "model_selected": false
+        },
+        "risk_model_direct": {
+          "probe_selected": false,
+          "model_selected": false
+        },
+        "risk_hierarchical": {
+          "probe_selected": false,
+          "model_selected": false
+        },
+        "random_k_call_matched": {
+          "probe_selected": false,
+          "model_selected": false
+        }
+      },
+      "random_rank": "99e5a0a70a7dafe5bd5f7e07cae2fc69647f2f658ef9e262ffc682a761019d48"
+    },
+    {
+      "base_id": "heldout-v1--campaign-template-bundle--r1",
+      "source_run_id": "666bf9ea049746d583f376dea2cecb39",
+      "task_id": "campaign-template-bundle",
+      "task_version": 1,
+      "stratum": "development",
+      "base_workspace_hash": "sha256:fb3a32f1d2f93cc5f1e3bbb03f737c13437b2ba0e15d8e82fd387e97acbb05dc",
+      "public_completion_eligible": true,
+      "risk_decision": {
+        "policy_version": "completion-risk-v0.2",
+        "eligible": true,
+        "score": 0,
+        "threshold": 3,
+        "level": "low",
+        "escalate": false,
+        "signals": [
+          {
+            "rule_id": "R001_BOUNDARY_SENSITIVE_SURFACE",
+            "triggered": false,
+            "weight": 1,
+            "detail": "no boundary-sensitive semantics found in public task text",
+            "evidence": []
+          },
+          {
+            "rule_id": "R002_MISSING_NEGATIVE_PUBLIC_EVIDENCE",
+            "triggered": false,
+            "weight": 2,
+            "detail": "required negative-evidence dimensions are covered or not applicable",
+            "evidence": []
+          },
+          {
+            "rule_id": "R003_UNRESOLVED_PLAN_ASSUMPTION",
+            "triggered": false,
+            "weight": 2,
+            "detail": "no unresolved-assumption marker found in the public plan",
+            "evidence": []
+          }
+        ]
+      },
+      "probe_route": null,
+      "policies": {
+        "accept_all": {
+          "probe_selected": false,
+          "model_selected": false
+        },
+        "verify_all": {
+          "probe_selected": false,
+          "model_selected": true
+        },
+        "probe_all": {
+          "probe_selected": true,
+          "model_selected": false
+        },
+        "risk_model_direct": {
+          "probe_selected": false,
+          "model_selected": false
+        },
+        "risk_hierarchical": {
+          "probe_selected": false,
+          "model_selected": false
+        },
+        "random_k_call_matched": {
+          "probe_selected": false,
+          "model_selected": false
+        }
+      },
+      "random_rank": "6dbb6bbe5aaed2e1d23c620d0dbebb0f3580b3f0e97d0feb706a52a76662835b"
+    },
+    {
+      "base_id": "heldout-v1--campaign-template-bundle--r2",
+      "source_run_id": "5fc6773d682c4d089575a7f8a0f12d44",
+      "task_id": "campaign-template-bundle",
+      "task_version": 1,
+      "stratum": "development",
+      "base_workspace_hash": "sha256:1c3c3c75e14c6db97613ef54f5452bcbaf168546d46d2c517b8496610aef8cc5",
+      "public_completion_eligible": true,
+      "risk_decision": {
+        "policy_version": "completion-risk-v0.2",
+        "eligible": true,
+        "score": 0,
+        "threshold": 3,
+        "level": "low",
+        "escalate": false,
+        "signals": [
+          {
+            "rule_id": "R001_BOUNDARY_SENSITIVE_SURFACE",
+            "triggered": false,
+            "weight": 1,
+            "detail": "no boundary-sensitive semantics found in public task text",
+            "evidence": []
+          },
+          {
+            "rule_id": "R002_MISSING_NEGATIVE_PUBLIC_EVIDENCE",
+            "triggered": false,
+            "weight": 2,
+            "detail": "required negative-evidence dimensions are covered or not applicable",
+            "evidence": []
+          },
+          {
+            "rule_id": "R003_UNRESOLVED_PLAN_ASSUMPTION",
+            "triggered": false,
+            "weight": 2,
+            "detail": "no unresolved-assumption marker found in the public plan",
+            "evidence": []
+          }
+        ]
+      },
+      "probe_route": null,
+      "policies": {
+        "accept_all": {
+          "probe_selected": false,
+          "model_selected": false
+        },
+        "verify_all": {
+          "probe_selected": false,
+          "model_selected": true
+        },
+        "probe_all": {
+          "probe_selected": true,
+          "model_selected": false
+        },
+        "risk_model_direct": {
+          "probe_selected": false,
+          "model_selected": false
+        },
+        "risk_hierarchical": {
+          "probe_selected": false,
+          "model_selected": false
+        },
+        "random_k_call_matched": {
+          "probe_selected": false,
+          "model_selected": false
+        }
+      },
+      "random_rank": "9cff1805bfe327a1bf648922305da54ea935e76c64966dc8fa3f6898481ae68e"
+    },
+    {
+      "base_id": "heldout-v1--campaign-template-bundle--r3",
+      "source_run_id": "1f6f8f8f3f7443d696390668bd1576d1",
+      "task_id": "campaign-template-bundle",
+      "task_version": 1,
+      "stratum": "development",
+      "base_workspace_hash": "sha256:95f6b7454194edf7b37ec400ec42025b7e43742986e4207bdefa9830fedfafc5",
+      "public_completion_eligible": true,
+      "risk_decision": {
+        "policy_version": "completion-risk-v0.2",
+        "eligible": true,
+        "score": 0,
+        "threshold": 3,
+        "level": "low",
+        "escalate": false,
+        "signals": [
+          {
+            "rule_id": "R001_BOUNDARY_SENSITIVE_SURFACE",
+            "triggered": false,
+            "weight": 1,
+            "detail": "no boundary-sensitive semantics found in public task text",
+            "evidence": []
+          },
+          {
+            "rule_id": "R002_MISSING_NEGATIVE_PUBLIC_EVIDENCE",
+            "triggered": false,
+            "weight": 2,
+            "detail": "required negative-evidence dimensions are covered or not applicable",
+            "evidence": []
+          },
+          {
+            "rule_id": "R003_UNRESOLVED_PLAN_ASSUMPTION",
+            "triggered": false,
+            "weight": 2,
+            "detail": "no unresolved-assumption marker found in the public plan",
+            "evidence": []
+          }
+        ]
+      },
+      "probe_route": null,
+      "policies": {
+        "accept_all": {
+          "probe_selected": false,
+          "model_selected": false
+        },
+        "verify_all": {
+          "probe_selected": false,
+          "model_selected": true
+        },
+        "probe_all": {
+          "probe_selected": true,
+          "model_selected": false
+        },
+        "risk_model_direct": {
+          "probe_selected": false,
+          "model_selected": false
+        },
+        "risk_hierarchical": {
+          "probe_selected": false,
+          "model_selected": false
+        },
+        "random_k_call_matched": {
+          "probe_selected": false,
+          "model_selected": false
+        }
+      },
+      "random_rank": "a35eda2653085e05b4facd14e3e9708c7e113ab643db6088c0bd24417fbde57f"
+    },
+    {
+      "base_id": "heldout-v1--certificate-rollover-incident--r1",
+      "source_run_id": "ccf777be75864aef95b14a43b754769a",
+      "task_id": "certificate-rollover-incident",
+      "task_version": 1,
+      "stratum": "incident",
+      "base_workspace_hash": "sha256:3294905e508554e27c5a426c940f24d592f96b345e850925a1f8cb52c313c785",
+      "public_completion_eligible": true,
+      "risk_decision": {
+        "policy_version": "completion-risk-v0.2",
+        "eligible": true,
+        "score": 0,
+        "threshold": 3,
+        "level": "low",
+        "escalate": false,
+        "signals": [
+          {
+            "rule_id": "R001_BOUNDARY_SENSITIVE_SURFACE",
+            "triggered": false,
+            "weight": 1,
+            "detail": "no boundary-sensitive semantics found in public task text",
+            "evidence": []
+          },
+          {
+            "rule_id": "R002_MISSING_NEGATIVE_PUBLIC_EVIDENCE",
+            "triggered": false,
+            "weight": 2,
+            "detail": "required negative-evidence dimensions are covered or not applicable",
+            "evidence": []
+          },
+          {
+            "rule_id": "R003_UNRESOLVED_PLAN_ASSUMPTION",
+            "triggered": false,
+            "weight": 2,
+            "detail": "no unresolved-assumption marker found in the public plan",
+            "evidence": []
+          }
+        ]
+      },
+      "probe_route": null,
+      "policies": {
+        "accept_all": {
+          "probe_selected": false,
+          "model_selected": false
+        },
+        "verify_all": {
+          "probe_selected": false,
+          "model_selected": true
+        },
+        "probe_all": {
+          "probe_selected": true,
+          "model_selected": false
+        },
+        "risk_model_direct": {
+          "probe_selected": false,
+          "model_selected": false
+        },
+        "risk_hierarchical": {
+          "probe_selected": false,
+          "model_selected": false
+        },
+        "random_k_call_matched": {
+          "probe_selected": false,
+          "model_selected": false
+        }
+      },
+      "random_rank": "11aa1ba5a6c829d3b9a2de0cad7f129c97facae58281d578481a2a2cf6852f7a"
+    },
+    {
+      "base_id": "heldout-v1--certificate-rollover-incident--r2",
+      "source_run_id": "4e7bce185a874815ac6382728af900c4",
+      "task_id": "certificate-rollover-incident",
+      "task_version": 1,
+      "stratum": "incident",
+      "base_workspace_hash": "sha256:13cc00816758fe580a0989c0d24ca96cd6829fa63bc667f894a2cf8caa1eb4da",
+      "public_completion_eligible": true,
+      "risk_decision": {
+        "policy_version": "completion-risk-v0.2",
+        "eligible": true,
+        "score": 0,
+        "threshold": 3,
+        "level": "low",
+        "escalate": false,
+        "signals": [
+          {
+            "rule_id": "R001_BOUNDARY_SENSITIVE_SURFACE",
+            "triggered": false,
+            "weight": 1,
+            "detail": "no boundary-sensitive semantics found in public task text",
+            "evidence": []
+          },
+          {
+            "rule_id": "R002_MISSING_NEGATIVE_PUBLIC_EVIDENCE",
+            "triggered": false,
+            "weight": 2,
+            "detail": "required negative-evidence dimensions are covered or not applicable",
+            "evidence": []
+          },
+          {
+            "rule_id": "R003_UNRESOLVED_PLAN_ASSUMPTION",
+            "triggered": false,
+            "weight": 2,
+            "detail": "no unresolved-assumption marker found in the public plan",
+            "evidence": []
+          }
+        ]
+      },
+      "probe_route": null,
+      "policies": {
+        "accept_all": {
+          "probe_selected": false,
+          "model_selected": false
+        },
+        "verify_all": {
+          "probe_selected": false,
+          "model_selected": true
+        },
+        "probe_all": {
+          "probe_selected": true,
+          "model_selected": false
+        },
+        "risk_model_direct": {
+          "probe_selected": false,
+          "model_selected": false
+        },
+        "risk_hierarchical": {
+          "probe_selected": false,
+          "model_selected": false
+        },
+        "random_k_call_matched": {
+          "probe_selected": false,
+          "model_selected": false
+        }
+      },
+      "random_rank": "5e7b2f8ee7b0d4f71c2049a99c3c5fb74d6e29bc163617c0f0a8088b80fc9a10"
+    },
+    {
+      "base_id": "heldout-v1--certificate-rollover-incident--r3",
+      "source_run_id": "cff6edb55bd342cda35089cc98eba65a",
+      "task_id": "certificate-rollover-incident",
+      "task_version": 1,
+      "stratum": "incident",
+      "base_workspace_hash": "sha256:729bbc7155e426e8a53799a68fe6e517703cf2221251860bb3a7fdb2e48a3f3d",
+      "public_completion_eligible": true,
+      "risk_decision": {
+        "policy_version": "completion-risk-v0.2",
+        "eligible": true,
+        "score": 0,
+        "threshold": 3,
+        "level": "low",
+        "escalate": false,
+        "signals": [
+          {
+            "rule_id": "R001_BOUNDARY_SENSITIVE_SURFACE",
+            "triggered": false,
+            "weight": 1,
+            "detail": "no boundary-sensitive semantics found in public task text",
+            "evidence": []
+          },
+          {
+            "rule_id": "R002_MISSING_NEGATIVE_PUBLIC_EVIDENCE",
+            "triggered": false,
+            "weight": 2,
+            "detail": "required negative-evidence dimensions are covered or not applicable",
+            "evidence": []
+          },
+          {
+            "rule_id": "R003_UNRESOLVED_PLAN_ASSUMPTION",
+            "triggered": false,
+            "weight": 2,
+            "detail": "no unresolved-assumption marker found in the public plan",
+            "evidence": []
+          }
+        ]
+      },
+      "probe_route": null,
+      "policies": {
+        "accept_all": {
+          "probe_selected": false,
+          "model_selected": false
+        },
+        "verify_all": {
+          "probe_selected": false,
+          "model_selected": true
+        },
+        "probe_all": {
+          "probe_selected": true,
+          "model_selected": false
+        },
+        "risk_model_direct": {
+          "probe_selected": false,
+          "model_selected": false
+        },
+        "risk_hierarchical": {
+          "probe_selected": false,
+          "model_selected": false
+        },
+        "random_k_call_matched": {
+          "probe_selected": false,
+          "model_selected": false
+        }
+      },
+      "random_rank": "990d1c7215f32ede167446ee3d3f9e066941f97eba0486267181dc168cec3042"
+    },
+    {
+      "base_id": "heldout-v1--csv-formula-neutralization--r1",
+      "source_run_id": "b6042e4906584e0a8e65fe39f7b7d9a4",
+      "task_id": "csv-formula-neutralization",
+      "task_version": 1,
+      "stratum": "adversarial",
+      "base_workspace_hash": "sha256:afa2a9a048a47dbbada76785fec2041a547a78083b791d9081814b1e02a385df",
+      "public_completion_eligible": true,
+      "risk_decision": {
+        "policy_version": "completion-risk-v0.2",
+        "eligible": true,
+        "score": 3,
+        "threshold": 3,
+        "level": "high",
+        "escalate": true,
+        "signals": [
+          {
+            "rule_id": "R001_BOUNDARY_SENSITIVE_SURFACE",
+            "triggered": true,
+            "weight": 1,
+            "detail": "public task text contains boundary-sensitive semantics",
+            "evidence": [
+              "security"
+            ]
+          },
+          {
+            "rule_id": "R002_MISSING_NEGATIVE_PUBLIC_EVIDENCE",
+            "triggered": true,
+            "weight": 2,
+            "detail": "one or more public contract dimensions lack negative evidence",
+            "evidence": [
+              "missing:negative_case"
+            ]
+          },
+          {
+            "rule_id": "R003_UNRESOLVED_PLAN_ASSUMPTION",
+            "triggered": false,
+            "weight": 2,
+            "detail": "no unresolved-assumption marker found in the public plan",
+            "evidence": []
+          }
+        ]
+      },
+      "probe_route": {
+        "probe_version": "deterministic-probe-v0.2",
+        "adapter_id": null,
+        "supported": false,
+        "passed": false,
+        "cases": [],
+        "duration_seconds": 0.0
+      },
+      "policies": {
+        "accept_all": {
+          "probe_selected": false,
+          "model_selected": false
+        },
+        "verify_all": {
+          "probe_selected": false,
+          "model_selected": true
+        },
+        "probe_all": {
+          "probe_selected": true,
+          "model_selected": false
+        },
+        "risk_model_direct": {
+          "probe_selected": false,
+          "model_selected": true
+        },
+        "risk_hierarchical": {
+          "probe_selected": true,
+          "model_selected": true
+        },
+        "random_k_call_matched": {
+          "probe_selected": false,
+          "model_selected": true
+        }
+      },
+      "random_rank": "9a95062857f83ba026ebc74ed4078d44c518202890de5efbf454de4641f5e094"
+    },
+    {
+      "base_id": "heldout-v1--csv-formula-neutralization--r2",
+      "source_run_id": "7c4cc74426e847fa880e59d1faaff68c",
+      "task_id": "csv-formula-neutralization",
+      "task_version": 1,
+      "stratum": "adversarial",
+      "base_workspace_hash": "sha256:83d28f24189830766c03f8c04b26e1dd08ac12b59f40c8586b30277ea6424299",
+      "public_completion_eligible": true,
+      "risk_decision": {
+        "policy_version": "completion-risk-v0.2",
+        "eligible": true,
+        "score": 3,
+        "threshold": 3,
+        "level": "high",
+        "escalate": true,
+        "signals": [
+          {
+            "rule_id": "R001_BOUNDARY_SENSITIVE_SURFACE",
+            "triggered": true,
+            "weight": 1,
+            "detail": "public task text contains boundary-sensitive semantics",
+            "evidence": [
+              "security"
+            ]
+          },
+          {
+            "rule_id": "R002_MISSING_NEGATIVE_PUBLIC_EVIDENCE",
+            "triggered": true,
+            "weight": 2,
+            "detail": "one or more public contract dimensions lack negative evidence",
+            "evidence": [
+              "missing:negative_case"
+            ]
+          },
+          {
+            "rule_id": "R003_UNRESOLVED_PLAN_ASSUMPTION",
+            "triggered": false,
+            "weight": 2,
+            "detail": "no unresolved-assumption marker found in the public plan",
+            "evidence": []
+          }
+        ]
+      },
+      "probe_route": {
+        "probe_version": "deterministic-probe-v0.2",
+        "adapter_id": null,
+        "supported": false,
+        "passed": false,
+        "cases": [],
+        "duration_seconds": 0.0
+      },
+      "policies": {
+        "accept_all": {
+          "probe_selected": false,
+          "model_selected": false
+        },
+        "verify_all": {
+          "probe_selected": false,
+          "model_selected": true
+        },
+        "probe_all": {
+          "probe_selected": true,
+          "model_selected": false
+        },
+        "risk_model_direct": {
+          "probe_selected": false,
+          "model_selected": true
+        },
+        "risk_hierarchical": {
+          "probe_selected": true,
+          "model_selected": true
+        },
+        "random_k_call_matched": {
+          "probe_selected": false,
+          "model_selected": true
+        }
+      },
+      "random_rank": "97a06485d6c46d392bb25977532ce7461a408d0d33e2146ec3c2ec47dcb50d1b"
+    },
+    {
+      "base_id": "heldout-v1--csv-formula-neutralization--r3",
+      "source_run_id": "e9386345f1234b17b822f73a400dd041",
+      "task_id": "csv-formula-neutralization",
+      "task_version": 1,
+      "stratum": "adversarial",
+      "base_workspace_hash": "sha256:c9e103bc87f4cb1bbd6d952b0e1942d63c555e3500fa5aea58fd03835eeafa97",
+      "public_completion_eligible": true,
+      "risk_decision": {
+        "policy_version": "completion-risk-v0.2",
+        "eligible": true,
+        "score": 3,
+        "threshold": 3,
+        "level": "high",
+        "escalate": true,
+        "signals": [
+          {
+            "rule_id": "R001_BOUNDARY_SENSITIVE_SURFACE",
+            "triggered": true,
+            "weight": 1,
+            "detail": "public task text contains boundary-sensitive semantics",
+            "evidence": [
+              "security"
+            ]
+          },
+          {
+            "rule_id": "R002_MISSING_NEGATIVE_PUBLIC_EVIDENCE",
+            "triggered": true,
+            "weight": 2,
+            "detail": "one or more public contract dimensions lack negative evidence",
+            "evidence": [
+              "missing:negative_case"
+            ]
+          },
+          {
+            "rule_id": "R003_UNRESOLVED_PLAN_ASSUMPTION",
+            "triggered": false,
+            "weight": 2,
+            "detail": "no unresolved-assumption marker found in the public plan",
+            "evidence": []
+          }
+        ]
+      },
+      "probe_route": {
+        "probe_version": "deterministic-probe-v0.2",
+        "adapter_id": null,
+        "supported": false,
+        "passed": false,
+        "cases": [],
+        "duration_seconds": 0.0
+      },
+      "policies": {
+        "accept_all": {
+          "probe_selected": false,
+          "model_selected": false
+        },
+        "verify_all": {
+          "probe_selected": false,
+          "model_selected": true
+        },
+        "probe_all": {
+          "probe_selected": true,
+          "model_selected": false
+        },
+        "risk_model_direct": {
+          "probe_selected": false,
+          "model_selected": true
+        },
+        "risk_hierarchical": {
+          "probe_selected": true,
+          "model_selected": true
+        },
+        "random_k_call_matched": {
+          "probe_selected": false,
+          "model_selected": true
+        }
+      },
+      "random_rank": "d8331c1d765697de02d04542969fcff75342b8a05343c208a7090366fba7fc8d"
+    },
+    {
+      "base_id": "heldout-v1--database-migration-lock-incident--r1",
+      "source_run_id": "e37d7bab52a446b9b5d0d646b9fb1df2",
+      "task_id": "database-migration-lock-incident",
+      "task_version": 1,
+      "stratum": "incident",
+      "base_workspace_hash": "sha256:0a38798d5a29b3e441af6cb87e41fbfbdf5d5c15766940ee6261cedce5ca6215",
+      "public_completion_eligible": true,
+      "risk_decision": {
+        "policy_version": "completion-risk-v0.2",
+        "eligible": true,
+        "score": 0,
+        "threshold": 3,
+        "level": "low",
+        "escalate": false,
+        "signals": [
+          {
+            "rule_id": "R001_BOUNDARY_SENSITIVE_SURFACE",
+            "triggered": false,
+            "weight": 1,
+            "detail": "no boundary-sensitive semantics found in public task text",
+            "evidence": []
+          },
+          {
+            "rule_id": "R002_MISSING_NEGATIVE_PUBLIC_EVIDENCE",
+            "triggered": false,
+            "weight": 2,
+            "detail": "required negative-evidence dimensions are covered or not applicable",
+            "evidence": []
+          },
+          {
+            "rule_id": "R003_UNRESOLVED_PLAN_ASSUMPTION",
+            "triggered": false,
+            "weight": 2,
+            "detail": "no unresolved-assumption marker found in the public plan",
+            "evidence": []
+          }
+        ]
+      },
+      "probe_route": null,
+      "policies": {
+        "accept_all": {
+          "probe_selected": false,
+          "model_selected": false
+        },
+        "verify_all": {
+          "probe_selected": false,
+          "model_selected": true
+        },
+        "probe_all": {
+          "probe_selected": true,
+          "model_selected": false
+        },
+        "risk_model_direct": {
+          "probe_selected": false,
+          "model_selected": false
+        },
+        "risk_hierarchical": {
+          "probe_selected": false,
+          "model_selected": false
+        },
+        "random_k_call_matched": {
+          "probe_selected": false,
+          "model_selected": false
+        }
+      },
+      "random_rank": "fd7b70712989868b650e72506ed0af30fcc7b4ac2ccae6ae0a1a58d4a18425f4"
+    },
+    {
+      "base_id": "heldout-v1--database-migration-lock-incident--r2",
+      "source_run_id": "82149aa9eba6439b8b37ce12d6b5ebf1",
+      "task_id": "database-migration-lock-incident",
+      "task_version": 1,
+      "stratum": "incident",
+      "base_workspace_hash": "sha256:f721804add64d5a4a3adfc8689b2dd1bb4495ad4624683f221273c1f6cae0143",
+      "public_completion_eligible": true,
+      "risk_decision": {
+        "policy_version": "completion-risk-v0.2",
+        "eligible": true,
+        "score": 0,
+        "threshold": 3,
+        "level": "low",
+        "escalate": false,
+        "signals": [
+          {
+            "rule_id": "R001_BOUNDARY_SENSITIVE_SURFACE",
+            "triggered": false,
+            "weight": 1,
+            "detail": "no boundary-sensitive semantics found in public task text",
+            "evidence": []
+          },
+          {
+            "rule_id": "R002_MISSING_NEGATIVE_PUBLIC_EVIDENCE",
+            "triggered": false,
+            "weight": 2,
+            "detail": "required negative-evidence dimensions are covered or not applicable",
+            "evidence": []
+          },
+          {
+            "rule_id": "R003_UNRESOLVED_PLAN_ASSUMPTION",
+            "triggered": false,
+            "weight": 2,
+            "detail": "no unresolved-assumption marker found in the public plan",
+            "evidence": []
+          }
+        ]
+      },
+      "probe_route": null,
+      "policies": {
+        "accept_all": {
+          "probe_selected": false,
+          "model_selected": false
+        },
+        "verify_all": {
+          "probe_selected": false,
+          "model_selected": true
+        },
+        "probe_all": {
+          "probe_selected": true,
+          "model_selected": false
+        },
+        "risk_model_direct": {
+          "probe_selected": false,
+          "model_selected": false
+        },
+        "risk_hierarchical": {
+          "probe_selected": false,
+          "model_selected": false
+        },
+        "random_k_call_matched": {
+          "probe_selected": false,
+          "model_selected": false
+        }
+      },
+      "random_rank": "0b703bb762c835afbac1be9e5ee973b1407c5a45eb3caa9154607c109fbb502f"
+    },
+    {
+      "base_id": "heldout-v1--database-migration-lock-incident--r3",
+      "source_run_id": "fb4ec4c877c140a196b5ea61e0b12822",
+      "task_id": "database-migration-lock-incident",
+      "task_version": 1,
+      "stratum": "incident",
+      "base_workspace_hash": "sha256:d8d40604a65e174bd2bd24a2f10d7c95f60176a5b852fbd81a0bab47dc8a5cd6",
+      "public_completion_eligible": true,
+      "risk_decision": {
+        "policy_version": "completion-risk-v0.2",
+        "eligible": true,
+        "score": 0,
+        "threshold": 3,
+        "level": "low",
+        "escalate": false,
+        "signals": [
+          {
+            "rule_id": "R001_BOUNDARY_SENSITIVE_SURFACE",
+            "triggered": false,
+            "weight": 1,
+            "detail": "no boundary-sensitive semantics found in public task text",
+            "evidence": []
+          },
+          {
+            "rule_id": "R002_MISSING_NEGATIVE_PUBLIC_EVIDENCE",
+            "triggered": false,
+            "weight": 2,
+            "detail": "required negative-evidence dimensions are covered or not applicable",
+            "evidence": []
+          },
+          {
+            "rule_id": "R003_UNRESOLVED_PLAN_ASSUMPTION",
+            "triggered": false,
+            "weight": 2,
+            "detail": "no unresolved-assumption marker found in the public plan",
+            "evidence": []
+          }
+        ]
+      },
+      "probe_route": null,
+      "policies": {
+        "accept_all": {
+          "probe_selected": false,
+          "model_selected": false
+        },
+        "verify_all": {
+          "probe_selected": false,
+          "model_selected": true
+        },
+        "probe_all": {
+          "probe_selected": true,
+          "model_selected": false
+        },
+        "risk_model_direct": {
+          "probe_selected": false,
+          "model_selected": false
+        },
+        "risk_hierarchical": {
+          "probe_selected": false,
+          "model_selected": false
+        },
+        "random_k_call_matched": {
+          "probe_selected": false,
+          "model_selected": false
+        }
+      },
+      "random_rank": "87dc4b3d10be8b67ce99c700984a3e0311df0db5fd842de16f7e8a4f57e0505f"
+    },
+    {
+      "base_id": "heldout-v1--nested-secret-redaction--r1",
+      "source_run_id": "e625ac108b8d4b1d94f9655be38d7d5e",
+      "task_id": "nested-secret-redaction",
+      "task_version": 1,
+      "stratum": "adversarial",
+      "base_workspace_hash": "sha256:7a2487b1f7d1f8956c0c31d1d52273bf04f55e72035553230bcc05e70726f5d5",
+      "public_completion_eligible": true,
+      "risk_decision": {
+        "policy_version": "completion-risk-v0.2",
+        "eligible": true,
+        "score": 3,
+        "threshold": 3,
+        "level": "high",
+        "escalate": true,
+        "signals": [
+          {
+            "rule_id": "R001_BOUNDARY_SENSITIVE_SURFACE",
+            "triggered": true,
+            "weight": 1,
+            "detail": "public task text contains boundary-sensitive semantics",
+            "evidence": [
+              "security"
+            ]
+          },
+          {
+            "rule_id": "R002_MISSING_NEGATIVE_PUBLIC_EVIDENCE",
+            "triggered": true,
+            "weight": 2,
+            "detail": "one or more public contract dimensions lack negative evidence",
+            "evidence": [
+              "missing:negative_case"
+            ]
+          },
+          {
+            "rule_id": "R003_UNRESOLVED_PLAN_ASSUMPTION",
+            "triggered": false,
+            "weight": 2,
+            "detail": "no unresolved-assumption marker found in the public plan",
+            "evidence": []
+          }
+        ]
+      },
+      "probe_route": {
+        "probe_version": "deterministic-probe-v0.2",
+        "adapter_id": null,
+        "supported": false,
+        "passed": false,
+        "cases": [],
+        "duration_seconds": 0.0
+      },
+      "policies": {
+        "accept_all": {
+          "probe_selected": false,
+          "model_selected": false
+        },
+        "verify_all": {
+          "probe_selected": false,
+          "model_selected": true
+        },
+        "probe_all": {
+          "probe_selected": true,
+          "model_selected": false
+        },
+        "risk_model_direct": {
+          "probe_selected": false,
+          "model_selected": true
+        },
+        "risk_hierarchical": {
+          "probe_selected": true,
+          "model_selected": true
+        },
+        "random_k_call_matched": {
+          "probe_selected": false,
+          "model_selected": true
+        }
+      },
+      "random_rank": "3a1f66c52a659f06fc93e004756bd589d8ee38a2d82d96f3c0d98fe049d52055"
+    },
+    {
+      "base_id": "heldout-v1--nested-secret-redaction--r2",
+      "source_run_id": "facc741a77224b0681b6b49597a37381",
+      "task_id": "nested-secret-redaction",
+      "task_version": 1,
+      "stratum": "adversarial",
+      "base_workspace_hash": "sha256:80fb0d924a5249da1f7c8d8b9462352d33eadef97de2a08768bd0e2deeb1b0e8",
+      "public_completion_eligible": true,
+      "risk_decision": {
+        "policy_version": "completion-risk-v0.2",
+        "eligible": true,
+        "score": 3,
+        "threshold": 3,
+        "level": "high",
+        "escalate": true,
+        "signals": [
+          {
+            "rule_id": "R001_BOUNDARY_SENSITIVE_SURFACE",
+            "triggered": true,
+            "weight": 1,
+            "detail": "public task text contains boundary-sensitive semantics",
+            "evidence": [
+              "security"
+            ]
+          },
+          {
+            "rule_id": "R002_MISSING_NEGATIVE_PUBLIC_EVIDENCE",
+            "triggered": true,
+            "weight": 2,
+            "detail": "one or more public contract dimensions lack negative evidence",
+            "evidence": [
+              "missing:negative_case"
+            ]
+          },
+          {
+            "rule_id": "R003_UNRESOLVED_PLAN_ASSUMPTION",
+            "triggered": false,
+            "weight": 2,
+            "detail": "no unresolved-assumption marker found in the public plan",
+            "evidence": []
+          }
+        ]
+      },
+      "probe_route": {
+        "probe_version": "deterministic-probe-v0.2",
+        "adapter_id": null,
+        "supported": false,
+        "passed": false,
+        "cases": [],
+        "duration_seconds": 0.0
+      },
+      "policies": {
+        "accept_all": {
+          "probe_selected": false,
+          "model_selected": false
+        },
+        "verify_all": {
+          "probe_selected": false,
+          "model_selected": true
+        },
+        "probe_all": {
+          "probe_selected": true,
+          "model_selected": false
+        },
+        "risk_model_direct": {
+          "probe_selected": false,
+          "model_selected": true
+        },
+        "risk_hierarchical": {
+          "probe_selected": true,
+          "model_selected": true
+        },
+        "random_k_call_matched": {
+          "probe_selected": false,
+          "model_selected": true
+        }
+      },
+      "random_rank": "edb51bafb34193eee84a0100deaeae3c96c299aaa348746a8519763fd0ee3536"
+    },
+    {
+      "base_id": "heldout-v1--nested-secret-redaction--r3",
+      "source_run_id": "7411b3826e244f4393fefdf03a2bc502",
+      "task_id": "nested-secret-redaction",
+      "task_version": 1,
+      "stratum": "adversarial",
+      "base_workspace_hash": "sha256:cd0dd7a88afc7ceb8f20c1defc2c3e431b71a90dcb69ba8389ec1783acc04236",
+      "public_completion_eligible": true,
+      "risk_decision": {
+        "policy_version": "completion-risk-v0.2",
+        "eligible": true,
+        "score": 3,
+        "threshold": 3,
+        "level": "high",
+        "escalate": true,
+        "signals": [
+          {
+            "rule_id": "R001_BOUNDARY_SENSITIVE_SURFACE",
+            "triggered": true,
+            "weight": 1,
+            "detail": "public task text contains boundary-sensitive semantics",
+            "evidence": [
+              "security"
+            ]
+          },
+          {
+            "rule_id": "R002_MISSING_NEGATIVE_PUBLIC_EVIDENCE",
+            "triggered": true,
+            "weight": 2,
+            "detail": "one or more public contract dimensions lack negative evidence",
+            "evidence": [
+              "missing:negative_case"
+            ]
+          },
+          {
+            "rule_id": "R003_UNRESOLVED_PLAN_ASSUMPTION",
+            "triggered": false,
+            "weight": 2,
+            "detail": "no unresolved-assumption marker found in the public plan",
+            "evidence": []
+          }
+        ]
+      },
+      "probe_route": {
+        "probe_version": "deterministic-probe-v0.2",
+        "adapter_id": null,
+        "supported": false,
+        "passed": false,
+        "cases": [],
+        "duration_seconds": 0.0
+      },
+      "policies": {
+        "accept_all": {
+          "probe_selected": false,
+          "model_selected": false
+        },
+        "verify_all": {
+          "probe_selected": false,
+          "model_selected": true
+        },
+        "probe_all": {
+          "probe_selected": true,
+          "model_selected": false
+        },
+        "risk_model_direct": {
+          "probe_selected": false,
+          "model_selected": true
+        },
+        "risk_hierarchical": {
+          "probe_selected": true,
+          "model_selected": true
+        },
+        "random_k_call_matched": {
+          "probe_selected": false,
+          "model_selected": true
+        }
+      },
+      "random_rank": "76a0ad0ed36e4fa2e4a04c105e8666eeddcbfc1b109970e3e6dbbd31a010c7a7"
+    },
+    {
+      "base_id": "heldout-v1--regional-tax-table-loader--r1",
+      "source_run_id": "e1da237b208e4bc2b5bd6d2f064c4d3b",
+      "task_id": "regional-tax-table-loader",
+      "task_version": 1,
+      "stratum": "development",
+      "base_workspace_hash": "sha256:4b33a53202b90b4162659b88df4402f841066b5633185c5920d9fabbb03f9dc8",
+      "public_completion_eligible": true,
+      "risk_decision": {
+        "policy_version": "completion-risk-v0.2",
+        "eligible": true,
+        "score": 0,
+        "threshold": 3,
+        "level": "low",
+        "escalate": false,
+        "signals": [
+          {
+            "rule_id": "R001_BOUNDARY_SENSITIVE_SURFACE",
+            "triggered": false,
+            "weight": 1,
+            "detail": "no boundary-sensitive semantics found in public task text",
+            "evidence": []
+          },
+          {
+            "rule_id": "R002_MISSING_NEGATIVE_PUBLIC_EVIDENCE",
+            "triggered": false,
+            "weight": 2,
+            "detail": "required negative-evidence dimensions are covered or not applicable",
+            "evidence": []
+          },
+          {
+            "rule_id": "R003_UNRESOLVED_PLAN_ASSUMPTION",
+            "triggered": false,
+            "weight": 2,
+            "detail": "no unresolved-assumption marker found in the public plan",
+            "evidence": []
+          }
+        ]
+      },
+      "probe_route": null,
+      "policies": {
+        "accept_all": {
+          "probe_selected": false,
+          "model_selected": false
+        },
+        "verify_all": {
+          "probe_selected": false,
+          "model_selected": true
+        },
+        "probe_all": {
+          "probe_selected": true,
+          "model_selected": false
+        },
+        "risk_model_direct": {
+          "probe_selected": false,
+          "model_selected": false
+        },
+        "risk_hierarchical": {
+          "probe_selected": false,
+          "model_selected": false
+        },
+        "random_k_call_matched": {
+          "probe_selected": false,
+          "model_selected": false
+        }
+      },
+      "random_rank": "2c9163e32ec271dc9fec0374fc450bdc9e4e62c66c3ddd5decd7008b22f056b8"
+    },
+    {
+      "base_id": "heldout-v1--regional-tax-table-loader--r2",
+      "source_run_id": "cfb41a13727d49e29fa9cdcb7d593981",
+      "task_id": "regional-tax-table-loader",
+      "task_version": 1,
+      "stratum": "development",
+      "base_workspace_hash": "sha256:062a52ede77c4d52d18a4c0a4cba20974060a504c6bcf78e12a19cbc318832f0",
+      "public_completion_eligible": true,
+      "risk_decision": {
+        "policy_version": "completion-risk-v0.2",
+        "eligible": true,
+        "score": 0,
+        "threshold": 3,
+        "level": "low",
+        "escalate": false,
+        "signals": [
+          {
+            "rule_id": "R001_BOUNDARY_SENSITIVE_SURFACE",
+            "triggered": false,
+            "weight": 1,
+            "detail": "no boundary-sensitive semantics found in public task text",
+            "evidence": []
+          },
+          {
+            "rule_id": "R002_MISSING_NEGATIVE_PUBLIC_EVIDENCE",
+            "triggered": false,
+            "weight": 2,
+            "detail": "required negative-evidence dimensions are covered or not applicable",
+            "evidence": []
+          },
+          {
+            "rule_id": "R003_UNRESOLVED_PLAN_ASSUMPTION",
+            "triggered": false,
+            "weight": 2,
+            "detail": "no unresolved-assumption marker found in the public plan",
+            "evidence": []
+          }
+        ]
+      },
+      "probe_route": null,
+      "policies": {
+        "accept_all": {
+          "probe_selected": false,
+          "model_selected": false
+        },
+        "verify_all": {
+          "probe_selected": false,
+          "model_selected": true
+        },
+        "probe_all": {
+          "probe_selected": true,
+          "model_selected": false
+        },
+        "risk_model_direct": {
+          "probe_selected": false,
+          "model_selected": false
+        },
+        "risk_hierarchical": {
+          "probe_selected": false,
+          "model_selected": false
+        },
+        "random_k_call_matched": {
+          "probe_selected": false,
+          "model_selected": false
+        }
+      },
+      "random_rank": "23ab44dfd4a2993cda7cdd4387ffa383264c64570f6a74fa365b1f31ef3a651c"
+    },
+    {
+      "base_id": "heldout-v1--regional-tax-table-loader--r3",
+      "source_run_id": "118d314fb51241d4aaa4fc04f39026da",
+      "task_id": "regional-tax-table-loader",
+      "task_version": 1,
+      "stratum": "development",
+      "base_workspace_hash": "sha256:a042e4a2f2ee518e68420e4ce29e8b93b411cd5de6b4d654410425eec07d31ac",
+      "public_completion_eligible": true,
+      "risk_decision": {
+        "policy_version": "completion-risk-v0.2",
+        "eligible": true,
+        "score": 0,
+        "threshold": 3,
+        "level": "low",
+        "escalate": false,
+        "signals": [
+          {
+            "rule_id": "R001_BOUNDARY_SENSITIVE_SURFACE",
+            "triggered": false,
+            "weight": 1,
+            "detail": "no boundary-sensitive semantics found in public task text",
+            "evidence": []
+          },
+          {
+            "rule_id": "R002_MISSING_NEGATIVE_PUBLIC_EVIDENCE",
+            "triggered": false,
+            "weight": 2,
+            "detail": "required negative-evidence dimensions are covered or not applicable",
+            "evidence": []
+          },
+          {
+            "rule_id": "R003_UNRESOLVED_PLAN_ASSUMPTION",
+            "triggered": false,
+            "weight": 2,
+            "detail": "no unresolved-assumption marker found in the public plan",
+            "evidence": []
+          }
+        ]
+      },
+      "probe_route": null,
+      "policies": {
+        "accept_all": {
+          "probe_selected": false,
+          "model_selected": false
+        },
+        "verify_all": {
+          "probe_selected": false,
+          "model_selected": true
+        },
+        "probe_all": {
+          "probe_selected": true,
+          "model_selected": false
+        },
+        "risk_model_direct": {
+          "probe_selected": false,
+          "model_selected": false
+        },
+        "risk_hierarchical": {
+          "probe_selected": false,
+          "model_selected": false
+        },
+        "random_k_call_matched": {
+          "probe_selected": false,
+          "model_selected": false
+        }
+      },
+      "random_rank": "89356ea6a005384165d53badc5ba175eaead75a6193e34eb3fb177192cb90fb0"
+    },
+    {
+      "base_id": "heldout-v1--rollout-allocation-loader--r1",
+      "source_run_id": "ae823a5fdaaa48c2a42bdd98f013ca02",
+      "task_id": "rollout-allocation-loader",
+      "task_version": 1,
+      "stratum": "development",
+      "base_workspace_hash": "sha256:33dacf6efa8b18ba338561e0a48109df450f928aa97983bd6d03e08cd90f5874",
+      "public_completion_eligible": true,
+      "risk_decision": {
+        "policy_version": "completion-risk-v0.2",
+        "eligible": true,
+        "score": 0,
+        "threshold": 3,
+        "level": "low",
+        "escalate": false,
+        "signals": [
+          {
+            "rule_id": "R001_BOUNDARY_SENSITIVE_SURFACE",
+            "triggered": false,
+            "weight": 1,
+            "detail": "no boundary-sensitive semantics found in public task text",
+            "evidence": []
+          },
+          {
+            "rule_id": "R002_MISSING_NEGATIVE_PUBLIC_EVIDENCE",
+            "triggered": false,
+            "weight": 2,
+            "detail": "required negative-evidence dimensions are covered or not applicable",
+            "evidence": []
+          },
+          {
+            "rule_id": "R003_UNRESOLVED_PLAN_ASSUMPTION",
+            "triggered": false,
+            "weight": 2,
+            "detail": "no unresolved-assumption marker found in the public plan",
+            "evidence": []
+          }
+        ]
+      },
+      "probe_route": null,
+      "policies": {
+        "accept_all": {
+          "probe_selected": false,
+          "model_selected": false
+        },
+        "verify_all": {
+          "probe_selected": false,
+          "model_selected": true
+        },
+        "probe_all": {
+          "probe_selected": true,
+          "model_selected": false
+        },
+        "risk_model_direct": {
+          "probe_selected": false,
+          "model_selected": false
+        },
+        "risk_hierarchical": {
+          "probe_selected": false,
+          "model_selected": false
+        },
+        "random_k_call_matched": {
+          "probe_selected": false,
+          "model_selected": false
+        }
+      },
+      "random_rank": "f6f1efacf183a0aa46675323faadfa8699b04f3a6ea9f6aae4c28102f5606bba"
+    },
+    {
+      "base_id": "heldout-v1--rollout-allocation-loader--r2",
+      "source_run_id": "adf450ab85574548a73f981ba6892946",
+      "task_id": "rollout-allocation-loader",
+      "task_version": 1,
+      "stratum": "development",
+      "base_workspace_hash": "sha256:9afc212b73284e7e495eee96ca40f22bd4072c09c6be05356b17e2622bc60c04",
+      "public_completion_eligible": true,
+      "risk_decision": {
+        "policy_version": "completion-risk-v0.2",
+        "eligible": true,
+        "score": 0,
+        "threshold": 3,
+        "level": "low",
+        "escalate": false,
+        "signals": [
+          {
+            "rule_id": "R001_BOUNDARY_SENSITIVE_SURFACE",
+            "triggered": false,
+            "weight": 1,
+            "detail": "no boundary-sensitive semantics found in public task text",
+            "evidence": []
+          },
+          {
+            "rule_id": "R002_MISSING_NEGATIVE_PUBLIC_EVIDENCE",
+            "triggered": false,
+            "weight": 2,
+            "detail": "required negative-evidence dimensions are covered or not applicable",
+            "evidence": []
+          },
+          {
+            "rule_id": "R003_UNRESOLVED_PLAN_ASSUMPTION",
+            "triggered": false,
+            "weight": 2,
+            "detail": "no unresolved-assumption marker found in the public plan",
+            "evidence": []
+          }
+        ]
+      },
+      "probe_route": null,
+      "policies": {
+        "accept_all": {
+          "probe_selected": false,
+          "model_selected": false
+        },
+        "verify_all": {
+          "probe_selected": false,
+          "model_selected": true
+        },
+        "probe_all": {
+          "probe_selected": true,
+          "model_selected": false
+        },
+        "risk_model_direct": {
+          "probe_selected": false,
+          "model_selected": false
+        },
+        "risk_hierarchical": {
+          "probe_selected": false,
+          "model_selected": false
+        },
+        "random_k_call_matched": {
+          "probe_selected": false,
+          "model_selected": false
+        }
+      },
+      "random_rank": "d778eb7255925f1ede4f05f30defbd9ac695e2ed82eda51414ffdcc87cdc492c"
+    },
+    {
+      "base_id": "heldout-v1--rollout-allocation-loader--r3",
+      "source_run_id": "668a4292c26a42be8f145643e86ed223",
+      "task_id": "rollout-allocation-loader",
+      "task_version": 1,
+      "stratum": "development",
+      "base_workspace_hash": "sha256:3b909a82899f831aa512808ac7ea542560fd14791597d69b548ecbf87dc4b66e",
+      "public_completion_eligible": true,
+      "risk_decision": {
+        "policy_version": "completion-risk-v0.2",
+        "eligible": true,
+        "score": 0,
+        "threshold": 3,
+        "level": "low",
+        "escalate": false,
+        "signals": [
+          {
+            "rule_id": "R001_BOUNDARY_SENSITIVE_SURFACE",
+            "triggered": false,
+            "weight": 1,
+            "detail": "no boundary-sensitive semantics found in public task text",
+            "evidence": []
+          },
+          {
+            "rule_id": "R002_MISSING_NEGATIVE_PUBLIC_EVIDENCE",
+            "triggered": false,
+            "weight": 2,
+            "detail": "required negative-evidence dimensions are covered or not applicable",
+            "evidence": []
+          },
+          {
+            "rule_id": "R003_UNRESOLVED_PLAN_ASSUMPTION",
+            "triggered": false,
+            "weight": 2,
+            "detail": "no unresolved-assumption marker found in the public plan",
+            "evidence": []
+          }
+        ]
+      },
+      "probe_route": null,
+      "policies": {
+        "accept_all": {
+          "probe_selected": false,
+          "model_selected": false
+        },
+        "verify_all": {
+          "probe_selected": false,
+          "model_selected": true
+        },
+        "probe_all": {
+          "probe_selected": true,
+          "model_selected": false
+        },
+        "risk_model_direct": {
+          "probe_selected": false,
+          "model_selected": false
+        },
+        "risk_hierarchical": {
+          "probe_selected": false,
+          "model_selected": false
+        },
+        "random_k_call_matched": {
+          "probe_selected": false,
+          "model_selected": false
+        }
+      },
+      "random_rank": "a1fb048eca878be6887340ed2ac0eb3f0972392efda290c5e3b42d1315d94c45"
+    },
+    {
+      "base_id": "heldout-v1--token-bucket-refill--r1",
+      "source_run_id": "f0e1fbd890504ae4a5081abc3be357dc",
+      "task_id": "token-bucket-refill",
+      "task_version": 1,
+      "stratum": "development",
+      "base_workspace_hash": "sha256:17974e5e10e1fb281ab770821dd3ea01434646caef9295010fb58fcb87792fe0",
+      "public_completion_eligible": true,
+      "risk_decision": {
+        "policy_version": "completion-risk-v0.2",
+        "eligible": true,
+        "score": 0,
+        "threshold": 3,
+        "level": "low",
+        "escalate": false,
+        "signals": [
+          {
+            "rule_id": "R001_BOUNDARY_SENSITIVE_SURFACE",
+            "triggered": false,
+            "weight": 1,
+            "detail": "no boundary-sensitive semantics found in public task text",
+            "evidence": []
+          },
+          {
+            "rule_id": "R002_MISSING_NEGATIVE_PUBLIC_EVIDENCE",
+            "triggered": false,
+            "weight": 2,
+            "detail": "required negative-evidence dimensions are covered or not applicable",
+            "evidence": []
+          },
+          {
+            "rule_id": "R003_UNRESOLVED_PLAN_ASSUMPTION",
+            "triggered": false,
+            "weight": 2,
+            "detail": "no unresolved-assumption marker found in the public plan",
+            "evidence": []
+          }
+        ]
+      },
+      "probe_route": null,
+      "policies": {
+        "accept_all": {
+          "probe_selected": false,
+          "model_selected": false
+        },
+        "verify_all": {
+          "probe_selected": false,
+          "model_selected": true
+        },
+        "probe_all": {
+          "probe_selected": true,
+          "model_selected": false
+        },
+        "risk_model_direct": {
+          "probe_selected": false,
+          "model_selected": false
+        },
+        "risk_hierarchical": {
+          "probe_selected": false,
+          "model_selected": false
+        },
+        "random_k_call_matched": {
+          "probe_selected": false,
+          "model_selected": false
+        }
+      },
+      "random_rank": "25a5246dcd5bb71336dd6bdc1dd2a2a07f73313225a3df0f27b778012f48e81d"
+    },
+    {
+      "base_id": "heldout-v1--token-bucket-refill--r2",
+      "source_run_id": "09021a56d7d7434ea4faff15031a276d",
+      "task_id": "token-bucket-refill",
+      "task_version": 1,
+      "stratum": "development",
+      "base_workspace_hash": "sha256:6f75b0c1c630efb631512d3e675432be2f6fd80fd9a256869514984dce64cbfe",
+      "public_completion_eligible": true,
+      "risk_decision": {
+        "policy_version": "completion-risk-v0.2",
+        "eligible": true,
+        "score": 0,
+        "threshold": 3,
+        "level": "low",
+        "escalate": false,
+        "signals": [
+          {
+            "rule_id": "R001_BOUNDARY_SENSITIVE_SURFACE",
+            "triggered": false,
+            "weight": 1,
+            "detail": "no boundary-sensitive semantics found in public task text",
+            "evidence": []
+          },
+          {
+            "rule_id": "R002_MISSING_NEGATIVE_PUBLIC_EVIDENCE",
+            "triggered": false,
+            "weight": 2,
+            "detail": "required negative-evidence dimensions are covered or not applicable",
+            "evidence": []
+          },
+          {
+            "rule_id": "R003_UNRESOLVED_PLAN_ASSUMPTION",
+            "triggered": false,
+            "weight": 2,
+            "detail": "no unresolved-assumption marker found in the public plan",
+            "evidence": []
+          }
+        ]
+      },
+      "probe_route": null,
+      "policies": {
+        "accept_all": {
+          "probe_selected": false,
+          "model_selected": false
+        },
+        "verify_all": {
+          "probe_selected": false,
+          "model_selected": true
+        },
+        "probe_all": {
+          "probe_selected": true,
+          "model_selected": false
+        },
+        "risk_model_direct": {
+          "probe_selected": false,
+          "model_selected": false
+        },
+        "risk_hierarchical": {
+          "probe_selected": false,
+          "model_selected": false
+        },
+        "random_k_call_matched": {
+          "probe_selected": false,
+          "model_selected": false
+        }
+      },
+      "random_rank": "bf19d5eed7c39fb18b95e29210e0f9f15a554afc916649e82b135107952f4757"
+    },
+    {
+      "base_id": "heldout-v1--token-bucket-refill--r3",
+      "source_run_id": "14d5c694bc874c63b545e1c99c5cfa69",
+      "task_id": "token-bucket-refill",
+      "task_version": 1,
+      "stratum": "development",
+      "base_workspace_hash": "sha256:f98a4dd49aa16dd6ca1e91b164d73a2f2435ff9457867fe4558e348622108cbe",
+      "public_completion_eligible": true,
+      "risk_decision": {
+        "policy_version": "completion-risk-v0.2",
+        "eligible": true,
+        "score": 0,
+        "threshold": 3,
+        "level": "low",
+        "escalate": false,
+        "signals": [
+          {
+            "rule_id": "R001_BOUNDARY_SENSITIVE_SURFACE",
+            "triggered": false,
+            "weight": 1,
+            "detail": "no boundary-sensitive semantics found in public task text",
+            "evidence": []
+          },
+          {
+            "rule_id": "R002_MISSING_NEGATIVE_PUBLIC_EVIDENCE",
+            "triggered": false,
+            "weight": 2,
+            "detail": "required negative-evidence dimensions are covered or not applicable",
+            "evidence": []
+          },
+          {
+            "rule_id": "R003_UNRESOLVED_PLAN_ASSUMPTION",
+            "triggered": false,
+            "weight": 2,
+            "detail": "no unresolved-assumption marker found in the public plan",
+            "evidence": []
+          }
+        ]
+      },
+      "probe_route": null,
+      "policies": {
+        "accept_all": {
+          "probe_selected": false,
+          "model_selected": false
+        },
+        "verify_all": {
+          "probe_selected": false,
+          "model_selected": true
+        },
+        "probe_all": {
+          "probe_selected": true,
+          "model_selected": false
+        },
+        "risk_model_direct": {
+          "probe_selected": false,
+          "model_selected": false
+        },
+        "risk_hierarchical": {
+          "probe_selected": false,
+          "model_selected": false
+        },
+        "random_k_call_matched": {
+          "probe_selected": false,
+          "model_selected": false
+        }
+      },
+      "random_rank": "75abb81a56d94148725bbcf9a115eafb1c4b0215220e66070523a4e9b90f808d"
+    },
+    {
+      "base_id": "heldout-v1--unicode-account-identifier--r1",
+      "source_run_id": "b13a38747c83456fae7e7f50a92c7f49",
+      "task_id": "unicode-account-identifier",
+      "task_version": 1,
+      "stratum": "adversarial",
+      "base_workspace_hash": "sha256:e93638d689fb7a0010886d155ccec9c4977a2a8fca9a9165ab2484f69fa7125d",
+      "public_completion_eligible": true,
+      "risk_decision": {
+        "policy_version": "completion-risk-v0.2",
+        "eligible": true,
+        "score": 3,
+        "threshold": 3,
+        "level": "high",
+        "escalate": true,
+        "signals": [
+          {
+            "rule_id": "R001_BOUNDARY_SENSITIVE_SURFACE",
+            "triggered": true,
+            "weight": 1,
+            "detail": "public task text contains boundary-sensitive semantics",
+            "evidence": [
+              "reject",
+              "security"
+            ]
+          },
+          {
+            "rule_id": "R002_MISSING_NEGATIVE_PUBLIC_EVIDENCE",
+            "triggered": true,
+            "weight": 2,
+            "detail": "one or more public contract dimensions lack negative evidence",
+            "evidence": [
+              "missing:negative_case"
+            ]
+          },
+          {
+            "rule_id": "R003_UNRESOLVED_PLAN_ASSUMPTION",
+            "triggered": false,
+            "weight": 2,
+            "detail": "no unresolved-assumption marker found in the public plan",
+            "evidence": []
+          }
+        ]
+      },
+      "probe_route": {
+        "probe_version": "deterministic-probe-v0.2",
+        "adapter_id": null,
+        "supported": false,
+        "passed": false,
+        "cases": [],
+        "duration_seconds": 0.0
+      },
+      "policies": {
+        "accept_all": {
+          "probe_selected": false,
+          "model_selected": false
+        },
+        "verify_all": {
+          "probe_selected": false,
+          "model_selected": true
+        },
+        "probe_all": {
+          "probe_selected": true,
+          "model_selected": false
+        },
+        "risk_model_direct": {
+          "probe_selected": false,
+          "model_selected": true
+        },
+        "risk_hierarchical": {
+          "probe_selected": true,
+          "model_selected": true
+        },
+        "random_k_call_matched": {
+          "probe_selected": false,
+          "model_selected": true
+        }
+      },
+      "random_rank": "43adf31da20b970e4b4630edc8929ec099dba6f1245a938f07fb6732c0409fc0"
+    },
+    {
+      "base_id": "heldout-v1--unicode-account-identifier--r2",
+      "source_run_id": "a94325d341d94e3588016cda61943403",
+      "task_id": "unicode-account-identifier",
+      "task_version": 1,
+      "stratum": "adversarial",
+      "base_workspace_hash": "sha256:6e8bc136c1ea697c044de1b12ba207e1f664009ea867773ddfed73efabda6dbb",
+      "public_completion_eligible": true,
+      "risk_decision": {
+        "policy_version": "completion-risk-v0.2",
+        "eligible": true,
+        "score": 3,
+        "threshold": 3,
+        "level": "high",
+        "escalate": true,
+        "signals": [
+          {
+            "rule_id": "R001_BOUNDARY_SENSITIVE_SURFACE",
+            "triggered": true,
+            "weight": 1,
+            "detail": "public task text contains boundary-sensitive semantics",
+            "evidence": [
+              "reject",
+              "security"
+            ]
+          },
+          {
+            "rule_id": "R002_MISSING_NEGATIVE_PUBLIC_EVIDENCE",
+            "triggered": true,
+            "weight": 2,
+            "detail": "one or more public contract dimensions lack negative evidence",
+            "evidence": [
+              "missing:negative_case"
+            ]
+          },
+          {
+            "rule_id": "R003_UNRESOLVED_PLAN_ASSUMPTION",
+            "triggered": false,
+            "weight": 2,
+            "detail": "no unresolved-assumption marker found in the public plan",
+            "evidence": []
+          }
+        ]
+      },
+      "probe_route": {
+        "probe_version": "deterministic-probe-v0.2",
+        "adapter_id": null,
+        "supported": false,
+        "passed": false,
+        "cases": [],
+        "duration_seconds": 0.0
+      },
+      "policies": {
+        "accept_all": {
+          "probe_selected": false,
+          "model_selected": false
+        },
+        "verify_all": {
+          "probe_selected": false,
+          "model_selected": true
+        },
+        "probe_all": {
+          "probe_selected": true,
+          "model_selected": false
+        },
+        "risk_model_direct": {
+          "probe_selected": false,
+          "model_selected": true
+        },
+        "risk_hierarchical": {
+          "probe_selected": true,
+          "model_selected": true
+        },
+        "random_k_call_matched": {
+          "probe_selected": false,
+          "model_selected": true
+        }
+      },
+      "random_rank": "3e31af6759650229b754bc407b9b1fe53b9a5b76e19cbba7c17d7620f011e09e"
+    },
+    {
+      "base_id": "heldout-v1--unicode-account-identifier--r3",
+      "source_run_id": "90111d302cf54f9e8c8de02aec5fb55e",
+      "task_id": "unicode-account-identifier",
+      "task_version": 1,
+      "stratum": "adversarial",
+      "base_workspace_hash": "sha256:b569b4b77dced41d15fce951c5d46ac19c00807b32e317729c36f3b03eab12df",
+      "public_completion_eligible": true,
+      "risk_decision": {
+        "policy_version": "completion-risk-v0.2",
+        "eligible": true,
+        "score": 3,
+        "threshold": 3,
+        "level": "high",
+        "escalate": true,
+        "signals": [
+          {
+            "rule_id": "R001_BOUNDARY_SENSITIVE_SURFACE",
+            "triggered": true,
+            "weight": 1,
+            "detail": "public task text contains boundary-sensitive semantics",
+            "evidence": [
+              "reject",
+              "security"
+            ]
+          },
+          {
+            "rule_id": "R002_MISSING_NEGATIVE_PUBLIC_EVIDENCE",
+            "triggered": true,
+            "weight": 2,
+            "detail": "one or more public contract dimensions lack negative evidence",
+            "evidence": [
+              "missing:negative_case"
+            ]
+          },
+          {
+            "rule_id": "R003_UNRESOLVED_PLAN_ASSUMPTION",
+            "triggered": false,
+            "weight": 2,
+            "detail": "no unresolved-assumption marker found in the public plan",
+            "evidence": []
+          }
+        ]
+      },
+      "probe_route": {
+        "probe_version": "deterministic-probe-v0.2",
+        "adapter_id": null,
+        "supported": false,
+        "passed": false,
+        "cases": [],
+        "duration_seconds": 0.0
+      },
+      "policies": {
+        "accept_all": {
+          "probe_selected": false,
+          "model_selected": false
+        },
+        "verify_all": {
+          "probe_selected": false,
+          "model_selected": true
+        },
+        "probe_all": {
+          "probe_selected": true,
+          "model_selected": false
+        },
+        "risk_model_direct": {
+          "probe_selected": false,
+          "model_selected": true
+        },
+        "risk_hierarchical": {
+          "probe_selected": true,
+          "model_selected": true
+        },
+        "random_k_call_matched": {
+          "probe_selected": false,
+          "model_selected": true
+        }
+      },
+      "random_rank": "baf75655b2c2bd0b0d4518e2ed67670a9fdae11de8f81f2233539fdfe5b9a8fc"
+    }
+  ],
+  "strata": [
+    {
+      "stratum": "adversarial",
+      "eligible_bases": 9,
+      "risk_hierarchical_model_calls": 9,
+      "random_k_model_calls": 9
+    },
+    {
+      "stratum": "development",
+      "eligible_bases": 12,
+      "risk_hierarchical_model_calls": 0,
+      "random_k_model_calls": 0
+    },
+    {
+      "stratum": "incident",
+      "eligible_bases": 9,
+      "risk_hierarchical_model_calls": 0,
+      "random_k_model_calls": 0
+    }
+  ],
+  "content_sha256": "sha256:c275ccbe34243c90f8548f55ea6b48708a75124bdcab2c96b623365d06cb9083"
+}
