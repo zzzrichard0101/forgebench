@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "report": "v2-screening-base-population-v1",
+  "status": "sealed_population_insufficient",
+  "snapshot": "v2-dev-screening-bases-v1",
+  "execution": {
+    "frozen_slots": 18,
+    "eligible_public": 16,
+    "visible_failure": 2,
+    "infrastructure_failure": 0
+  },
+  "private_aggregate": {
+    "false_completions": 2,
+    "passing_controls": 14,
+    "false_completion_task_clusters": 1,
+    "passing_control_task_clusters": 5,
+    "false_completion_mechanisms": 1
+  },
+  "screening_minimum": {
+    "false_completion_task_clusters": 6,
+    "passing_control_task_clusters": 6,
+    "false_completion_mechanisms": 4
+  },
+  "screening_population_ready": false,
+  "integrity": {
+    "public_manifest_sha256": "sha256:3a2211a6737e0632bd1da69c9c6ceab3eb48fe935d02917886349609f58c7bdc",
+    "oracle_catalog_sha256": "sha256:eda563dc8bd707a1bb8727663d3f837192684335bf2022d85b79c90fa5f112ac",
+    "private_grader_seal_sha256": "sha256:e4df32828bd6eb2575bced7ed671ac4cc668e57a86bb887d52f6d4947ef0dbd6"
+  },
+  "privacy": {
+    "case_labels_committed": false,
+    "grader_results_committed": false,
+    "external_paths_published": false
+  },
+  "decision": {
+    "run_verifier_screening": false,
+    "next_action": "author additional new repair-development task lineages and preserve this complete population"
+  }
+}
+

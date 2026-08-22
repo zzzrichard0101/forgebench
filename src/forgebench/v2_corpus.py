@@ -29,6 +29,7 @@ MECHANISMS = {
 }
 SHA256_PATTERN = re.compile(r"sha256:[0-9a-f]{64}")
 SLUG_PATTERN = re.compile(r"[a-z0-9]+(?:-[a-z0-9]+)*")
+ARTIFACT_ID_PATTERN = re.compile(r"[A-Za-z0-9][A-Za-z0-9._-]{0,127}")
 PUBLIC_CASE_FIELDS = {
     "case_id",
     "task_id",
@@ -251,9 +252,11 @@ def audit_v2_labeled_corpus(
 def _validate_public_case(case: Any, public_root: Path) -> None:
     if not isinstance(case, dict) or set(case) != PUBLIC_CASE_FIELDS:
         raise ValueError("V2 public case fields are invalid")
-    for field in ("case_id", "task_id", "task_cluster_id", "repository_lineage", "base_id"):
+    for field in ("case_id", "task_id", "task_cluster_id", "repository_lineage"):
         if not isinstance(case[field], str) or SLUG_PATTERN.fullmatch(case[field]) is None:
             raise ValueError(f"V2 public case {field} is invalid")
+    if not isinstance(case["base_id"], str) or ARTIFACT_ID_PATTERN.fullmatch(case["base_id"]) is None:
+        raise ValueError("V2 public case base_id is invalid")
     if not isinstance(case["task_version"], int) or isinstance(case["task_version"], bool) or case["task_version"] < 1:
         raise ValueError("V2 task version is invalid")
     if case["split"] not in SPLITS:
