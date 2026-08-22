@@ -10,6 +10,7 @@ from forgebench.comparison_manifest import (
     load_comparison_manifest,
     validate_assignment,
 )
+from forgebench.public_base_discovery import discover_public_base_entries
 from forgebench.workspace import (
     create_isolated_workspace,
     hash_workspace,
@@ -27,6 +28,27 @@ SEED = ROOT / "benchmark" / "fixtures" / "python-plugin-boundary"
 
 
 class ComparisonManifestTests(unittest.TestCase):
+    def test_public_base_discovery_reads_records_without_label_input(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            for task_id, base_id in (("task-b", "base-b"), ("task-a", "base-a")):
+                record_root = root / base_id
+                record_root.mkdir()
+                (record_root / "public-base-record.json").write_text(
+                    json.dumps(
+                        {
+                            "record_type": "public_base_completion",
+                            "task_id": task_id,
+                            "base_id": base_id,
+                        }
+                    ),
+                    encoding="utf-8",
+                )
+            self.assertEqual(
+                discover_public_base_entries(root),
+                [("task-a", "base-a"), ("task-b", "base-b")],
+            )
+
     def _source(self, root: Path, run_id: str, *, fully_fixed: bool) -> Path:
         source = create_isolated_workspace(SEED, root / "sources", run_id)
         initialize_git_workspace(source)
