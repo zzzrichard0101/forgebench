@@ -1,0 +1,25 @@
+{
+  "id": "v2-upload-budget-ledger",
+  "version": 1,
+  "title": "Account for idempotent UTF-8 upload chunks",
+  "family": "development",
+  "difficulty": "medium",
+  "split": "dev",
+  "tags": ["v2", "aggregate", "utf8", "idempotency"],
+  "seed_repo": {
+    "source": "benchmark/v2-development/fixtures/v2-upload-budget-ledger",
+    "revision": "sha256:8b04b0b4c424e360f5dffc22ffe91a406ff3307a8849bc590cf29e1e06a371ee",
+    "subdirectory": ""
+  },
+  "instruction": "Fix UploadBudget without changing its public methods. The limit is an inclusive positive integer byte budget per upload. add accepts non-empty string upload_id and chunk_id plus string text; count len(text.encode('utf-8')), not characters. Replaying the same chunk_id with identical text is idempotent and returns the unchanged total; replaying it with different text raises ValueError. Overflow and all invalid calls must leave state unchanged. Chunk IDs are scoped per upload, and used returns zero for unknown valid upload IDs. Add regression tests and no dependencies.",
+  "budgets": {"max_steps": 40, "max_seconds": 720, "max_input_tokens": 80000, "max_output_tokens": 16000, "max_cost_usd": 2.5},
+  "public_checks": [{"id": "public_tests", "type": "command", "severity": "diagnostic", "argv": ["{python}", "-m", "unittest", "discover", "-s", "tests", "-v"], "expected_exit_code": 0}],
+  "grader": {"checks": [
+    {"id": "public_tests", "type": "command", "severity": "required", "argv": ["{python}", "-m", "unittest", "discover", "-s", "tests", "-v"], "expected_exit_code": 0},
+    {"id": "private_contract", "type": "command", "severity": "required", "argv": ["{python}", "{grader_root}/v2-upload-budget-ledger/test_contract.py"], "expected_exit_code": 0},
+    {"id": "protected_dependencies", "type": "workspace_policy", "severity": "required", "protected_paths": ["requirements.txt"]}
+  ]},
+  "safety": {"network": "disabled", "network_allowlist": [], "allowed_write_roots": ["."], "forbidden_commands": ["sudo", "chmod", "chown"]},
+  "evidence": {"required_artifacts": ["workspace.diff", "trace.jsonl", "grader-result.json"]},
+  "author_metadata": {"capabilities": ["planning", "tool_use", "verification"], "likely_failure_modes": ["planning", "verification"], "notes": "V2 screening lineage combining aggregate byte accounting with replay semantics."}
+}

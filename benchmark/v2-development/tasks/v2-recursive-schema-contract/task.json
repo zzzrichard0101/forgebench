@@ -1,0 +1,25 @@
+{
+  "id": "v2-recursive-schema-contract",
+  "version": 1,
+  "title": "Complete a strict recursive data contract validator",
+  "family": "development",
+  "difficulty": "hard",
+  "split": "dev",
+  "tags": ["v2", "schema", "recursion", "python-types"],
+  "seed_repo": {
+    "source": "benchmark/v2-development/fixtures/v2-recursive-schema-contract",
+    "revision": "sha256:1ec051763a4e4a683aa1b02b559b28ebf2bba7f7fc75adc76f9cfe9d340bfbc5",
+    "subdirectory": ""
+  },
+  "instruction": "Complete validate as a strict recursive validator without changing its API. Support type values integer, number, boolean, string, null, array, object, and a non-empty list representing a union. Python booleans must not satisfy integer or number. Arrays require an items schema. Objects validate declared properties recursively, enforce a required string-key list, allow undeclared keys by default, and reject them only when additionalProperties is false. Malformed or unsupported schemas return false rather than raising. Add regression tests and no dependencies.",
+  "budgets": {"max_steps": 40, "max_seconds": 720, "max_input_tokens": 80000, "max_output_tokens": 16000, "max_cost_usd": 2.5},
+  "public_checks": [{"id": "public_tests", "type": "command", "severity": "diagnostic", "argv": ["{python}", "-m", "unittest", "discover", "-s", "tests", "-v"], "expected_exit_code": 0}],
+  "grader": {"checks": [
+    {"id": "public_tests", "type": "command", "severity": "required", "argv": ["{python}", "-m", "unittest", "discover", "-s", "tests", "-v"], "expected_exit_code": 0},
+    {"id": "private_contract", "type": "command", "severity": "required", "argv": ["{python}", "{grader_root}/v2-recursive-schema-contract/test_contract.py"], "expected_exit_code": 0},
+    {"id": "protected_dependencies", "type": "workspace_policy", "severity": "required", "protected_paths": ["requirements.txt"]}
+  ]},
+  "safety": {"network": "disabled", "network_allowlist": [], "allowed_write_roots": ["."], "forbidden_commands": ["sudo", "chmod", "chown"]},
+  "evidence": {"required_artifacts": ["workspace.diff", "trace.jsonl", "grader-result.json"]},
+  "author_metadata": {"capabilities": ["planning", "tool_use", "verification"], "likely_failure_modes": ["planning", "verification"], "notes": "V2 screening lineage for recursive contract coverage and Python scalar edge semantics."}
+}

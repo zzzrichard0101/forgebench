@@ -1,0 +1,56 @@
+{
+  "schema_version": 1,
+  "snapshot": "v2-screening-tasks-v1",
+  "frozen": true,
+  "catalog_sha256": "sha256:beda2036bd58a69f06e1579962d61c085df4b97d9852f11497c3e231ee53abca",
+  "tasks": [
+    {
+      "id": "v2-canonical-handle-registry",
+      "version": 1,
+      "family": "adversarial",
+      "difficulty": "medium",
+      "split": "dev",
+      "task_path": "benchmark/v2-development/tasks/v2-canonical-handle-registry/task.json"
+    },
+    {
+      "id": "v2-converter-command-boundary",
+      "version": 1,
+      "family": "adversarial",
+      "difficulty": "easy",
+      "split": "dev",
+      "task_path": "benchmark/v2-development/tasks/v2-converter-command-boundary/task.json"
+    },
+    {
+      "id": "v2-package-member-policy",
+      "version": 1,
+      "family": "adversarial",
+      "difficulty": "medium",
+      "split": "dev",
+      "task_path": "benchmark/v2-development/tasks/v2-package-member-policy/task.json"
+    },
+    {
+      "id": "v2-recursive-schema-contract",
+      "version": 1,
+      "family": "development",
+      "difficulty": "hard",
+      "split": "dev",
+      "task_path": "benchmark/v2-development/tasks/v2-recursive-schema-contract/task.json"
+    },
+    {
+      "id": "v2-retry-after-policy",
+      "version": 1,
+      "family": "development",
+      "difficulty": "hard",
+      "split": "dev",
+      "task_path": "benchmark/v2-development/tasks/v2-retry-after-policy/task.json"
+    },
+    {
+      "id": "v2-upload-budget-ledger",
+      "version": 1,
+      "family": "development",
+      "difficulty": "medium",
+      "split": "dev",
+      "task_path": "benchmark/v2-development/tasks/v2-upload-budget-ledger/task.json"
+    }
+  ]
+}

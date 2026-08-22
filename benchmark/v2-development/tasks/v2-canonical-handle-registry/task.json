@@ -1,0 +1,25 @@
+{
+  "id": "v2-canonical-handle-registry",
+  "version": 1,
+  "title": "Canonicalize international account handles",
+  "family": "adversarial",
+  "difficulty": "medium",
+  "split": "dev",
+  "tags": ["v2", "unicode", "normalization", "identity"],
+  "seed_repo": {
+    "source": "benchmark/v2-development/fixtures/v2-canonical-handle-registry",
+    "revision": "sha256:74e0dbe8c94c2092f0c158eb254f923edcaa22a70744610d8b172b91587a770a",
+    "subdirectory": ""
+  },
+  "instruction": "Make HandleRegistry treat compatibility-equivalent, case-equivalent handles as the same identity while preserving the first registered original for lookup. Preserve the public API. Validate that handles are strings, normalize with Unicode NFKC followed by casefold, reject empty canonical forms and any original containing control characters, and use the same canonicalization for register and lookup. Equivalent registrations must raise ValueError. Add regression tests and no dependencies.",
+  "budgets": {"max_steps": 35, "max_seconds": 600, "max_input_tokens": 70000, "max_output_tokens": 14000, "max_cost_usd": 2.0},
+  "public_checks": [{"id": "public_tests", "type": "command", "severity": "diagnostic", "argv": ["{python}", "-m", "unittest", "discover", "-s", "tests", "-v"], "expected_exit_code": 0}],
+  "grader": {"checks": [
+    {"id": "public_tests", "type": "command", "severity": "required", "argv": ["{python}", "-m", "unittest", "discover", "-s", "tests", "-v"], "expected_exit_code": 0},
+    {"id": "private_contract", "type": "command", "severity": "required", "argv": ["{python}", "{grader_root}/v2-canonical-handle-registry/test_contract.py"], "expected_exit_code": 0},
+    {"id": "protected_dependencies", "type": "workspace_policy", "severity": "required", "protected_paths": ["requirements.txt"]}
+  ]},
+  "safety": {"network": "disabled", "network_allowlist": [], "allowed_write_roots": ["."], "forbidden_commands": ["sudo", "chmod", "chown"]},
+  "evidence": {"required_artifacts": ["workspace.diff", "trace.jsonl", "grader-result.json"]},
+  "author_metadata": {"capabilities": ["planning", "tool_use", "verification", "safety"], "likely_failure_modes": ["verification", "safety"], "notes": "V2 screening lineage for canonical identity rather than presentation normalization."}
+}

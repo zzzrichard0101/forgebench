@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "report": "v2-screening-task-authoring-v1",
+  "status": "ready_for_base_generation",
+  "snapshot": "v2-screening-tasks-v1",
+  "task_count": 6,
+  "repository_lineages": 6,
+  "mechanisms": [
+    "containment",
+    "injection",
+    "numeric_aggregate",
+    "schema",
+    "temporal_retry",
+    "unicode_normalization"
+  ],
+  "public_catalog_sha256": "sha256:beda2036bd58a69f06e1579962d61c085df4b97d9852f11497c3e231ee53abca",
+  "private_grader_seal_sha256": "sha256:e4df32828bd6eb2575bced7ed671ac4cc668e57a86bb887d52f6d4947ef0dbd6",
+  "grader_audit_file_sha256": "sha256:aed8cddde5738ed27302c2abc370854ce4cf5a0aa8cf312ca8ce96d54aa6980b",
+  "grader_quality": {
+    "repetitions": 3,
+    "seed_hidden_failures": 18,
+    "seed_hidden_successes": 0,
+    "known_good_hidden_successes": 18,
+    "known_good_hidden_failures": 0,
+    "protected_mutation_detected_tasks": 6
+  },
+  "privacy": {
+    "grader_source_committed": false,
+    "known_good_committed": false,
+    "case_labels_committed": false,
+    "external_paths_published": false
+  },
+  "scope": {
+    "split": "repair_dev",
+    "development_only": true,
+    "eligible_for_mechanism_validation": false,
+    "model_base_completions_generated": false
+  }
+}
+

@@ -1,0 +1,25 @@
+{
+  "id": "v2-retry-after-policy",
+  "version": 1,
+  "title": "Parse bounded HTTP Retry-After values",
+  "family": "development",
+  "difficulty": "hard",
+  "split": "dev",
+  "tags": ["v2", "retry", "http-date", "time"],
+  "seed_repo": {
+    "source": "benchmark/v2-development/fixtures/v2-retry-after-policy",
+    "revision": "sha256:49b280e69d8fcbae0e18835088ca1942b8ff5649de4a52926e0118e03c5a7fd0",
+    "subdirectory": ""
+  },
+  "instruction": "Complete retry_delay while preserving its API. value is either non-negative decimal delta-seconds or an RFC 7231 HTTP-date. now must be a timezone-aware datetime and max_delay a positive integer. Convert a future date to whole seconds using ceiling so a positive fraction never becomes an immediate retry; past dates return zero. Clamp every valid result to max_delay. Reject booleans, malformed values, signed/negative delta forms, naive datetimes, and invalid max_delay with ValueError. Do not consult the system clock, change now, or add dependencies. Add regression tests.",
+  "budgets": {"max_steps": 40, "max_seconds": 720, "max_input_tokens": 80000, "max_output_tokens": 16000, "max_cost_usd": 2.5},
+  "public_checks": [{"id": "public_tests", "type": "command", "severity": "diagnostic", "argv": ["{python}", "-m", "unittest", "discover", "-s", "tests", "-v"], "expected_exit_code": 0}],
+  "grader": {"checks": [
+    {"id": "public_tests", "type": "command", "severity": "required", "argv": ["{python}", "-m", "unittest", "discover", "-s", "tests", "-v"], "expected_exit_code": 0},
+    {"id": "private_contract", "type": "command", "severity": "required", "argv": ["{python}", "{grader_root}/v2-retry-after-policy/test_contract.py"], "expected_exit_code": 0},
+    {"id": "protected_dependencies", "type": "workspace_policy", "severity": "required", "protected_paths": ["requirements.txt"]}
+  ]},
+  "safety": {"network": "disabled", "network_allowlist": [], "allowed_write_roots": ["."], "forbidden_commands": ["sudo", "chmod", "chown"]},
+  "evidence": {"required_artifacts": ["workspace.diff", "trace.jsonl", "grader-result.json"]},
+  "author_metadata": {"capabilities": ["planning", "tool_use", "verification"], "likely_failure_modes": ["planning", "verification"], "notes": "V2 screening lineage for deterministic protocol-date interpretation and boundary rounding."}
+}
