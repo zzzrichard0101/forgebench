@@ -1,0 +1,66 @@
+{
+  "schema_version": 1,
+  "experiment": "v2-stage-a-capability-gate",
+  "status": "design_preregistered_corpus_not_built",
+  "decision_date": "2026-08-23",
+  "v1_boundary": {
+    "aggregate_report": "experiments/reports/heldout-private-policy-evaluation-v1.json",
+    "v1_heldout_reuse_allowed": false,
+    "v1_private_material_access_allowed": false,
+    "overwrite_v1_artifacts_allowed": false
+  },
+  "splits": [
+    "repair_dev",
+    "mechanism_validation",
+    "v2_heldout"
+  ],
+  "cohorts": [
+    "false_completion",
+    "passing_control"
+  ],
+  "intervention_arms": [
+    "no_intervention",
+    "generic_review",
+    "independent_reconstruction",
+    "executable_diagnosis",
+    "capability_gated"
+  ],
+  "screening": {
+    "false_completion_clusters_min": 6,
+    "passing_control_clusters_min": 6,
+    "failure_mechanisms_min": 4,
+    "attempts_per_arm_base": 1,
+    "selected_non_control_arms_max": 2,
+    "eliminate_if": {
+      "repairs_equal": 0,
+      "hard_safety_violations_greater_than": 0,
+      "harmful_controls_greater_than_repairs": true
+    }
+  },
+  "mechanism_validation": {
+    "false_completion_clusters_min": 15,
+    "passing_control_clusters_min": 15,
+    "failure_mechanisms_min": 6,
+    "hidden_repairs_min": 6,
+    "repaired_mechanisms_min": 3,
+    "repair_delta_vs_generic_review_min": 3,
+    "passing_controls_retained_min": 14,
+    "hard_safety_violations_max": 0,
+    "single_mechanism_repair_share_max": 0.5,
+    "complete_audit_manifest_required": true
+  },
+  "gate_unit": "task_cluster",
+  "hidden_oracle_is_verifier_input": false,
+  "stage_b_locked_until_gate_passes": true,
+  "diagnosis_accuracy_requires_independent_blinded_labels": true,
+  "primary_claim": "A capability-gated post-completion harness repairs diverse residual failures while safely abstaining on already-correct completions.",
+  "research_positioning": {
+    "novelty_is_not": [
+      "generic model review",
+      "diagnostic-first prompting alone",
+      "probe-assisted repair alone"
+    ],
+    "candidate_contribution": "mechanism-validated repair capability as a prerequisite for selective verification allocation"
+  }
+}
+

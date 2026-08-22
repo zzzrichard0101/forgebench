@@ -8,7 +8,13 @@ The project asks one practical question:
 
 ## Current status
 
-**Phase 10 complete — negative held-out result sealed and application package ready**
+**V1 complete — negative held-out result sealed and application package ready**
+
+**V2 Stage A design preregistered — repair capability must pass before allocation research begins**
+
+- [V1 preservation boundary](docs/v2/v1-preservation-boundary.md)
+- [V2 Stage A protocol and mechanism gate](docs/v2/stage-a-protocol-v1.md)
+- [V2 machine-readable preregistration](experiments/configs/v2-stage-a-preregistration-v1.json)
 
 - [Design brief](docs/design-brief.md)
 - [Metrics and evaluation contract](docs/metrics.md)
