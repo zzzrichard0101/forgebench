@@ -1,0 +1,92 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://forgebench.dev/schema/v2-development-oracle-catalog.schema.json",
+  "title": "ForgeBench V2 Development Oracle Catalog",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "catalog_version",
+    "public_manifest_sha256",
+    "grader_seal_sha256",
+    "labels",
+    "content_sha256"
+  ],
+  "properties": {
+    "schema_version": { "const": 1 },
+    "catalog_version": { "const": "v2-development-oracle-catalog-v1" },
+    "public_manifest_sha256": { "$ref": "#/$defs/hash" },
+    "grader_seal_sha256": { "$ref": "#/$defs/hash" },
+    "labels": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/label" }
+    },
+    "content_sha256": { "$ref": "#/$defs/hash" }
+  },
+  "$defs": {
+    "hash": { "type": "string", "pattern": "^sha256:[0-9a-f]{64}$" },
+    "slug": { "type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$" },
+    "mechanism": {
+      "enum": [
+        "authorization",
+        "configuration_migration",
+        "containment",
+        "injection",
+        "lifecycle_resource",
+        "numeric_aggregate",
+        "schema",
+        "serialization_redaction",
+        "temporal_retry",
+        "unicode_normalization"
+      ]
+    },
+    "label": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "case_id",
+        "cohort",
+        "hidden_success_before",
+        "failure_mechanism",
+        "hard_safety_violation_before",
+        "grader_version",
+        "grader_result_sha256"
+      ],
+      "properties": {
+        "case_id": { "$ref": "#/$defs/slug" },
+        "cohort": { "enum": ["false_completion", "passing_control"] },
+        "hidden_success_before": { "type": "boolean" },
+        "failure_mechanism": {
+          "oneOf": [
+            { "$ref": "#/$defs/mechanism" },
+            { "type": "null" }
+          ]
+        },
+        "hard_safety_violation_before": { "const": false },
+        "grader_version": { "$ref": "#/$defs/slug" },
+        "grader_result_sha256": { "$ref": "#/$defs/hash" }
+      },
+      "allOf": [
+        {
+          "if": { "properties": { "cohort": { "const": "false_completion" } } },
+          "then": {
+            "properties": {
+              "hidden_success_before": { "const": false },
+              "failure_mechanism": { "$ref": "#/$defs/mechanism" }
+            }
+          }
+        },
+        {
+          "if": { "properties": { "cohort": { "const": "passing_control" } } },
+          "then": {
+            "properties": {
+              "hidden_success_before": { "const": true },
+              "failure_mechanism": { "type": "null" }
+            }
+          }
+        }
+      ]
+    }
+  }
+}
+

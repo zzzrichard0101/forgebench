@@ -1,0 +1,69 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://forgebench.dev/schema/v2-development-corpus.schema.json",
+  "title": "ForgeBench V2 Development Corpus",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "corpus_version",
+    "snapshot",
+    "frozen",
+    "cases",
+    "content_sha256"
+  ],
+  "properties": {
+    "schema_version": { "const": 1 },
+    "corpus_version": { "const": "v2-development-corpus-v1" },
+    "snapshot": { "type": "string", "pattern": "^v2-dev-[a-z0-9.-]+$" },
+    "frozen": { "type": "boolean" },
+    "cases": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/case" }
+    },
+    "content_sha256": { "$ref": "#/$defs/hash" }
+  },
+  "$defs": {
+    "hash": { "type": "string", "pattern": "^sha256:[0-9a-f]{64}$" },
+    "slug": { "type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$" },
+    "case": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "case_id",
+        "task_id",
+        "task_version",
+        "task_cluster_id",
+        "repository_lineage",
+        "seed_revision_sha256",
+        "split",
+        "task_path",
+        "task_content_sha256",
+        "base_id",
+        "base_artifact_path",
+        "base_content_sha256",
+        "public_evidence_path",
+        "public_evidence_sha256",
+        "public_completion_gate_passed"
+      ],
+      "properties": {
+        "case_id": { "$ref": "#/$defs/slug" },
+        "task_id": { "$ref": "#/$defs/slug" },
+        "task_version": { "type": "integer", "minimum": 1 },
+        "task_cluster_id": { "$ref": "#/$defs/slug" },
+        "repository_lineage": { "$ref": "#/$defs/slug" },
+        "seed_revision_sha256": { "$ref": "#/$defs/hash" },
+        "split": { "enum": ["repair_dev", "mechanism_validation"] },
+        "task_path": { "type": "string", "minLength": 1 },
+        "task_content_sha256": { "$ref": "#/$defs/hash" },
+        "base_id": { "$ref": "#/$defs/slug" },
+        "base_artifact_path": { "type": "string", "minLength": 1 },
+        "base_content_sha256": { "$ref": "#/$defs/hash" },
+        "public_evidence_path": { "type": "string", "minLength": 1 },
+        "public_evidence_sha256": { "$ref": "#/$defs/hash" },
+        "public_completion_gate_passed": { "const": true }
+      }
+    }
+  }
+}
+
