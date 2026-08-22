@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "freeze_version": "heldout-final-evaluation-freeze-v1",
+  "status": "final_public_aggregate_frozen",
+  "frozen_at": "2026-08-22",
+  "request_content_sha256": "sha256:84311977af6e08884b7ab0bfbe83153237a9a2ed0a4d92cab19feeb3fc906132",
+  "target_catalog_sha256": "sha256:e3eee4ad151787cc72e423d090683f3d4ecfbc8a8fb8b07ea19ccbad45ef138b",
+  "private_result_content_sha256": "sha256:42b6bbc576c8aa61a98d44e1cfe69446751b87eb56d8f1032c8d5f2232cc6d2f",
+  "public_aggregate_report_sha256": "sha256:1f1d556450d6d155603dfdef4c42afb324197f4d75fb7e84ea2fe6648ff1ece8",
+  "outcome_summary": {
+    "base_hidden_successes": 0,
+    "base_hidden_failures": 30,
+    "model_policy_replay_hidden_successes": 0,
+    "model_policy_replay_hidden_failures": 120,
+    "risk_hierarchical_recoveries": 0,
+    "verify_all_hard_safety_violations": 1,
+    "primary_claim_eligible": false
+  },
+  "statistical_contract": {
+    "independent_unit": "task cluster",
+    "bootstrap_seed": 1729,
+    "bootstrap_samples": 20000
+  },
+  "privacy": {
+    "private_result_in_repository": false,
+    "private_grader_in_repository": false,
+    "sealed_labels_in_repository": false,
+    "individual_trajectory_outcomes_published": false
+  },
+  "artifacts": [
+    {"path": "experiments/reports/heldout-private-policy-evaluation-v1.json", "sha256": "sha256:1f1d556450d6d155603dfdef4c42afb324197f4d75fb7e84ea2fe6648ff1ece8"},
+    {"path": "src/forgebench/private_evaluation_analysis.py", "sha256": "sha256:cccdd82d4c38783b80dbd6b7ae7131dd8df41a829e174e1de3e09ea7ff042947"},
+    {"path": "scripts/analyze_private_policy_evaluation.py", "sha256": "sha256:b4a817f24965baa1a433abade21994a68e548552343bd452fa94a9d449228d14"},
+    {"path": "docs/heldout-private-policy-evaluation-v1.md", "sha256": "sha256:9716671a28c057fcb25c5e05d0509efd3c5db8de0cbc1d49a00577a5e673cd55"}
+  ],
+  "content_sha256": "sha256:36ed6ac24b578fc2a8f4dcb8d7ac7eb66ee8e23aa48fc9b58e1486db36bc43e0"
+}
