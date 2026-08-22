@@ -15,13 +15,14 @@ from forgebench.policy_freeze import canonical_file_hash
 
 
 ROOT = Path(__file__).resolve().parents[1]
-MANIFEST = ROOT / "benchmark" / "v2-development" / "manifest.json"
+DEFAULT_MANIFEST = ROOT / "benchmark" / "v2-development" / "manifest.json"
 
 
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--grader-root", type=Path, required=True)
     parser.add_argument("--known-good-root", type=Path, required=True)
+    parser.add_argument("--manifest", type=Path, default=DEFAULT_MANIFEST)
     parser.add_argument("--repetitions", type=int, default=3)
     parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
@@ -34,7 +35,8 @@ def main() -> int:
     if output == grader_root or output.is_relative_to(grader_root):
         raise ValueError("audit output must be outside the grader root")
     grader = DeterministicGrader(grader_root)
-    catalog = BenchmarkCatalog(ROOT, MANIFEST)
+    manifest = args.manifest.resolve(strict=True)
+    catalog = BenchmarkCatalog(ROOT, manifest)
     records = []
     for bundle in catalog.list():
         task_id = bundle.task["id"]

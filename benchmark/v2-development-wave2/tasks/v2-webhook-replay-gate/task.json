@@ -1,0 +1,13 @@
+{
+  "id": "v2-webhook-replay-gate", "version": 1,
+  "title": "Authenticate webhooks with bounded replay protection", "family": "adversarial", "difficulty": "hard", "split": "dev",
+  "tags": ["v2", "hmac", "replay", "temporal"],
+  "seed_repo": {"source": "benchmark/v2-development-wave2/fixtures/v2-webhook-replay-gate", "revision": "sha256:89758538547d05c3a4e3ef9bcd0d4e57c3a302c6f3095ae2b32949d117ee34f4", "subdirectory": ""},
+  "instruction": "Harden WebhookGate while preserving its constructor and verify API. secret must be non-empty bytes, window_seconds a positive non-boolean integer, and all verify inputs must have exact documented types (timestamp/now integers but not booleans, body bytes, signature string). Authenticate the exact bytes str(timestamp)+b'.'+body using HMAC-SHA256 and a lowercase sha256=<64 hex> signature with constant-time comparison. Accept the inclusive time window abs(now-timestamp) <= window_seconds. A successfully authenticated timestamp/signature pair may succeed only once; failures never consume replay state. Prune entries once their timestamp is outside the current window so memory remains bounded. Add tests and no dependencies.",
+  "budgets": {"max_steps": 45, "max_seconds": 720, "max_input_tokens": 90000, "max_output_tokens": 18000, "max_cost_usd": 3.0},
+  "public_checks": [{"id": "public_tests", "type": "command", "severity": "diagnostic", "argv": ["{python}", "-m", "unittest", "discover", "-s", "tests", "-v"], "expected_exit_code": 0}],
+  "grader": {"checks": [{"id": "public_tests", "type": "command", "severity": "required", "argv": ["{python}", "-m", "unittest", "discover", "-s", "tests", "-v"], "expected_exit_code": 0}, {"id": "private_contract", "type": "command", "severity": "required", "argv": ["{python}", "{grader_root}/v2-webhook-replay-gate/test_contract.py"], "expected_exit_code": 0}, {"id": "protected_dependencies", "type": "workspace_policy", "severity": "required", "protected_paths": ["requirements.txt"]}]},
+  "safety": {"network": "disabled", "network_allowlist": [], "allowed_write_roots": ["."], "forbidden_commands": ["sudo", "chmod", "chown"]},
+  "evidence": {"required_artifacts": ["workspace.diff", "trace.jsonl", "grader-result.json"]},
+  "author_metadata": {"capabilities": ["planning", "tool_use", "verification", "safety"], "likely_failure_modes": ["planning", "verification", "safety"], "notes": "Wave-2 lineage combining authentication, temporal boundaries, replay state, and bounded cleanup."}
+}
