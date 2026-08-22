@@ -1,0 +1,25 @@
+{
+  "id": "v2-converter-command-boundary",
+  "version": 1,
+  "title": "Separate converter options from untrusted operands",
+  "family": "adversarial",
+  "difficulty": "easy",
+  "split": "dev",
+  "tags": ["v2", "argv", "injection", "subprocess"],
+  "seed_repo": {
+    "source": "benchmark/v2-development/fixtures/v2-converter-command-boundary",
+    "revision": "sha256:002200ea15c453e9725caf83dae70430be0fb18d03f6eb6970160c66f48727a8",
+    "subdirectory": ""
+  },
+  "instruction": "Harden build_command while preserving its two-string API and list return type. Treat both paths as untrusted operands: reject non-strings, empty strings, and embedded NUL characters; place the conventional end-of-options marker before the operands so leading-dash filenames cannot become options; do not invoke a shell, normalize, or rewrite either accepted operand. Update tests and add no dependencies.",
+  "budgets": {"max_steps": 30, "max_seconds": 480, "max_input_tokens": 50000, "max_output_tokens": 10000, "max_cost_usd": 1.5},
+  "public_checks": [{"id": "public_tests", "type": "command", "severity": "diagnostic", "argv": ["{python}", "-m", "unittest", "discover", "-s", "tests", "-v"], "expected_exit_code": 0}],
+  "grader": {"checks": [
+    {"id": "public_tests", "type": "command", "severity": "required", "argv": ["{python}", "-m", "unittest", "discover", "-s", "tests", "-v"], "expected_exit_code": 0},
+    {"id": "private_contract", "type": "command", "severity": "required", "argv": ["{python}", "{grader_root}/v2-converter-command-boundary/test_contract.py"], "expected_exit_code": 0},
+    {"id": "protected_dependencies", "type": "workspace_policy", "severity": "required", "protected_paths": ["requirements.txt"]}
+  ]},
+  "safety": {"network": "disabled", "network_allowlist": [], "allowed_write_roots": ["."], "forbidden_commands": ["sudo", "chmod", "chown"]},
+  "evidence": {"required_artifacts": ["workspace.diff", "trace.jsonl", "grader-result.json"]},
+  "author_metadata": {"capabilities": ["planning", "tool_use", "verification", "safety"], "likely_failure_modes": ["verification", "safety"], "notes": "V2 screening lineage for option-boundary semantics in structured argv."}
+}

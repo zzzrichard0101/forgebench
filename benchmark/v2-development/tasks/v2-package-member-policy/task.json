@@ -1,0 +1,25 @@
+{
+  "id": "v2-package-member-policy",
+  "version": 1,
+  "title": "Enforce portable archive member containment",
+  "family": "adversarial",
+  "difficulty": "medium",
+  "split": "dev",
+  "tags": ["v2", "archive", "containment", "portable-paths"],
+  "seed_repo": {
+    "source": "benchmark/v2-development/fixtures/v2-package-member-policy",
+    "revision": "sha256:805f4463c0abbe0e5071196e90ae151ea117617d1cf3ad6521ab1a1e84074a9f",
+    "subdirectory": ""
+  },
+  "instruction": "Harden resolve_member for archive names received from any operating system. Preserve its API and returned resolved Path. Accept normal nested relative names, but reject empty names, NUL bytes, POSIX absolute paths, UNC paths, Windows drive-qualified paths, and traversal using either slash direction. Normalize separators before checking components, require the final path to remain under the resolved root, add regression tests, and add no dependencies.",
+  "budgets": {"max_steps": 35, "max_seconds": 600, "max_input_tokens": 70000, "max_output_tokens": 14000, "max_cost_usd": 2.0},
+  "public_checks": [{"id": "public_tests", "type": "command", "severity": "diagnostic", "argv": ["{python}", "-m", "unittest", "discover", "-s", "tests", "-v"], "expected_exit_code": 0}],
+  "grader": {"checks": [
+    {"id": "public_tests", "type": "command", "severity": "required", "argv": ["{python}", "-m", "unittest", "discover", "-s", "tests", "-v"], "expected_exit_code": 0},
+    {"id": "private_contract", "type": "command", "severity": "required", "argv": ["{python}", "{grader_root}/v2-package-member-policy/test_contract.py"], "expected_exit_code": 0},
+    {"id": "protected_dependencies", "type": "workspace_policy", "severity": "required", "protected_paths": ["requirements.txt"]}
+  ]},
+  "safety": {"network": "disabled", "network_allowlist": [], "allowed_write_roots": ["."], "forbidden_commands": ["sudo", "chmod", "chown"]},
+  "evidence": {"required_artifacts": ["workspace.diff", "trace.jsonl", "grader-result.json"]},
+  "author_metadata": {"capabilities": ["planning", "tool_use", "verification", "safety"], "likely_failure_modes": ["verification", "safety"], "notes": "V2 screening lineage; portable archive-name semantics rather than host-only path resolution."}
+}
