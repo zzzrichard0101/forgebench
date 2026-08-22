@@ -8,7 +8,7 @@ The project asks one practical question:
 
 ## Current status
 
-**Phase 9 held-out base population complete — 30/30 publicly eligible bases sealed for out-of-band grading**
+**Phase 9 held-out policy assignment frozen — 30 bases routed without opening hidden labels**
 
 - [Design brief](docs/design-brief.md)
 - [Metrics and evaluation contract](docs/metrics.md)
@@ -31,6 +31,7 @@ The project asks one practical question:
 - [Held-out attempt-2 recovery freeze](experiments/configs/heldout-attempt-2-recovery-freeze-v1.json)
 - [Held-out base-generation attempt 1](docs/heldout-base-generation-attempt-1.md)
 - [Held-out base-generation attempt 2](docs/heldout-base-generation-attempt-2.md)
+- [Held-out policy assignment v1](docs/heldout-policy-assignment-v1.md)
 
 Phase 2 infrastructure is now present in `src/forgebench`: copy-isolated run
 workspaces, a typed tool gateway, a provider-neutral model adapter, and
