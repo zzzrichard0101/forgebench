@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "freeze_version": "heldout-model-policy-replay-freeze-v1",
+  "status": "frozen_before_model_policy_replay",
+  "frozen_at": "2026-08-22",
+  "batch_id": "heldout-v1-model-policies-v1",
+  "plan_sha256": "sha256:2020d26bfb4a7a507bae00c6c33ce0cf2017cc164c2b589eac1bde2559e840b5",
+  "assignment_manifest_sha256": "sha256:c275ccbe34243c90f8548f55ea6b48708a75124bdcab2c96b623365d06cb9083",
+  "base_catalog_sha256": "sha256:6fcbe9dddfb4ca11ebdc8078367a3e6f17b44c0b10ad25355583b086fcaee591",
+  "policies": [
+    "verify_all",
+    "random_k_call_matched",
+    "risk_model_direct",
+    "risk_hierarchical"
+  ],
+  "slot_count": 120,
+  "expected_model_calls": 57,
+  "expected_probe_calls": 9,
+  "model": "gpt-5.6-sol",
+  "reasoning_effort": "medium",
+  "codex_cli_version": "0.147.0",
+  "timeout_seconds": 300,
+  "hidden_labels_available": false,
+  "private_grader_available": false,
+  "artifacts": [
+    {"path": "experiments/configs/heldout-policy-assignment-v1.json", "sha256": "sha256:ba6e04fd474db5d17d1cf35aaff61a60bcb77ed2fcff2a6380dd6bebd20af64d"},
+    {"path": "scripts/run_heldout_model_policy_batch.py", "sha256": "sha256:3f3c0678dd4b09dd32037839fd19170f8c1a6af832578538859780cf810a5320"},
+    {"path": "src/forgebench/heldout_model_replay.py", "sha256": "sha256:ad0506e31bd28a8588819772e0bbd204aeea8d0db0f2fbfd431d0a39d2a25719"},
+    {"path": "src/forgebench/adaptive_verification.py", "sha256": "sha256:17adb662259ca48b6e9d91e60059aaeed6dfe0955786e97e5c2f11ead273bf66"},
+    {"path": "src/forgebench/evidence_packet.py", "sha256": "sha256:bcce6ac71c8f8c6e57b89f8fc1120632129bd50bce25e93762a0d25f6cb7559e"},
+    {"path": "src/forgebench/completion_risk.py", "sha256": "sha256:cf91107a4a9f6438ac2b2091fe5849e4d557ee4ea0bd2dea2abd87b0620fa7a5"},
+    {"path": "src/forgebench/deterministic_probe.py", "sha256": "sha256:4d447f96e471864c9eacc18d012c3e56bb92ae93436f2d5d42a8682e95955377"},
+    {"path": "src/forgebench/completion.py", "sha256": "sha256:167bdfff771ff6d34670dd5d7600b0ff665b1509cad0db59d2696d9ba9abd483"},
+    {"path": "src/forgebench/codex_command.py", "sha256": "sha256:509afa8eeaa53e7f4271cbb55551670e7a59d1049b6f4e3c6c923b6c1345aee3"},
+    {"path": "src/forgebench/workspace.py", "sha256": "sha256:929930e9dfb4afc208719911401760fd2e095d411cf91a2adcee40ac01352379"}
+  ],
+  "content_sha256": "sha256:be2433271701ffdc9fc4d68173e0eb4edf7e77120adeb544abe6bae2d7f4b2ff"
+}
