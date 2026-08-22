@@ -8,7 +8,7 @@ The project asks one practical question:
 
 ## Current status
 
-**Phase 10 held-out evaluation complete — primary claim rejected, negative result sealed**
+**Phase 10 complete — negative held-out result sealed and application package ready**
 
 - [Design brief](docs/design-brief.md)
 - [Metrics and evaluation contract](docs/metrics.md)
@@ -42,6 +42,9 @@ The project asks one practical question:
 - [Held-out private policy evaluation](docs/heldout-private-policy-evaluation-v1.md)
 - [Machine-readable final evaluation](experiments/reports/heldout-private-policy-evaluation-v1.json)
 - [Final evaluation freeze](experiments/configs/heldout-final-evaluation-freeze-v1.json)
+- [5-minute demo script](demo/5-minute-demo.md)
+- [Application project description](docs/application-project-description.md)
+- [One-page portfolio PDF](output/pdf/forgebench-one-page-portfolio.pdf)
 
 Phase 2 infrastructure is now present in `src/forgebench`: copy-isolated run
 workspaces, a typed tool gateway, a provider-neutral model adapter, and
@@ -188,6 +191,14 @@ then found that all 30 bases and all 120 model-policy replays failed the hidden
 grader. P5 recovered 0/30 false completions, the frozen primary claim gate
 failed, and Verify-All added one hard-safety violation. ForgeBench therefore
 reports a leakage-controlled negative result rather than a reliability winner.
+
+The final [application package](docs/application-project-description.md)
+translates that result into a 30-second introduction, evidence-backed resume
+bullets, Korean and English summaries, role-fit mapping, and interview answers.
+The [five-minute demo](demo/5-minute-demo.md) leads with the harness and freeze
+mechanism before disclosing the failed hypothesis, and the
+[one-page brief](output/pdf/forgebench-one-page-portfolio.pdf) provides a compact
+visual handoff without overstating reliability.
 
 ## Local verification
 
