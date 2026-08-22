@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "report": "v2-screening-wave2-public-population-v1",
+  "status": "public_population_sealed_awaiting_private_evaluation",
+  "snapshot": "v2-dev-screening-wave2-bases-v1",
+  "execution": {
+    "frozen_slots": 18,
+    "eligible_public": 17,
+    "visible_failure": 1,
+    "infrastructure_failure": 0
+  },
+  "integrity": {
+    "base_generation_freeze_sha256": "sha256:93b3e6aba6ee9f34d5c111fa738f5f1fb6cab63c7cf508e91328c1b3f536f3fb",
+    "execution_plan_sha256": "sha256:8752b3003f34962165b8c434e871d2a24c9c85b244a63d80f0ebc51fdecb7ba2",
+    "public_manifest_sha256": "sha256:6d2db02a015a16a107445d3b2582591ed9a15acbdafd22d368ff0ce889f5aaab",
+    "private_grader_seal_sha256": "sha256:2023e8b322de9a59a8ad4171c0cf0e3231c26ca3facb54e525defdb4b3c30875"
+  },
+  "privacy": {
+    "private_evaluation_performed": false,
+    "case_labels_committed": false,
+    "grader_results_committed": false,
+    "external_paths_published": false
+  },
+  "selection": {
+    "all_frozen_slots_executed": true,
+    "all_publicly_eligible_cases_sealed": true,
+    "visible_failure_rerun": false,
+    "outcome_based_exclusion": false
+  },
+  "next_action": "evaluate all 17 eligible cases with the sealed external development grader"
+}
