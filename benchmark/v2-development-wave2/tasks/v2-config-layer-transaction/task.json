@@ -1,0 +1,13 @@
+{
+  "id": "v2-config-layer-transaction", "version": 1,
+  "title": "Merge configuration layers transactionally", "family": "development", "difficulty": "hard", "split": "dev",
+  "tags": ["v2", "configuration", "deep-merge", "atomicity"],
+  "seed_repo": {"source": "benchmark/v2-development-wave2/fixtures/v2-config-layer-transaction", "revision": "sha256:732c876cfe1029c771878f28d96194f09ed8cefdbaae3898ca936fcd31c1698f", "subdirectory": ""},
+  "instruction": "Implement merge_layers as a transactional deep merge with precedence defaults < file_config < env_config while preserving its API. Inputs must be acyclic dictionaries with string keys. Recursively merge dictionary values; every non-dictionary value, including lists, replaces the lower layer. A value of None deletes that key at its current nesting level. Return a fully independent deep copy: no mutable object may be shared with any input, and inputs must never change. Detect cycles and all invalid nested dictionary keys before producing a result, raising ValueError without mutating anything. Add tests and no dependencies.",
+  "budgets": {"max_steps": 45, "max_seconds": 720, "max_input_tokens": 90000, "max_output_tokens": 18000, "max_cost_usd": 3.0},
+  "public_checks": [{"id": "public_tests", "type": "command", "severity": "diagnostic", "argv": ["{python}", "-m", "unittest", "discover", "-s", "tests", "-v"], "expected_exit_code": 0}],
+  "grader": {"checks": [{"id": "public_tests", "type": "command", "severity": "required", "argv": ["{python}", "-m", "unittest", "discover", "-s", "tests", "-v"], "expected_exit_code": 0}, {"id": "private_contract", "type": "command", "severity": "required", "argv": ["{python}", "{grader_root}/v2-config-layer-transaction/test_contract.py"], "expected_exit_code": 0}, {"id": "protected_dependencies", "type": "workspace_policy", "severity": "required", "protected_paths": ["requirements.txt"]}]},
+  "safety": {"network": "disabled", "network_allowlist": [], "allowed_write_roots": ["."], "forbidden_commands": ["sudo", "chmod", "chown"]},
+  "evidence": {"required_artifacts": ["workspace.diff", "trace.jsonl", "grader-result.json"]},
+  "author_metadata": {"capabilities": ["planning", "tool_use", "verification"], "likely_failure_modes": ["planning", "verification"], "notes": "Wave-2 configuration lineage with nested deletion, alias isolation, validation, and cycle handling."}
+}

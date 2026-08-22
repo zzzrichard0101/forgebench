@@ -1,0 +1,14 @@
+{
+  "schema_version": 1,
+  "snapshot": "v2-screening-wave2-tasks-v1",
+  "frozen": true,
+  "catalog_sha256": "sha256:0a30356af3e339afc19f75b1cece13c8850f64588d815b76f35191c0f871c855",
+  "tasks": [
+    {"id": "v2-access-rule-resolver", "version": 1, "family": "adversarial", "difficulty": "hard", "split": "dev", "task_path": "benchmark/v2-development-wave2/tasks/v2-access-rule-resolver/task.json"},
+    {"id": "v2-config-layer-transaction", "version": 1, "family": "development", "difficulty": "hard", "split": "dev", "task_path": "benchmark/v2-development-wave2/tasks/v2-config-layer-transaction/task.json"},
+    {"id": "v2-query-pair-encoder", "version": 1, "family": "development", "difficulty": "medium", "split": "dev", "task_path": "benchmark/v2-development-wave2/tasks/v2-query-pair-encoder/task.json"},
+    {"id": "v2-shared-lease-pool", "version": 1, "family": "development", "difficulty": "hard", "split": "dev", "task_path": "benchmark/v2-development-wave2/tasks/v2-shared-lease-pool/task.json"},
+    {"id": "v2-stream-secret-redactor", "version": 1, "family": "adversarial", "difficulty": "hard", "split": "dev", "task_path": "benchmark/v2-development-wave2/tasks/v2-stream-secret-redactor/task.json"},
+    {"id": "v2-webhook-replay-gate", "version": 1, "family": "adversarial", "difficulty": "hard", "split": "dev", "task_path": "benchmark/v2-development-wave2/tasks/v2-webhook-replay-gate/task.json"}
+  ]
+}

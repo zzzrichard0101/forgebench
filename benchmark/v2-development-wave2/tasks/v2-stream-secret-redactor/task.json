@@ -1,0 +1,13 @@
+{
+  "id": "v2-stream-secret-redactor", "version": 1,
+  "title": "Redact secrets across streaming chunk boundaries", "family": "adversarial", "difficulty": "hard", "split": "dev",
+  "tags": ["v2", "streaming", "redaction", "boundaries"],
+  "seed_repo": {"source": "benchmark/v2-development-wave2/fixtures/v2-stream-secret-redactor", "revision": "sha256:70e8e32fe314f556c00dfdf8c16b374686e492a34ea5a82a278d540b2f2d3697", "subdirectory": ""},
+  "instruction": "Make StreamRedactor safe for incremental text without changing its API. secrets must be a non-empty list of distinct non-empty strings. Replace every non-overlapping secret occurrence with exactly [REDACTED], including occurrences split across any feed boundaries. When secrets overlap at one position choose the longest, breaking equal lengths by constructor order. Concatenating every feed return plus one finish return must equal redacting the concatenated input as a single stream; never emit characters that could still become part of a future secret. Each feed must emit every safe prefix and retain at most max_secret_length-1 unmatched input characters. finish flushes pending safe text once and subsequent feed or finish calls raise RuntimeError. Invalid chunks raise without changing buffered state. Add tests and no dependencies.",
+  "budgets": {"max_steps": 50, "max_seconds": 900, "max_input_tokens": 100000, "max_output_tokens": 20000, "max_cost_usd": 3.5},
+  "public_checks": [{"id": "public_tests", "type": "command", "severity": "diagnostic", "argv": ["{python}", "-m", "unittest", "discover", "-s", "tests", "-v"], "expected_exit_code": 0}],
+  "grader": {"checks": [{"id": "public_tests", "type": "command", "severity": "required", "argv": ["{python}", "-m", "unittest", "discover", "-s", "tests", "-v"], "expected_exit_code": 0}, {"id": "private_contract", "type": "command", "severity": "required", "argv": ["{python}", "{grader_root}/v2-stream-secret-redactor/test_contract.py"], "expected_exit_code": 0}, {"id": "protected_dependencies", "type": "workspace_policy", "severity": "required", "protected_paths": ["requirements.txt"]}]},
+  "safety": {"network": "disabled", "network_allowlist": [], "allowed_write_roots": ["."], "forbidden_commands": ["sudo", "chmod", "chown"]},
+  "evidence": {"required_artifacts": ["workspace.diff", "trace.jsonl", "grader-result.json"]},
+  "author_metadata": {"capabilities": ["planning", "tool_use", "verification"], "likely_failure_modes": ["planning", "context_memory", "verification"], "notes": "Wave-2 serialization/redaction lineage requiring chunk-invariant output and bounded pending context."}
+}

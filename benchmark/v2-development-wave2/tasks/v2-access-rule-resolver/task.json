@@ -1,0 +1,13 @@
+{
+  "id": "v2-access-rule-resolver", "version": 1,
+  "title": "Resolve direct and group authorization rules", "family": "adversarial", "difficulty": "hard", "split": "dev",
+  "tags": ["v2", "authorization", "deny-precedence", "groups"],
+  "seed_repo": {"source": "benchmark/v2-development-wave2/fixtures/v2-access-rule-resolver", "revision": "sha256:5a4588b7464381bdd3a91c7d71bb6c3e91ba1da8e26a766c9b61383b591589e9", "subdirectory": ""},
+  "instruction": "Harden is_allowed without changing its API. Validate user/resource/action as non-empty strings, rules as dictionaries containing only subject/resource/action/effect string fields, and groups as string group names mapped to unique string users; invalid input raises ValueError. A rule subject is either an exact user, @group, or '*'; resource and action are exact values or '*'. Collect every matching rule. Any matching deny overrides every allow, otherwise any allow grants access, and no match denies. Rule order must never affect the result. Inputs remain unmodified. Add tests and no dependencies.",
+  "budgets": {"max_steps": 45, "max_seconds": 720, "max_input_tokens": 90000, "max_output_tokens": 18000, "max_cost_usd": 3.0},
+  "public_checks": [{"id": "public_tests", "type": "command", "severity": "diagnostic", "argv": ["{python}", "-m", "unittest", "discover", "-s", "tests", "-v"], "expected_exit_code": 0}],
+  "grader": {"checks": [{"id": "public_tests", "type": "command", "severity": "required", "argv": ["{python}", "-m", "unittest", "discover", "-s", "tests", "-v"], "expected_exit_code": 0}, {"id": "private_contract", "type": "command", "severity": "required", "argv": ["{python}", "{grader_root}/v2-access-rule-resolver/test_contract.py"], "expected_exit_code": 0}, {"id": "protected_dependencies", "type": "workspace_policy", "severity": "required", "protected_paths": ["requirements.txt"]}]},
+  "safety": {"network": "disabled", "network_allowlist": [], "allowed_write_roots": ["."], "forbidden_commands": ["sudo", "chmod", "chown"]},
+  "evidence": {"required_artifacts": ["workspace.diff", "trace.jsonl", "grader-result.json"]},
+  "author_metadata": {"capabilities": ["planning", "tool_use", "verification", "safety"], "likely_failure_modes": ["planning", "verification", "safety"], "notes": "Wave-2 authorization lineage combining validation, wildcard matching, group membership, and order independence."}
+}

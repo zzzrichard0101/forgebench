@@ -1,0 +1,13 @@
+{
+  "id": "v2-shared-lease-pool", "version": 1,
+  "title": "Share and release keyed resources safely", "family": "development", "difficulty": "hard", "split": "dev",
+  "tags": ["v2", "lifecycle", "context-manager", "reference-counting"],
+  "seed_repo": {"source": "benchmark/v2-development-wave2/fixtures/v2-shared-lease-pool", "revision": "sha256:3cf0307fe99edcaa056809841bb552e1fb2716b29443db90e0f9df1d7978173c", "subdirectory": ""},
+  "instruction": "Implement LeasePool as a keyed reference-counted context manager while preserving its constructor and lease API. key must be a non-empty string. Overlapping or nested leases for the same key share the exact resource and call acquire only once; distinct keys are independent. Release exactly once when the last lease for a key exits, including body exceptions and out-of-order exits. If acquire raises, record no state. If release raises, remove internal state before propagating so a later lease can acquire again. A context manager object may be entered only once. Add tests and no dependencies.",
+  "budgets": {"max_steps": 45, "max_seconds": 720, "max_input_tokens": 90000, "max_output_tokens": 18000, "max_cost_usd": 3.0},
+  "public_checks": [{"id": "public_tests", "type": "command", "severity": "diagnostic", "argv": ["{python}", "-m", "unittest", "discover", "-s", "tests", "-v"], "expected_exit_code": 0}],
+  "grader": {"checks": [{"id": "public_tests", "type": "command", "severity": "required", "argv": ["{python}", "-m", "unittest", "discover", "-s", "tests", "-v"], "expected_exit_code": 0}, {"id": "private_contract", "type": "command", "severity": "required", "argv": ["{python}", "{grader_root}/v2-shared-lease-pool/test_contract.py"], "expected_exit_code": 0}, {"id": "protected_dependencies", "type": "workspace_policy", "severity": "required", "protected_paths": ["requirements.txt"]}]},
+  "safety": {"network": "disabled", "network_allowlist": [], "allowed_write_roots": ["."], "forbidden_commands": ["sudo", "chmod", "chown"]},
+  "evidence": {"required_artifacts": ["workspace.diff", "trace.jsonl", "grader-result.json"]},
+  "author_metadata": {"capabilities": ["planning", "tool_use", "verification", "recovery"], "likely_failure_modes": ["planning", "verification", "recovery"], "notes": "Wave-2 lifecycle lineage covering shared ownership, exception cleanup, and reusable pool state."}
+}

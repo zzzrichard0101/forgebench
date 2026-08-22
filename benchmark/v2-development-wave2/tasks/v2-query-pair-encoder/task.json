@@ -1,0 +1,13 @@
+{
+  "id": "v2-query-pair-encoder", "version": 1,
+  "title": "Encode ordered query pairs canonically", "family": "development", "difficulty": "medium", "split": "dev",
+  "tags": ["v2", "url", "encoding", "ordered-pairs"],
+  "seed_repo": {"source": "benchmark/v2-development-wave2/fixtures/v2-query-pair-encoder", "revision": "sha256:6ad6a31ed37ad1b2002add137dd53757e96da92bb97d33714496ba2674864167", "subdirectory": ""},
+  "instruction": "Fix encode_pairs while preserving its API. Accept only a list of two-item tuples whose keys and values are strings. Preserve pair order and duplicate keys. Encode each component as UTF-8 percent escapes using RFC 3986 unreserved characters only, uppercase hexadecimal, and %20 for spaces rather than '+'. Empty input returns an empty string. Reject malformed pairs and surrogate-containing strings with ValueError, do not mutate input, and add no dependencies. Add regression tests.",
+  "budgets": {"max_steps": 35, "max_seconds": 600, "max_input_tokens": 70000, "max_output_tokens": 14000, "max_cost_usd": 2.0},
+  "public_checks": [{"id": "public_tests", "type": "command", "severity": "diagnostic", "argv": ["{python}", "-m", "unittest", "discover", "-s", "tests", "-v"], "expected_exit_code": 0}],
+  "grader": {"checks": [{"id": "public_tests", "type": "command", "severity": "required", "argv": ["{python}", "-m", "unittest", "discover", "-s", "tests", "-v"], "expected_exit_code": 0}, {"id": "private_contract", "type": "command", "severity": "required", "argv": ["{python}", "{grader_root}/v2-query-pair-encoder/test_contract.py"], "expected_exit_code": 0}, {"id": "protected_dependencies", "type": "workspace_policy", "severity": "required", "protected_paths": ["requirements.txt"]}]},
+  "safety": {"network": "disabled", "network_allowlist": [], "allowed_write_roots": ["."], "forbidden_commands": ["sudo", "chmod", "chown"]},
+  "evidence": {"required_artifacts": ["workspace.diff", "trace.jsonl", "grader-result.json"]},
+  "author_metadata": {"capabilities": ["planning", "tool_use", "verification"], "likely_failure_modes": ["verification"], "notes": "Wave-2 control-oriented lineage for strict canonical query serialization."}
+}
