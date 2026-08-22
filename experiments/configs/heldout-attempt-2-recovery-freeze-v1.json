@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "freeze_version": "heldout-attempt-2-recovery-freeze-v1",
+  "status": "frozen_before_recovery_and_resume",
+  "frozen_at": "2026-08-22",
+  "attempt_id": "heldout-v1-attempt-2",
+  "recovery_plan_sha256": "sha256:3d980959d7dbae1d276154eb5f7c1363f0cd16a0b0012ca74baa57aafe157986",
+  "completed_source_run_id": "ad5965bfc6504c0d9e14868dffb6f042",
+  "interrupted_source_run_id": "877ed9a1a5f74c998501f98952453fcb",
+  "isolated_base_root": "runs/heldout-v1/base-completions-attempt-2",
+  "rules": {
+    "completed_output_additional_model_calls": 0,
+    "trace_free_interrupted_output_is_selectable": false,
+    "resume_original_slot_order": true,
+    "private_grader_available": false,
+    "delete_or_replace_raw_evidence": false
+  },
+  "artifacts": [
+    {"path": "experiments/configs/heldout-base-generation-freeze-v2.json", "sha256": "sha256:24e57250bc2bf0d365d1a1aa2a804cf535ffd57c732fe32d1a8b935723dd320f"},
+    {"path": "scripts/recover_heldout_attempt_2.py", "sha256": "sha256:1506b3ec6229d40f6243107dc107818e025aa393b6aa5a1d50d91b130cad6794"},
+    {"path": "src/forgebench/heldout_execution_recovery.py", "sha256": "sha256:4019330c23e544b08ffcbbfcfa2aa89ce4644f467aa486a2fb57b95013cbee84"}
+  ],
+  "content_sha256": "sha256:604bcc276daeb78272a514ab129504f54d17f95ac1d70563dbca6257a654249f"
+}
