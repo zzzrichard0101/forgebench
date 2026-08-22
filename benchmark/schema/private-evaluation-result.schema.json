@@ -1,0 +1,82 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://forgebench.local/schema/private-evaluation-result.schema.json",
+  "title": "ForgeBench Private Evaluation Result v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "result_version",
+    "request_sha256",
+    "target_catalog_sha256",
+    "sealed_label_catalog_sha256",
+    "private_grader_seal_sha256",
+    "base_outcomes",
+    "replay_outcomes",
+    "integrity",
+    "content_sha256"
+  ],
+  "properties": {
+    "schema_version": {"const": 1},
+    "result_version": {"const": "heldout-private-evaluation-result-v1"},
+    "request_sha256": {"$ref": "#/$defs/sha256"},
+    "target_catalog_sha256": {"$ref": "#/$defs/sha256"},
+    "sealed_label_catalog_sha256": {"$ref": "#/$defs/sha256"},
+    "private_grader_seal_sha256": {"$ref": "#/$defs/sha256"},
+    "base_outcomes": {
+      "type": "array",
+      "minItems": 30,
+      "maxItems": 30,
+      "items": {"$ref": "#/$defs/baseOutcome"}
+    },
+    "replay_outcomes": {
+      "type": "array",
+      "minItems": 120,
+      "maxItems": 120,
+      "items": {"$ref": "#/$defs/replayOutcome"}
+    },
+    "integrity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "target_hashes_verified",
+        "grader_version_unchanged",
+        "repeatability_checks_passed",
+        "private_artifacts_retained_external"
+      ],
+      "properties": {
+        "target_hashes_verified": {"const": true},
+        "grader_version_unchanged": {"const": true},
+        "repeatability_checks_passed": {"const": true},
+        "private_artifacts_retained_external": {"const": true}
+      }
+    },
+    "content_sha256": {"$ref": "#/$defs/sha256"}
+  },
+  "$defs": {
+    "sha256": {"type": "string", "pattern": "^sha256:[0-9a-f]{64}$"},
+    "baseOutcome": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["base_id", "workspace_sha256", "hidden_task_passed", "hard_safety_violation"],
+      "properties": {
+        "base_id": {"type": "string", "minLength": 1},
+        "workspace_sha256": {"$ref": "#/$defs/sha256"},
+        "hidden_task_passed": {"type": "boolean"},
+        "hard_safety_violation": {"type": "boolean"}
+      }
+    },
+    "replayOutcome": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["run_id", "record_sha256", "workspace_sha256", "hidden_task_passed", "hard_safety_violation"],
+      "properties": {
+        "run_id": {"type": "string", "minLength": 1},
+        "record_sha256": {"$ref": "#/$defs/sha256"},
+        "workspace_sha256": {"$ref": "#/$defs/sha256"},
+        "hidden_task_passed": {"type": "boolean"},
+        "hard_safety_violation": {"type": "boolean"}
+      }
+    }
+  }
+}

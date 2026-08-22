@@ -8,7 +8,7 @@ The project asks one practical question:
 
 ## Current status
 
-**Phase 9 model-policy replay complete — 120/120 cells sealed before hidden evaluation**
+**Phase 10 private-evaluation handoff — 150 targets hash-bound for external grading**
 
 - [Design brief](docs/design-brief.md)
 - [Metrics and evaluation contract](docs/metrics.md)
@@ -37,6 +37,8 @@ The project asks one practical question:
 - [Held-out model-policy replay freeze](experiments/configs/heldout-model-policy-replay-freeze-v1.json)
 - [Held-out model-policy replay report](docs/heldout-model-policy-replay-v1.md)
 - [Held-out model-policy result freeze](experiments/configs/heldout-model-policy-result-freeze-v1.json)
+- [Private evaluation handoff](docs/private-evaluation-handoff-v1.md)
+- [Frozen private evaluation request](experiments/configs/heldout-private-evaluation-request-v1.json)
 
 Phase 2 infrastructure is now present in `src/forgebench`: copy-isolated run
 workspaces, a typed tool gateway, a provider-neutral model adapter, and
