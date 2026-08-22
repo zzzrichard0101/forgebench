@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "freeze_version": "heldout-model-policy-result-freeze-v1",
+  "status": "frozen_before_private_label_join",
+  "frozen_at": "2026-08-22",
+  "batch_id": "heldout-v1-model-policies-v1",
+  "model_replay_plan_sha256": "sha256:2020d26bfb4a7a507bae00c6c33ce0cf2017cc164c2b589eac1bde2559e840b5",
+  "assignment_manifest_sha256": "sha256:c275ccbe34243c90f8548f55ea6b48708a75124bdcab2c96b623365d06cb9083",
+  "base_catalog_sha256": "sha256:6fcbe9dddfb4ca11ebdc8078367a3e6f17b44c0b10ad25355583b086fcaee591",
+  "raw_execution_sha256": "sha256:ac84035f87a9cfe323dc64802d5c330579026aac9828445f55a0db6e1eea4ce4",
+  "replay_record_catalog_sha256": "sha256:d59728d87e3aee44c632ea073d0e59320205381650b420f7f90fc543add1523e",
+  "public_report_sha256": "sha256:d4a0914585878f69c455ac6a74a8bf593c43c6d655a8af63c2e2cc717a7b4bbf",
+  "completed_cells": 120,
+  "model_calls": 57,
+  "probe_calls": 9,
+  "sealed_label_catalog_sha256": "sha256:909099f0e3e132c61141b6308c0bf508faa481a410b4271c963349d264d51cec",
+  "private_grader_seal_sha256": "sha256:aee74ae33f37d19c311c28066d877e88e55699335e12efc00d3570c0abddf632",
+  "private_artifacts_in_repository": false,
+  "hidden_outcomes_disclosed": false,
+  "predeclared_interpretation_constraints": [
+    "Random-k and Risk-Hierarchical select the same nine model-routed bases in this population.",
+    "All nine Risk-Hierarchical probes are unsupported, so the hierarchical route does not short-circuit a model call.",
+    "Verify-All introduces one visible public protected-file regression before hidden grading."
+  ],
+  "required_next_action": "external private join against this exact public replay catalog",
+  "content_sha256": "sha256:1198347a1f27bf40e5d9d8b3c26626c4996fde57fcf28286002f9438e3c884c8"
+}

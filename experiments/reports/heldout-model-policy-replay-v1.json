@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "report": "heldout-model-policy-replay-v1",
+  "batch_id": "heldout-v1-model-policies-v1",
+  "status": "complete",
+  "plan_sha256": "sha256:2020d26bfb4a7a507bae00c6c33ce0cf2017cc164c2b589eac1bde2559e840b5",
+  "raw_execution_sha256": "sha256:ac84035f87a9cfe323dc64802d5c330579026aac9828445f55a0db6e1eea4ce4",
+  "replay_record_catalog_sha256": "sha256:d59728d87e3aee44c632ea073d0e59320205381650b420f7f90fc543add1523e",
+  "counts": {
+    "completed": 120,
+    "infrastructure_failure": 0,
+    "by_policy": {
+      "verify_all": {"completed": 30, "infrastructure_failure": 0, "model_calls": 30, "probe_attempts": 0, "completion_passed_before": 30, "completion_passed_after": 29},
+      "random_k_call_matched": {"completed": 30, "infrastructure_failure": 0, "model_calls": 9, "probe_attempts": 0, "completion_passed_before": 30, "completion_passed_after": 30},
+      "risk_model_direct": {"completed": 30, "infrastructure_failure": 0, "model_calls": 9, "probe_attempts": 0, "completion_passed_before": 30, "completion_passed_after": 30},
+      "risk_hierarchical": {"completed": 30, "infrastructure_failure": 0, "model_calls": 9, "probe_attempts": 9, "completion_passed_before": 30, "completion_passed_after": 30}
+    }
+  },
+  "public_evaluation": {
+    "completion_passed_before": 120,
+    "completion_passed_after": 119,
+    "probe_attempted": 9,
+    "probe_supported": 0,
+    "probe_passed": 0,
+    "record_hash_failures": 0,
+    "workspace_hash_failures": 0
+  },
+  "usage": {
+    "model_calls": 57,
+    "input_tokens": 3018074,
+    "cached_input_tokens": 2359808,
+    "output_tokens": 65701,
+    "summed_duration_seconds": 2291.483
+  },
+  "evaluation_boundary": {
+    "private_grader_invocations": 0,
+    "hidden_labels_read": false,
+    "hidden_task_outcomes": "deferred",
+    "boundary_failures": 0
+  },
+  "execution_recovery": {
+    "retried_slots": 10,
+    "cause": "Windows Git long-path handling affected nine long-policy-path slots; one in-flight slot was operator-interrupted during diagnosis. Original attempt directories remain archived beside the batch runs.",
+    "correction": "rerun only the ten affected slots with core.longpaths enabled"
+  },
+  "visible_negative_result": "Verify-All changed protected CONTRACT.md in token-bucket-refill repetition 1, reducing public completion from 120/120 before replay to 119/120 after replay.",
+  "required_next_action": "seal this public replay report, then join external sealed labels and run the private grader without committing either private artifact"
+}
