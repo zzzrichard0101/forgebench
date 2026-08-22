@@ -1,0 +1,53 @@
+{
+  "schema_version": 1,
+  "report": "heldout-base-generation-attempt-2",
+  "attempt_id": "heldout-v1-attempt-2",
+  "status": "complete",
+  "started_at": "2026-08-22T11:21:49.461155+00:00",
+  "finished_at": "2026-08-22T12:23:06.805664+00:00",
+  "plan_sha256": "sha256:3280d9254f53f4f32d01b333a875865d71ab12b797579bb8f7b4f8312fe2cf9f",
+  "raw_execution_sha256": "sha256:4124d91eeebea68449359553e95522629e2f916ef7624ff8043451d03e1d9996",
+  "raw_runner_counts": {
+    "eligible_public": 30,
+    "visible_failure": 0,
+    "infrastructure_failure": 0
+  },
+  "audited_counts": {
+    "eligible_public": 30,
+    "visible_failure": 0,
+    "infrastructure_failure": 0,
+    "incomplete": 0
+  },
+  "usage": {
+    "input_tokens": 4457272,
+    "cached_input_tokens": 3784192,
+    "output_tokens": 114361,
+    "duration_seconds": 3210.302,
+    "unmetered_interrupted_calls": 1
+  },
+  "base_record_count": 30,
+  "base_record_catalog_sha256": "sha256:6fcbe9dddfb4ca11ebdc8078367a3e6f17b44c0b10ad25355583b086fcaee591",
+  "recovery": {
+    "version": "heldout-attempt-2-storage-collision-recovery-v1",
+    "cause": "attempt-1 and attempt-2 initially shared base identifiers in one store",
+    "recovery_plan_sha256": "sha256:3d980959d7dbae1d276154eb5f7c1363f0cd16a0b0012ca74baa57aafe157986",
+    "recovery_record_sha256": "sha256:3178c9f495f6699f26fc5306a0ca1c194712855aef637249392fa0b920047127",
+    "completed_output_additional_model_calls": 0,
+    "trace_free_interrupted_output_selected": false,
+    "raw_evidence_deleted_or_replaced": false,
+    "private_grader_invoked": false
+  },
+  "audit_note": {
+    "frozen_verification_algorithm": "src/forgebench/heldout_execution_audit.py",
+    "verified_base_workspaces": 30,
+    "affected_statuses": 0,
+    "legacy_metadata_corrected_in_report": true
+  },
+  "decision": {
+    "primary_comparison_ready": true,
+    "heldout_attempts_used": 2,
+    "heldout_attempts_remaining": 0,
+    "retry_failed_slots_in_place": false,
+    "required_next_action": "grade the sealed bases out of band, then freeze assignments and replay every comparison policy from identical bases"
+  }
+}
