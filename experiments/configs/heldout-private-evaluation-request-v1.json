@@ -1,0 +1,1489 @@
+{
+  "schema_version": 1,
+  "request_version": "heldout-private-evaluation-request-v1",
+  "request_id": "heldout-v1-private-evaluation-v1",
+  "public_result_freeze_sha256": "sha256:1198347a1f27bf40e5d9d8b3c26626c4996fde57fcf28286002f9438e3c884c8",
+  "replay_record_catalog_sha256": "sha256:d59728d87e3aee44c632ea073d0e59320205381650b420f7f90fc543add1523e",
+  "base_catalog_sha256": "sha256:6fcbe9dddfb4ca11ebdc8078367a3e6f17b44c0b10ad25355583b086fcaee591",
+  "sealed_label_catalog_sha256": "sha256:909099f0e3e132c61141b6308c0bf508faa481a410b4271c963349d264d51cec",
+  "private_grader_seal_sha256": "sha256:aee74ae33f37d19c311c28066d877e88e55699335e12efc00d3570c0abddf632",
+  "target_catalog_sha256": "sha256:e3eee4ad151787cc72e423d090683f3d4ecfbc8a8fb8b07ea19ccbad45ef138b",
+  "counts": {
+    "base_targets": 30,
+    "replay_targets": 120
+  },
+  "targets": {
+    "bases": [
+      {
+        "base_id": "heldout-v1--cache-key-collision-incident--r1",
+        "task_id": "cache-key-collision-incident",
+        "task_version": 1,
+        "stratum": "incident",
+        "workspace_path": "runs/heldout-v1/base-completions-attempt-2/heldout-v1--cache-key-collision-incident--r1/workspace",
+        "workspace_sha256": "sha256:4cb8fcb872e3b0d2d15f6739a83bdbd5b2a15680215ab6846d715b124cc9577c"
+      },
+      {
+        "base_id": "heldout-v1--cache-key-collision-incident--r2",
+        "task_id": "cache-key-collision-incident",
+        "task_version": 1,
+        "stratum": "incident",
+        "workspace_path": "runs/heldout-v1/base-completions-attempt-2/heldout-v1--cache-key-collision-incident--r2/workspace",
+        "workspace_sha256": "sha256:63bc4fed1612ab7a5abd052578013b4d8652ae11857498a7ab328a1466e85da3"
+      },
+      {
+        "base_id": "heldout-v1--cache-key-collision-incident--r3",
+        "task_id": "cache-key-collision-incident",
+        "task_version": 1,
+        "stratum": "incident",
+        "workspace_path": "runs/heldout-v1/base-completions-attempt-2/heldout-v1--cache-key-collision-incident--r3/workspace",
+        "workspace_sha256": "sha256:b2cd786e0ce2e59c0b17bb7ad671ee04297167138d5e3bc64572bd19e90eb8a7"
+      },
+      {
+        "base_id": "heldout-v1--campaign-template-bundle--r1",
+        "task_id": "campaign-template-bundle",
+        "task_version": 1,
+        "stratum": "development",
+        "workspace_path": "runs/heldout-v1/base-completions-attempt-2/heldout-v1--campaign-template-bundle--r1/workspace",
+        "workspace_sha256": "sha256:fb3a32f1d2f93cc5f1e3bbb03f737c13437b2ba0e15d8e82fd387e97acbb05dc"
+      },
+      {
+        "base_id": "heldout-v1--campaign-template-bundle--r2",
+        "task_id": "campaign-template-bundle",
+        "task_version": 1,
+        "stratum": "development",
+        "workspace_path": "runs/heldout-v1/base-completions-attempt-2/heldout-v1--campaign-template-bundle--r2/workspace",
+        "workspace_sha256": "sha256:1c3c3c75e14c6db97613ef54f5452bcbaf168546d46d2c517b8496610aef8cc5"
+      },
+      {
+        "base_id": "heldout-v1--campaign-template-bundle--r3",
+        "task_id": "campaign-template-bundle",
+        "task_version": 1,
+        "stratum": "development",
+        "workspace_path": "runs/heldout-v1/base-completions-attempt-2/heldout-v1--campaign-template-bundle--r3/workspace",
+        "workspace_sha256": "sha256:95f6b7454194edf7b37ec400ec42025b7e43742986e4207bdefa9830fedfafc5"
+      },
+      {
+        "base_id": "heldout-v1--certificate-rollover-incident--r1",
+        "task_id": "certificate-rollover-incident",
+        "task_version": 1,
+        "stratum": "incident",
+        "workspace_path": "runs/heldout-v1/base-completions-attempt-2/heldout-v1--certificate-rollover-incident--r1/workspace",
+        "workspace_sha256": "sha256:3294905e508554e27c5a426c940f24d592f96b345e850925a1f8cb52c313c785"
+      },
+      {
+        "base_id": "heldout-v1--certificate-rollover-incident--r2",
+        "task_id": "certificate-rollover-incident",
+        "task_version": 1,
+        "stratum": "incident",
+        "workspace_path": "runs/heldout-v1/base-completions-attempt-2/heldout-v1--certificate-rollover-incident--r2/workspace",
+        "workspace_sha256": "sha256:13cc00816758fe580a0989c0d24ca96cd6829fa63bc667f894a2cf8caa1eb4da"
+      },
+      {
+        "base_id": "heldout-v1--certificate-rollover-incident--r3",
+        "task_id": "certificate-rollover-incident",
+        "task_version": 1,
+        "stratum": "incident",
+        "workspace_path": "runs/heldout-v1/base-completions-attempt-2/heldout-v1--certificate-rollover-incident--r3/workspace",
+        "workspace_sha256": "sha256:729bbc7155e426e8a53799a68fe6e517703cf2221251860bb3a7fdb2e48a3f3d"
+      },
+      {
+        "base_id": "heldout-v1--csv-formula-neutralization--r1",
+        "task_id": "csv-formula-neutralization",
+        "task_version": 1,
+        "stratum": "adversarial",
+        "workspace_path": "runs/heldout-v1/base-completions-attempt-2/heldout-v1--csv-formula-neutralization--r1/workspace",
+        "workspace_sha256": "sha256:afa2a9a048a47dbbada76785fec2041a547a78083b791d9081814b1e02a385df"
+      },
+      {
+        "base_id": "heldout-v1--csv-formula-neutralization--r2",
+        "task_id": "csv-formula-neutralization",
+        "task_version": 1,
+        "stratum": "adversarial",
+        "workspace_path": "runs/heldout-v1/base-completions-attempt-2/heldout-v1--csv-formula-neutralization--r2/workspace",
+        "workspace_sha256": "sha256:83d28f24189830766c03f8c04b26e1dd08ac12b59f40c8586b30277ea6424299"
+      },
+      {
+        "base_id": "heldout-v1--csv-formula-neutralization--r3",
+        "task_id": "csv-formula-neutralization",
+        "task_version": 1,
+        "stratum": "adversarial",
+        "workspace_path": "runs/heldout-v1/base-completions-attempt-2/heldout-v1--csv-formula-neutralization--r3/workspace",
+        "workspace_sha256": "sha256:c9e103bc87f4cb1bbd6d952b0e1942d63c555e3500fa5aea58fd03835eeafa97"
+      },
+      {
+        "base_id": "heldout-v1--database-migration-lock-incident--r1",
+        "task_id": "database-migration-lock-incident",
+        "task_version": 1,
+        "stratum": "incident",
+        "workspace_path": "runs/heldout-v1/base-completions-attempt-2/heldout-v1--database-migration-lock-incident--r1/workspace",
+        "workspace_sha256": "sha256:0a38798d5a29b3e441af6cb87e41fbfbdf5d5c15766940ee6261cedce5ca6215"
+      },
+      {
+        "base_id": "heldout-v1--database-migration-lock-incident--r2",
+        "task_id": "database-migration-lock-incident",
+        "task_version": 1,
+        "stratum": "incident",
+        "workspace_path": "runs/heldout-v1/base-completions-attempt-2/heldout-v1--database-migration-lock-incident--r2/workspace",
+        "workspace_sha256": "sha256:f721804add64d5a4a3adfc8689b2dd1bb4495ad4624683f221273c1f6cae0143"
+      },
+      {
+        "base_id": "heldout-v1--database-migration-lock-incident--r3",
+        "task_id": "database-migration-lock-incident",
+        "task_version": 1,
+        "stratum": "incident",
+        "workspace_path": "runs/heldout-v1/base-completions-attempt-2/heldout-v1--database-migration-lock-incident--r3/workspace",
+        "workspace_sha256": "sha256:d8d40604a65e174bd2bd24a2f10d7c95f60176a5b852fbd81a0bab47dc8a5cd6"
+      },
+      {
+        "base_id": "heldout-v1--nested-secret-redaction--r1",
+        "task_id": "nested-secret-redaction",
+        "task_version": 1,
+        "stratum": "adversarial",
+        "workspace_path": "runs/heldout-v1/base-completions-attempt-2/heldout-v1--nested-secret-redaction--r1/workspace",
+        "workspace_sha256": "sha256:7a2487b1f7d1f8956c0c31d1d52273bf04f55e72035553230bcc05e70726f5d5"
+      },
+      {
+        "base_id": "heldout-v1--nested-secret-redaction--r2",
+        "task_id": "nested-secret-redaction",
+        "task_version": 1,
+        "stratum": "adversarial",
+        "workspace_path": "runs/heldout-v1/base-completions-attempt-2/heldout-v1--nested-secret-redaction--r2/workspace",
+        "workspace_sha256": "sha256:80fb0d924a5249da1f7c8d8b9462352d33eadef97de2a08768bd0e2deeb1b0e8"
+      },
+      {
+        "base_id": "heldout-v1--nested-secret-redaction--r3",
+        "task_id": "nested-secret-redaction",
+        "task_version": 1,
+        "stratum": "adversarial",
+        "workspace_path": "runs/heldout-v1/base-completions-attempt-2/heldout-v1--nested-secret-redaction--r3/workspace",
+        "workspace_sha256": "sha256:cd0dd7a88afc7ceb8f20c1defc2c3e431b71a90dcb69ba8389ec1783acc04236"
+      },
+      {
+        "base_id": "heldout-v1--regional-tax-table-loader--r1",
+        "task_id": "regional-tax-table-loader",
+        "task_version": 1,
+        "stratum": "development",
+        "workspace_path": "runs/heldout-v1/base-completions-attempt-2/heldout-v1--regional-tax-table-loader--r1/workspace",
+        "workspace_sha256": "sha256:4b33a53202b90b4162659b88df4402f841066b5633185c5920d9fabbb03f9dc8"
+      },
+      {
+        "base_id": "heldout-v1--regional-tax-table-loader--r2",
+        "task_id": "regional-tax-table-loader",
+        "task_version": 1,
+        "stratum": "development",
+        "workspace_path": "runs/heldout-v1/base-completions-attempt-2/heldout-v1--regional-tax-table-loader--r2/workspace",
+        "workspace_sha256": "sha256:062a52ede77c4d52d18a4c0a4cba20974060a504c6bcf78e12a19cbc318832f0"
+      },
+      {
+        "base_id": "heldout-v1--regional-tax-table-loader--r3",
+        "task_id": "regional-tax-table-loader",
+        "task_version": 1,
+        "stratum": "development",
+        "workspace_path": "runs/heldout-v1/base-completions-attempt-2/heldout-v1--regional-tax-table-loader--r3/workspace",
+        "workspace_sha256": "sha256:a042e4a2f2ee518e68420e4ce29e8b93b411cd5de6b4d654410425eec07d31ac"
+      },
+      {
+        "base_id": "heldout-v1--rollout-allocation-loader--r1",
+        "task_id": "rollout-allocation-loader",
+        "task_version": 1,
+        "stratum": "development",
+        "workspace_path": "runs/heldout-v1/base-completions-attempt-2/heldout-v1--rollout-allocation-loader--r1/workspace",
+        "workspace_sha256": "sha256:33dacf6efa8b18ba338561e0a48109df450f928aa97983bd6d03e08cd90f5874"
+      },
+      {
+        "base_id": "heldout-v1--rollout-allocation-loader--r2",
+        "task_id": "rollout-allocation-loader",
+        "task_version": 1,
+        "stratum": "development",
+        "workspace_path": "runs/heldout-v1/base-completions-attempt-2/heldout-v1--rollout-allocation-loader--r2/workspace",
+        "workspace_sha256": "sha256:9afc212b73284e7e495eee96ca40f22bd4072c09c6be05356b17e2622bc60c04"
+      },
+      {
+        "base_id": "heldout-v1--rollout-allocation-loader--r3",
+        "task_id": "rollout-allocation-loader",
+        "task_version": 1,
+        "stratum": "development",
+        "workspace_path": "runs/heldout-v1/base-completions-attempt-2/heldout-v1--rollout-allocation-loader--r3/workspace",
+        "workspace_sha256": "sha256:3b909a82899f831aa512808ac7ea542560fd14791597d69b548ecbf87dc4b66e"
+      },
+      {
+        "base_id": "heldout-v1--token-bucket-refill--r1",
+        "task_id": "token-bucket-refill",
+        "task_version": 1,
+        "stratum": "development",
+        "workspace_path": "runs/heldout-v1/base-completions-attempt-2/heldout-v1--token-bucket-refill--r1/workspace",
+        "workspace_sha256": "sha256:17974e5e10e1fb281ab770821dd3ea01434646caef9295010fb58fcb87792fe0"
+      },
+      {
+        "base_id": "heldout-v1--token-bucket-refill--r2",
+        "task_id": "token-bucket-refill",
+        "task_version": 1,
+        "stratum": "development",
+        "workspace_path": "runs/heldout-v1/base-completions-attempt-2/heldout-v1--token-bucket-refill--r2/workspace",
+        "workspace_sha256": "sha256:6f75b0c1c630efb631512d3e675432be2f6fd80fd9a256869514984dce64cbfe"
+      },
+      {
+        "base_id": "heldout-v1--token-bucket-refill--r3",
+        "task_id": "token-bucket-refill",
+        "task_version": 1,
+        "stratum": "development",
+        "workspace_path": "runs/heldout-v1/base-completions-attempt-2/heldout-v1--token-bucket-refill--r3/workspace",
+        "workspace_sha256": "sha256:f98a4dd49aa16dd6ca1e91b164d73a2f2435ff9457867fe4558e348622108cbe"
+      },
+      {
+        "base_id": "heldout-v1--unicode-account-identifier--r1",
+        "task_id": "unicode-account-identifier",
+        "task_version": 1,
+        "stratum": "adversarial",
+        "workspace_path": "runs/heldout-v1/base-completions-attempt-2/heldout-v1--unicode-account-identifier--r1/workspace",
+        "workspace_sha256": "sha256:e93638d689fb7a0010886d155ccec9c4977a2a8fca9a9165ab2484f69fa7125d"
+      },
+      {
+        "base_id": "heldout-v1--unicode-account-identifier--r2",
+        "task_id": "unicode-account-identifier",
+        "task_version": 1,
+        "stratum": "adversarial",
+        "workspace_path": "runs/heldout-v1/base-completions-attempt-2/heldout-v1--unicode-account-identifier--r2/workspace",
+        "workspace_sha256": "sha256:6e8bc136c1ea697c044de1b12ba207e1f664009ea867773ddfed73efabda6dbb"
+      },
+      {
+        "base_id": "heldout-v1--unicode-account-identifier--r3",
+        "task_id": "unicode-account-identifier",
+        "task_version": 1,
+        "stratum": "adversarial",
+        "workspace_path": "runs/heldout-v1/base-completions-attempt-2/heldout-v1--unicode-account-identifier--r3/workspace",
+        "workspace_sha256": "sha256:b569b4b77dced41d15fce951c5d46ac19c00807b32e317729c36f3b03eab12df"
+      }
+    ],
+    "replays": [
+      {
+        "run_id": "model-v1--random_k_call_matched--0cde913d30f83fdfd9df",
+        "policy": "random_k_call_matched",
+        "base_id": "heldout-v1--nested-secret-redaction--r2",
+        "task_id": "nested-secret-redaction",
+        "record_path": "runs/heldout-v1/model-policy-replays-v1/heldout-v1-model-policies-v1/runs/model-v1--random_k_call_matched--0cde913d30f83fdfd9df/model-policy-replay.json",
+        "record_sha256": "sha256:b4c6b0cfc31503f27b30060b05ee3517fd4127136f66571af1f74db7a4d2d068",
+        "workspace_path": "runs/heldout-v1/model-policy-replays-v1/heldout-v1-model-policies-v1/runs/model-v1--random_k_call_matched--0cde913d30f83fdfd9df/workspace",
+        "workspace_sha256": "sha256:de6182489218ba38225c4024d18a272a8ae43008399e84644c43366f6e4c7d00"
+      },
+      {
+        "run_id": "model-v1--random_k_call_matched--135cd8209779d6ba94ea",
+        "policy": "random_k_call_matched",
+        "base_id": "heldout-v1--token-bucket-refill--r3",
+        "task_id": "token-bucket-refill",
+        "record_path": "runs/heldout-v1/model-policy-replays-v1/heldout-v1-model-policies-v1/runs/model-v1--random_k_call_matched--135cd8209779d6ba94ea/model-policy-replay.json",
+        "record_sha256": "sha256:71d8bbcb26a26f88c75dc77c56276c65ccadc60ab9c1090e469dc701b364807f",
+        "workspace_path": "runs/heldout-v1/model-policy-replays-v1/heldout-v1-model-policies-v1/runs/model-v1--random_k_call_matched--135cd8209779d6ba94ea/workspace",
+        "workspace_sha256": "sha256:f98a4dd49aa16dd6ca1e91b164d73a2f2435ff9457867fe4558e348622108cbe"
+      },
+      {
+        "run_id": "model-v1--random_k_call_matched--140dd4e4cf7376b48690",
+        "policy": "random_k_call_matched",
+        "base_id": "heldout-v1--cache-key-collision-incident--r2",
+        "task_id": "cache-key-collision-incident",
+        "record_path": "runs/heldout-v1/model-policy-replays-v1/heldout-v1-model-policies-v1/runs/model-v1--random_k_call_matched--140dd4e4cf7376b48690/model-policy-replay.json",
+        "record_sha256": "sha256:e77c81adbbfcd481918e2f4edaf9e50fb398be64141076a96bdb3f562b2774b5",
+        "workspace_path": "runs/heldout-v1/model-policy-replays-v1/heldout-v1-model-policies-v1/runs/model-v1--random_k_call_matched--140dd4e4cf7376b48690/workspace",
+        "workspace_sha256": "sha256:63bc4fed1612ab7a5abd052578013b4d8652ae11857498a7ab328a1466e85da3"
+      },
+      {
+        "run_id": "model-v1--random_k_call_matched--168a153ff44dab359a19",
+        "policy": "random_k_call_matched",
+        "base_id": "heldout-v1--database-migration-lock-incident--r1",
+        "task_id": "database-migration-lock-incident",
+        "record_path": "runs/heldout-v1/model-policy-replays-v1/heldout-v1-model-policies-v1/runs/model-v1--random_k_call_matched--168a153ff44dab359a19/model-policy-replay.json",
+        "record_sha256": "sha256:74e0ef1289d2ba3d9d8502b00b55b5a472c447c84f293eb0bc75e2a717ed77ee",
+        "workspace_path": "runs/heldout-v1/model-policy-replays-v1/heldout-v1-model-policies-v1/runs/model-v1--random_k_call_matched--168a153ff44dab359a19/workspace",
+        "workspace_sha256": "sha256:0a38798d5a29b3e441af6cb87e41fbfbdf5d5c15766940ee6261cedce5ca6215"
+      },
+      {
+        "run_id": "model-v1--random_k_call_matched--1e17a80b0e8b22fd0bd0",
+        "policy": "random_k_call_matched",
+        "base_id": "heldout-v1--campaign-template-bundle--r1",
+        "task_id": "campaign-template-bundle",
+        "record_path": "runs/heldout-v1/model-policy-replays-v1/heldout-v1-model-policies-v1/runs/model-v1--random_k_call_matched--1e17a80b0e8b22fd0bd0/model-policy-replay.json",
+        "record_sha256": "sha256:55c311fe953f8c7ae6f284acb5c5e014f3e200aae9b652bfaa53d01fc8245dd3",
+        "workspace_path": "runs/heldout-v1/model-policy-replays-v1/heldout-v1-model-policies-v1/runs/model-v1--random_k_call_matched--1e17a80b0e8b22fd0bd0/workspace",
+        "workspace_sha256": "sha256:fb3a32f1d2f93cc5f1e3bbb03f737c13437b2ba0e15d8e82fd387e97acbb05dc"
+      },
+      {
+        "run_id": "model-v1--random_k_call_matched--26f16af47efea6b5f67a",
+        "policy": "random_k_call_matched",
+        "base_id": "heldout-v1--nested-secret-redaction--r1",
+        "task_id": "nested-secret-redaction",
+        "record_path": "runs/heldout-v1/model-policy-replays-v1/heldout-v1-model-policies-v1/runs/model-v1--random_k_call_matched--26f16af47efea6b5f67a/model-policy-replay.json",
+        "record_sha256": "sha256:8c586ccfe4b119c4f1646e937bd59e8f30268e3f4707df02bf534632e813a1c7",
+        "workspace_path": "runs/heldout-v1/model-policy-replays-v1/heldout-v1-model-policies-v1/runs/model-v1--random_k_call_matched--26f16af47efea6b5f67a/workspace",
+        "workspace_sha256": "sha256:9287d1b798833070ee1ab64dd06ff604352d293167e0e6742f8117bd222e2489"
+      },
+      {
+        "run_id": "model-v1--random_k_call_matched--2c2a187bf545a180c27c",
+        "policy": "random_k_call_matched",
+        "base_id": "heldout-v1--unicode-account-identifier--r1",
+        "task_id": "unicode-account-identifier",
+        "record_path": "runs/heldout-v1/model-policy-replays-v1/heldout-v1-model-policies-v1/runs/model-v1--random_k_call_matched--2c2a187bf545a180c27c/model-policy-replay.json",
+        "record_sha256": "sha256:a209507caaca819243c61df333580b982a28b9c234a7b2f442f5941828ddcda3",
+        "workspace_path": "runs/heldout-v1/model-policy-replays-v1/heldout-v1-model-policies-v1/runs/model-v1--random_k_call_matched--2c2a187bf545a180c27c/workspace",
+        "workspace_sha256": "sha256:15f6c187f0bc39bad88df7bce129f28c7df8b180c84bea21c1f6b7492f2be389"
+      },
+      {
+        "run_id": "model-v1--random_k_call_matched--32a7dc1a60cda38ccfab",
+        "policy": "random_k_call_matched",
+        "base_id": "heldout-v1--rollout-allocation-loader--r3",
+        "task_id": "rollout-allocation-loader",
+        "record_path": "runs/heldout-v1/model-policy-replays-v1/heldout-v1-model-policies-v1/runs/model-v1--random_k_call_matched--32a7dc1a60cda38ccfab/model-policy-replay.json",
+        "record_sha256": "sha256:147330ae818bf9aa07d9195418fb5295d238b5df70b8a1437d44b9206c43c4dd",
+        "workspace_path": "runs/heldout-v1/model-policy-replays-v1/heldout-v1-model-policies-v1/runs/model-v1--random_k_call_matched--32a7dc1a60cda38ccfab/workspace",
+        "workspace_sha256": "sha256:3b909a82899f831aa512808ac7ea542560fd14791597d69b548ecbf87dc4b66e"
+      },
+      {
+        "run_id": "model-v1--random_k_call_matched--332e6061575e22844535",
+        "policy": "random_k_call_matched",
+        "base_id": "heldout-v1--unicode-account-identifier--r2",
+        "task_id": "unicode-account-identifier",
+        "record_path": "runs/heldout-v1/model-policy-replays-v1/heldout-v1-model-policies-v1/runs/model-v1--random_k_call_matched--332e6061575e22844535/model-policy-replay.json",
+        "record_sha256": "sha256:0f17c798459708715eb3f4fcbb496220eb575faf7b9ead94ca966b28c0265711",
+        "workspace_path": "runs/heldout-v1/model-policy-replays-v1/heldout-v1-model-policies-v1/runs/model-v1--random_k_call_matched--332e6061575e22844535/workspace",
+        "workspace_sha256": "sha256:6e8bc136c1ea697c044de1b12ba207e1f664009ea867773ddfed73efabda6dbb"
+      },
+      {
+        "run_id": "model-v1--random_k_call_matched--41cd3f1f79846b6aae16",
+        "policy": "random_k_call_matched",
+        "base_id": "heldout-v1--campaign-template-bundle--r3",
+        "task_id": "campaign-template-bundle",
+        "record_path": "runs/heldout-v1/model-policy-replays-v1/heldout-v1-model-policies-v1/runs/model-v1--random_k_call_matched--41cd3f1f79846b6aae16/model-policy-replay.json",
+        "record_sha256": "sha256:d252f062d211aa4a3d757c2b9ebe49efab088dd8b3a9b5e70e3e1be183c8d97c",
+        "workspace_path": "runs/heldout-v1/model-policy-replays-v1/heldout-v1-model-policies-v1/runs/model-v1--random_k_call_matched--41cd3f1f79846b6aae16/workspace",
+        "workspace_sha256": "sha256:95f6b7454194edf7b37ec400ec42025b7e43742986e4207bdefa9830fedfafc5"
+      },
+      {
+        "run_id": "model-v1--random_k_call_matched--4245363552bb2a181ee4",
+        "policy": "random_k_call_matched",
+        "base_id": "heldout-v1--database-migration-lock-incident--r3",
+        "task_id": "database-migration-lock-incident",
+        "record_path": "runs/heldout-v1/model-policy-replays-v1/heldout-v1-model-policies-v1/runs/model-v1--random_k_call_matched--4245363552bb2a181ee4/model-policy-replay.json",
+        "record_sha256": "sha256:3c8faf2f6003495a85d7f928ed8473c861ab296d8b27baf4768c43946fc319b0",
+        "workspace_path": "runs/heldout-v1/model-policy-replays-v1/heldout-v1-model-policies-v1/runs/model-v1--random_k_call_matched--4245363552bb2a181ee4/workspace",
+        "workspace_sha256": "sha256:d8d40604a65e174bd2bd24a2f10d7c95f60176a5b852fbd81a0bab47dc8a5cd6"
+      },
+      {
+        "run_id": "model-v1--random_k_call_matched--435ea5d986f8f559b9f1",
+        "policy": "random_k_call_matched",
+        "base_id": "heldout-v1--database-migration-lock-incident--r2",
+        "task_id": "database-migration-lock-incident",
+        "record_path": "runs/heldout-v1/model-policy-replays-v1/heldout-v1-model-policies-v1/runs/model-v1--random_k_call_matched--435ea5d986f8f559b9f1/model-policy-replay.json",
+        "record_sha256": "sha256:4f1426bdd0b57a33221f2a6a72a3b2273957d1906e3fa17dad9a5c4092749611",
+        "workspace_path": "runs/heldout-v1/model-policy-replays-v1/heldout-v1-model-policies-v1/runs/model-v1--random_k_call_matched--435ea5d986f8f559b9f1/workspace",
+        "workspace_sha256": "sha256:f721804add64d5a4a3adfc8689b2dd1bb4495ad4624683f221273c1f6cae0143"
+      },
+      {
+        "run_id": "model-v1--random_k_call_matched--45dbf8e18ca3bfcc9b3e",
+        "policy": "random_k_call_matched",
+        "base_id": "heldout-v1--token-bucket-refill--r2",
+        "task_id": "token-bucket-refill",
+        "record_path": "runs/heldout-v1/model-policy-replays-v1/heldout-v1-model-policies-v1/runs/model-v1--random_k_call_matched--45dbf8e18ca3bfcc9b3e/model-policy-replay.json",
+        "record_sha256": "sha256:278c40afb2924f44c7ff124b4ff43b8de2e0acb49b8797c38a8d85b08387951d",
+        "workspace_path": "runs/heldout-v1/model-policy-replays-v1/heldout-v1-model-policies-v1/runs/model-v1--random_k_call_matched--45dbf8e18ca3bfcc9b3e/workspace",
+        "workspace_sha256": "sha256:6f75b0c1c630efb631512d3e675432be2f6fd80fd9a256869514984dce64cbfe"
+      },
+      {
+        "run_id": "model-v1--random_k_call_matched--50743b8e3d9c95a23e3d",
+        "policy": "random_k_call_matched",
+        "base_id": "heldout-v1--csv-formula-neutralization--r3",
+        "task_id": "csv-formula-neutralization",
+        "record_path": "runs/heldout-v1/model-policy-replays-v1/heldout-v1-model-policies-v1/runs/model-v1--random_k_call_matched--50743b8e3d9c95a23e3d/model-policy-replay.json",
+        "record_sha256": "sha256:cddd865b75783699ee04d4b4974a8ae89dd82cc3932c8a00dfca64166684b5d7",
+        "workspace_path": "runs/heldout-v1/model-policy-replays-v1/heldout-v1-model-policies-v1/runs/model-v1--random_k_call_matched--50743b8e3d9c95a23e3d/workspace",
+        "workspace_sha256": "sha256:886e8b41524f578f56e8381540cb5551625903e890f2ca0ea1e171fcb932ee81"
+      },
+      {
+        "run_id": "model-v1--random_k_call_matched--54b3f970ab5675218f36",
+        "policy": "random_k_call_matched",
+        "base_id": "heldout-v1--certificate-rollover-incident--r3",
+        "task_id": "certificate-rollover-incident",
+        "record_path": "runs/heldout-v1/model-policy-replays-v1/heldout-v1-model-policies-v1/runs/model-v1--random_k_call_matched--54b3f970ab5675218f36/model-policy-replay.json",
+        "record_sha256": "sha256:ec7d75487dd4054fedae794a495ef555276cfc8a4b284e6831786f676eb9ba2f",
+        "workspace_path": "runs/heldout-v1/model-policy-replays-v1/heldout-v1-model-policies-v1/runs/model-v1--random_k_call_matched--54b3f970ab5675218f36/workspace",
+        "workspace_sha256": "sha256:729bbc7155e426e8a53799a68fe6e517703cf2221251860bb3a7fdb2e48a3f3d"
+      },
+      {
+        "run_id": "model-v1--random_k_call_matched--63f58e82da6df7b20c93",
+        "policy": "random_k_call_matched",
+        "base_id": "heldout-v1--regional-tax-table-loader--r3",
+        "task_id": "regional-tax-table-loader",
+        "record_path": "runs/heldout-v1/model-policy-replays-v1/heldout-v1-model-policies-v1/runs/model-v1--random_k_call_matched--63f58e82da6df7b20c93/model-policy-replay.json",
+        "record_sha256": "sha256:807a5264912e47ef1bfdf135dc9aa30149586d9d1f1a4fb3047320a04f6142e4",
+        "workspace_path": "runs/heldout-v1/model-policy-replays-v1/heldout-v1-model-policies-v1/runs/model-v1--random_k_call_matched--63f58e82da6df7b20c93/workspace",
+        "workspace_sha256": "sha256:a042e4a2f2ee518e68420e4ce29e8b93b411cd5de6b4d654410425eec07d31ac"
+      },
+      {
+        "run_id": "model-v1--random_k_call_matched--6b708f98f81c1800b310",
+        "policy": "random_k_call_matched",
+        "base_id": "heldout-v1--token-bucket-refill--r1",
+        "task_id": "token-bucket-refill",
+        "record_path": "runs/heldout-v1/model-policy-replays-v1/heldout-v1-model-policies-v1/runs/model-v1--random_k_call_matched--6b708f98f81c1800b310/model-policy-replay.json",
+        "record_sha256": "sha256:8c91258dc884f556b0aa43b49351cddd756296f0a735551f400a07b43dd92d1f",
+        "workspace_path": "runs/heldout-v1/model-policy-replays-v1/heldout-v1-model-policies-v1/runs/model-v1--random_k_call_matched--6b708f98f81c1800b310/workspace",
+        "workspace_sha256": "sha256:17974e5e10e1fb281ab770821dd3ea01434646caef9295010fb58fcb87792fe0"
+      },
+      {
+        "run_id": "model-v1--random_k_call_matched--74b666784b4531e1270d",
+        "policy": "random_k_call_matched",
+        "base_id": "heldout-v1--csv-formula-neutralization--r2",
+        "task_id": "csv-formula-neutralization",
+        "record_path": "runs/heldout-v1/model-policy-replays-v1/heldout-v1-model-policies-v1/runs/model-v1--random_k_call_matched--74b666784b4531e1270d/model-policy-replay.json",
+        "record_sha256": "sha256:7fc64fef5ef4bbc9f1e795f44a677046a91bb8a98a7902d2c448fb5fb836a022",
+        "workspace_path": "runs/heldout-v1/model-policy-replays-v1/heldout-v1-model-policies-v1/runs/model-v1--random_k_call_matched--74b666784b4531e1270d/workspace",
+        "workspace_sha256": "sha256:83d28f24189830766c03f8c04b26e1dd08ac12b59f40c8586b30277ea6424299"
+      },
+      {
+        "run_id": "model-v1--random_k_call_matched--79f72717e1b854a6c19b",
+        "policy": "random_k_call_matched",
+        "base_id": "heldout-v1--regional-tax-table-loader--r2",
+        "task_id": "regional-tax-table-loader",
+        "record_path": "runs/heldout-v1/model-policy-replays-v1/heldout-v1-model-policies-v1/runs/model-v1--random_k_call_matched--79f72717e1b854a6c19b/model-policy-replay.json",
+        "record_sha256": "sha256:32f50c770f7eb02af280772dbe867cec553aba285382717360fe568c69c46bb8",
+        "workspace_path": "runs/heldout-v1/model-policy-replays-v1/heldout-v1-model-policies-v1/runs/model-v1--random_k_call_matched--79f72717e1b854a6c19b/workspace",
+        "workspace_sha256": "sha256:062a52ede77c4d52d18a4c0a4cba20974060a504c6bcf78e12a19cbc318832f0"
+      },
+      {
+        "run_id": "model-v1--random_k_call_matched--95b73765035573351ec1",
+        "policy": "random_k_call_matched",
+        "base_id": "heldout-v1--campaign-template-bundle--r2",
+        "task_id": "campaign-template-bundle",
+        "record_path": "runs/heldout-v1/model-policy-replays-v1/heldout-v1-model-policies-v1/runs/model-v1--random_k_call_matched--95b73765035573351ec1/model-policy-replay.json",
+        "record_sha256": "sha256:47f38583f3a966225300aa1baf0ce1709e24490c75ec5caa91fb01e31737a6fe",
+        "workspace_path": "runs/heldout-v1/model-policy-replays-v1/heldout-v1-model-policies-v1/runs/model-v1--random_k_call_matched--95b73765035573351ec1/workspace",
+        "workspace_sha256": "sha256:1c3c3c75e14c6db97613ef54f5452bcbaf168546d46d2c517b8496610aef8cc5"
+      },
+      {
+        "run_id": "model-v1--random_k_call_matched--a425034fc482b2e9b3ed",
+        "policy": "random_k_call_matched",
+        "base_id": "heldout-v1--unicode-account-identifier--r3",
+        "task_id": "unicode-account-identifier",
+        "record_path": "runs/heldout-v1/model-policy-replays-v1/heldout-v1-model-policies-v1/runs/model-v1--random_k_call_matched--a425034fc482b2e9b3ed/model-policy-replay.json",
+        "record_sha256": "sha256:8282dd04173792a770704007c5f438aa7f739c5460b57b8af674dc720236891e",
+        "workspace_path": "runs/heldout-v1/model-policy-replays-v1/heldout-v1-model-policies-v1/runs/model-v1--random_k_call_matched--a425034fc482b2e9b3ed/workspace",
+        "workspace_sha256": "sha256:b569b4b77dced41d15fce951c5d46ac19c00807b32e317729c36f3b03eab12df"
+      },
+      {
+        "run_id": "model-v1--random_k_call_matched--ab6e2297bd860dbafc31",
+        "policy": "random_k_call_matched",
+        "base_id": "heldout-v1--nested-secret-redaction--r3",
+        "task_id": "nested-secret-redaction",
+        "record_path": "runs/heldout-v1/model-policy-replays-v1/heldout-v1-model-policies-v1/runs/model-v1--random_k_call_matched--ab6e2297bd860dbafc31/model-policy-replay.json",
+        "record_sha256": "sha256:3eea082b0ede491d9b8f626af16bdef3451b07ad2942af8a78f6f79463b52364",
+        "workspace_path": "runs/heldout-v1/model-policy-replays-v1/heldout-v1-model-policies-v1/runs/model-v1--random_k_call_matched--ab6e2297bd860dbafc31/workspace",
+        "workspace_sha256": "sha256:cd0dd7a88afc7ceb8f20c1defc2c3e431b71a90dcb69ba8389ec1783acc04236"
+      },
+      {
+        "run_id": "model-v1--random_k_call_matched--bc65c1b7a4406c0f10dd",
+        "policy": "random_k_call_matched",
+        "base_id": "heldout-v1--rollout-allocation-loader--r1",
+        "task_id": "rollout-allocation-loader",
+        "record_path": "runs/heldout-v1/model-policy-replays-v1/heldout-v1-model-policies-v1/runs/model-v1--random_k_call_matched--bc65c1b7a4406c0f10dd/model-policy-replay.json",
+        "record_sha256": "sha256:52e98e2240cae3f222e635f322ee8a4cac9362288fc47fea56eeffb81d6f30f5",
+        "workspace_path": "runs/heldout-v1/model-policy-replays-v1/heldout-v1-model-policies-v1/runs/model-v1--random_k_call_matched--bc65c1b7a4406c0f10dd/workspace",
+        "workspace_sha256": "sha256:33dacf6efa8b18ba338561e0a48109df450f928aa97983bd6d03e08cd90f5874"
+      },
+      {
+        "run_id": "model-v1--random_k_call_matched--c5d8397329cb011c1b86",
+        "policy": "random_k_call_matched",
+        "base_id": "heldout-v1--cache-key-collision-incident--r3",
+        "task_id": "cache-key-collision-incident",
+        "record_path": "runs/heldout-v1/model-policy-replays-v1/heldout-v1-model-policies-v1/runs/model-v1--random_k_call_matched--c5d8397329cb011c1b86/model-policy-replay.json",
+        "record_sha256": "sha256:1614394e2678be16ac7ff5b8baa73ce50ac6e169b6b48766a006fca1872b2e08",
+        "workspace_path": "runs/heldout-v1/model-policy-replays-v1/heldout-v1-model-policies-v1/runs/model-v1--random_k_call_matched--c5d8397329cb011c1b86/workspace",
+        "workspace_sha256": "sha256:b2cd786e0ce2e59c0b17bb7ad671ee04297167138d5e3bc64572bd19e90eb8a7"
+      },
+      {
+        "run_id": "model-v1--random_k_call_matched--d6a540e67b94c661765e",
+        "policy": "random_k_call_matched",
+        "base_id": "heldout-v1--certificate-rollover-incident--r2",
+        "task_id": "certificate-rollover-incident",
+        "record_path": "runs/heldout-v1/model-policy-replays-v1/heldout-v1-model-policies-v1/runs/model-v1--random_k_call_matched--d6a540e67b94c661765e/model-policy-replay.json",
+        "record_sha256": "sha256:bccc6384b55b7095fce260bb6ea56866ecdb86e78fb74ad22e9594805be3e602",
+        "workspace_path": "runs/heldout-v1/model-policy-replays-v1/heldout-v1-model-policies-v1/runs/model-v1--random_k_call_matched--d6a540e67b94c661765e/workspace",
+        "workspace_sha256": "sha256:13cc00816758fe580a0989c0d24ca96cd6829fa63bc667f894a2cf8caa1eb4da"
+      },
+      {
+        "run_id": "model-v1--random_k_call_matched--dfa620eee5b60ccfdf7b",
+        "policy": "random_k_call_matched",
+        "base_id": "heldout-v1--regional-tax-table-loader--r1",
+        "task_id": "regional-tax-table-loader",
+        "record_path": "runs/heldout-v1/model-policy-replays-v1/heldout-v1-model-policies-v1/runs/model-v1--random_k_call_matched--dfa620eee5b60ccfdf7b/model-policy-replay.json",
+        "record_sha256": "sha256:610a74f7f128ee6af4fdfcb7873332660c178d3e360eaf8f3c8fedb0b7995b6c",
+        "workspace_path": "runs/heldout-v1/model-policy-replays-v1/heldout-v1-model-policies-v1/runs/model-v1--random_k_call_matched--dfa620eee5b60ccfdf7b/workspace",
+        "workspace_sha256": "sha256:4b33a53202b90b4162659b88df4402f841066b5633185c5920d9fabbb03f9dc8"
+      },
+      {
+        "run_id": "model-v1--random_k_call_matched--e55af42367cefb69294c",
+        "policy": "random_k_call_matched",
+        "base_id": "heldout-v1--cache-key-collision-incident--r1",
+        "task_id": "cache-key-collision-incident",
+        "record_path": "runs/heldout-v1/model-policy-replays-v1/heldout-v1-model-policies-v1/runs/model-v1--random_k_call_matched--e55af42367cefb69294c/model-policy-replay.json",
+        "record_sha256": "sha256:57e2924f534f8a2cc4156fad277f3a14603831da2c79235ace33181aa266e30e",
+        "workspace_path": "runs/heldout-v1/model-policy-replays-v1/heldout-v1-model-policies-v1/runs/model-v1--random_k_call_matched--e55af42367cefb69294c/workspace",
+        "workspace_sha256": "sha256:4cb8fcb872e3b0d2d15f6739a83bdbd5b2a15680215ab6846d715b124cc9577c"
+      },
+      {
+        "run_id": "model-v1--random_k_call_matched--ef170d32bc92ff3ff7fc",
+        "policy": "random_k_call_matched",
+        "base_id": "heldout-v1--rollout-allocation-loader--r2",
+        "task_id": "rollout-allocation-loader",
+        "record_path": "runs/heldout-v1/model-policy-replays-v1/heldout-v1-model-policies-v1/runs/model-v1--random_k_call_matched--ef170d32bc92ff3ff7fc/model-policy-replay.json",
+        "record_sha256": "sha256:4bc5a510dc07717bb30ba3264844ded2b15d100405db1abb9aa4a088ed59e1dc",
+        "workspace_path": "runs/heldout-v1/model-policy-replays-v1/heldout-v1-model-policies-v1/runs/model-v1--random_k_call_matched--ef170d32bc92ff3ff7fc/workspace",
+        "workspace_sha256": "sha256:9afc212b73284e7e495eee96ca40f22bd4072c09c6be05356b17e2622bc60c04"
+      },
+      {
+        "run_id": "model-v1--random_k_call_matched--f369fcdfa78950c9a96d",
+        "policy": "random_k_call_matched",
+        "base_id": "heldout-v1--certificate-rollover-incident--r1",
+        "task_id": "certificate-rollover-incident",
+        "record_path": "runs/heldout-v1/model-policy-replays-v1/heldout-v1-model-policies-v1/runs/model-v1--random_k_call_matched--f369fcdfa78950c9a96d/model-policy-replay.json",
+        "record_sha256": "sha256:347f09e6b031d3efcbb259f8c13f1920455c2ada1ed093939a6984eff9f1d592",
+        "workspace_path": "runs/heldout-v1/model-policy-replays-v1/heldout-v1-model-policies-v1/runs/model-v1--random_k_call_matched--f369fcdfa78950c9a96d/workspace",
+        "workspace_sha256": "sha256:3294905e508554e27c5a426c940f24d592f96b345e850925a1f8cb52c313c785"
+      },
+      {
+        "run_id": "model-v1--random_k_call_matched--f4c07626333165881316",
+        "policy": "random_k_call_matched",
+        "base_id": "heldout-v1--csv-formula-neutralization--r1",
+        "task_id": "csv-formula-neutralization",
+        "record_path": "runs/heldout-v1/model-policy-replays-v1/heldout-v1-model-policies-v1/runs/model-v1--random_k_call_matched--f4c07626333165881316/model-policy-replay.json",
+        "record_sha256": "sha256:f1fb2ac24fa4cad4aed6528d4167e6d79e4fb0b82fe99026d06f345c1de7bb4e",
+        "workspace_path": "runs/heldout-v1/model-policy-replays-v1/heldout-v1-model-policies-v1/runs/model-v1--random_k_call_matched--f4c07626333165881316/workspace",
+        "workspace_sha256": "sha256:aa5d9ca6c9f696dfc131c7767911368c51ff6c719cde4cb986006adb2876492c"
+      },
+      {
+        "run_id": "model-v1--risk_hierarchical--0553221c7fa1dabca224",
+        "policy": "risk_hierarchical",
+        "base_id": "heldout-v1--cache-key-collision-incident--r3",
+        "task_id": "cache-key-collision-incident",
+        "record_path": "runs/heldout-v1/model-policy-replays-v1/heldout-v1-model-policies-v1/runs/model-v1--risk_hierarchical--0553221c7fa1dabca224/model-policy-replay.json",
+        "record_sha256": "sha256:2e28eb71a5eff94cb87fc4dd81d606318b1cbe977e00d7e033c3bd4d3f130529",
+        "workspace_path": "runs/heldout-v1/model-policy-replays-v1/heldout-v1-model-policies-v1/runs/model-v1--risk_hierarchical--0553221c7fa1dabca224/workspace",
+        "workspace_sha256": "sha256:b2cd786e0ce2e59c0b17bb7ad671ee04297167138d5e3bc64572bd19e90eb8a7"
+      },
+      {
+        "run_id": "model-v1--risk_hierarchical--06a487647680924dcb31",
+        "policy": "risk_hierarchical",
+        "base_id": "heldout-v1--nested-secret-redaction--r1",
+        "task_id": "nested-secret-redaction",
+        "record_path": "runs/heldout-v1/model-policy-replays-v1/heldout-v1-model-policies-v1/runs/model-v1--risk_hierarchical--06a487647680924dcb31/model-policy-replay.json",
+        "record_sha256": "sha256:963f3b5561eee2170e3b89bc41bc166a3749029b2833288e5ad59795c78519af",
+        "workspace_path": "runs/heldout-v1/model-policy-replays-v1/heldout-v1-model-policies-v1/runs/model-v1--risk_hierarchical--06a487647680924dcb31/workspace",
+        "workspace_sha256": "sha256:c6ed3d2573818ec4ab724ba30c46411d9811d1299e4ca140935a28a867688dd1"
+      },
+      {
+        "run_id": "model-v1--risk_hierarchical--0f055c4a7fa4621221ed",
+        "policy": "risk_hierarchical",
+        "base_id": "heldout-v1--csv-formula-neutralization--r3",
+        "task_id": "csv-formula-neutralization",
+        "record_path": "runs/heldout-v1/model-policy-replays-v1/heldout-v1-model-policies-v1/runs/model-v1--risk_hierarchical--0f055c4a7fa4621221ed/model-policy-replay.json",
+        "record_sha256": "sha256:d537befedf39a7c76a628fd4ec9f67187ff0d9fc3d6295337949963605fe1b1f",
+        "workspace_path": "runs/heldout-v1/model-policy-replays-v1/heldout-v1-model-policies-v1/runs/model-v1--risk_hierarchical--0f055c4a7fa4621221ed/workspace",
+        "workspace_sha256": "sha256:a36f0337a70b2423c79379e960e06142b9116e90d6021032ff51f9812a65ffa6"
+      },
+      {
+        "run_id": "model-v1--risk_hierarchical--1673e471d2559391e665",
+        "policy": "risk_hierarchical",
+        "base_id": "heldout-v1--unicode-account-identifier--r1",
+        "task_id": "unicode-account-identifier",
+        "record_path": "runs/heldout-v1/model-policy-replays-v1/heldout-v1-model-policies-v1/runs/model-v1--risk_hierarchical--1673e471d2559391e665/model-policy-replay.json",
+        "record_sha256": "sha256:3a3ebd4d1cc17b3853eee0a9bf563933fdd04e9b314be4e426d583190fc58845",
+        "workspace_path": "runs/heldout-v1/model-policy-replays-v1/heldout-v1-model-policies-v1/runs/model-v1--risk_hierarchical--1673e471d2559391e665/workspace",
+        "workspace_sha256": "sha256:88b0720a05f3586d167503811df6e6b94041a81a275be03bd374dfad3aa4f9b0"
+      },
+      {
+        "run_id": "model-v1--risk_hierarchical--1807ffd2afa30199fd1e",
+        "policy": "risk_hierarchical",
+        "base_id": "heldout-v1--rollout-allocation-loader--r3",
+        "task_id": "rollout-allocation-loader",
+        "record_path": "runs/heldout-v1/model-policy-replays-v1/heldout-v1-model-policies-v1/runs/model-v1--risk_hierarchical--1807ffd2afa30199fd1e/model-policy-replay.json",
+        "record_sha256": "sha256:a0d34cb5042fa9ac08e301cea513db332530e4bb53a527c3495245f1de058589",
+        "workspace_path": "runs/heldout-v1/model-policy-replays-v1/heldout-v1-model-policies-v1/runs/model-v1--risk_hierarchical--1807ffd2afa30199fd1e/workspace",
+        "workspace_sha256": "sha256:3b909a82899f831aa512808ac7ea542560fd14791597d69b548ecbf87dc4b66e"
+      },
+      {
+        "run_id": "model-v1--risk_hierarchical--19fde957f3cd057bbfef",
+        "policy": "risk_hierarchical",
+        "base_id": "heldout-v1--unicode-account-identifier--r2",
+        "task_id": "unicode-account-identifier",
+        "record_path": "runs/heldout-v1/model-policy-replays-v1/heldout-v1-model-policies-v1/runs/model-v1--risk_hierarchical--19fde957f3cd057bbfef/model-policy-replay.json",
+        "record_sha256": "sha256:c6c68649e2259bb30011b6e139d88a811a616dfe26d52e46b6c7b4bb904c0ebe",
+        "workspace_path": "runs/heldout-v1/model-policy-replays-v1/heldout-v1-model-policies-v1/runs/model-v1--risk_hierarchical--19fde957f3cd057bbfef/workspace",
+        "workspace_sha256": "sha256:6e8bc136c1ea697c044de1b12ba207e1f664009ea867773ddfed73efabda6dbb"
+      },
+      {
+        "run_id": "model-v1--risk_hierarchical--1df8fcad8dae70a48f9a",
+        "policy": "risk_hierarchical",
+        "base_id": "heldout-v1--database-migration-lock-incident--r3",
+        "task_id": "database-migration-lock-incident",
+        "record_path": "runs/heldout-v1/model-policy-replays-v1/heldout-v1-model-policies-v1/runs/model-v1--risk_hierarchical--1df8fcad8dae70a48f9a/model-policy-replay.json",
+        "record_sha256": "sha256:4677ebc2d1876ac865ee90c8ff1616d5aec75b1ee1ae162e36e30023397fa39b",
+        "workspace_path": "runs/heldout-v1/model-policy-replays-v1/heldout-v1-model-policies-v1/runs/model-v1--risk_hierarchical--1df8fcad8dae70a48f9a/workspace",
+        "workspace_sha256": "sha256:d8d40604a65e174bd2bd24a2f10d7c95f60176a5b852fbd81a0bab47dc8a5cd6"
+      },
+      {
+        "run_id": "model-v1--risk_hierarchical--1f533534fd67720299c8",
+        "policy": "risk_hierarchical",
+        "base_id": "heldout-v1--cache-key-collision-incident--r2",
+        "task_id": "cache-key-collision-incident",
+        "record_path": "runs/heldout-v1/model-policy-replays-v1/heldout-v1-model-policies-v1/runs/model-v1--risk_hierarchical--1f533534fd67720299c8/model-policy-replay.json",
+        "record_sha256": "sha256:b8e39cdb67ce94e99d8f9a6b674bd4c0b5d3376f0e43b937ed47c5454daf1dc6",
+        "workspace_path": "runs/heldout-v1/model-policy-replays-v1/heldout-v1-model-policies-v1/runs/model-v1--risk_hierarchical--1f533534fd67720299c8/workspace",
+        "workspace_sha256": "sha256:63bc4fed1612ab7a5abd052578013b4d8652ae11857498a7ab328a1466e85da3"
+      },
+      {
+        "run_id": "model-v1--risk_hierarchical--278256ae591eb8b3e14a",
+        "policy": "risk_hierarchical",
+        "base_id": "heldout-v1--campaign-template-bundle--r1",
+        "task_id": "campaign-template-bundle",
+        "record_path": "runs/heldout-v1/model-policy-replays-v1/heldout-v1-model-policies-v1/runs/model-v1--risk_hierarchical--278256ae591eb8b3e14a/model-policy-replay.json",
+        "record_sha256": "sha256:b350ad9d09358414576c13f3b237abfe39945a6d0f664b71e5db4a146042e1b4",
+        "workspace_path": "runs/heldout-v1/model-policy-replays-v1/heldout-v1-model-policies-v1/runs/model-v1--risk_hierarchical--278256ae591eb8b3e14a/workspace",
+        "workspace_sha256": "sha256:fb3a32f1d2f93cc5f1e3bbb03f737c13437b2ba0e15d8e82fd387e97acbb05dc"
+      },
+      {
+        "run_id": "model-v1--risk_hierarchical--2bfc4f3ccfd1f3f9599b",
+        "policy": "risk_hierarchical",
+        "base_id": "heldout-v1--token-bucket-refill--r3",
+        "task_id": "token-bucket-refill",
+        "record_path": "runs/heldout-v1/model-policy-replays-v1/heldout-v1-model-policies-v1/runs/model-v1--risk_hierarchical--2bfc4f3ccfd1f3f9599b/model-policy-replay.json",
+        "record_sha256": "sha256:1c4e51f47cb1a0fa7d0e0f859bd966b721dd8e29f8a5b947d3f5ee5c8e754fc5",
+        "workspace_path": "runs/heldout-v1/model-policy-replays-v1/heldout-v1-model-policies-v1/runs/model-v1--risk_hierarchical--2bfc4f3ccfd1f3f9599b/workspace",
+        "workspace_sha256": "sha256:f98a4dd49aa16dd6ca1e91b164d73a2f2435ff9457867fe4558e348622108cbe"
+      },
+      {
+        "run_id": "model-v1--risk_hierarchical--343e6d0810914f4e66dc",
+        "policy": "risk_hierarchical",
+        "base_id": "heldout-v1--rollout-allocation-loader--r1",
+        "task_id": "rollout-allocation-loader",
+        "record_path": "runs/heldout-v1/model-policy-replays-v1/heldout-v1-model-policies-v1/runs/model-v1--risk_hierarchical--343e6d0810914f4e66dc/model-policy-replay.json",
+        "record_sha256": "sha256:a8ea8378f1a500f8447bb36f8f215a67a343654391e484d5970484d17f4369dd",
+        "workspace_path": "runs/heldout-v1/model-policy-replays-v1/heldout-v1-model-policies-v1/runs/model-v1--risk_hierarchical--343e6d0810914f4e66dc/workspace",
+        "workspace_sha256": "sha256:33dacf6efa8b18ba338561e0a48109df450f928aa97983bd6d03e08cd90f5874"
+      },
+      {
+        "run_id": "model-v1--risk_hierarchical--3ad5af6fe033835cc951",
+        "policy": "risk_hierarchical",
+        "base_id": "heldout-v1--csv-formula-neutralization--r2",
+        "task_id": "csv-formula-neutralization",
+        "record_path": "runs/heldout-v1/model-policy-replays-v1/heldout-v1-model-policies-v1/runs/model-v1--risk_hierarchical--3ad5af6fe033835cc951/model-policy-replay.json",
+        "record_sha256": "sha256:04983abf176a18b7d0f33d6f114bbd664fead6d55a0080730907363a08ec61a6",
+        "workspace_path": "runs/heldout-v1/model-policy-replays-v1/heldout-v1-model-policies-v1/runs/model-v1--risk_hierarchical--3ad5af6fe033835cc951/workspace",
+        "workspace_sha256": "sha256:8901428fead0c205eed0acd675f11301f85681e032c081ed9760f04ca27f508f"
+      },
+      {
+        "run_id": "model-v1--risk_hierarchical--3c71d3281ffb35e7334a",
+        "policy": "risk_hierarchical",
+        "base_id": "heldout-v1--cache-key-collision-incident--r1",
+        "task_id": "cache-key-collision-incident",
+        "record_path": "runs/heldout-v1/model-policy-replays-v1/heldout-v1-model-policies-v1/runs/model-v1--risk_hierarchical--3c71d3281ffb35e7334a/model-policy-replay.json",
+        "record_sha256": "sha256:b835cc22588a2b9be3a9bfc43f74820ee6ce867ee79090811914fbeacdcb82d8",
+        "workspace_path": "runs/heldout-v1/model-policy-replays-v1/heldout-v1-model-policies-v1/runs/model-v1--risk_hierarchical--3c71d3281ffb35e7334a/workspace",
+        "workspace_sha256": "sha256:4cb8fcb872e3b0d2d15f6739a83bdbd5b2a15680215ab6846d715b124cc9577c"
+      },
+      {
+        "run_id": "model-v1--risk_hierarchical--43da24c5ae8efab89a8c",
+        "policy": "risk_hierarchical",
+        "base_id": "heldout-v1--regional-tax-table-loader--r1",
+        "task_id": "regional-tax-table-loader",
+        "record_path": "runs/heldout-v1/model-policy-replays-v1/heldout-v1-model-policies-v1/runs/model-v1--risk_hierarchical--43da24c5ae8efab89a8c/model-policy-replay.json",
+        "record_sha256": "sha256:2a4c9847f3dc5c4f000aaf6a9452ee9ad6e708d8bd079157ef5ad87dd71fde2a",
+        "workspace_path": "runs/heldout-v1/model-policy-replays-v1/heldout-v1-model-policies-v1/runs/model-v1--risk_hierarchical--43da24c5ae8efab89a8c/workspace",
+        "workspace_sha256": "sha256:4b33a53202b90b4162659b88df4402f841066b5633185c5920d9fabbb03f9dc8"
+      },
+      {
+        "run_id": "model-v1--risk_hierarchical--5391e95138920a3c0fec",
+        "policy": "risk_hierarchical",
+        "base_id": "heldout-v1--token-bucket-refill--r1",
+        "task_id": "token-bucket-refill",
+        "record_path": "runs/heldout-v1/model-policy-replays-v1/heldout-v1-model-policies-v1/runs/model-v1--risk_hierarchical--5391e95138920a3c0fec/model-policy-replay.json",
+        "record_sha256": "sha256:0a1430d42098d10511443ef72025735bb8381a8c1bad02eedf66036ffb784cc3",
+        "workspace_path": "runs/heldout-v1/model-policy-replays-v1/heldout-v1-model-policies-v1/runs/model-v1--risk_hierarchical--5391e95138920a3c0fec/workspace",
+        "workspace_sha256": "sha256:17974e5e10e1fb281ab770821dd3ea01434646caef9295010fb58fcb87792fe0"
+      },
+      {
+        "run_id": "model-v1--risk_hierarchical--5bafcf5a007afc797bcb",
+        "policy": "risk_hierarchical",
+        "base_id": "heldout-v1--unicode-account-identifier--r3",
+        "task_id": "unicode-account-identifier",
+        "record_path": "runs/heldout-v1/model-policy-replays-v1/heldout-v1-model-policies-v1/runs/model-v1--risk_hierarchical--5bafcf5a007afc797bcb/model-policy-replay.json",
+        "record_sha256": "sha256:e23d3a6733ffe37ab250671edde7b1c7623ac4f6913c98b88149ed4d5da7e079",
+        "workspace_path": "runs/heldout-v1/model-policy-replays-v1/heldout-v1-model-policies-v1/runs/model-v1--risk_hierarchical--5bafcf5a007afc797bcb/workspace",
+        "workspace_sha256": "sha256:b15eeae9cd2f5659b697fe812925eda2fd72f1bdeb1f028dc783ddb73766b310"
+      },
+      {
+        "run_id": "model-v1--risk_hierarchical--5f724661b9bd0447b19c",
+        "policy": "risk_hierarchical",
+        "base_id": "heldout-v1--token-bucket-refill--r2",
+        "task_id": "token-bucket-refill",
+        "record_path": "runs/heldout-v1/model-policy-replays-v1/heldout-v1-model-policies-v1/runs/model-v1--risk_hierarchical--5f724661b9bd0447b19c/model-policy-replay.json",
+        "record_sha256": "sha256:dda6110588be23307f467f016d59ee821481a9e5b5bb9ea201111543ed0fd5bd",
+        "workspace_path": "runs/heldout-v1/model-policy-replays-v1/heldout-v1-model-policies-v1/runs/model-v1--risk_hierarchical--5f724661b9bd0447b19c/workspace",
+        "workspace_sha256": "sha256:6f75b0c1c630efb631512d3e675432be2f6fd80fd9a256869514984dce64cbfe"
+      },
+      {
+        "run_id": "model-v1--risk_hierarchical--66dff449abf48171475d",
+        "policy": "risk_hierarchical",
+        "base_id": "heldout-v1--csv-formula-neutralization--r1",
+        "task_id": "csv-formula-neutralization",
+        "record_path": "runs/heldout-v1/model-policy-replays-v1/heldout-v1-model-policies-v1/runs/model-v1--risk_hierarchical--66dff449abf48171475d/model-policy-replay.json",
+        "record_sha256": "sha256:9ce48ce38d7b327d6889fcc30984233852330d4f43dc4e7b98703bad3941f35c",
+        "workspace_path": "runs/heldout-v1/model-policy-replays-v1/heldout-v1-model-policies-v1/runs/model-v1--risk_hierarchical--66dff449abf48171475d/workspace",
+        "workspace_sha256": "sha256:0586e77dc03c32139362ab43e8a0988d56b795c01fb85d770a0960236c0ac59e"
+      },
+      {
+        "run_id": "model-v1--risk_hierarchical--6eb56d89aa88b99ba1f6",
+        "policy": "risk_hierarchical",
+        "base_id": "heldout-v1--regional-tax-table-loader--r2",
+        "task_id": "regional-tax-table-loader",
+        "record_path": "runs/heldout-v1/model-policy-replays-v1/heldout-v1-model-policies-v1/runs/model-v1--risk_hierarchical--6eb56d89aa88b99ba1f6/model-policy-replay.json",
+        "record_sha256": "sha256:8218cefc641f811537b8a98b21db68bf9cedb0ebca79dbe7f5e190e65ccec1bb",
+        "workspace_path": "runs/heldout-v1/model-policy-replays-v1/heldout-v1-model-policies-v1/runs/model-v1--risk_hierarchical--6eb56d89aa88b99ba1f6/workspace",
+        "workspace_sha256": "sha256:062a52ede77c4d52d18a4c0a4cba20974060a504c6bcf78e12a19cbc318832f0"
+      },
+      {
+        "run_id": "model-v1--risk_hierarchical--8abd7773217674923b3a",
+        "policy": "risk_hierarchical",
+        "base_id": "heldout-v1--rollout-allocation-loader--r2",
+        "task_id": "rollout-allocation-loader",
+        "record_path": "runs/heldout-v1/model-policy-replays-v1/heldout-v1-model-policies-v1/runs/model-v1--risk_hierarchical--8abd7773217674923b3a/model-policy-replay.json",
+        "record_sha256": "sha256:d3530097aae9427db0aba313ef1f37e4124421d2962f86f249d6b956f00c1486",
+        "workspace_path": "runs/heldout-v1/model-policy-replays-v1/heldout-v1-model-policies-v1/runs/model-v1--risk_hierarchical--8abd7773217674923b3a/workspace",
+        "workspace_sha256": "sha256:9afc212b73284e7e495eee96ca40f22bd4072c09c6be05356b17e2622bc60c04"
+      },
+      {
+        "run_id": "model-v1--risk_hierarchical--933a439486d1f2d0dd46",
+        "policy": "risk_hierarchical",
+        "base_id": "heldout-v1--campaign-template-bundle--r3",
+        "task_id": "campaign-template-bundle",
+        "record_path": "runs/heldout-v1/model-policy-replays-v1/heldout-v1-model-policies-v1/runs/model-v1--risk_hierarchical--933a439486d1f2d0dd46/model-policy-replay.json",
+        "record_sha256": "sha256:b75ce2c13f809a50a22322b5cc13810a6269427c4001f8d99f8a0e2712c7502c",
+        "workspace_path": "runs/heldout-v1/model-policy-replays-v1/heldout-v1-model-policies-v1/runs/model-v1--risk_hierarchical--933a439486d1f2d0dd46/workspace",
+        "workspace_sha256": "sha256:95f6b7454194edf7b37ec400ec42025b7e43742986e4207bdefa9830fedfafc5"
+      },
+      {
+        "run_id": "model-v1--risk_hierarchical--9b48b0821dd871ccd80c",
+        "policy": "risk_hierarchical",
+        "base_id": "heldout-v1--nested-secret-redaction--r3",
+        "task_id": "nested-secret-redaction",
+        "record_path": "runs/heldout-v1/model-policy-replays-v1/heldout-v1-model-policies-v1/runs/model-v1--risk_hierarchical--9b48b0821dd871ccd80c/model-policy-replay.json",
+        "record_sha256": "sha256:a14c16485d55aae7900383b348dd2ffad261b5b68f51373811f3fb1132f67429",
+        "workspace_path": "runs/heldout-v1/model-policy-replays-v1/heldout-v1-model-policies-v1/runs/model-v1--risk_hierarchical--9b48b0821dd871ccd80c/workspace",
+        "workspace_sha256": "sha256:73912301c1c982e79e868c86f799f2b52a396677bfb4a763673f96f67d1288df"
+      },
+      {
+        "run_id": "model-v1--risk_hierarchical--b0ba6f1a8a59d9a6ab89",
+        "policy": "risk_hierarchical",
+        "base_id": "heldout-v1--campaign-template-bundle--r2",
+        "task_id": "campaign-template-bundle",
+        "record_path": "runs/heldout-v1/model-policy-replays-v1/heldout-v1-model-policies-v1/runs/model-v1--risk_hierarchical--b0ba6f1a8a59d9a6ab89/model-policy-replay.json",
+        "record_sha256": "sha256:60b2615f140397da3b89e65d71229cb475bb70ef04326d2c6332101a29a8f168",
+        "workspace_path": "runs/heldout-v1/model-policy-replays-v1/heldout-v1-model-policies-v1/runs/model-v1--risk_hierarchical--b0ba6f1a8a59d9a6ab89/workspace",
+        "workspace_sha256": "sha256:1c3c3c75e14c6db97613ef54f5452bcbaf168546d46d2c517b8496610aef8cc5"
+      },
+      {
+        "run_id": "model-v1--risk_hierarchical--b442a5bde25c46079e9a",
+        "policy": "risk_hierarchical",
+        "base_id": "heldout-v1--regional-tax-table-loader--r3",
+        "task_id": "regional-tax-table-loader",
+        "record_path": "runs/heldout-v1/model-policy-replays-v1/heldout-v1-model-policies-v1/runs/model-v1--risk_hierarchical--b442a5bde25c46079e9a/model-policy-replay.json",
+        "record_sha256": "sha256:c908e27c73a10f8a2e6ab25879654b2660cfa573e6b370d12231e1e57047f774",
+        "workspace_path": "runs/heldout-v1/model-policy-replays-v1/heldout-v1-model-policies-v1/runs/model-v1--risk_hierarchical--b442a5bde25c46079e9a/workspace",
+        "workspace_sha256": "sha256:a042e4a2f2ee518e68420e4ce29e8b93b411cd5de6b4d654410425eec07d31ac"
+      },
+      {
+        "run_id": "model-v1--risk_hierarchical--bf6daaa0c27b55f9f9ce",
+        "policy": "risk_hierarchical",
+        "base_id": "heldout-v1--certificate-rollover-incident--r1",
+        "task_id": "certificate-rollover-incident",
+        "record_path": "runs/heldout-v1/model-policy-replays-v1/heldout-v1-model-policies-v1/runs/model-v1--risk_hierarchical--bf6daaa0c27b55f9f9ce/model-policy-replay.json",
+        "record_sha256": "sha256:5bc74a759fc7830d9a2bf7e2bebb89aa349016bc9e799badd9aeb056c128b29f",
+        "workspace_path": "runs/heldout-v1/model-policy-replays-v1/heldout-v1-model-policies-v1/runs/model-v1--risk_hierarchical--bf6daaa0c27b55f9f9ce/workspace",
+        "workspace_sha256": "sha256:3294905e508554e27c5a426c940f24d592f96b345e850925a1f8cb52c313c785"
+      },
+      {
+        "run_id": "model-v1--risk_hierarchical--bfc4532850ebfb0e193c",
+        "policy": "risk_hierarchical",
+        "base_id": "heldout-v1--certificate-rollover-incident--r3",
+        "task_id": "certificate-rollover-incident",
+        "record_path": "runs/heldout-v1/model-policy-replays-v1/heldout-v1-model-policies-v1/runs/model-v1--risk_hierarchical--bfc4532850ebfb0e193c/model-policy-replay.json",
+        "record_sha256": "sha256:f8f389c5eefd11f91e5bed58f60b3d1e3e380ce04c96f0d281abf0634e396d8e",
+        "workspace_path": "runs/heldout-v1/model-policy-replays-v1/heldout-v1-model-policies-v1/runs/model-v1--risk_hierarchical--bfc4532850ebfb0e193c/workspace",
+        "workspace_sha256": "sha256:729bbc7155e426e8a53799a68fe6e517703cf2221251860bb3a7fdb2e48a3f3d"
+      },
+      {
+        "run_id": "model-v1--risk_hierarchical--c43cc3c2335ed4baaa70",
+        "policy": "risk_hierarchical",
+        "base_id": "heldout-v1--nested-secret-redaction--r2",
+        "task_id": "nested-secret-redaction",
+        "record_path": "runs/heldout-v1/model-policy-replays-v1/heldout-v1-model-policies-v1/runs/model-v1--risk_hierarchical--c43cc3c2335ed4baaa70/model-policy-replay.json",
+        "record_sha256": "sha256:8f21d3d22ba4cb6468b9b170af3565f899e066e6147c375e89e0cadb46e4bd3a",
+        "workspace_path": "runs/heldout-v1/model-policy-replays-v1/heldout-v1-model-policies-v1/runs/model-v1--risk_hierarchical--c43cc3c2335ed4baaa70/workspace",
+        "workspace_sha256": "sha256:fac25eeb458e5f254c8d283d0c5eed5103fb6d7930664e9633ceab1805b696b1"
+      },
+      {
+        "run_id": "model-v1--risk_hierarchical--cb3f3fd960641d129290",
+        "policy": "risk_hierarchical",
+        "base_id": "heldout-v1--certificate-rollover-incident--r2",
+        "task_id": "certificate-rollover-incident",
+        "record_path": "runs/heldout-v1/model-policy-replays-v1/heldout-v1-model-policies-v1/runs/model-v1--risk_hierarchical--cb3f3fd960641d129290/model-policy-replay.json",
+        "record_sha256": "sha256:64b9f160f1c56ecd84d68f3fa222f1025d9a9169f5f0608046a6a56f8ee6dcea",
+        "workspace_path": "runs/heldout-v1/model-policy-replays-v1/heldout-v1-model-policies-v1/runs/model-v1--risk_hierarchical--cb3f3fd960641d129290/workspace",
+        "workspace_sha256": "sha256:13cc00816758fe580a0989c0d24ca96cd6829fa63bc667f894a2cf8caa1eb4da"
+      },
+      {
+        "run_id": "model-v1--risk_hierarchical--d48f60f8627657b02216",
+        "policy": "risk_hierarchical",
+        "base_id": "heldout-v1--database-migration-lock-incident--r1",
+        "task_id": "database-migration-lock-incident",
+        "record_path": "runs/heldout-v1/model-policy-replays-v1/heldout-v1-model-policies-v1/runs/model-v1--risk_hierarchical--d48f60f8627657b02216/model-policy-replay.json",
+        "record_sha256": "sha256:64c20f04eb4e6296bf50e96a9132a94a9c1557cd38eab864134fb9a244b6f08d",
+        "workspace_path": "runs/heldout-v1/model-policy-replays-v1/heldout-v1-model-policies-v1/runs/model-v1--risk_hierarchical--d48f60f8627657b02216/workspace",
+        "workspace_sha256": "sha256:0a38798d5a29b3e441af6cb87e41fbfbdf5d5c15766940ee6261cedce5ca6215"
+      },
+      {
+        "run_id": "model-v1--risk_hierarchical--ed21b178936b3a28257a",
+        "policy": "risk_hierarchical",
+        "base_id": "heldout-v1--database-migration-lock-incident--r2",
+        "task_id": "database-migration-lock-incident",
+        "record_path": "runs/heldout-v1/model-policy-replays-v1/heldout-v1-model-policies-v1/runs/model-v1--risk_hierarchical--ed21b178936b3a28257a/model-policy-replay.json",
+        "record_sha256": "sha256:32b671cd4af0ea4b987114167e2c26f9a1ae15315e41d7edad7bd7ae32a05d90",
+        "workspace_path": "runs/heldout-v1/model-policy-replays-v1/heldout-v1-model-policies-v1/runs/model-v1--risk_hierarchical--ed21b178936b3a28257a/workspace",
+        "workspace_sha256": "sha256:f721804add64d5a4a3adfc8689b2dd1bb4495ad4624683f221273c1f6cae0143"
+      },
+      {
+        "run_id": "model-v1--risk_model_direct--04683fe13bc6519ea1de",
+        "policy": "risk_model_direct",
+        "base_id": "heldout-v1--certificate-rollover-incident--r3",
+        "task_id": "certificate-rollover-incident",
+        "record_path": "runs/heldout-v1/model-policy-replays-v1/heldout-v1-model-policies-v1/runs/model-v1--risk_model_direct--04683fe13bc6519ea1de/model-policy-replay.json",
+        "record_sha256": "sha256:5b84c6a61e0d1f2916b112449bdda244d59b6f62af3dc0e694568dfba808d381",
+        "workspace_path": "runs/heldout-v1/model-policy-replays-v1/heldout-v1-model-policies-v1/runs/model-v1--risk_model_direct--04683fe13bc6519ea1de/workspace",
+        "workspace_sha256": "sha256:729bbc7155e426e8a53799a68fe6e517703cf2221251860bb3a7fdb2e48a3f3d"
+      },
+      {
+        "run_id": "model-v1--risk_model_direct--047fcb3f2bc454013666",
+        "policy": "risk_model_direct",
+        "base_id": "heldout-v1--cache-key-collision-incident--r1",
+        "task_id": "cache-key-collision-incident",
+        "record_path": "runs/heldout-v1/model-policy-replays-v1/heldout-v1-model-policies-v1/runs/model-v1--risk_model_direct--047fcb3f2bc454013666/model-policy-replay.json",
+        "record_sha256": "sha256:55793c049586e5fbc513955eaeda6a7f7b11611f7fa3cbe7338b50c62e04a2e5",
+        "workspace_path": "runs/heldout-v1/model-policy-replays-v1/heldout-v1-model-policies-v1/runs/model-v1--risk_model_direct--047fcb3f2bc454013666/workspace",
+        "workspace_sha256": "sha256:4cb8fcb872e3b0d2d15f6739a83bdbd5b2a15680215ab6846d715b124cc9577c"
+      },
+      {
+        "run_id": "model-v1--risk_model_direct--08ed5acde1f211419012",
+        "policy": "risk_model_direct",
+        "base_id": "heldout-v1--cache-key-collision-incident--r2",
+        "task_id": "cache-key-collision-incident",
+        "record_path": "runs/heldout-v1/model-policy-replays-v1/heldout-v1-model-policies-v1/runs/model-v1--risk_model_direct--08ed5acde1f211419012/model-policy-replay.json",
+        "record_sha256": "sha256:44a5ec399636f7ec5320bd772e5b593066b663508937193d234ed7412e429e0f",
+        "workspace_path": "runs/heldout-v1/model-policy-replays-v1/heldout-v1-model-policies-v1/runs/model-v1--risk_model_direct--08ed5acde1f211419012/workspace",
+        "workspace_sha256": "sha256:63bc4fed1612ab7a5abd052578013b4d8652ae11857498a7ab328a1466e85da3"
+      },
+      {
+        "run_id": "model-v1--risk_model_direct--1cdad5f40ca93f51ed2c",
+        "policy": "risk_model_direct",
+        "base_id": "heldout-v1--csv-formula-neutralization--r3",
+        "task_id": "csv-formula-neutralization",
+        "record_path": "runs/heldout-v1/model-policy-replays-v1/heldout-v1-model-policies-v1/runs/model-v1--risk_model_direct--1cdad5f40ca93f51ed2c/model-policy-replay.json",
+        "record_sha256": "sha256:c87dec2a64b9fa12f8e11dcfc32f3f914d914be4fea81bca909fb65dd4b454d8",
+        "workspace_path": "runs/heldout-v1/model-policy-replays-v1/heldout-v1-model-policies-v1/runs/model-v1--risk_model_direct--1cdad5f40ca93f51ed2c/workspace",
+        "workspace_sha256": "sha256:44a1c64174b60a4008df8888703e82b96de5b492376d25bc5190ef7678da73c2"
+      },
+      {
+        "run_id": "model-v1--risk_model_direct--2ee305fb388caff820e6",
+        "policy": "risk_model_direct",
+        "base_id": "heldout-v1--rollout-allocation-loader--r3",
+        "task_id": "rollout-allocation-loader",
+        "record_path": "runs/heldout-v1/model-policy-replays-v1/heldout-v1-model-policies-v1/runs/model-v1--risk_model_direct--2ee305fb388caff820e6/model-policy-replay.json",
+        "record_sha256": "sha256:e7efb1f53337fe9de0bf8b51bce5247bff2dcad7c38275851e791e256860b508",
+        "workspace_path": "runs/heldout-v1/model-policy-replays-v1/heldout-v1-model-policies-v1/runs/model-v1--risk_model_direct--2ee305fb388caff820e6/workspace",
+        "workspace_sha256": "sha256:3b909a82899f831aa512808ac7ea542560fd14791597d69b548ecbf87dc4b66e"
+      },
+      {
+        "run_id": "model-v1--risk_model_direct--34e0f2820de3cef79148",
+        "policy": "risk_model_direct",
+        "base_id": "heldout-v1--csv-formula-neutralization--r2",
+        "task_id": "csv-formula-neutralization",
+        "record_path": "runs/heldout-v1/model-policy-replays-v1/heldout-v1-model-policies-v1/runs/model-v1--risk_model_direct--34e0f2820de3cef79148/model-policy-replay.json",
+        "record_sha256": "sha256:bf91246b1f36c316eaf34c2688c04462292ee175b57b77d311e230a6bc8fd921",
+        "workspace_path": "runs/heldout-v1/model-policy-replays-v1/heldout-v1-model-policies-v1/runs/model-v1--risk_model_direct--34e0f2820de3cef79148/workspace",
+        "workspace_sha256": "sha256:9f70095b8845dd6cc0b4f3dfe6cfa7aba31b53f5b10c8ab4bdc604515f4fa888"
+      },
+      {
+        "run_id": "model-v1--risk_model_direct--3ffc92f5ad2fffaa9cc4",
+        "policy": "risk_model_direct",
+        "base_id": "heldout-v1--cache-key-collision-incident--r3",
+        "task_id": "cache-key-collision-incident",
+        "record_path": "runs/heldout-v1/model-policy-replays-v1/heldout-v1-model-policies-v1/runs/model-v1--risk_model_direct--3ffc92f5ad2fffaa9cc4/model-policy-replay.json",
+        "record_sha256": "sha256:77259954322eec19a36c8c99c2de6e1e949a948ad43c3ea50700eb9082dd82e3",
+        "workspace_path": "runs/heldout-v1/model-policy-replays-v1/heldout-v1-model-policies-v1/runs/model-v1--risk_model_direct--3ffc92f5ad2fffaa9cc4/workspace",
+        "workspace_sha256": "sha256:b2cd786e0ce2e59c0b17bb7ad671ee04297167138d5e3bc64572bd19e90eb8a7"
+      },
+      {
+        "run_id": "model-v1--risk_model_direct--53854ef4317bb00b92e9",
+        "policy": "risk_model_direct",
+        "base_id": "heldout-v1--database-migration-lock-incident--r3",
+        "task_id": "database-migration-lock-incident",
+        "record_path": "runs/heldout-v1/model-policy-replays-v1/heldout-v1-model-policies-v1/runs/model-v1--risk_model_direct--53854ef4317bb00b92e9/model-policy-replay.json",
+        "record_sha256": "sha256:997f9f9274784afa9e7319a0acb545e1c3dfb8444394bd373f9274df21770149",
+        "workspace_path": "runs/heldout-v1/model-policy-replays-v1/heldout-v1-model-policies-v1/runs/model-v1--risk_model_direct--53854ef4317bb00b92e9/workspace",
+        "workspace_sha256": "sha256:d8d40604a65e174bd2bd24a2f10d7c95f60176a5b852fbd81a0bab47dc8a5cd6"
+      },
+      {
+        "run_id": "model-v1--risk_model_direct--6bd7491a27b19d75cce9",
+        "policy": "risk_model_direct",
+        "base_id": "heldout-v1--nested-secret-redaction--r2",
+        "task_id": "nested-secret-redaction",
+        "record_path": "runs/heldout-v1/model-policy-replays-v1/heldout-v1-model-policies-v1/runs/model-v1--risk_model_direct--6bd7491a27b19d75cce9/model-policy-replay.json",
+        "record_sha256": "sha256:edd03de2f1c838e87a80812e22738b55840ae2d0f8c6aa4069e9272f98a9a5bc",
+        "workspace_path": "runs/heldout-v1/model-policy-replays-v1/heldout-v1-model-policies-v1/runs/model-v1--risk_model_direct--6bd7491a27b19d75cce9/workspace",
+        "workspace_sha256": "sha256:feb50d34f7ec2d3a3022c6997071653d3b77007bb9ff19d6ccfbad448b08505a"
+      },
+      {
+        "run_id": "model-v1--risk_model_direct--71bc359675da58e62876",
+        "policy": "risk_model_direct",
+        "base_id": "heldout-v1--campaign-template-bundle--r2",
+        "task_id": "campaign-template-bundle",
+        "record_path": "runs/heldout-v1/model-policy-replays-v1/heldout-v1-model-policies-v1/runs/model-v1--risk_model_direct--71bc359675da58e62876/model-policy-replay.json",
+        "record_sha256": "sha256:b29e9c44f3846dc03761315e19745d3b60dbc5fc5ca3b1c9c16a700e4086f911",
+        "workspace_path": "runs/heldout-v1/model-policy-replays-v1/heldout-v1-model-policies-v1/runs/model-v1--risk_model_direct--71bc359675da58e62876/workspace",
+        "workspace_sha256": "sha256:1c3c3c75e14c6db97613ef54f5452bcbaf168546d46d2c517b8496610aef8cc5"
+      },
+      {
+        "run_id": "model-v1--risk_model_direct--74e0d75783b63653a1fd",
+        "policy": "risk_model_direct",
+        "base_id": "heldout-v1--unicode-account-identifier--r3",
+        "task_id": "unicode-account-identifier",
+        "record_path": "runs/heldout-v1/model-policy-replays-v1/heldout-v1-model-policies-v1/runs/model-v1--risk_model_direct--74e0d75783b63653a1fd/model-policy-replay.json",
+        "record_sha256": "sha256:215161d37db3222f4f72c3053e2b1b208220c5b3a552f3cf0481e9c98743322f",
+        "workspace_path": "runs/heldout-v1/model-policy-replays-v1/heldout-v1-model-policies-v1/runs/model-v1--risk_model_direct--74e0d75783b63653a1fd/workspace",
+        "workspace_sha256": "sha256:d752c0c151b245eb54d20a42820e01c25d944c26ddf1977a0fa2a500813ce6e5"
+      },
+      {
+        "run_id": "model-v1--risk_model_direct--75a4da2b77c750768d89",
+        "policy": "risk_model_direct",
+        "base_id": "heldout-v1--csv-formula-neutralization--r1",
+        "task_id": "csv-formula-neutralization",
+        "record_path": "runs/heldout-v1/model-policy-replays-v1/heldout-v1-model-policies-v1/runs/model-v1--risk_model_direct--75a4da2b77c750768d89/model-policy-replay.json",
+        "record_sha256": "sha256:4e6d2a8753e59797a39ee835ee8011607506a9796df80061046557c43a35d716",
+        "workspace_path": "runs/heldout-v1/model-policy-replays-v1/heldout-v1-model-policies-v1/runs/model-v1--risk_model_direct--75a4da2b77c750768d89/workspace",
+        "workspace_sha256": "sha256:be39c77f561daf3c807794179652bdd43c9e12e9bd612b6497e81fa6d48454c5"
+      },
+      {
+        "run_id": "model-v1--risk_model_direct--75b0251f75f3a1ff9599",
+        "policy": "risk_model_direct",
+        "base_id": "heldout-v1--certificate-rollover-incident--r1",
+        "task_id": "certificate-rollover-incident",
+        "record_path": "runs/heldout-v1/model-policy-replays-v1/heldout-v1-model-policies-v1/runs/model-v1--risk_model_direct--75b0251f75f3a1ff9599/model-policy-replay.json",
+        "record_sha256": "sha256:43aa2e00c34f9b524709b516be429de65b9f3c9493159873c7b4256db2513193",
+        "workspace_path": "runs/heldout-v1/model-policy-replays-v1/heldout-v1-model-policies-v1/runs/model-v1--risk_model_direct--75b0251f75f3a1ff9599/workspace",
+        "workspace_sha256": "sha256:3294905e508554e27c5a426c940f24d592f96b345e850925a1f8cb52c313c785"
+      },
+      {
+        "run_id": "model-v1--risk_model_direct--7c7144e89640aafed601",
+        "policy": "risk_model_direct",
+        "base_id": "heldout-v1--certificate-rollover-incident--r2",
+        "task_id": "certificate-rollover-incident",
+        "record_path": "runs/heldout-v1/model-policy-replays-v1/heldout-v1-model-policies-v1/runs/model-v1--risk_model_direct--7c7144e89640aafed601/model-policy-replay.json",
+        "record_sha256": "sha256:52a3889db75c46304c0f2c8e42fdda77c2c112593a40463e088c0f698a3f8d3a",
+        "workspace_path": "runs/heldout-v1/model-policy-replays-v1/heldout-v1-model-policies-v1/runs/model-v1--risk_model_direct--7c7144e89640aafed601/workspace",
+        "workspace_sha256": "sha256:13cc00816758fe580a0989c0d24ca96cd6829fa63bc667f894a2cf8caa1eb4da"
+      },
+      {
+        "run_id": "model-v1--risk_model_direct--8eb198c272076d320f3d",
+        "policy": "risk_model_direct",
+        "base_id": "heldout-v1--nested-secret-redaction--r1",
+        "task_id": "nested-secret-redaction",
+        "record_path": "runs/heldout-v1/model-policy-replays-v1/heldout-v1-model-policies-v1/runs/model-v1--risk_model_direct--8eb198c272076d320f3d/model-policy-replay.json",
+        "record_sha256": "sha256:785392a1e257adb8b0bc227d9ae6acd7a5000ba5776f79b9f1b784818934f1d5",
+        "workspace_path": "runs/heldout-v1/model-policy-replays-v1/heldout-v1-model-policies-v1/runs/model-v1--risk_model_direct--8eb198c272076d320f3d/workspace",
+        "workspace_sha256": "sha256:f6d96f6a31955414bff8625b0383aeafb08982b8a2a90b6474a056bb27cd93f8"
+      },
+      {
+        "run_id": "model-v1--risk_model_direct--922cc6aff1a04f9aa6d0",
+        "policy": "risk_model_direct",
+        "base_id": "heldout-v1--regional-tax-table-loader--r2",
+        "task_id": "regional-tax-table-loader",
+        "record_path": "runs/heldout-v1/model-policy-replays-v1/heldout-v1-model-policies-v1/runs/model-v1--risk_model_direct--922cc6aff1a04f9aa6d0/model-policy-replay.json",
+        "record_sha256": "sha256:81ac6ed629c8630e869d849987e185d56afb1e8fe56f5c78303b672a4e125d3e",
+        "workspace_path": "runs/heldout-v1/model-policy-replays-v1/heldout-v1-model-policies-v1/runs/model-v1--risk_model_direct--922cc6aff1a04f9aa6d0/workspace",
+        "workspace_sha256": "sha256:062a52ede77c4d52d18a4c0a4cba20974060a504c6bcf78e12a19cbc318832f0"
+      },
+      {
+        "run_id": "model-v1--risk_model_direct--96c5e7628a2a8b298538",
+        "policy": "risk_model_direct",
+        "base_id": "heldout-v1--campaign-template-bundle--r3",
+        "task_id": "campaign-template-bundle",
+        "record_path": "runs/heldout-v1/model-policy-replays-v1/heldout-v1-model-policies-v1/runs/model-v1--risk_model_direct--96c5e7628a2a8b298538/model-policy-replay.json",
+        "record_sha256": "sha256:a3a95e4bca9c53e2b3ff454fbf9544808c3c1bea75613f2e82361f82a17b2010",
+        "workspace_path": "runs/heldout-v1/model-policy-replays-v1/heldout-v1-model-policies-v1/runs/model-v1--risk_model_direct--96c5e7628a2a8b298538/workspace",
+        "workspace_sha256": "sha256:95f6b7454194edf7b37ec400ec42025b7e43742986e4207bdefa9830fedfafc5"
+      },
+      {
+        "run_id": "model-v1--risk_model_direct--9ec5c56c8d9c26d9fc5e",
+        "policy": "risk_model_direct",
+        "base_id": "heldout-v1--regional-tax-table-loader--r1",
+        "task_id": "regional-tax-table-loader",
+        "record_path": "runs/heldout-v1/model-policy-replays-v1/heldout-v1-model-policies-v1/runs/model-v1--risk_model_direct--9ec5c56c8d9c26d9fc5e/model-policy-replay.json",
+        "record_sha256": "sha256:a65191205385e6aca9885c2222ab3f975c26c0c81b8c1a01e0df07e0c1c44037",
+        "workspace_path": "runs/heldout-v1/model-policy-replays-v1/heldout-v1-model-policies-v1/runs/model-v1--risk_model_direct--9ec5c56c8d9c26d9fc5e/workspace",
+        "workspace_sha256": "sha256:4b33a53202b90b4162659b88df4402f841066b5633185c5920d9fabbb03f9dc8"
+      },
+      {
+        "run_id": "model-v1--risk_model_direct--a423bf7b76a59ac60d24",
+        "policy": "risk_model_direct",
+        "base_id": "heldout-v1--regional-tax-table-loader--r3",
+        "task_id": "regional-tax-table-loader",
+        "record_path": "runs/heldout-v1/model-policy-replays-v1/heldout-v1-model-policies-v1/runs/model-v1--risk_model_direct--a423bf7b76a59ac60d24/model-policy-replay.json",
+        "record_sha256": "sha256:165825001d71a0955bd47e7854ba0c763ddf9870209d92e377ef6402d3375658",
+        "workspace_path": "runs/heldout-v1/model-policy-replays-v1/heldout-v1-model-policies-v1/runs/model-v1--risk_model_direct--a423bf7b76a59ac60d24/workspace",
+        "workspace_sha256": "sha256:a042e4a2f2ee518e68420e4ce29e8b93b411cd5de6b4d654410425eec07d31ac"
+      },
+      {
+        "run_id": "model-v1--risk_model_direct--ad8c25c1dfea279a8e0a",
+        "policy": "risk_model_direct",
+        "base_id": "heldout-v1--campaign-template-bundle--r1",
+        "task_id": "campaign-template-bundle",
+        "record_path": "runs/heldout-v1/model-policy-replays-v1/heldout-v1-model-policies-v1/runs/model-v1--risk_model_direct--ad8c25c1dfea279a8e0a/model-policy-replay.json",
+        "record_sha256": "sha256:f2534a52c7434f094e2009f0c0a8b7537a0fc07c0fbb1bc3ceeedb4e8326b72e",
+        "workspace_path": "runs/heldout-v1/model-policy-replays-v1/heldout-v1-model-policies-v1/runs/model-v1--risk_model_direct--ad8c25c1dfea279a8e0a/workspace",
+        "workspace_sha256": "sha256:fb3a32f1d2f93cc5f1e3bbb03f737c13437b2ba0e15d8e82fd387e97acbb05dc"
+      },
+      {
+        "run_id": "model-v1--risk_model_direct--b0e6edb84d7858c661ed",
+        "policy": "risk_model_direct",
+        "base_id": "heldout-v1--token-bucket-refill--r1",
+        "task_id": "token-bucket-refill",
+        "record_path": "runs/heldout-v1/model-policy-replays-v1/heldout-v1-model-policies-v1/runs/model-v1--risk_model_direct--b0e6edb84d7858c661ed/model-policy-replay.json",
+        "record_sha256": "sha256:3a37366fccc16238c6b254f275cd613817ecdad618956c35dcc5e48d982900c3",
+        "workspace_path": "runs/heldout-v1/model-policy-replays-v1/heldout-v1-model-policies-v1/runs/model-v1--risk_model_direct--b0e6edb84d7858c661ed/workspace",
+        "workspace_sha256": "sha256:17974e5e10e1fb281ab770821dd3ea01434646caef9295010fb58fcb87792fe0"
+      },
+      {
+        "run_id": "model-v1--risk_model_direct--be9a8043d56b9673892d",
+        "policy": "risk_model_direct",
+        "base_id": "heldout-v1--unicode-account-identifier--r2",
+        "task_id": "unicode-account-identifier",
+        "record_path": "runs/heldout-v1/model-policy-replays-v1/heldout-v1-model-policies-v1/runs/model-v1--risk_model_direct--be9a8043d56b9673892d/model-policy-replay.json",
+        "record_sha256": "sha256:20bf580a29751e5a6aa3aeb3878dcfc3e1558dd598ba7bee215e926d0b9180eb",
+        "workspace_path": "runs/heldout-v1/model-policy-replays-v1/heldout-v1-model-policies-v1/runs/model-v1--risk_model_direct--be9a8043d56b9673892d/workspace",
+        "workspace_sha256": "sha256:6e8bc136c1ea697c044de1b12ba207e1f664009ea867773ddfed73efabda6dbb"
+      },
+      {
+        "run_id": "model-v1--risk_model_direct--cc64a08143a4b922b232",
+        "policy": "risk_model_direct",
+        "base_id": "heldout-v1--token-bucket-refill--r2",
+        "task_id": "token-bucket-refill",
+        "record_path": "runs/heldout-v1/model-policy-replays-v1/heldout-v1-model-policies-v1/runs/model-v1--risk_model_direct--cc64a08143a4b922b232/model-policy-replay.json",
+        "record_sha256": "sha256:099e8c4fdeeae1706cfe7cd3185b7b5529b3a2affe2507b39b3eebcac63b6664",
+        "workspace_path": "runs/heldout-v1/model-policy-replays-v1/heldout-v1-model-policies-v1/runs/model-v1--risk_model_direct--cc64a08143a4b922b232/workspace",
+        "workspace_sha256": "sha256:6f75b0c1c630efb631512d3e675432be2f6fd80fd9a256869514984dce64cbfe"
+      },
+      {
+        "run_id": "model-v1--risk_model_direct--cd71055c319ab6589db3",
+        "policy": "risk_model_direct",
+        "base_id": "heldout-v1--rollout-allocation-loader--r1",
+        "task_id": "rollout-allocation-loader",
+        "record_path": "runs/heldout-v1/model-policy-replays-v1/heldout-v1-model-policies-v1/runs/model-v1--risk_model_direct--cd71055c319ab6589db3/model-policy-replay.json",
+        "record_sha256": "sha256:0309567c2dba9e56f23e8de64321b4cfd4fefa0cd2db13ef0d9b158f8597d01a",
+        "workspace_path": "runs/heldout-v1/model-policy-replays-v1/heldout-v1-model-policies-v1/runs/model-v1--risk_model_direct--cd71055c319ab6589db3/workspace",
+        "workspace_sha256": "sha256:33dacf6efa8b18ba338561e0a48109df450f928aa97983bd6d03e08cd90f5874"
+      },
+      {
+        "run_id": "model-v1--risk_model_direct--d3f661b18c63171b58df",
+        "policy": "risk_model_direct",
+        "base_id": "heldout-v1--token-bucket-refill--r3",
+        "task_id": "token-bucket-refill",
+        "record_path": "runs/heldout-v1/model-policy-replays-v1/heldout-v1-model-policies-v1/runs/model-v1--risk_model_direct--d3f661b18c63171b58df/model-policy-replay.json",
+        "record_sha256": "sha256:60936b6f84dde0c3b1dbff3a3d6caf0877c5bf9f7142b823c737bd5d86686079",
+        "workspace_path": "runs/heldout-v1/model-policy-replays-v1/heldout-v1-model-policies-v1/runs/model-v1--risk_model_direct--d3f661b18c63171b58df/workspace",
+        "workspace_sha256": "sha256:f98a4dd49aa16dd6ca1e91b164d73a2f2435ff9457867fe4558e348622108cbe"
+      },
+      {
+        "run_id": "model-v1--risk_model_direct--df1a3f1654b694bafb20",
+        "policy": "risk_model_direct",
+        "base_id": "heldout-v1--unicode-account-identifier--r1",
+        "task_id": "unicode-account-identifier",
+        "record_path": "runs/heldout-v1/model-policy-replays-v1/heldout-v1-model-policies-v1/runs/model-v1--risk_model_direct--df1a3f1654b694bafb20/model-policy-replay.json",
+        "record_sha256": "sha256:6f4b61335fa396ebb80c2af5359e174b50f65d4460ea14f4b35a8ba9189c8fb7",
+        "workspace_path": "runs/heldout-v1/model-policy-replays-v1/heldout-v1-model-policies-v1/runs/model-v1--risk_model_direct--df1a3f1654b694bafb20/workspace",
+        "workspace_sha256": "sha256:12b906ba064b922ecc8969d3da16a01b3541ea07ff68b0d36749eeb3ebeafd66"
+      },
+      {
+        "run_id": "model-v1--risk_model_direct--e11f33eb916dca6f408b",
+        "policy": "risk_model_direct",
+        "base_id": "heldout-v1--database-migration-lock-incident--r1",
+        "task_id": "database-migration-lock-incident",
+        "record_path": "runs/heldout-v1/model-policy-replays-v1/heldout-v1-model-policies-v1/runs/model-v1--risk_model_direct--e11f33eb916dca6f408b/model-policy-replay.json",
+        "record_sha256": "sha256:8c5b6ed0e4866144efad3f271e8b1936aed01d60fa9b48883a026006ea4f03f1",
+        "workspace_path": "runs/heldout-v1/model-policy-replays-v1/heldout-v1-model-policies-v1/runs/model-v1--risk_model_direct--e11f33eb916dca6f408b/workspace",
+        "workspace_sha256": "sha256:0a38798d5a29b3e441af6cb87e41fbfbdf5d5c15766940ee6261cedce5ca6215"
+      },
+      {
+        "run_id": "model-v1--risk_model_direct--eab67a345ec421733dbf",
+        "policy": "risk_model_direct",
+        "base_id": "heldout-v1--nested-secret-redaction--r3",
+        "task_id": "nested-secret-redaction",
+        "record_path": "runs/heldout-v1/model-policy-replays-v1/heldout-v1-model-policies-v1/runs/model-v1--risk_model_direct--eab67a345ec421733dbf/model-policy-replay.json",
+        "record_sha256": "sha256:2ce08c90756d640e692385a474946571b8912c1c2f7ec019e190be3b13f43b8b",
+        "workspace_path": "runs/heldout-v1/model-policy-replays-v1/heldout-v1-model-policies-v1/runs/model-v1--risk_model_direct--eab67a345ec421733dbf/workspace",
+        "workspace_sha256": "sha256:cd0dd7a88afc7ceb8f20c1defc2c3e431b71a90dcb69ba8389ec1783acc04236"
+      },
+      {
+        "run_id": "model-v1--risk_model_direct--efb0afecca17e0b55287",
+        "policy": "risk_model_direct",
+        "base_id": "heldout-v1--database-migration-lock-incident--r2",
+        "task_id": "database-migration-lock-incident",
+        "record_path": "runs/heldout-v1/model-policy-replays-v1/heldout-v1-model-policies-v1/runs/model-v1--risk_model_direct--efb0afecca17e0b55287/model-policy-replay.json",
+        "record_sha256": "sha256:8089b3ab3d97f1da5e2def5c54123e899b39d481aab958daacb0df686afcf884",
+        "workspace_path": "runs/heldout-v1/model-policy-replays-v1/heldout-v1-model-policies-v1/runs/model-v1--risk_model_direct--efb0afecca17e0b55287/workspace",
+        "workspace_sha256": "sha256:f721804add64d5a4a3adfc8689b2dd1bb4495ad4624683f221273c1f6cae0143"
+      },
+      {
+        "run_id": "model-v1--risk_model_direct--ffbd5e060d600b179219",
+        "policy": "risk_model_direct",
+        "base_id": "heldout-v1--rollout-allocation-loader--r2",
+        "task_id": "rollout-allocation-loader",
+        "record_path": "runs/heldout-v1/model-policy-replays-v1/heldout-v1-model-policies-v1/runs/model-v1--risk_model_direct--ffbd5e060d600b179219/model-policy-replay.json",
+        "record_sha256": "sha256:dcf4c06ff9fc71de28ff1c60618642914c9da806d0a3d569e2ac60be1a0f6e04",
+        "workspace_path": "runs/heldout-v1/model-policy-replays-v1/heldout-v1-model-policies-v1/runs/model-v1--risk_model_direct--ffbd5e060d600b179219/workspace",
+        "workspace_sha256": "sha256:9afc212b73284e7e495eee96ca40f22bd4072c09c6be05356b17e2622bc60c04"
+      },
+      {
+        "run_id": "model-v1--verify_all--033fbff87dc469496f03",
+        "policy": "verify_all",
+        "base_id": "heldout-v1--database-migration-lock-incident--r1",
+        "task_id": "database-migration-lock-incident",
+        "record_path": "runs/heldout-v1/model-policy-replays-v1/heldout-v1-model-policies-v1/runs/model-v1--verify_all--033fbff87dc469496f03/model-policy-replay.json",
+        "record_sha256": "sha256:a8969c48bf367e010fff08b09f4a5a938969a44fefa2cb373d8ced1591cf4da2",
+        "workspace_path": "runs/heldout-v1/model-policy-replays-v1/heldout-v1-model-policies-v1/runs/model-v1--verify_all--033fbff87dc469496f03/workspace",
+        "workspace_sha256": "sha256:a4909856015b2c49914a03f2398f25e382659d8135e69ba7207bd073f7c436f6"
+      },
+      {
+        "run_id": "model-v1--verify_all--04228e7d5493bec3fa94",
+        "policy": "verify_all",
+        "base_id": "heldout-v1--regional-tax-table-loader--r2",
+        "task_id": "regional-tax-table-loader",
+        "record_path": "runs/heldout-v1/model-policy-replays-v1/heldout-v1-model-policies-v1/runs/model-v1--verify_all--04228e7d5493bec3fa94/model-policy-replay.json",
+        "record_sha256": "sha256:db774be07f6ad4d471d456521dea784493311fb7ea1d4f3246689f2bb1598b30",
+        "workspace_path": "runs/heldout-v1/model-policy-replays-v1/heldout-v1-model-policies-v1/runs/model-v1--verify_all--04228e7d5493bec3fa94/workspace",
+        "workspace_sha256": "sha256:85129fe32d4fb255d1f273a49dbfd13603cf305dd40dc238193835c069842cc8"
+      },
+      {
+        "run_id": "model-v1--verify_all--13884efd5e07e194b20c",
+        "policy": "verify_all",
+        "base_id": "heldout-v1--rollout-allocation-loader--r3",
+        "task_id": "rollout-allocation-loader",
+        "record_path": "runs/heldout-v1/model-policy-replays-v1/heldout-v1-model-policies-v1/runs/model-v1--verify_all--13884efd5e07e194b20c/model-policy-replay.json",
+        "record_sha256": "sha256:89c5aec745dad829c24758e0a61976c8347087ee3d93217148717e101e9e6a21",
+        "workspace_path": "runs/heldout-v1/model-policy-replays-v1/heldout-v1-model-policies-v1/runs/model-v1--verify_all--13884efd5e07e194b20c/workspace",
+        "workspace_sha256": "sha256:4ed35993214535dac011f21006663c10e63eaf489948c08cc80ab0b16ecd9c3c"
+      },
+      {
+        "run_id": "model-v1--verify_all--27900caf25a0a3bd6c65",
+        "policy": "verify_all",
+        "base_id": "heldout-v1--cache-key-collision-incident--r2",
+        "task_id": "cache-key-collision-incident",
+        "record_path": "runs/heldout-v1/model-policy-replays-v1/heldout-v1-model-policies-v1/runs/model-v1--verify_all--27900caf25a0a3bd6c65/model-policy-replay.json",
+        "record_sha256": "sha256:cd0d83a20688723e22bc43193effe7a68cca4d065e26ce647c31c3a608dd2333",
+        "workspace_path": "runs/heldout-v1/model-policy-replays-v1/heldout-v1-model-policies-v1/runs/model-v1--verify_all--27900caf25a0a3bd6c65/workspace",
+        "workspace_sha256": "sha256:63bc4fed1612ab7a5abd052578013b4d8652ae11857498a7ab328a1466e85da3"
+      },
+      {
+        "run_id": "model-v1--verify_all--379cf125b97e80a683af",
+        "policy": "verify_all",
+        "base_id": "heldout-v1--rollout-allocation-loader--r2",
+        "task_id": "rollout-allocation-loader",
+        "record_path": "runs/heldout-v1/model-policy-replays-v1/heldout-v1-model-policies-v1/runs/model-v1--verify_all--379cf125b97e80a683af/model-policy-replay.json",
+        "record_sha256": "sha256:1cec6f5eaf0a34db805b691197fdade1f91525909663aa91c3d0b57cae1ce36a",
+        "workspace_path": "runs/heldout-v1/model-policy-replays-v1/heldout-v1-model-policies-v1/runs/model-v1--verify_all--379cf125b97e80a683af/workspace",
+        "workspace_sha256": "sha256:95ba02b201a02fdfd85f6bbc901b5b42b2e1a2e279f92453635d9272f1f5c126"
+      },
+      {
+        "run_id": "model-v1--verify_all--3ec07fd1860373d67b4d",
+        "policy": "verify_all",
+        "base_id": "heldout-v1--csv-formula-neutralization--r1",
+        "task_id": "csv-formula-neutralization",
+        "record_path": "runs/heldout-v1/model-policy-replays-v1/heldout-v1-model-policies-v1/runs/model-v1--verify_all--3ec07fd1860373d67b4d/model-policy-replay.json",
+        "record_sha256": "sha256:645d57a9a51fb13f4c47e5d6fe88ec014bc26ebfaa9ae1db27ee8e67ed91a2a9",
+        "workspace_path": "runs/heldout-v1/model-policy-replays-v1/heldout-v1-model-policies-v1/runs/model-v1--verify_all--3ec07fd1860373d67b4d/workspace",
+        "workspace_sha256": "sha256:078fb3d7b25001a82ff370ef0ce9eddc04302ac0be56992cdf8eea037f27c13a"
+      },
+      {
+        "run_id": "model-v1--verify_all--4720b9ce25d86e1b0e33",
+        "policy": "verify_all",
+        "base_id": "heldout-v1--rollout-allocation-loader--r1",
+        "task_id": "rollout-allocation-loader",
+        "record_path": "runs/heldout-v1/model-policy-replays-v1/heldout-v1-model-policies-v1/runs/model-v1--verify_all--4720b9ce25d86e1b0e33/model-policy-replay.json",
+        "record_sha256": "sha256:8939bbed8872b1785eefe5e9243fec9ee78273e19e1463a48154a59872ad5d9b",
+        "workspace_path": "runs/heldout-v1/model-policy-replays-v1/heldout-v1-model-policies-v1/runs/model-v1--verify_all--4720b9ce25d86e1b0e33/workspace",
+        "workspace_sha256": "sha256:16590267bd26f9560418fd6907c37d3aca4f7748e1abceb85902fea83a8bce2e"
+      },
+      {
+        "run_id": "model-v1--verify_all--576aec05befea1c5fc6d",
+        "policy": "verify_all",
+        "base_id": "heldout-v1--certificate-rollover-incident--r2",
+        "task_id": "certificate-rollover-incident",
+        "record_path": "runs/heldout-v1/model-policy-replays-v1/heldout-v1-model-policies-v1/runs/model-v1--verify_all--576aec05befea1c5fc6d/model-policy-replay.json",
+        "record_sha256": "sha256:72419659fbeb79b6ef3c407e12b82311f19861fb437f5d256ac6c2306d1dc012",
+        "workspace_path": "runs/heldout-v1/model-policy-replays-v1/heldout-v1-model-policies-v1/runs/model-v1--verify_all--576aec05befea1c5fc6d/workspace",
+        "workspace_sha256": "sha256:13cc00816758fe580a0989c0d24ca96cd6829fa63bc667f894a2cf8caa1eb4da"
+      },
+      {
+        "run_id": "model-v1--verify_all--5c59b97dc3eea12b505e",
+        "policy": "verify_all",
+        "base_id": "heldout-v1--database-migration-lock-incident--r3",
+        "task_id": "database-migration-lock-incident",
+        "record_path": "runs/heldout-v1/model-policy-replays-v1/heldout-v1-model-policies-v1/runs/model-v1--verify_all--5c59b97dc3eea12b505e/model-policy-replay.json",
+        "record_sha256": "sha256:af4734c11bcd9e2ad91ede02c2696fb7530192090f8f5ffca5b849a19ccb6102",
+        "workspace_path": "runs/heldout-v1/model-policy-replays-v1/heldout-v1-model-policies-v1/runs/model-v1--verify_all--5c59b97dc3eea12b505e/workspace",
+        "workspace_sha256": "sha256:d8d40604a65e174bd2bd24a2f10d7c95f60176a5b852fbd81a0bab47dc8a5cd6"
+      },
+      {
+        "run_id": "model-v1--verify_all--675f55fdfeeb4a71191a",
+        "policy": "verify_all",
+        "base_id": "heldout-v1--certificate-rollover-incident--r1",
+        "task_id": "certificate-rollover-incident",
+        "record_path": "runs/heldout-v1/model-policy-replays-v1/heldout-v1-model-policies-v1/runs/model-v1--verify_all--675f55fdfeeb4a71191a/model-policy-replay.json",
+        "record_sha256": "sha256:0bbc14021d8a16756ed178a4fae2bd238de16e526681e05a6d490fa04cbc4241",
+        "workspace_path": "runs/heldout-v1/model-policy-replays-v1/heldout-v1-model-policies-v1/runs/model-v1--verify_all--675f55fdfeeb4a71191a/workspace",
+        "workspace_sha256": "sha256:0a04675310947020e215c04c5bb977dc1762e355bbb69905749dfd7c8cc44c45"
+      },
+      {
+        "run_id": "model-v1--verify_all--68b4d4dc2369d027a82b",
+        "policy": "verify_all",
+        "base_id": "heldout-v1--nested-secret-redaction--r2",
+        "task_id": "nested-secret-redaction",
+        "record_path": "runs/heldout-v1/model-policy-replays-v1/heldout-v1-model-policies-v1/runs/model-v1--verify_all--68b4d4dc2369d027a82b/model-policy-replay.json",
+        "record_sha256": "sha256:97a653450f10c45ddf1a8cdc9167d889130ddd5914d145824c1bd4616775af0c",
+        "workspace_path": "runs/heldout-v1/model-policy-replays-v1/heldout-v1-model-policies-v1/runs/model-v1--verify_all--68b4d4dc2369d027a82b/workspace",
+        "workspace_sha256": "sha256:73f645dee8c80f789f11265fc6b5cf9c9fa331aef705f69d80c02d5e988dc9f9"
+      },
+      {
+        "run_id": "model-v1--verify_all--7305504afb2972777fc9",
+        "policy": "verify_all",
+        "base_id": "heldout-v1--database-migration-lock-incident--r2",
+        "task_id": "database-migration-lock-incident",
+        "record_path": "runs/heldout-v1/model-policy-replays-v1/heldout-v1-model-policies-v1/runs/model-v1--verify_all--7305504afb2972777fc9/model-policy-replay.json",
+        "record_sha256": "sha256:d810e6c5bab3257bed32c822273826466522200e3093d7db9ce15f152fd7dbe2",
+        "workspace_path": "runs/heldout-v1/model-policy-replays-v1/heldout-v1-model-policies-v1/runs/model-v1--verify_all--7305504afb2972777fc9/workspace",
+        "workspace_sha256": "sha256:0628da0d9055c26e0065b9eabf220da5c86c6981990e3fdfea07e7a4350a3ad3"
+      },
+      {
+        "run_id": "model-v1--verify_all--79b9895d3e7730e286f6",
+        "policy": "verify_all",
+        "base_id": "heldout-v1--unicode-account-identifier--r1",
+        "task_id": "unicode-account-identifier",
+        "record_path": "runs/heldout-v1/model-policy-replays-v1/heldout-v1-model-policies-v1/runs/model-v1--verify_all--79b9895d3e7730e286f6/model-policy-replay.json",
+        "record_sha256": "sha256:ca2e52b13d15608291ceff621279ef097038481f4d64481f4ab4d9c2516ef944",
+        "workspace_path": "runs/heldout-v1/model-policy-replays-v1/heldout-v1-model-policies-v1/runs/model-v1--verify_all--79b9895d3e7730e286f6/workspace",
+        "workspace_sha256": "sha256:859ea009873b64a92c87d318167c2e10375ca1b7b75416cbd0de5c0dea8909c2"
+      },
+      {
+        "run_id": "model-v1--verify_all--79ccaa93cd7d7be10ba6",
+        "policy": "verify_all",
+        "base_id": "heldout-v1--token-bucket-refill--r2",
+        "task_id": "token-bucket-refill",
+        "record_path": "runs/heldout-v1/model-policy-replays-v1/heldout-v1-model-policies-v1/runs/model-v1--verify_all--79ccaa93cd7d7be10ba6/model-policy-replay.json",
+        "record_sha256": "sha256:ed82d6303aca7ffc2932e3bd74473c4c9819a9cab1752d46a8f1b46955ef0a09",
+        "workspace_path": "runs/heldout-v1/model-policy-replays-v1/heldout-v1-model-policies-v1/runs/model-v1--verify_all--79ccaa93cd7d7be10ba6/workspace",
+        "workspace_sha256": "sha256:6ba2678b0411d4269f17f6a961eb66ad9df466630f6a9baf9daef7347a2c4b6f"
+      },
+      {
+        "run_id": "model-v1--verify_all--80cd4cb77964f3100cd7",
+        "policy": "verify_all",
+        "base_id": "heldout-v1--nested-secret-redaction--r1",
+        "task_id": "nested-secret-redaction",
+        "record_path": "runs/heldout-v1/model-policy-replays-v1/heldout-v1-model-policies-v1/runs/model-v1--verify_all--80cd4cb77964f3100cd7/model-policy-replay.json",
+        "record_sha256": "sha256:223e82fb855da79f834ba2df69df3cf75729f796fd7c11413caf030a3d83210b",
+        "workspace_path": "runs/heldout-v1/model-policy-replays-v1/heldout-v1-model-policies-v1/runs/model-v1--verify_all--80cd4cb77964f3100cd7/workspace",
+        "workspace_sha256": "sha256:dfa9c8070a802135332b36ea4512725faf39f6959e520e5477ab18dc3419e37e"
+      },
+      {
+        "run_id": "model-v1--verify_all--975d041d34dc7fb5a6de",
+        "policy": "verify_all",
+        "base_id": "heldout-v1--nested-secret-redaction--r3",
+        "task_id": "nested-secret-redaction",
+        "record_path": "runs/heldout-v1/model-policy-replays-v1/heldout-v1-model-policies-v1/runs/model-v1--verify_all--975d041d34dc7fb5a6de/model-policy-replay.json",
+        "record_sha256": "sha256:68769ecc4480100edfd571d15591308e34c8e3da412c8a5a99403dd55a237898",
+        "workspace_path": "runs/heldout-v1/model-policy-replays-v1/heldout-v1-model-policies-v1/runs/model-v1--verify_all--975d041d34dc7fb5a6de/workspace",
+        "workspace_sha256": "sha256:cd0dd7a88afc7ceb8f20c1defc2c3e431b71a90dcb69ba8389ec1783acc04236"
+      },
+      {
+        "run_id": "model-v1--verify_all--a11f56f8986de9a6d1cb",
+        "policy": "verify_all",
+        "base_id": "heldout-v1--token-bucket-refill--r3",
+        "task_id": "token-bucket-refill",
+        "record_path": "runs/heldout-v1/model-policy-replays-v1/heldout-v1-model-policies-v1/runs/model-v1--verify_all--a11f56f8986de9a6d1cb/model-policy-replay.json",
+        "record_sha256": "sha256:4e27befee4572519bd825e80620ad1c38ac94a3d4c4a2ec067346f436b1a4000",
+        "workspace_path": "runs/heldout-v1/model-policy-replays-v1/heldout-v1-model-policies-v1/runs/model-v1--verify_all--a11f56f8986de9a6d1cb/workspace",
+        "workspace_sha256": "sha256:6144a344a43fbeec5013f4cd7b7697e3417fe5eeaa834691ec0de03cd8384ab7"
+      },
+      {
+        "run_id": "model-v1--verify_all--a51770e8f8d1b72d97d4",
+        "policy": "verify_all",
+        "base_id": "heldout-v1--unicode-account-identifier--r3",
+        "task_id": "unicode-account-identifier",
+        "record_path": "runs/heldout-v1/model-policy-replays-v1/heldout-v1-model-policies-v1/runs/model-v1--verify_all--a51770e8f8d1b72d97d4/model-policy-replay.json",
+        "record_sha256": "sha256:147a77b888864abc9f1826db4d30ce152d6fb43603eff48b973abbcef05a538d",
+        "workspace_path": "runs/heldout-v1/model-policy-replays-v1/heldout-v1-model-policies-v1/runs/model-v1--verify_all--a51770e8f8d1b72d97d4/workspace",
+        "workspace_sha256": "sha256:b569b4b77dced41d15fce951c5d46ac19c00807b32e317729c36f3b03eab12df"
+      },
+      {
+        "run_id": "model-v1--verify_all--a5337211e049f954af61",
+        "policy": "verify_all",
+        "base_id": "heldout-v1--campaign-template-bundle--r1",
+        "task_id": "campaign-template-bundle",
+        "record_path": "runs/heldout-v1/model-policy-replays-v1/heldout-v1-model-policies-v1/runs/model-v1--verify_all--a5337211e049f954af61/model-policy-replay.json",
+        "record_sha256": "sha256:54bb979d1fd4a979f4053613437901a7cba9918da031a42b8bd8f5aeb067ee29",
+        "workspace_path": "runs/heldout-v1/model-policy-replays-v1/heldout-v1-model-policies-v1/runs/model-v1--verify_all--a5337211e049f954af61/workspace",
+        "workspace_sha256": "sha256:3e3fc46b836e68dcbb6143dae5bc4ba5c79b26d2204190ebb80b22ce403f10e3"
+      },
+      {
+        "run_id": "model-v1--verify_all--ac5c209a88f5838a588d",
+        "policy": "verify_all",
+        "base_id": "heldout-v1--cache-key-collision-incident--r1",
+        "task_id": "cache-key-collision-incident",
+        "record_path": "runs/heldout-v1/model-policy-replays-v1/heldout-v1-model-policies-v1/runs/model-v1--verify_all--ac5c209a88f5838a588d/model-policy-replay.json",
+        "record_sha256": "sha256:d393309a002a84acab2631ddc1654003558f6522aa4d2a0f350a8c27590d995a",
+        "workspace_path": "runs/heldout-v1/model-policy-replays-v1/heldout-v1-model-policies-v1/runs/model-v1--verify_all--ac5c209a88f5838a588d/workspace",
+        "workspace_sha256": "sha256:4cb8fcb872e3b0d2d15f6739a83bdbd5b2a15680215ab6846d715b124cc9577c"
+      },
+      {
+        "run_id": "model-v1--verify_all--b08a04521233b52155bc",
+        "policy": "verify_all",
+        "base_id": "heldout-v1--regional-tax-table-loader--r1",
+        "task_id": "regional-tax-table-loader",
+        "record_path": "runs/heldout-v1/model-policy-replays-v1/heldout-v1-model-policies-v1/runs/model-v1--verify_all--b08a04521233b52155bc/model-policy-replay.json",
+        "record_sha256": "sha256:214a15961f0f2d6cff3fd147b161214d343624e0c4a6ece47034b25467e5d72b",
+        "workspace_path": "runs/heldout-v1/model-policy-replays-v1/heldout-v1-model-policies-v1/runs/model-v1--verify_all--b08a04521233b52155bc/workspace",
+        "workspace_sha256": "sha256:68c0817d0403440465372f211e1c95686b7c95961798a99131a07344656e6148"
+      },
+      {
+        "run_id": "model-v1--verify_all--bbd4fa9b02cf0fb77583",
+        "policy": "verify_all",
+        "base_id": "heldout-v1--cache-key-collision-incident--r3",
+        "task_id": "cache-key-collision-incident",
+        "record_path": "runs/heldout-v1/model-policy-replays-v1/heldout-v1-model-policies-v1/runs/model-v1--verify_all--bbd4fa9b02cf0fb77583/model-policy-replay.json",
+        "record_sha256": "sha256:da7c3a568b31e581f78ebb1b1a9c8c21eb07d87f7663d3233e5055220814e4b8",
+        "workspace_path": "runs/heldout-v1/model-policy-replays-v1/heldout-v1-model-policies-v1/runs/model-v1--verify_all--bbd4fa9b02cf0fb77583/workspace",
+        "workspace_sha256": "sha256:b2cd786e0ce2e59c0b17bb7ad671ee04297167138d5e3bc64572bd19e90eb8a7"
+      },
+      {
+        "run_id": "model-v1--verify_all--c3ec7954340ebf9eb3c6",
+        "policy": "verify_all",
+        "base_id": "heldout-v1--campaign-template-bundle--r3",
+        "task_id": "campaign-template-bundle",
+        "record_path": "runs/heldout-v1/model-policy-replays-v1/heldout-v1-model-policies-v1/runs/model-v1--verify_all--c3ec7954340ebf9eb3c6/model-policy-replay.json",
+        "record_sha256": "sha256:98c26825693017b15812587a63448f2388e74695e883c86db1d51bd0e7c88efa",
+        "workspace_path": "runs/heldout-v1/model-policy-replays-v1/heldout-v1-model-policies-v1/runs/model-v1--verify_all--c3ec7954340ebf9eb3c6/workspace",
+        "workspace_sha256": "sha256:faea5ea9169d2605587dbb57af2bc6834f659fe9f1b62fc6268e1130a7d5ab01"
+      },
+      {
+        "run_id": "model-v1--verify_all--c6deebf13e1f8758eb8a",
+        "policy": "verify_all",
+        "base_id": "heldout-v1--regional-tax-table-loader--r3",
+        "task_id": "regional-tax-table-loader",
+        "record_path": "runs/heldout-v1/model-policy-replays-v1/heldout-v1-model-policies-v1/runs/model-v1--verify_all--c6deebf13e1f8758eb8a/model-policy-replay.json",
+        "record_sha256": "sha256:e32f98f85aef0b29ebb373045a2397c08e18a8b22c063f10acc56c9cfb5236d2",
+        "workspace_path": "runs/heldout-v1/model-policy-replays-v1/heldout-v1-model-policies-v1/runs/model-v1--verify_all--c6deebf13e1f8758eb8a/workspace",
+        "workspace_sha256": "sha256:d22a2f3d6325c3d8e7d8ba17ba24f8a4e3360426ef84fa19b8205ba4baddc06e"
+      },
+      {
+        "run_id": "model-v1--verify_all--ca83ac355c7c1a447f53",
+        "policy": "verify_all",
+        "base_id": "heldout-v1--token-bucket-refill--r1",
+        "task_id": "token-bucket-refill",
+        "record_path": "runs/heldout-v1/model-policy-replays-v1/heldout-v1-model-policies-v1/runs/model-v1--verify_all--ca83ac355c7c1a447f53/model-policy-replay.json",
+        "record_sha256": "sha256:8b5a477f6c5b389655988a3e76bb913bfe92f2c7190fae7016973b7d726cf700",
+        "workspace_path": "runs/heldout-v1/model-policy-replays-v1/heldout-v1-model-policies-v1/runs/model-v1--verify_all--ca83ac355c7c1a447f53/workspace",
+        "workspace_sha256": "sha256:36c2a8a514e0c7118d571116e95d0fc90908545d1286691e2b91a9f79a40c987"
+      },
+      {
+        "run_id": "model-v1--verify_all--e05fb17ba2ffac71af59",
+        "policy": "verify_all",
+        "base_id": "heldout-v1--certificate-rollover-incident--r3",
+        "task_id": "certificate-rollover-incident",
+        "record_path": "runs/heldout-v1/model-policy-replays-v1/heldout-v1-model-policies-v1/runs/model-v1--verify_all--e05fb17ba2ffac71af59/model-policy-replay.json",
+        "record_sha256": "sha256:8f41c3d3826372ea79be9c68a5b6185ce91225f99391c00500bd0bc66f03775b",
+        "workspace_path": "runs/heldout-v1/model-policy-replays-v1/heldout-v1-model-policies-v1/runs/model-v1--verify_all--e05fb17ba2ffac71af59/workspace",
+        "workspace_sha256": "sha256:729bbc7155e426e8a53799a68fe6e517703cf2221251860bb3a7fdb2e48a3f3d"
+      },
+      {
+        "run_id": "model-v1--verify_all--e9cece1a138cc4b2ec49",
+        "policy": "verify_all",
+        "base_id": "heldout-v1--campaign-template-bundle--r2",
+        "task_id": "campaign-template-bundle",
+        "record_path": "runs/heldout-v1/model-policy-replays-v1/heldout-v1-model-policies-v1/runs/model-v1--verify_all--e9cece1a138cc4b2ec49/model-policy-replay.json",
+        "record_sha256": "sha256:439749f59044f3dcc641edecb051c91510d0ac76206af610d5ce021b4140db43",
+        "workspace_path": "runs/heldout-v1/model-policy-replays-v1/heldout-v1-model-policies-v1/runs/model-v1--verify_all--e9cece1a138cc4b2ec49/workspace",
+        "workspace_sha256": "sha256:a658c61dce2e8f49c460889b1476b5f3efc64f8b96a09a6e97a15c82791dd4b2"
+      },
+      {
+        "run_id": "model-v1--verify_all--ed39de92a163cc707474",
+        "policy": "verify_all",
+        "base_id": "heldout-v1--csv-formula-neutralization--r3",
+        "task_id": "csv-formula-neutralization",
+        "record_path": "runs/heldout-v1/model-policy-replays-v1/heldout-v1-model-policies-v1/runs/model-v1--verify_all--ed39de92a163cc707474/model-policy-replay.json",
+        "record_sha256": "sha256:387f4e390c476e43776f72e8ded184e82f69e3b13a599fd80393af05ad4f26c8",
+        "workspace_path": "runs/heldout-v1/model-policy-replays-v1/heldout-v1-model-policies-v1/runs/model-v1--verify_all--ed39de92a163cc707474/workspace",
+        "workspace_sha256": "sha256:3deb7751324887f1d226397935a3719a37fb4c19f37427db2631c703e6f48a89"
+      },
+      {
+        "run_id": "model-v1--verify_all--f0fc927cbeebccecee3e",
+        "policy": "verify_all",
+        "base_id": "heldout-v1--unicode-account-identifier--r2",
+        "task_id": "unicode-account-identifier",
+        "record_path": "runs/heldout-v1/model-policy-replays-v1/heldout-v1-model-policies-v1/runs/model-v1--verify_all--f0fc927cbeebccecee3e/model-policy-replay.json",
+        "record_sha256": "sha256:010f2093bd9a33ec37a257b7b76fa4fac7862e3233c1fb5e240d0d0cfe563987",
+        "workspace_path": "runs/heldout-v1/model-policy-replays-v1/heldout-v1-model-policies-v1/runs/model-v1--verify_all--f0fc927cbeebccecee3e/workspace",
+        "workspace_sha256": "sha256:6e8bc136c1ea697c044de1b12ba207e1f664009ea867773ddfed73efabda6dbb"
+      },
+      {
+        "run_id": "model-v1--verify_all--f2fb56819b67eb366b31",
+        "policy": "verify_all",
+        "base_id": "heldout-v1--csv-formula-neutralization--r2",
+        "task_id": "csv-formula-neutralization",
+        "record_path": "runs/heldout-v1/model-policy-replays-v1/heldout-v1-model-policies-v1/runs/model-v1--verify_all--f2fb56819b67eb366b31/model-policy-replay.json",
+        "record_sha256": "sha256:3c2426187752b22e1af0310fa6e36a89c6ffdbfd135efb41a45e95766e20c6dd",
+        "workspace_path": "runs/heldout-v1/model-policy-replays-v1/heldout-v1-model-policies-v1/runs/model-v1--verify_all--f2fb56819b67eb366b31/workspace",
+        "workspace_sha256": "sha256:83d28f24189830766c03f8c04b26e1dd08ac12b59f40c8586b30277ea6424299"
+      }
+    ]
+  },
+  "evaluation_contract": {
+    "same_private_grader_version_for_every_target": true,
+    "grade_base_targets_or_join_the_existing_sealed_base_labels": true,
+    "grade_every_replay_workspace": true,
+    "repeatability_and_integrity_checks_required": true,
+    "do_not_modify_target_workspaces": true,
+    "do_not_return_grader_source_known_good_artifacts_or_hidden_values": true,
+    "private_inputs_and_outcomes_must_remain_outside_public_repository": true,
+    "accept_all_outcome_source": "matching sealed base outcome",
+    "probe_all_outcome_source": "matching sealed base outcome; replay made no workspace change"
+  },
+  "required_result_fields": {
+    "base_outcome": [
+      "base_id",
+      "workspace_sha256",
+      "hidden_task_passed",
+      "hard_safety_violation"
+    ],
+    "replay_outcome": [
+      "run_id",
+      "record_sha256",
+      "workspace_sha256",
+      "hidden_task_passed",
+      "hard_safety_violation"
+    ]
+  },
+  "hidden_inputs_read_by_request_builder": false,
+  "content_sha256": "sha256:84311977af6e08884b7ab0bfbe83153237a9a2ed0a4d92cab19feeb3fc906132"
+}
