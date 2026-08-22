@@ -15,6 +15,7 @@ The project asks one practical question:
 - [V1 preservation boundary](docs/v2/v1-preservation-boundary.md)
 - [V2 Stage A protocol and mechanism gate](docs/v2/stage-a-protocol-v1.md)
 - [V2 machine-readable preregistration](experiments/configs/v2-stage-a-preregistration-v1.json)
+- [V2 development corpus contract](docs/v2/development-corpus-contract-v1.md)
 
 - [Design brief](docs/design-brief.md)
 - [Metrics and evaluation contract](docs/metrics.md)
