@@ -8,7 +8,7 @@ The project asks one practical question:
 
 ## Current status
 
-**Phase 9 model-policy replay preflight — 120 cells and 57 grader-free model calls frozen**
+**Phase 9 model-policy replay complete — 120/120 cells sealed before hidden evaluation**
 
 - [Design brief](docs/design-brief.md)
 - [Metrics and evaluation contract](docs/metrics.md)
@@ -35,6 +35,8 @@ The project asks one practical question:
 - [Held-out public-policy replay freeze](experiments/configs/heldout-public-policy-replay-freeze-v1.json)
 - [Held-out public-policy replay report](docs/heldout-public-policy-replay-v1.md)
 - [Held-out model-policy replay freeze](experiments/configs/heldout-model-policy-replay-freeze-v1.json)
+- [Held-out model-policy replay report](docs/heldout-model-policy-replay-v1.md)
+- [Held-out model-policy result freeze](experiments/configs/heldout-model-policy-result-freeze-v1.json)
 
 Phase 2 infrastructure is now present in `src/forgebench`: copy-isolated run
 workspaces, a typed tool gateway, a provider-neutral model adapter, and
@@ -170,6 +172,14 @@ now freezes public-only routing across a base collection. Random-k receives the
 same number of model calls as Risk-Hierarchical within each task-family stratum,
 using a deterministic seed-derived rank. Each replay validates the manifest
 hash, task version, base hash, and expected probe/model routing.
+
+The [held-out model-policy replay](docs/heldout-model-policy-replay-v1.md) is
+now complete: 120/120 policy/base cells, 57 model calls, and 9 probes were
+sealed without reading hidden labels or invoking the private grader. All record
+and workspace hashes verified. Verify-All introduced one visible protected-file
+regression, leaving 119/120 public completion gates passing after replay. The
+next gate is an external sealed-label join; no reliability winner is claimed
+before that evaluation.
 
 ## Local verification
 
