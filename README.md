@@ -8,7 +8,7 @@ The project asks one practical question:
 
 ## Current status
 
-**Phase 9 held-out attempt 2 recovery — storage collision isolated before resuming the frozen matrix**
+**Phase 9 held-out base population complete — 30/30 publicly eligible bases sealed for out-of-band grading**
 
 - [Design brief](docs/design-brief.md)
 - [Metrics and evaluation contract](docs/metrics.md)
@@ -30,6 +30,7 @@ The project asks one practical question:
 - [Held-out base-generation attempt-2 freeze](experiments/configs/heldout-base-generation-freeze-v2.json)
 - [Held-out attempt-2 recovery freeze](experiments/configs/heldout-attempt-2-recovery-freeze-v1.json)
 - [Held-out base-generation attempt 1](docs/heldout-base-generation-attempt-1.md)
+- [Held-out base-generation attempt 2](docs/heldout-base-generation-attempt-2.md)
 
 Phase 2 infrastructure is now present in `src/forgebench`: copy-isolated run
 workspaces, a typed tool gateway, a provider-neutral model adapter, and
