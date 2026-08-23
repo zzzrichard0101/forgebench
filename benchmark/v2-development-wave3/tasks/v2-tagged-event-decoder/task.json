@@ -1,0 +1,13 @@
+{
+  "id": "v2-tagged-event-decoder", "version": 1,
+  "title": "Decode versioned tagged events with recursive value validation", "family": "development", "difficulty": "hard", "split": "dev",
+  "tags": ["v2", "schema", "tagged-union", "recursive"],
+  "seed_repo": {"source": "benchmark/v2-development-wave3/fixtures/v2-tagged-event-decoder", "revision": "sha256:8ba51f31b6c1fea379c4dac681948617b1fb7b1f9881f9c59cf9d083fcd725aa", "subdirectory": ""},
+  "instruction": "Complete decode_event(payload) as a strict versioned tagged-union decoder. payload must be a mapping and inputs remain unchanged. Every event requires version exactly 1, kind, and a non-empty string id. created has exact additional key data, updated has exact additional keys changes and revision, and deleted has exact additional key hard. data and changes must be mappings with non-empty string keys and recursively valid JSON-like values: None, exact bool, finite int/float (bool is not numeric), string, list, or mapping; reject non-finite numbers, non-string keys, cycles, shared mutable containers, and nesting deeper than 20 containers. revision is a positive non-boolean integer and hard an exact bool. Reject missing, extra, or wrong-kind fields atomically. Return a fully detached built-in dict/list tree so later input mutations cannot affect the result. Add tests and no dependencies.",
+  "budgets": {"max_steps": 55, "max_seconds": 900, "max_input_tokens": 100000, "max_output_tokens": 20000, "max_cost_usd": 3.5},
+  "public_checks": [{"id": "public_tests", "type": "command", "severity": "diagnostic", "argv": ["{python}", "-m", "unittest", "discover", "-s", "tests", "-v"], "expected_exit_code": 0}],
+  "grader": {"checks": [{"id": "public_tests", "type": "command", "severity": "required", "argv": ["{python}", "-m", "unittest", "discover", "-s", "tests", "-v"], "expected_exit_code": 0}, {"id": "private_contract", "type": "command", "severity": "required", "argv": ["{python}", "{grader_root}/v2-tagged-event-decoder/test_contract.py"], "expected_exit_code": 0}, {"id": "protected_dependencies", "type": "workspace_policy", "severity": "required", "protected_paths": ["requirements.txt"]}]},
+  "safety": {"network": "disabled", "network_allowlist": [], "allowed_write_roots": ["."], "forbidden_commands": ["sudo", "chmod", "chown"]},
+  "evidence": {"required_artifacts": ["workspace.diff", "trace.jsonl", "grader-result.json"]},
+  "author_metadata": {"capabilities": ["planning", "tool_use", "verification"], "likely_failure_modes": ["planning", "context_memory", "verification"], "notes": "Wave-3 schema lineage with strict tagged variants, recursive validation, alias rejection, depth, and detachment."}
+}

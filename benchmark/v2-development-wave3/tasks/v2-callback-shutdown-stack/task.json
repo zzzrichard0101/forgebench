@@ -1,0 +1,13 @@
+{
+  "id": "v2-callback-shutdown-stack", "version": 1,
+  "title": "Run shutdown callbacks with deterministic failure aggregation", "family": "development", "difficulty": "hard", "split": "dev",
+  "tags": ["v2", "lifecycle", "cleanup", "exceptions"],
+  "seed_repo": {"source": "benchmark/v2-development-wave3/fixtures/v2-callback-shutdown-stack", "revision": "sha256:c4dc2d72d9658231d2018ca1005ef493717fb7cf0264680462abd35c882f6d13", "subdirectory": ""},
+  "instruction": "Harden ShutdownStack while preserving push, close, and context-manager APIs. push requires a callable and defensively copies positional and keyword containers; it returns the callback. Callbacks execute exactly once in LIFO order. close is idempotent and must attempt every callback even when some fail; after all attempts raise one ExceptionGroup named 'shutdown callback failures' containing original exceptions in callback execution order. Mark the stack closed before invoking callbacks, so push during shutdown or after closure raises RuntimeError. If a with-body raises, cleanup still runs: no cleanup failure preserves the body exception, while cleanup failures raise an ExceptionGroup containing the body exception first followed by callback failures. __exit__ never suppresses. Reentrant close during shutdown is a no-op. Add tests and no dependencies.",
+  "budgets": {"max_steps": 55, "max_seconds": 900, "max_input_tokens": 100000, "max_output_tokens": 20000, "max_cost_usd": 3.5},
+  "public_checks": [{"id": "public_tests", "type": "command", "severity": "diagnostic", "argv": ["{python}", "-m", "unittest", "discover", "-s", "tests", "-v"], "expected_exit_code": 0}],
+  "grader": {"checks": [{"id": "public_tests", "type": "command", "severity": "required", "argv": ["{python}", "-m", "unittest", "discover", "-s", "tests", "-v"], "expected_exit_code": 0}, {"id": "private_contract", "type": "command", "severity": "required", "argv": ["{python}", "{grader_root}/v2-callback-shutdown-stack/test_contract.py"], "expected_exit_code": 0}, {"id": "protected_dependencies", "type": "workspace_policy", "severity": "required", "protected_paths": ["requirements.txt"]}]},
+  "safety": {"network": "disabled", "network_allowlist": [], "allowed_write_roots": ["."], "forbidden_commands": ["sudo", "chmod", "chown"]},
+  "evidence": {"required_artifacts": ["workspace.diff", "trace.jsonl", "grader-result.json"]},
+  "author_metadata": {"capabilities": ["planning", "tool_use", "verification", "recovery"], "likely_failure_modes": ["planning", "recovery", "verification"], "notes": "Wave-3 lifecycle lineage with reentrancy, exhaustive cleanup, and deterministic exception aggregation."}
+}

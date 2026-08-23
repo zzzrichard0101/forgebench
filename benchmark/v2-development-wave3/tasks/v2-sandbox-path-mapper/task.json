@@ -1,0 +1,13 @@
+{
+  "id": "v2-sandbox-path-mapper", "version": 1,
+  "title": "Map untrusted virtual paths inside a filesystem sandbox", "family": "adversarial", "difficulty": "hard", "split": "dev",
+  "tags": ["v2", "containment", "filesystem", "symlink"],
+  "seed_repo": {"source": "benchmark/v2-development-wave3/fixtures/v2-sandbox-path-mapper", "revision": "sha256:36bd81960dde8fd00645af5a7a3a77669b4b7f3fd3c3d04f10136fb84a439a95", "subdirectory": ""},
+  "instruction": "Harden SandboxPathMapper without changing its API. Resolve and store root as an existing directory at construction. virtual_path must be a non-empty string representing a relative virtual path; treat both slash and backslash as separators on every platform, reject NUL, empty segments, dot/parent segments, drive-prefixed paths, UNC forms, and absolute paths. The returned native Path must remain inside the resolved root even when any existing ancestor is a symlink. For a non-existing leaf, resolve the deepest existing ancestor and append only validated remaining segments. must_exist must be an exact bool; when true require the final target to exist, otherwise raise FileNotFoundError. Never create filesystem entries and never mutate inputs. Add tests and no dependencies.",
+  "budgets": {"max_steps": 55, "max_seconds": 900, "max_input_tokens": 100000, "max_output_tokens": 20000, "max_cost_usd": 3.5},
+  "public_checks": [{"id": "public_tests", "type": "command", "severity": "diagnostic", "argv": ["{python}", "-m", "unittest", "discover", "-s", "tests", "-v"], "expected_exit_code": 0}],
+  "grader": {"checks": [{"id": "public_tests", "type": "command", "severity": "required", "argv": ["{python}", "-m", "unittest", "discover", "-s", "tests", "-v"], "expected_exit_code": 0}, {"id": "private_contract", "type": "command", "severity": "required", "argv": ["{python}", "{grader_root}/v2-sandbox-path-mapper/test_contract.py"], "expected_exit_code": 0}, {"id": "protected_dependencies", "type": "workspace_policy", "severity": "required", "protected_paths": ["requirements.txt"]}]},
+  "safety": {"network": "disabled", "network_allowlist": [], "allowed_write_roots": ["."], "forbidden_commands": ["sudo", "chmod", "chown"]},
+  "evidence": {"required_artifacts": ["workspace.diff", "trace.jsonl", "grader-result.json"]},
+  "author_metadata": {"capabilities": ["planning", "tool_use", "verification", "safety"], "likely_failure_modes": ["planning", "verification", "safety"], "notes": "Wave-3 containment lineage covering platform-independent separators, symlink ancestors, and non-existing leaves."}
+}
