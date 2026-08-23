@@ -1,0 +1,60 @@
+{
+  "schema_version": 1,
+  "report": "v2-screening-wave2-private-aggregate-v1",
+  "status": "sealed_population_insufficient",
+  "snapshot": "v2-dev-screening-wave2-bases-v1",
+  "wave2_execution": {
+    "frozen_slots": 18,
+    "eligible_public": 17,
+    "visible_failure": 1,
+    "infrastructure_failure": 0
+  },
+  "wave2_private_aggregate": {
+    "false_completions": 5,
+    "passing_controls": 12,
+    "false_completion_task_clusters": 2,
+    "passing_control_task_clusters": 5,
+    "false_completion_mechanisms": 2
+  },
+  "combined_screening_aggregate": {
+    "frozen_slots": 36,
+    "eligible_public": 33,
+    "visible_failure": 3,
+    "infrastructure_failure": 0,
+    "false_completions": 7,
+    "passing_controls": 26,
+    "false_completion_task_clusters": 3,
+    "passing_control_task_clusters": 10,
+    "false_completion_mechanisms": 2
+  },
+  "screening_minimum": {
+    "false_completion_task_clusters": 6,
+    "passing_control_task_clusters": 6,
+    "false_completion_mechanisms": 4
+  },
+  "screening_population_ready": false,
+  "integrity": {
+    "public_manifest_sha256": "sha256:6d2db02a015a16a107445d3b2582591ed9a15acbdafd22d368ff0ce889f5aaab",
+    "private_grader_seal_sha256": "sha256:2023e8b322de9a59a8ad4171c0cf0e3231c26ca3facb54e525defdb4b3c30875",
+    "oracle_catalog_sha256": "sha256:4cb26aa1ca537feb68a6e25de6345be7a6c7baa7743c8c51bef0afa77ee1e564",
+    "oracle_file_sha256": "sha256:c12f325c5385c6753ea8519303f926db68fb379c1eef9257b66b2bcfd861cecd",
+    "repeatability_checks": 3,
+    "repeatability_passed": true
+  },
+  "privacy": {
+    "case_labels_committed": false,
+    "grader_results_committed": false,
+    "grader_source_committed": false,
+    "external_paths_published": false
+  },
+  "scope": {
+    "split": "repair_dev",
+    "development_only": true,
+    "independent_custodian": false,
+    "eligible_for_mechanism_validation": false
+  },
+  "decision": {
+    "run_verifier_screening": false,
+    "next_action": "author additional new repair-development lineages targeting broader mechanisms while preserving both frozen populations"
+  }
+}
