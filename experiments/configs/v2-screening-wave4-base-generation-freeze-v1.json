@@ -1,0 +1,64 @@
+{
+  "schema_version": 1,
+  "freeze_version": "v2-screening-wave4-base-generation-freeze-v1",
+  "status": "frozen",
+  "dataset": {
+    "snapshot": "v2-screening-wave4-tasks-v1",
+    "public_catalog_sha256": "sha256:ab8b052a3dc4d3d2d79bd5e845daf5f3e5303870b5b2b8c2d3925ebb5d470798",
+    "private_grader_seal_sha256": "sha256:1edb5b46d0f214535b0320848bed45f9dc795b150e8069916ec6f8fd33383b9a",
+    "task_ids": [
+      "v2-archive-extraction-planner",
+      "v2-async-resource-coordinator",
+      "v2-canonical-header-redactor",
+      "v2-capability-token-exchange",
+      "v2-deadline-retry-scheduler",
+      "v2-domain-label-registry",
+      "v2-polymorphic-message-upgrader",
+      "v2-structured-log-template",
+      "v2-tiered-quota-reconciler",
+      "v2-versioned-config-renamer"
+    ]
+  },
+  "execution": {
+    "harness": "H1a-lite-bounded-planning",
+    "model": "gpt-5.6-sol",
+    "reasoning_effort": "medium",
+    "cli_version": "0.147.0",
+    "repetitions_per_task": 3,
+    "expected_slots": 30,
+    "network": "disabled",
+    "hidden_grader_available_to_runner": false,
+    "all_slots_required": true,
+    "selective_case_execution_allowed": false,
+    "outcome_based_rerun_allowed": false,
+    "outcome_based_case_exclusion_allowed": false
+  },
+  "terminal_rule": {
+    "final_screening_wave_under_current_protocol": true,
+    "wave5_allowed": false,
+    "threshold_weakening_allowed": false
+  },
+  "artifacts": [
+    {
+      "path": "benchmark/v2-development-wave4/manifest.json",
+      "sha256": "sha256:c30e2ba0b5fc6ed71dc16abee87e6d4ba160a88043266573fed8b517cb5d8f60"
+    },
+    {
+      "path": "experiments/configs/v2-stage-a-preregistration-v1.json",
+      "sha256": "sha256:029014b56189d6362d0e78d257489ba4a7c71004a50db9d29c54e0d81837d711"
+    },
+    {
+      "path": "experiments/configs/v2-wave4-expansion-decision-freeze-v1.json",
+      "sha256": "sha256:7d4329405d8a3d290b98d243b2a333b517783793f680b7766a6b04e8bffe527f"
+    },
+    {
+      "path": "experiments/reports/v2-screening-wave4-task-authoring-v1.json",
+      "sha256": "sha256:7a76e9bdeecad47348fa64ec65d7b9733ba4e0abf5168e10aaf14ad58fd70f07"
+    },
+    {
+      "path": "scripts/run_v2_screening_wave4_bases.py",
+      "sha256": "sha256:884a681c2c9233ad2ecaf96c4d1be3403b703fbbcc9473bd86cf04b4bec69267"
+    }
+  ],
+  "content_sha256": "sha256:db414175cb1358a059c83d895c729eb1cd6096f9d652fdb84758bbdd39d50d18"
+}
