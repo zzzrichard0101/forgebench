@@ -82,8 +82,24 @@ decision boundary, not a post-hoc reliability win.
 - [Machine-readable final evaluation](experiments/reports/heldout-private-policy-evaluation-v1.json)
 - [Final evaluation freeze](experiments/configs/heldout-final-evaluation-freeze-v1.json)
 - [5-minute demo script](demo/5-minute-demo.md)
+- [Reusable Codex demo skill](.agents/skills/forgebench-demo/SKILL.md)
 - [Application project description](docs/application-project-description.md)
 - [One-page portfolio PDF](output/pdf/forgebench-one-page-portfolio.pdf)
+
+## Public portfolio demo
+
+Run the deterministic public scenario from the repository root:
+
+```powershell
+python scripts/run_public_demo.py
+```
+
+The demo intentionally uses a committed public fixture and a scripted
+remediation. It shows a public completion pass, high-risk routing, a
+deterministic probe catching an uncovered file-type boundary, and a verified
+remediated state. It makes zero model calls and never accesses a private grader.
+The reusable [ForgeBench demo skill](.agents/skills/forgebench-demo/SKILL.md)
+contains the rehearsal, evidence-boundary, and recording workflow.
 
 Phase 2 infrastructure is now present in `src/forgebench`: copy-isolated run
 workspaces, a typed tool gateway, a provider-neutral model adapter, and
