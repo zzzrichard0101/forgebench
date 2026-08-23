@@ -29,6 +29,7 @@ The project asks one practical question:
 - [V2 screening wave-3 private aggregate](docs/v2/screening-wave3-private-aggregate-v1.md)
 - [V2 Wave 4 expansion decision freeze](docs/v2/wave4-expansion-decision-freeze-v1.md)
 - [V2 screening wave-4 task authoring report](docs/v2/screening-wave4-task-authoring-v1.md)
+- [V2 screening wave-4 base-generation freeze](docs/v2/screening-wave4-base-generation-freeze-v1.md)
 
 - [Design brief](docs/design-brief.md)
 - [Metrics and evaluation contract](docs/metrics.md)
