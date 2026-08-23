@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 from dataclasses import asdict
 from pathlib import Path
@@ -17,6 +18,38 @@ from forgebench.v2_corpus import (
     validate_v2_public_corpus,
 )
 from prepare_v2_screening_corpus import MECHANISMS, ROOT, TASK_MANIFEST, V1_EXCLUSIONS
+
+
+EXPECTED_GRADER_SEAL_SHA256: str | None = None
+
+
+def verify_grader_seal(grader_root: Path, seal: dict) -> None:
+    if seal.get("content_sha256") != payload_hash(seal):
+        raise ValueError("V2 development grader seal content hash is invalid")
+    if seal.get("development_only") is not True:
+        raise ValueError("invalid V2 development grader seal scope")
+    expected = {
+        record["task_id"]: record["grader_sha256"]
+        for record in seal.get("task_graders", [])
+    }
+    actual_ids = {path.name for path in grader_root.iterdir() if path.is_dir()}
+    if not expected or set(expected) != actual_ids:
+        raise ValueError("grader directories do not match the sealed task set")
+    for task_id, expected_hash in expected.items():
+        task_root = grader_root / task_id
+        files = sorted(path for path in task_root.rglob("*") if path.is_file())
+        if not files:
+            raise ValueError(f"grader directory is empty: {task_id}")
+        digest = hashlib.sha256()
+        for path in files:
+            relative = path.relative_to(task_root).as_posix().encode("utf-8")
+            file_hash = canonical_file_hash(path).encode("ascii")
+            digest.update(len(relative).to_bytes(4, "big"))
+            digest.update(relative)
+            digest.update(file_hash)
+        actual_hash = "sha256:" + digest.hexdigest()
+        if actual_hash != expected_hash:
+            raise ValueError(f"grader content differs from seal: {task_id}")
 
 
 def main() -> int:
@@ -35,12 +68,17 @@ def main() -> int:
         exclusion_manifest_paths=V1_EXCLUSIONS,
     )
     seal = json.loads(args.grader_seal.resolve(strict=True).read_text(encoding="utf-8"))
-    if seal.get("content_sha256") is None or seal.get("development_only") is not True:
-        raise ValueError("invalid V2 development grader seal")
+    grader_root = args.grader_root.resolve(strict=True)
+    verify_grader_seal(grader_root, seal)
+    if (
+        EXPECTED_GRADER_SEAL_SHA256 is not None
+        and seal["content_sha256"] != EXPECTED_GRADER_SEAL_SHA256
+    ):
+        raise ValueError("grader seal differs from the frozen public population")
     catalog = BenchmarkCatalog(ROOT, TASK_MANIFEST)
     by_task = {bundle.task["id"]: bundle for bundle in catalog.list()}
     store = BaseCompletionStore(args.base_root)
-    grader = DeterministicGrader(args.grader_root)
+    grader = DeterministicGrader(grader_root)
     result_root = args.result_root.resolve(strict=False)
     result_root.mkdir(parents=True, exist_ok=True)
     labels = []
