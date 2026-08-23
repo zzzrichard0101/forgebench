@@ -1,0 +1,74 @@
+{
+  "schema_version": 1,
+  "freeze_version": "v2-stage-sequencing-freeze-v1",
+  "status": "frozen",
+  "decision_date": "2026-08-23",
+  "ordered_stages": [
+    "stage_a_screening_population_wave3",
+    "stage_a_verifier_screening",
+    "stage_a_mechanism_validation",
+    "stage_b_public_evidence_activation"
+  ],
+  "current_stage": "stage_a_screening_population_wave3",
+  "stage_a_continuation": {
+    "preserve_prior_populations": true,
+    "weaken_screening_thresholds": false,
+    "next_population_objective": "increase false-completion task-cluster and failure-mechanism diversity with new repair-development lineages"
+  },
+  "stage_b_before_gate": {
+    "status": "design_only_locked",
+    "allowed": [
+      "documentation",
+      "schemas_and_serialization_interfaces",
+      "synthetic_unit_fixtures",
+      "public_private_firewall_tests",
+      "activation_guard"
+    ],
+    "forbidden": [
+      "stage_b_task_authoring",
+      "stage_b_heldout_generation",
+      "risk_fitting",
+      "threshold_tuning",
+      "decision_policy_activation",
+      "policy_evaluation",
+      "stage_a_hidden_label_feature_design"
+    ]
+  },
+  "reserved_stage_b_design": {
+    "version": "stage-b-public-evidence-v0.1",
+    "historical_baseline": "completion-risk-v0.2",
+    "decision_policy_status": "not_frozen_not_active",
+    "evidence_classes": [
+      "requirement_verification_coverage",
+      "independent_issue_patch_alignment",
+      "trajectory_verification_discipline"
+    ],
+    "optional_active_evidence": "public_executable_probe_with_separate_compute_accounting",
+    "unknown_defaults_to_low": false
+  },
+  "activation": {
+    "requires_stage_a_gate_pass": true,
+    "requires_uncontaminated_public_aggregate": true,
+    "requires_complete_audit_manifest": true,
+    "runtime_guard": "forgebench.stage_b_lock.verify_stage_b_activation"
+  },
+  "protected_artifacts": [
+    {
+      "path": "src/forgebench/completion_risk.py",
+      "sha256": "sha256:cf91107a4a9f6438ac2b2091fe5849e4d557ee4ea0bd2dea2abd87b0620fa7a5"
+    },
+    {
+      "path": "experiments/configs/v2-stage-a-preregistration-v1.json",
+      "sha256": "sha256:029014b56189d6362d0e78d257489ba4a7c71004a50db9d29c54e0d81837d711"
+    },
+    {
+      "path": "experiments/reports/v2-screening-base-population-v1.json",
+      "sha256": "sha256:85337daa6ded3b9123c6dd681f69ed347a229f18e0189993438a0182951dd654"
+    },
+    {
+      "path": "experiments/reports/v2-screening-wave2-private-aggregate-v1.json",
+      "sha256": "sha256:b1cabf39b279094a177ab7e10160011e1876ee4b8eb6ec3c73ac2f604e505ab5"
+    }
+  ],
+  "content_sha256": "sha256:a7016d758e3bcb14b1cc848b0e16ea242e4e925b5eca1b5667201f069b06f28d"
+}
