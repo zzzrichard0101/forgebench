@@ -1,0 +1,13 @@
+{
+  "id": "v2-typed-env-loader", "version": 1,
+  "title": "Load typed environment configuration with safe legacy migration", "family": "development", "difficulty": "hard", "split": "dev",
+  "tags": ["v2", "configuration", "environment", "migration"],
+  "seed_repo": {"source": "benchmark/v2-development-wave3/fixtures/v2-typed-env-loader", "revision": "sha256:e3690acad1afd807c4f4d866a30882efc6cc777f16db2616eaca192a47f0fb95", "subdirectory": ""},
+  "instruction": "Complete load_environment(schema, environ, prefix='APP_') as an atomic typed configuration loader. schema and environ must be mappings and prefix a non-empty string. Each output field has an exact spec with env, type and optional default or legacy_env; supported types are str, int, bool, and csv. Environment names must start with prefix and be unique across current and legacy names. A current value overrides its legacy alias, but supplying both raises ValueError rather than silently choosing. Parse integers from canonical signed decimal strings, booleans only from case-insensitive true/false, and csv with the standard csv parser while preserving order and empty quoted items. Reject unknown prefixed environment variables and malformed schema or values without returning partial output. Defaults are type-checked and all returned containers are defensively copied. Inputs remain unchanged. Add tests and no dependencies.",
+  "budgets": {"max_steps": 55, "max_seconds": 900, "max_input_tokens": 100000, "max_output_tokens": 20000, "max_cost_usd": 3.5},
+  "public_checks": [{"id": "public_tests", "type": "command", "severity": "diagnostic", "argv": ["{python}", "-m", "unittest", "discover", "-s", "tests", "-v"], "expected_exit_code": 0}],
+  "grader": {"checks": [{"id": "public_tests", "type": "command", "severity": "required", "argv": ["{python}", "-m", "unittest", "discover", "-s", "tests", "-v"], "expected_exit_code": 0}, {"id": "private_contract", "type": "command", "severity": "required", "argv": ["{python}", "{grader_root}/v2-typed-env-loader/test_contract.py"], "expected_exit_code": 0}, {"id": "protected_dependencies", "type": "workspace_policy", "severity": "required", "protected_paths": ["requirements.txt"]}]},
+  "safety": {"network": "disabled", "network_allowlist": [], "allowed_write_roots": ["."], "forbidden_commands": ["sudo", "chmod", "chown"]},
+  "evidence": {"required_artifacts": ["workspace.diff", "trace.jsonl", "grader-result.json"]},
+  "author_metadata": {"capabilities": ["planning", "tool_use", "verification"], "likely_failure_modes": ["planning", "verification"], "notes": "Wave-3 configuration/migration lineage with strict typed parsing, aliases, unknown-key rejection, and atomicity."}
+}

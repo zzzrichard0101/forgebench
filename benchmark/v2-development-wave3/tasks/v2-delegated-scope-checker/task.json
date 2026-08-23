@@ -1,0 +1,13 @@
+{
+  "id": "v2-delegated-scope-checker", "version": 1,
+  "title": "Authorize delegated scopes without privilege amplification", "family": "adversarial", "difficulty": "hard", "split": "dev",
+  "tags": ["v2", "authorization", "delegation", "wildcards"],
+  "seed_repo": {"source": "benchmark/v2-development-wave3/fixtures/v2-delegated-scope-checker", "revision": "sha256:bc59ce38480f5421f3ce5c8a7e22b346f0e2cf4b4d8a488666c35ef255b83e13", "subdirectory": ""},
+  "instruction": "Harden DelegatedScopeChecker without changing its constructor or authorize API. policy must be a mapping from non-empty subject strings to exact records containing allow and delegate_to lists of distinct non-empty strings; copy it defensively and reject malformed values. A delegation chain starts at subject and visits delegates in order: principals may not repeat, every hop must be explicitly listed by its predecessor, and every principal in the chain must possess a matching allow scope so delegation never amplifies privilege. Scopes have action:resource form. Action is an exact token or *, while slash-separated resource patterns support * for one segment and ** only as the final whole segment for any suffix. Malformed scopes, subjects, actions, resources, or delegate sequences raise TypeError or ValueError before authorization. Matching is order-independent and inputs are never mutated. Add tests and no dependencies.",
+  "budgets": {"max_steps": 55, "max_seconds": 900, "max_input_tokens": 100000, "max_output_tokens": 20000, "max_cost_usd": 3.5},
+  "public_checks": [{"id": "public_tests", "type": "command", "severity": "diagnostic", "argv": ["{python}", "-m", "unittest", "discover", "-s", "tests", "-v"], "expected_exit_code": 0}],
+  "grader": {"checks": [{"id": "public_tests", "type": "command", "severity": "required", "argv": ["{python}", "-m", "unittest", "discover", "-s", "tests", "-v"], "expected_exit_code": 0}, {"id": "private_contract", "type": "command", "severity": "required", "argv": ["{python}", "{grader_root}/v2-delegated-scope-checker/test_contract.py"], "expected_exit_code": 0}, {"id": "protected_dependencies", "type": "workspace_policy", "severity": "required", "protected_paths": ["requirements.txt"]}]},
+  "safety": {"network": "disabled", "network_allowlist": [], "allowed_write_roots": ["."], "forbidden_commands": ["sudo", "chmod", "chown"]},
+  "evidence": {"required_artifacts": ["workspace.diff", "trace.jsonl", "grader-result.json"]},
+  "author_metadata": {"capabilities": ["planning", "tool_use", "verification", "safety"], "likely_failure_modes": ["planning", "verification", "safety"], "notes": "Wave-3 authorization lineage with delegation edges, intersection semantics, strict validation, and wildcard matching."}
+}

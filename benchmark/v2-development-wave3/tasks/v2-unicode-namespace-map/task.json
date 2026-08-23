@@ -1,0 +1,13 @@
+{
+  "id": "v2-unicode-namespace-map", "version": 1,
+  "title": "Index Unicode names with canonical collision protection", "family": "adversarial", "difficulty": "hard", "split": "dev",
+  "tags": ["v2", "unicode", "normalization", "namespace"],
+  "seed_repo": {"source": "benchmark/v2-development-wave3/fixtures/v2-unicode-namespace-map", "revision": "sha256:b67e2136460d4d1740ce0cfa015daf6cd3b520ff08b10d9565c334c0b599a524", "subdirectory": ""},
+  "instruction": "Harden UnicodeNamespace without changing register, lookup, or display_name. Names must be exact strings, non-empty, already free of leading/trailing whitespace, and contain only Unicode letters/numbers plus ASCII underscore, hyphen, or dot. Reject control, format, surrogate, private-use, unassigned, combining-mark-only, separator, and NUL characters. Canonical keys use Unicode NFKC followed by casefold; validate the normalized result again and reject names whose normalized key is empty. register rejects every canonical collision atomically, stores the first original spelling for display_name, and may store any value without copying it. lookup and display_name apply identical validation and normalization and raise KeyError only for a valid unknown name. Failed operations never mutate existing entries. Add tests and no dependencies.",
+  "budgets": {"max_steps": 55, "max_seconds": 900, "max_input_tokens": 100000, "max_output_tokens": 20000, "max_cost_usd": 3.5},
+  "public_checks": [{"id": "public_tests", "type": "command", "severity": "diagnostic", "argv": ["{python}", "-m", "unittest", "discover", "-s", "tests", "-v"], "expected_exit_code": 0}],
+  "grader": {"checks": [{"id": "public_tests", "type": "command", "severity": "required", "argv": ["{python}", "-m", "unittest", "discover", "-s", "tests", "-v"], "expected_exit_code": 0}, {"id": "private_contract", "type": "command", "severity": "required", "argv": ["{python}", "{grader_root}/v2-unicode-namespace-map/test_contract.py"], "expected_exit_code": 0}, {"id": "protected_dependencies", "type": "workspace_policy", "severity": "required", "protected_paths": ["requirements.txt"]}]},
+  "safety": {"network": "disabled", "network_allowlist": [], "allowed_write_roots": ["."], "forbidden_commands": ["sudo", "chmod", "chown"]},
+  "evidence": {"required_artifacts": ["workspace.diff", "trace.jsonl", "grader-result.json"]},
+  "author_metadata": {"capabilities": ["planning", "tool_use", "verification", "safety"], "likely_failure_modes": ["planning", "verification", "safety"], "notes": "Wave-3 Unicode lineage with NFKC/casefold collision semantics and strict identifier-category validation."}
+}

@@ -1,0 +1,16 @@
+{
+  "schema_version": 1,
+  "snapshot": "v2-screening-wave3-tasks-v1",
+  "frozen": true,
+  "catalog_sha256": "sha256:f9c7c52ac8f1d62342b6b15e46dfc26238cccf231952334abeef0e1a157825b2",
+  "tasks": [
+    {"id": "v2-callback-shutdown-stack", "version": 1, "family": "development", "difficulty": "hard", "split": "dev", "task_path": "benchmark/v2-development-wave3/tasks/v2-callback-shutdown-stack/task.json"},
+    {"id": "v2-credit-reservation-ledger", "version": 1, "family": "adversarial", "difficulty": "hard", "split": "dev", "task_path": "benchmark/v2-development-wave3/tasks/v2-credit-reservation-ledger/task.json"},
+    {"id": "v2-delegated-scope-checker", "version": 1, "family": "adversarial", "difficulty": "hard", "split": "dev", "task_path": "benchmark/v2-development-wave3/tasks/v2-delegated-scope-checker/task.json"},
+    {"id": "v2-sandbox-path-mapper", "version": 1, "family": "adversarial", "difficulty": "hard", "split": "dev", "task_path": "benchmark/v2-development-wave3/tasks/v2-sandbox-path-mapper/task.json"},
+    {"id": "v2-subprocess-request-builder", "version": 1, "family": "adversarial", "difficulty": "hard", "split": "dev", "task_path": "benchmark/v2-development-wave3/tasks/v2-subprocess-request-builder/task.json"},
+    {"id": "v2-tagged-event-decoder", "version": 1, "family": "development", "difficulty": "hard", "split": "dev", "task_path": "benchmark/v2-development-wave3/tasks/v2-tagged-event-decoder/task.json"},
+    {"id": "v2-typed-env-loader", "version": 1, "family": "development", "difficulty": "hard", "split": "dev", "task_path": "benchmark/v2-development-wave3/tasks/v2-typed-env-loader/task.json"},
+    {"id": "v2-unicode-namespace-map", "version": 1, "family": "adversarial", "difficulty": "hard", "split": "dev", "task_path": "benchmark/v2-development-wave3/tasks/v2-unicode-namespace-map/task.json"}
+  ]
+}
