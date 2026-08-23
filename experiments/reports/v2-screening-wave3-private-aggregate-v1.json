@@ -1,0 +1,65 @@
+{
+  "schema_version": 1,
+  "report": "v2-screening-wave3-private-aggregate-v1",
+  "status": "sealed_population_insufficient",
+  "snapshot": "v2-dev-screening-wave3-bases-v1",
+  "wave3_execution": {
+    "frozen_slots": 24,
+    "eligible_public": 23,
+    "visible_failure": 1,
+    "infrastructure_failure": 0
+  },
+  "wave3_private_aggregate": {
+    "false_completions": 3,
+    "passing_controls": 20,
+    "false_completion_task_clusters": 1,
+    "passing_control_task_clusters": 7,
+    "false_completion_mechanisms": 1
+  },
+  "combined_screening_aggregate": {
+    "frozen_slots": 60,
+    "eligible_public": 56,
+    "visible_failure": 4,
+    "infrastructure_failure": 0,
+    "false_completions": 10,
+    "passing_controls": 46,
+    "false_completion_task_clusters": 4,
+    "passing_control_task_clusters": 17,
+    "false_completion_mechanisms": 3
+  },
+  "screening_minimum": {
+    "false_completion_task_clusters": 6,
+    "passing_control_task_clusters": 6,
+    "false_completion_mechanisms": 4
+  },
+  "screening_population_ready": false,
+  "integrity": {
+    "public_manifest_sha256": "sha256:0a637f8158176abfbfb0cddab9f411185dc3aefc06ff88b54b4f2760ae8bcd86",
+    "private_grader_seal_sha256": "sha256:57bd25d24c9810cfe3a84e15efaf5cede1ebba6ed3d7185b98327f1ba5dfaf96",
+    "oracle_catalog_sha256": "sha256:7a06d8266a0195715ef5261bf8c5834751a20e8c1e1abbc01f748e118f1c1944",
+    "oracle_file_sha256": "sha256:51b02f0478256a04aaf0e8bd073cc4c71be29b150af51b44351eb6412e22705c",
+    "private_audit_content_sha256": "sha256:16912075ba7b5dae00dfa443ff794b05090bfcfaa9beb8ec411a307381a8f93f",
+    "private_audit_file_sha256": "sha256:b90b116f25681a2b543411cd45849ab2c02ed91b3853d68f815367495de67a53",
+    "repeatability_checks": 3,
+    "repeatability_passed": true,
+    "grader_files_match_seal": true,
+    "target_hashes_verified": true
+  },
+  "privacy": {
+    "case_labels_committed": false,
+    "grader_results_committed": false,
+    "grader_source_committed": false,
+    "external_paths_published": false
+  },
+  "scope": {
+    "split": "repair_dev",
+    "development_only": true,
+    "independent_custodian": false,
+    "eligible_for_mechanism_validation": false
+  },
+  "decision": {
+    "run_verifier_screening": false,
+    "stage_b_activation_allowed": false,
+    "next_action": "preserve all three populations and reassess additional repair-development lineage expansion without weakening thresholds"
+  }
+}
