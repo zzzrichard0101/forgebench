@@ -1,0 +1,83 @@
+{
+  "schema_version": 1,
+  "freeze_version": "v2-wave4-expansion-decision-freeze-v1",
+  "status": "frozen_before_task_authoring",
+  "decision": "proceed_with_one_final_balanced_screening_wave",
+  "evidence_policy": {
+    "selection_uses_public_lineage_counts_only": true,
+    "feasibility_uses_published_aggregate_counts_only": true,
+    "private_case_labels_consulted": false,
+    "private_failure_locations_consulted": false
+  },
+  "observed_after_wave3": {
+    "authored_task_lineages": 20,
+    "frozen_slots": 60,
+    "eligible_public": 56,
+    "false_completions": 10,
+    "false_completion_task_clusters": 4,
+    "passing_control_task_clusters": 17,
+    "false_completion_mechanisms": 3,
+    "remaining_cluster_gap": 2,
+    "remaining_mechanism_gap": 1
+  },
+  "feasibility_estimate": {
+    "planned_new_lineages": 10,
+    "empirical_false_cluster_yield_per_lineage": 0.2,
+    "binomial_probability_at_least_two_new_false_clusters": 0.6242,
+    "beta_binomial_probability_at_least_two_new_false_clusters": 0.6499,
+    "sensitivity_probability_range_for_cluster_requirement": [0.4557, 0.7560],
+    "estimated_overall_gate_pass_probability_range": [0.40, 0.60],
+    "overall_range_note": "Conservative judgmental range after adding the requirement for at least one previously unrepresented failure mechanism; it is not a statistical guarantee."
+  },
+  "public_lineage_counts_before_wave4": {
+    "authorization": 2,
+    "configuration_migration": 2,
+    "containment": 2,
+    "injection": 2,
+    "lifecycle_resource": 2,
+    "numeric_aggregate": 2,
+    "schema": 2,
+    "serialization_redaction": 2,
+    "temporal_retry": 2,
+    "unicode_normalization": 2
+  },
+  "selection_rule": "All ten preregistered mechanisms are tied at the minimum public lineage count, so add exactly one new task and repository lineage for every mechanism without consulting private outcomes.",
+  "planned_tasks": [
+    {"task_id": "v2-capability-token-exchange", "mechanism": "authorization"},
+    {"task_id": "v2-versioned-config-renamer", "mechanism": "configuration_migration"},
+    {"task_id": "v2-archive-extraction-planner", "mechanism": "containment"},
+    {"task_id": "v2-structured-log-template", "mechanism": "injection"},
+    {"task_id": "v2-async-resource-coordinator", "mechanism": "lifecycle_resource"},
+    {"task_id": "v2-tiered-quota-reconciler", "mechanism": "numeric_aggregate"},
+    {"task_id": "v2-polymorphic-message-upgrader", "mechanism": "schema"},
+    {"task_id": "v2-canonical-header-redactor", "mechanism": "serialization_redaction"},
+    {"task_id": "v2-deadline-retry-scheduler", "mechanism": "temporal_retry"},
+    {"task_id": "v2-domain-label-registry", "mechanism": "unicode_normalization"}
+  ],
+  "execution_after_authoring": {
+    "repetitions_per_task": 3,
+    "expected_slots": 30,
+    "all_slots_required": true,
+    "outcome_based_rerun_or_exclusion": false
+  },
+  "terminal_rule": {
+    "if_gate_passes": "proceed_to_stage_a_verifier_screening",
+    "if_gate_remains_insufficient": "seal_a_negative_stage_a_screening_feasibility_result",
+    "wave5_allowed_under_current_protocol": false,
+    "threshold_weakening_allowed": false
+  },
+  "scope": {
+    "split": "repair_dev",
+    "development_only": true,
+    "eligible_for_mechanism_validation": false,
+    "stage_b_activation_allowed": false
+  },
+  "protected_artifacts": [
+    {"path": "experiments/configs/v2-stage-a-preregistration-v1.json", "sha256": "sha256:029014b56189d6362d0e78d257489ba4a7c71004a50db9d29c54e0d81837d711"},
+    {"path": "experiments/configs/v2-stage-sequencing-freeze-v1.json", "sha256": "sha256:fdb21cb314587ca5c3c7f059c65b490f916f67708e8e2dc9bd25e23691bd4f87"},
+    {"path": "experiments/reports/v2-screening-base-population-v1.json", "sha256": "sha256:85337daa6ded3b9123c6dd681f69ed347a229f18e0189993438a0182951dd654"},
+    {"path": "experiments/reports/v2-screening-wave2-private-aggregate-v1.json", "sha256": "sha256:b1cabf39b279094a177ab7e10160011e1876ee4b8eb6ec3c73ac2f604e505ab5"},
+    {"path": "experiments/reports/v2-screening-wave3-private-aggregate-v1.json", "sha256": "sha256:c138a69e4c245242a68b1d9dcd3ad6d4edc5998db0105369f8d2b58aecc27384"}
+  ],
+  "content_sha256": "sha256:7866f603e91cd8f1a852b67bb6c80779048a5976e41c1d643b62696f3e96aa7a"
+}
