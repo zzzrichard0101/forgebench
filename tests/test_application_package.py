@@ -14,6 +14,9 @@ class ApplicationPackageTests(unittest.TestCase):
         for text in (description, demo):
             self.assertIn("0/30", text)
             self.assertIn("hard-safety", text)
+            self.assertIn("90", text)
+            self.assertIn("84", text)
+            self.assertIn("Stage B", text)
             self.assertNotIn("improved held-out reliability", text)
 
     def test_one_page_pdf_is_present_and_linked(self) -> None:

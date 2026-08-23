@@ -36,6 +36,9 @@ def main() -> int:
     pdfmetrics.registerFont(TTFont("Malgun", str(FONT)))
     pdfmetrics.registerFont(TTFont("Malgun-Bold", str(FONT_BOLD)))
     canvas = Canvas(str(OUTPUT), pagesize=A4)
+    canvas.setTitle("ForgeBench - AI Agent Harness and Evaluation Laboratory")
+    canvas.setAuthor("ForgeBench")
+    canvas.setSubject("Final V2 screening feasibility result and AI Agent Engineer evidence")
     width, height = A4
     _background(canvas, width, height)
     _header(canvas, width, height)
@@ -84,9 +87,9 @@ def _metric_cards(c: Canvas, width: float, height: float) -> None:
     gap = 4 * mm
     card_w = (width - 2 * margin - 2 * gap) / 3
     cards = [
-        ("150", "hash-bound evaluation targets"),
-        ("120/120", "model-policy replays sealed"),
-        ("130", "automated regression tests"),
+        ("90", "frozen V2 Codex slots"),
+        ("84", "externally graded V2 bases"),
+        ("207", "automated regression tests"),
     ]
     for index, (value, label) in enumerate(cards):
         x = margin + index * (card_w + gap)
@@ -106,7 +109,7 @@ def _pipeline(c: Canvas, width: float, height: float) -> None:
     c.setFillColor(NAVY)
     c.setFont("Malgun-Bold", 10.5)
     c.drawString(x, y + 20 * mm, "SYSTEM")
-    labels = ["Base", "Public Gate", "Risk / Probe", "Model Verify", "External Grade"]
+    labels = ["Dev Tasks", "Public Gate", "Frozen Corpus", "External Grade", "Protocol Gate"]
     box_w = 31.5 * mm
     gap = 5.3 * mm
     for i, label in enumerate(labels):
@@ -129,7 +132,7 @@ def _pipeline(c: Canvas, width: float, height: float) -> None:
     c.drawString(
         x,
         y - 5 * mm,
-        "동일 base workspace · frozen model/config · SHA-256 replay binding · private grader outside Git",
+        "frozen model/config · SHA-256 catalog/corpus/oracle · private grader and labels outside Git",
     )
 
 
@@ -138,17 +141,17 @@ def _result_table(c: Canvas, width: float, height: float) -> None:
     y = height - 188 * mm
     c.setFillColor(NAVY)
     c.setFont("Malgun-Bold", 10.5)
-    c.drawString(x, y + 55 * mm, "HELD-OUT RESULT  /  PRIMARY CLAIM REJECTED")
+    c.drawString(x, y + 55 * mm, "FINAL V2 SCREENING  /  PREREGISTERED GATE NOT MET")
     data = [
-        ["Policy", "Hidden success", "Model", "Input tokens", "Safety"],
-        ["Accept-All", "0 / 30", "0", "0", "0"],
-        ["Verify-All", "0 / 30", "30", "1,690,849", "1"],
-        ["Random-k", "0 / 30", "9", "348,434", "0"],
-        ["Probe-All", "0 / 30", "0", "0", "0"],
-        ["Risk-Direct", "0 / 30", "9", "474,452", "0"],
-        ["Risk-Hierarchical", "0 / 30", "9", "504,339", "0"],
+        ["Measure", "Wave 4", "Combined", "Required", "Decision"],
+        ["Frozen slots", "30", "90", "-", "complete"],
+        ["Eligible bases", "28", "84", "-", "sealed"],
+        ["False completions", "0", "10", "-", "preserved"],
+        ["False-completion clusters", "0", "4", "6", "insufficient"],
+        ["Failure mechanisms", "0", "3", "4", "insufficient"],
+        ["Passing-control clusters", "10", "27", "6", "passed"],
     ]
-    table = Table(data, colWidths=[48 * mm, 30 * mm, 20 * mm, 34 * mm, 20 * mm], rowHeights=6.2 * mm)
+    table = Table(data, colWidths=[52 * mm, 24 * mm, 26 * mm, 25 * mm, 31 * mm], rowHeights=6.2 * mm)
     table.setStyle(
         TableStyle(
             [
@@ -157,8 +160,8 @@ def _result_table(c: Canvas, width: float, height: float) -> None:
                 ("FONTSIZE", (0, 0), (-1, -1), 7.4),
                 ("BACKGROUND", (0, 0), (-1, 0), NAVY),
                 ("TEXTCOLOR", (0, 0), (-1, 0), WHITE),
-                ("TEXTCOLOR", (0, 2), (-1, 2), RED),
-                ("BACKGROUND", (0, 2), (-1, 2), colors.HexColor("#FEF2F2")),
+                ("TEXTCOLOR", (0, 4), (-1, 5), RED),
+                ("BACKGROUND", (0, 4), (-1, 5), colors.HexColor("#FEF2F2")),
                 ("GRID", (0, 0), (-1, -1), 0.4, LINE),
                 ("ALIGN", (1, 1), (-1, -1), "CENTER"),
                 ("VALIGN", (0, 0), (-1, -1), "MIDDLE"),
@@ -170,10 +173,10 @@ def _result_table(c: Canvas, width: float, height: float) -> None:
     table.drawOn(c, x, y + 7 * mm)
     c.setFillColor(RED)
     c.setFont("Malgun-Bold", 8.5)
-    c.drawString(x, y, "P5: 9 model calls · 504,339 input tokens · 0 recoveries")
+    c.drawString(x, y, "Stage B blocked · Wave 5 prohibited · thresholds unchanged")
     c.setFillColor(MUTED)
     c.setFont("Malgun", 7.2)
-    c.drawRightString(width - 16 * mm, y, "Risk recall 0.30 · task-cluster bootstrap 95% CI [0.0, 0.6]")
+    c.drawRightString(width - 16 * mm, y, "Three identical external evaluations · 0 infrastructure failures")
 
 
 def _insight_and_fit(c: Canvas, width: float, height: float) -> None:
@@ -191,10 +194,10 @@ def _insight_and_fit(c: Canvas, width: float, height: float) -> None:
     c.setFont("Malgun-Bold", 10)
     c.drawString(x1 + 5 * mm, top - 8 * mm, "WHAT THE FAILURE TAUGHT")
     left = [
-        "• 모든 base가 false completion: single-class 한계",
-        "• P2/P4/P5가 같은 9개 base 선택: allocation 붕괴",
-        "• 9개 probe 모두 unsupported: short-circuit 0회",
-        "• test-time compute만 늘려서는 repair가 되지 않음",
+        "• V1: 추가 compute로 ineffective repair를 해결 못함",
+        "• V2: target failure 다양성이 먼저 필요함",
+        "• raw failure 수는 cluster/mechanism을 대체 못함",
+        "• terminal rule이 outcome-driven 확장을 차단함",
     ]
     c.setFillColor(SLATE)
     c.setFont("Malgun", 7.8)
@@ -207,8 +210,8 @@ def _insight_and_fit(c: Canvas, width: float, height: float) -> None:
     right = [
         "• Planning / Loop: plan·completion·repair contract",
         "• Tool / Safety: isolated workspace·protected evidence",
-        "• Evaluation: shared base·hidden firewall·bootstrap",
-        "• Harness R&D: routing degeneracy와 실패 원인 분리",
+        "• Evaluation: 90 slots·3회 외부 평가·hash seal",
+        "• Benchmark: 30 lineages·public/private firewall",
     ]
     c.setFillColor(SLATE)
     c.setFont("Malgun", 7.8)
@@ -224,7 +227,7 @@ def _insight_and_fit(c: Canvas, width: float, height: float) -> None:
         alignment=TA_LEFT,
     )
     note = Paragraph(
-        "핵심 주장: 정책이 성공했다가 아니라, 성공하지 않았음을 데이터 누수 없이 증명하는 평가 시스템을 만들었다.",
+        "핵심 주장: 성공 점수가 아니라, 지원되지 않는 연구를 데이터 누수 없이 중단할 수 있는 평가 시스템을 만들었다.",
         note_style,
     )
     note.wrapOn(c, width - 32 * mm, 15 * mm)
