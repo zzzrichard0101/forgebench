@@ -22,6 +22,7 @@ The project asks one practical question:
 - [V2 screening wave-2 public population](docs/v2/screening-wave2-public-population-v1.md)
 - [V2 screening wave-2 private aggregate](docs/v2/screening-wave2-private-aggregate-v1.md)
 - [V2 stage sequencing and Stage B design lock](docs/v2/stage-sequencing-and-stage-b-design-lock-v1.md)
+- [V2 screening wave-3 authoring freeze](docs/v2/screening-wave3-authoring-freeze-v1.md)
 
 - [Design brief](docs/design-brief.md)
 - [Metrics and evaluation contract](docs/metrics.md)
