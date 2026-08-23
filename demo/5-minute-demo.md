@@ -10,7 +10,7 @@ Goal: show harness engineering, evaluation discipline, and honest stopping decis
 - Set the terminal font to at least 16 px and browser zoom to 110-125%.
 - Pre-open `README.md`, both final reports, the final V2 aggregate, and the one-page PDF.
 - Do not reveal raw model traces or individual hidden outcomes.
-- Rehearse `python scripts/run_public_demo.py` once and keep its terminal ready.
+- Rehearse `py -3 scripts/run_public_demo.py` once and keep its terminal ready.
 
 ## Timeline and talk track
 
@@ -34,7 +34,7 @@ and private grader boundary.
 Run:
 
 ```powershell
-python scripts/run_public_demo.py
+py -3 scripts/run_public_demo.py
 ```
 
 Say:

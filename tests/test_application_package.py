@@ -18,7 +18,7 @@ class ApplicationPackageTests(unittest.TestCase):
             self.assertIn("84", text)
             self.assertIn("Stage B", text)
             self.assertNotIn("improved held-out reliability", text)
-        self.assertIn("python scripts/run_public_demo.py", demo)
+        self.assertIn("py -3 scripts/run_public_demo.py", demo)
 
     def test_one_page_pdf_is_present_and_linked(self) -> None:
         pdf = ROOT / "output/pdf/forgebench-one-page-portfolio.pdf"

@@ -12,12 +12,14 @@ new experiment.
 ## Workflow
 
 1. Work from the ForgeBench repository root and confirm the checkout is clean.
-2. Run `python scripts/run_public_demo.py`.
+2. On Windows, run `py -3 scripts/run_public_demo.py`. On macOS or Linux, use
+   `python3 scripts/run_public_demo.py`.
 3. Confirm that the first attempt passes public completion, is routed high risk,
    fails `plugin_non_python_regular_file`, and is blocked for repair.
 4. Confirm that the explicitly scripted remediation passes the same public
    probe with zero model calls. Never describe it as a live agent repair.
-5. Run `python -m unittest tests.test_public_demo -v` with `PYTHONPATH=src`.
+5. Run `py -3 -m unittest tests.test_public_demo -v` with `PYTHONPATH=src` on
+   Windows, or use `python3` on macOS or Linux.
 6. Follow [`demo/5-minute-demo.md`](../../../demo/5-minute-demo.md) for the
    screen order and narration. Keep the public-demo terminal output visible for
    roughly 40 seconds.
