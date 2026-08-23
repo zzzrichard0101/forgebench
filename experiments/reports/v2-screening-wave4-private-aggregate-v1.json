@@ -1,0 +1,68 @@
+{
+  "schema_version": 1,
+  "report": "v2-screening-wave4-private-aggregate-v1",
+  "status": "sealed_final_screening_feasibility_negative",
+  "snapshot": "v2-dev-screening-wave4-bases-v1",
+  "wave4_execution": {
+    "frozen_slots": 30,
+    "eligible_public": 28,
+    "visible_failure": 2,
+    "infrastructure_failure": 0
+  },
+  "wave4_private_aggregate": {
+    "false_completions": 0,
+    "passing_controls": 28,
+    "false_completion_task_clusters": 0,
+    "passing_control_task_clusters": 10,
+    "false_completion_mechanisms": 0
+  },
+  "combined_screening_aggregate": {
+    "frozen_slots": 90,
+    "eligible_public": 84,
+    "visible_failure": 6,
+    "infrastructure_failure": 0,
+    "false_completions": 10,
+    "passing_controls": 74,
+    "false_completion_task_clusters": 4,
+    "passing_control_task_clusters": 27,
+    "false_completion_mechanisms": 3
+  },
+  "screening_minimum": {
+    "false_completion_task_clusters": 6,
+    "passing_control_task_clusters": 6,
+    "false_completion_mechanisms": 4
+  },
+  "screening_population_ready": false,
+  "integrity": {
+    "public_manifest_sha256": "sha256:d5968eeccc597dfc7381a16e0b9d025dd7cbfda0332efcef0adb9de90abaa76c",
+    "private_grader_seal_sha256": "sha256:1edb5b46d0f214535b0320848bed45f9dc795b150e8069916ec6f8fd33383b9a",
+    "oracle_catalog_sha256": "sha256:536be13dad1ef36a87fd0ed58d0e902ddfd7c26d76b9db338adb8745baedc1de",
+    "oracle_file_sha256": "sha256:c218e0f4e84fc50580338d9dbfd8f87ddb311c48bd42df5984faf1382159439e",
+    "private_audit_content_sha256": "sha256:1ef48a8c6d4b8a4ec954cb7d6ab8d155da8ab8981c8e49bf6f48855ed03c0233",
+    "private_audit_file_sha256": "sha256:289f793518d384fca3efc15b7314caa1126b34c4d68ca94ffdc859ac6a6dac3d",
+    "repeatability_checks": 3,
+    "repeatability_passed": true,
+    "grader_files_match_seal": true,
+    "target_hashes_verified": true
+  },
+  "privacy": {
+    "case_labels_committed": false,
+    "grader_results_committed": false,
+    "grader_source_committed": false,
+    "external_paths_published": false
+  },
+  "scope": {
+    "split": "repair_dev",
+    "development_only": true,
+    "independent_custodian": false,
+    "eligible_for_mechanism_validation": false
+  },
+  "decision": {
+    "terminal_under_current_protocol": true,
+    "run_verifier_screening": false,
+    "stage_b_activation_allowed": false,
+    "wave5_allowed": false,
+    "threshold_weakening_allowed": false,
+    "next_action": "seal the negative Stage A screening-feasibility result and stop expansion under the current protocol"
+  }
+}
