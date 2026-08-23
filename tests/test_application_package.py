@@ -18,6 +18,7 @@ class ApplicationPackageTests(unittest.TestCase):
             self.assertIn("84", text)
             self.assertIn("Stage B", text)
             self.assertNotIn("improved held-out reliability", text)
+        self.assertIn("python scripts/run_public_demo.py", demo)
 
     def test_one_page_pdf_is_present_and_linked(self) -> None:
         pdf = ROOT / "output/pdf/forgebench-one-page-portfolio.pdf"
@@ -26,6 +27,7 @@ class ApplicationPackageTests(unittest.TestCase):
         readme = (ROOT / "README.md").read_text(encoding="utf-8")
         self.assertIn("output/pdf/forgebench-one-page-portfolio.pdf", readme)
         self.assertIn("demo/5-minute-demo.md", readme)
+        self.assertIn(".agents/skills/forgebench-demo/SKILL.md", readme)
 
 
 if __name__ == "__main__":

@@ -1,0 +1,4 @@
+interface:
+  display_name: "ForgeBench Demo"
+  short_description: "Run and record the public ForgeBench demo"
+  default_prompt: "Use $forgebench-demo to prepare and verify the public ForgeBench portfolio demo."

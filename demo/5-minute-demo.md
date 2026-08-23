@@ -10,6 +10,7 @@ Goal: show harness engineering, evaluation discipline, and honest stopping decis
 - Set the terminal font to at least 16 px and browser zoom to 110-125%.
 - Pre-open `README.md`, both final reports, the final V2 aggregate, and the one-page PDF.
 - Do not reveal raw model traces or individual hidden outcomes.
+- Rehearse `python scripts/run_public_demo.py` once and keep its terminal ready.
 
 ## Timeline and talk track
 
@@ -28,24 +29,29 @@ Say:
 Point out the fixed model, identical workspaces, deterministic public gates,
 and private grader boundary.
 
-### 0:35-1:20 - The harness, not a prompt demo
+### 0:35-1:25 - Public harness demo
 
-Show: `src/forgebench/` and the architecture section.
+Run:
+
+```powershell
+python scripts/run_public_demo.py
+```
 
 Say:
 
-> The harness is the unit under test. Planning, tool calls, completion,
-> deterministic probes, routing, and model verification all emit trace-visible
-> records. Every run uses a copied workspace and verifies source and final
-> hashes, separating agent, safety, and infrastructure failures.
+> This is a deterministic public fixture, not a live model repair and not a
+> private grader. The incomplete candidate passes ordinary completion checks,
+> but the risk gate routes it to a transferable probe. The probe catches an
+> unsupported non-Python entrypoint and blocks completion. An explicitly
+> scripted remediation then passes the same probe with zero model calls.
 
 Open briefly:
 
-- `src/forgebench/heldout_model_replay.py`;
-- `src/forgebench/base_completion.py`;
-- `src/forgebench/v2_corpus.py`.
+- `src/forgebench/public_demo.py`;
+- `src/forgebench/completion_risk.py`;
+- `src/forgebench/deterministic_probe.py`.
 
-### 1:20-2:00 - Reproducibility proof
+### 1:25-2:00 - Reproducibility proof
 
 Run:
 
