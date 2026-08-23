@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "snapshot": "v2-screening-wave4-tasks-v1",
+  "frozen": true,
+  "catalog_sha256": "sha256:ab8b052a3dc4d3d2d79bd5e845daf5f3e5303870b5b2b8c2d3925ebb5d470798",
+  "tasks": [
+    {"id": "v2-archive-extraction-planner", "version": 1, "family": "adversarial", "difficulty": "hard", "split": "dev", "task_path": "benchmark/v2-development-wave4/tasks/v2-archive-extraction-planner/task.json"},
+    {"id": "v2-async-resource-coordinator", "version": 1, "family": "development", "difficulty": "hard", "split": "dev", "task_path": "benchmark/v2-development-wave4/tasks/v2-async-resource-coordinator/task.json"},
+    {"id": "v2-canonical-header-redactor", "version": 1, "family": "adversarial", "difficulty": "hard", "split": "dev", "task_path": "benchmark/v2-development-wave4/tasks/v2-canonical-header-redactor/task.json"},
+    {"id": "v2-capability-token-exchange", "version": 1, "family": "adversarial", "difficulty": "hard", "split": "dev", "task_path": "benchmark/v2-development-wave4/tasks/v2-capability-token-exchange/task.json"},
+    {"id": "v2-deadline-retry-scheduler", "version": 1, "family": "development", "difficulty": "hard", "split": "dev", "task_path": "benchmark/v2-development-wave4/tasks/v2-deadline-retry-scheduler/task.json"},
+    {"id": "v2-domain-label-registry", "version": 1, "family": "adversarial", "difficulty": "hard", "split": "dev", "task_path": "benchmark/v2-development-wave4/tasks/v2-domain-label-registry/task.json"},
+    {"id": "v2-polymorphic-message-upgrader", "version": 1, "family": "development", "difficulty": "hard", "split": "dev", "task_path": "benchmark/v2-development-wave4/tasks/v2-polymorphic-message-upgrader/task.json"},
+    {"id": "v2-structured-log-template", "version": 1, "family": "adversarial", "difficulty": "hard", "split": "dev", "task_path": "benchmark/v2-development-wave4/tasks/v2-structured-log-template/task.json"},
+    {"id": "v2-tiered-quota-reconciler", "version": 1, "family": "development", "difficulty": "hard", "split": "dev", "task_path": "benchmark/v2-development-wave4/tasks/v2-tiered-quota-reconciler/task.json"},
+    {"id": "v2-versioned-config-renamer", "version": 1, "family": "development", "difficulty": "hard", "split": "dev", "task_path": "benchmark/v2-development-wave4/tasks/v2-versioned-config-renamer/task.json"}
+  ]
+}
