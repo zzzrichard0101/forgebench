@@ -1,0 +1,57 @@
+{
+  "schema_version": 1,
+  "freeze_version": "v2-screening-wave3-base-generation-freeze-v1",
+  "status": "frozen",
+  "dataset": {
+    "snapshot": "v2-screening-wave3-tasks-v1",
+    "public_catalog_sha256": "sha256:f9c7c52ac8f1d62342b6b15e46dfc26238cccf231952334abeef0e1a157825b2",
+    "private_grader_seal_sha256": "sha256:57bd25d24c9810cfe3a84e15efaf5cede1ebba6ed3d7185b98327f1ba5dfaf96",
+    "task_ids": [
+      "v2-callback-shutdown-stack",
+      "v2-credit-reservation-ledger",
+      "v2-delegated-scope-checker",
+      "v2-sandbox-path-mapper",
+      "v2-subprocess-request-builder",
+      "v2-tagged-event-decoder",
+      "v2-typed-env-loader",
+      "v2-unicode-namespace-map"
+    ]
+  },
+  "execution": {
+    "harness": "H1a-lite-bounded-planning",
+    "model": "gpt-5.6-sol",
+    "reasoning_effort": "medium",
+    "cli_version": "0.147.0",
+    "repetitions_per_task": 3,
+    "expected_slots": 24,
+    "network": "disabled",
+    "hidden_grader_available_to_runner": false,
+    "all_slots_required": true,
+    "selective_case_execution_allowed": false,
+    "outcome_based_rerun_allowed": false,
+    "outcome_based_case_exclusion_allowed": false
+  },
+  "artifacts": [
+    {
+      "path": "benchmark/v2-development-wave3/manifest.json",
+      "sha256": "sha256:ab789dd79b6411320283213de6d48bcd4d35989fdd7f7a55e80bfadb27b8d54f"
+    },
+    {
+      "path": "experiments/configs/v2-stage-a-preregistration-v1.json",
+      "sha256": "sha256:029014b56189d6362d0e78d257489ba4a7c71004a50db9d29c54e0d81837d711"
+    },
+    {
+      "path": "experiments/configs/v2-screening-wave3-authoring-freeze-v1.json",
+      "sha256": "sha256:c97a89ada615d004d9d239e5a37197868016b374b5cecac0f68f5914568ea846"
+    },
+    {
+      "path": "experiments/reports/v2-screening-wave3-task-authoring-v1.json",
+      "sha256": "sha256:fcd483d84364fda28367ba51bb2d75de3ef724a695381e305bfc4f13263368f1"
+    },
+    {
+      "path": "scripts/run_v2_screening_wave3_bases.py",
+      "sha256": "sha256:c0c52bbbeae065264130495bd1e3b84c8d97e208689ec2a7604c08097a3f4afe"
+    }
+  ],
+  "content_sha256": "sha256:5496825a1b782be51d511730be719337b516a3d4af2ac168250cd8521bc61a26"
+}
