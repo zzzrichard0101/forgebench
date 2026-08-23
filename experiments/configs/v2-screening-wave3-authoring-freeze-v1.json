@@ -1,0 +1,53 @@
+{
+  "schema_version": 1,
+  "freeze_version": "v2-screening-wave3-authoring-freeze-v1",
+  "status": "frozen_before_task_authoring",
+  "selection_basis": "public_lineage_counts_only",
+  "private_case_labels_consulted": false,
+  "selection_rule": "Select every preregistered mechanism with the minimum public development-lineage count after waves 1 and 2; assign one new task and repository lineage to each selected mechanism.",
+  "public_lineage_counts_before_wave3": {
+    "authorization": 1,
+    "configuration_migration": 1,
+    "containment": 1,
+    "injection": 1,
+    "lifecycle_resource": 1,
+    "numeric_aggregate": 1,
+    "schema": 1,
+    "serialization_redaction": 2,
+    "temporal_retry": 2,
+    "unicode_normalization": 1
+  },
+  "selected_mechanisms": [
+    "authorization",
+    "configuration_migration",
+    "containment",
+    "injection",
+    "lifecycle_resource",
+    "numeric_aggregate",
+    "schema",
+    "unicode_normalization"
+  ],
+  "planned_tasks": [
+    {"task_id": "v2-delegated-scope-checker", "mechanism": "authorization"},
+    {"task_id": "v2-typed-env-loader", "mechanism": "configuration_migration"},
+    {"task_id": "v2-sandbox-path-mapper", "mechanism": "containment"},
+    {"task_id": "v2-subprocess-request-builder", "mechanism": "injection"},
+    {"task_id": "v2-callback-shutdown-stack", "mechanism": "lifecycle_resource"},
+    {"task_id": "v2-credit-reservation-ledger", "mechanism": "numeric_aggregate"},
+    {"task_id": "v2-tagged-event-decoder", "mechanism": "schema"},
+    {"task_id": "v2-unicode-namespace-map", "mechanism": "unicode_normalization"}
+  ],
+  "task_count": 8,
+  "execution_after_authoring": {
+    "repetitions_per_task": 3,
+    "expected_slots": 24,
+    "all_slots_required": true,
+    "outcome_based_rerun_or_exclusion": false
+  },
+  "scope": {
+    "split": "repair_dev",
+    "development_only": true,
+    "eligible_for_mechanism_validation": false
+  },
+  "content_sha256": "sha256:8481c6436dfcc3ec1c1269d0279b14d069e9f34c323662f5e8b54bcee70c1371"
+}
