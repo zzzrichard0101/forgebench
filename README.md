@@ -20,6 +20,7 @@ The project asks one practical question:
 - [V2 screening base population v1](docs/v2/screening-base-population-v1.md)
 - [V2 screening wave-2 task authoring report](docs/v2/screening-wave2-task-authoring-v1.md)
 - [V2 screening wave-2 public population](docs/v2/screening-wave2-public-population-v1.md)
+- [V2 screening wave-2 private aggregate](docs/v2/screening-wave2-private-aggregate-v1.md)
 
 - [Design brief](docs/design-brief.md)
 - [Metrics and evaluation contract](docs/metrics.md)
