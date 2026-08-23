@@ -91,7 +91,7 @@ decision boundary, not a post-hoc reliability win.
 Run the deterministic public scenario from the repository root:
 
 ```powershell
-python scripts/run_public_demo.py
+py -3 scripts/run_public_demo.py
 ```
 
 The demo intentionally uses a committed public fixture and a scripted
