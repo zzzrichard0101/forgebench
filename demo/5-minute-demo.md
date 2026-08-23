@@ -1,127 +1,121 @@
 # ForgeBench 5-minute demo
 
 Audience: KRAFTON AI Research - AI Agent Engineer  
-Goal: show harness engineering, evaluation discipline, and honest iteration in five minutes.
+Goal: show harness engineering, evaluation discipline, and honest stopping decisions in five minutes.
 
 ## Before recording
 
-- Use a clean `main` checkout at or after commit `f344de9`.
-- Keep the external private grader, labels, and result file closed and outside the repository.
+- Use a clean `main` checkout at or after the final portfolio-package commit.
+- Keep external private graders, labels, oracle catalogs, and result files closed.
 - Set the terminal font to at least 16 px and browser zoom to 110-125%.
-- Pre-open `README.md`, the final report, the final freeze, and the analysis module.
-- Do not scroll through raw model traces or individual hidden outcomes.
+- Pre-open `README.md`, both final reports, the final V2 aggregate, and the one-page PDF.
+- Do not reveal raw model traces or individual hidden outcomes.
 
 ## Timeline and talk track
 
 ### 0:00-0:35 - The engineering question
 
-Show: repository README, title and current status.
+Show: README title and final status.
 
 Say:
 
-> ForgeBench asks a narrow question: after a coding agent says it is done, can a
-> harness decide when to spend more verification compute and reduce false
-> completion? I built the runner, typed tool boundary, completion checks, risk
-> routing, replay system, and leakage-controlled evaluator around that question.
+> ForgeBench asks whether a coding-agent harness can distinguish apparent
+> completion from correct completion and spend verification compute where it
+> helps. I built the runner, typed tools, completion checks, recovery, risk
+> routing, replay, benchmark, and leakage-controlled evaluator around that
+> question.
 
-Point out:
-
-- one model and frozen inference settings;
-- identical base workspaces across policies;
-- deterministic public gates separated from the hidden evaluator.
+Point out the fixed model, identical workspaces, deterministic public gates,
+and private grader boundary.
 
 ### 0:35-1:20 - The harness, not a prompt demo
 
-Show: `README.md` architecture description and `src/forgebench/`.
+Show: `src/forgebench/` and the architecture section.
 
 Say:
 
-> The unit under test is the harness. Planning, tool execution, completion,
-> deterministic probes, risk scoring, and model verification all produce
-> trace-visible records. Every replay runs in a copied workspace and checks its
-> source and final hash. This lets me distinguish agent failure, safety
-> regression, and infrastructure failure instead of collapsing them into one
-> score.
+> The harness is the unit under test. Planning, tool calls, completion,
+> deterministic probes, routing, and model verification all emit trace-visible
+> records. Every run uses a copied workspace and verifies source and final
+> hashes, separating agent, safety, and infrastructure failures.
 
 Open briefly:
 
 - `src/forgebench/heldout_model_replay.py`;
-- `src/forgebench/private_evaluation_handoff.py`;
-- `src/forgebench/private_evaluation_analysis.py`.
+- `src/forgebench/base_completion.py`;
+- `src/forgebench/v2_corpus.py`.
 
-### 1:20-2:05 - Reproducibility proof
+### 1:20-2:00 - Reproducibility proof
 
 Run:
 
 ```powershell
 $env:PYTHONPATH = "src"
-py -3 -m unittest tests.test_private_evaluation_analysis tests.test_heldout_final_evaluation_freeze -v
+python -m unittest tests.test_v2_screening_wave4_private_aggregate tests.test_heldout_final_evaluation_freeze -v
 ```
 
-Show: the frozen request and final freeze hashes.
+Say:
+
+> Policies, task populations, thresholds, and terminal rules were frozen before
+> evaluation. V2 retained all 90 slots. Private graders and labels stayed
+> outside Git, and three external evaluations had identical oracle and grader
+> result hashes.
+
+### 2:00-2:50 - V1 rejected policy claim
+
+Show: `docs/heldout-private-policy-evaluation-v1.md`.
 
 Say:
 
-> Policy and thresholds were frozen before held-out execution. The public
-> replay was sealed before any hidden outcome was joined. An independent
-> process graded 30 bases and 120 replays, returned only a hash-bound result
-> envelope, and kept graders and labels outside Git.
+> The V1 policy did not work. All 30 publicly complete bases were hidden
+> failures, and none of 120 model-policy replays recovered one. Risk routing
+> selected 9 failures but repaired zero. Verify-All repaired zero and introduced
+> one hard-safety violation. I rejected the claim instead of tuning on held-out
+> labels.
 
-### 2:05-3:15 - The result, including failure
+Emphasize: P5 used 9 model calls and 504,339 input tokens for 0/30 recoveries.
 
-Show: `docs/heldout-private-policy-evaluation-v1.md`, result table.
+### 2:50-3:55 - V2 stopped before an invalid experiment
 
-Say:
-
-> The proposed policy did not work. All 30 publicly complete bases were hidden
-> failures, and none of 120 model-policy replays produced a hidden success.
-> Risk routing found 9 failures, but verification repaired zero. Verify-All
-> spent 30 model calls, still repaired zero, and introduced one hard-safety
-> violation. I rejected the predeclared novelty claim instead of tuning on the
-> held-out set.
-
-Emphasize:
-
-- P5: 9 model calls, 504,339 input tokens, 0/30 recoveries;
-- risk recall: 0.30, task-cluster bootstrap 95% CI `[0.0, 0.6]`;
-- 20,000 task-cluster bootstrap samples, seed 1729;
-- no individual hidden trajectory or grader source is public.
-
-### 3:15-4:15 - What the negative result diagnosed
-
-Show: claim-gate section and machine-readable report.
+Show: `docs/v2/screening-wave4-private-aggregate-v1.md`.
 
 Say:
 
-> This result separates three problems. First, the base population was
-> single-class: every public completion was false, so AUROC was undefined.
-> Second, Random-k and both risk policies selected the same nine adversarial
-> bases, so allocation novelty collapsed. Third, all hierarchical probes were
-> unsupported, so probing saved no model call. The failure is therefore
-> actionable harness evidence, not just a zero score.
+> V2 asked a prerequisite question: is the repair-development population
+> diverse enough to evaluate verifier allocation? Across four waves I froze 90
+> Codex slots and externally graded 84 eligible bases. The passing-control gate
+> passed with 27 clusters, but false completion reached only 4 of 6 clusters
+> and 3 of 4 mechanisms. The final balanced Wave 4 added no false completion:
+> all 28 eligible bases passed private grading.
 
-### 4:15-5:00 - Why this fits AI Agent Engineer
+Emphasize: no Wave 5, no relaxed threshold, and no Stage B activation.
 
-Show: one-page portfolio PDF or README current-status block.
+### 3:55-4:30 - What the two negative results diagnosed
 
 Say:
 
-> The project demonstrates how I work on agent harnesses: make routing and
-> completion explicit, design benchmarks before optimizing, preserve failed
-> runs, separate private evaluation from policy development, and turn an
-> unsuccessful hypothesis into a reproducible next decision. I would carry the
-> same discipline into planning, memory, tool use, loop, evaluation, and
-> meta-harness work at production scale.
+> V1 showed that more verification compute cannot repair an ineffective
+> intervention. V2 showed that a benchmark must contain diverse target failures
+> before an allocation claim is meaningful. ForgeBench separates policy
+> failure, intervention failure, population failure, safety regression, and
+> infrastructure failure rather than reporting one blended score.
 
-Close with:
+### 4:30-5:00 - Why this fits AI Agent Engineer
 
-> My claim is not that this policy improved reliability. My claim is that I
-> built an evaluation system capable of proving when it did not.
+Show: the one-page portfolio PDF.
+
+Say:
+
+> This project demonstrates how I approach agent harness work: make planning
+> and completion explicit, bind evidence before reading outcomes, audit graders,
+> preserve failed runs, and stop unsupported research. My claim is not that the
+> proposed policies improved reliability. It is that I built a system capable
+> of proving when they did not and why the next experiment was invalid.
 
 ## Recording deliverable
 
 - Target length: 4:30-5:00.
 - Resolution: 1920x1080, 30 fps.
-- Export one version with Korean narration and English code/report text.
-- Add chapter captions: Question, Harness, Freeze, Result, Diagnosis, Role fit.
+- Record Korean narration with English code and report text.
+- Add chapter captions: Question, Harness, Freeze, V1, V2, Decision.
 - Keep the repository URL visible in the final frame for five seconds.

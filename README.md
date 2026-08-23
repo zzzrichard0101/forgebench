@@ -8,9 +8,25 @@ The project asks one practical question:
 
 ## Current status
 
-**V1 complete — negative held-out result sealed and application package ready**
+**V1 complete — the held-out selective-verification claim was rejected and sealed.**
 
-**V2 Stage A design preregistered — repair capability must pass before allocation research begins**
+**V2 Stage A complete — the final preregistered screening-feasibility gate was not met, so Stage B remains blocked.**
+
+| Final evidence | Result |
+| --- | ---: |
+| V2 frozen Codex slots | 90 |
+| Publicly eligible / externally graded bases | 84 |
+| False completions | 10 |
+| False-completion task clusters | 4 / 6 required |
+| Failure mechanisms | 3 / 4 required |
+| Passing-control task clusters | 27 / 6 required |
+
+Wave 4 added the final balanced ten-task screening wave. Its 28 publicly
+eligible bases all passed the sealed private grader, so it added no new false
+completion cluster or mechanism. The protocol therefore terminates with a
+negative Stage A screening-feasibility result: no Wave 5, no threshold
+weakening, and no Stage B claim. The value of the result is the auditable
+decision boundary, not a post-hoc reliability win.
 
 - [V1 preservation boundary](docs/v2/v1-preservation-boundary.md)
 - [V2 Stage A protocol and mechanism gate](docs/v2/stage-a-protocol-v1.md)
@@ -216,8 +232,9 @@ failed, and Verify-All added one hard-safety violation. ForgeBench therefore
 reports a leakage-controlled negative result rather than a reliability winner.
 
 The final [application package](docs/application-project-description.md)
-translates that result into a 30-second introduction, evidence-backed resume
-bullets, Korean and English summaries, role-fit mapping, and interview answers.
+connects the V1 rejected policy claim and the V2 terminal feasibility result
+to a 30-second introduction, evidence-backed resume bullets, Korean and English
+summaries, role-fit mapping, and interview answers.
 The [five-minute demo](demo/5-minute-demo.md) leads with the harness and freeze
 mechanism before disclosing the failed hypothesis, and the
 [one-page brief](output/pdf/forgebench-one-page-portfolio.pdf) provides a compact
